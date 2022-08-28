@@ -34,11 +34,11 @@ class _HomeState extends State<Home> {
             "name,duration,number,phone_account_id,call_type,formattedNumber,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
 
         if (widget.entries != null) {
-          // Entries
-          for (CallLogEntry entry in widget.entries!) {
-            contents +=
-                "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}\n";
-          }
+          contents += widget.entries!
+              .map((entry) =>
+                  "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}")
+              .toList()
+              .join("\n");
           file.writeAsStringSync(contents);
           return true;
         }
