@@ -1,19 +1,18 @@
 import 'dart:io';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:open_file/open_file.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'appinfo.dart';
 import 'logspage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Home extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
   const Home({
-    Key? key,
+    super.key,
     required this.entries,
-  }) : super(key: key);
+  });
 
   @override
   State<Home> createState() => _HomeState();

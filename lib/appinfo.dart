@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AppInfo extends StatelessWidget {
   const AppInfo({Key? key}) : super(key: key);
