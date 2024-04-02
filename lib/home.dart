@@ -6,6 +6,7 @@ import 'appinfo.dart';
 import 'logspage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Home extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -68,7 +69,7 @@ class _HomeState extends State<Home> {
         content: Text(content),
         action: useAction
             ? SnackBarAction(
-                textColor: const Color.fromARGB(255, 113, 47, 255),
+                textColor: const Color.fromARGB(255, 215, 197, 255),
                 label: buttonText!,
                 onPressed: () => buttonOnPressed!(),
               )

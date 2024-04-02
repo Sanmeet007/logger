@@ -27,7 +27,7 @@ class ThemeClass {
       fontFamily: "SFPro",
       scaffoldBackgroundColor: Colors.black,
       colorScheme: const ColorScheme.dark().copyWith(
-        primary: const Color.fromARGB(255, 113, 47, 255),
+        primary: const Color.fromARGB(255, 196, 169, 255),
       ),
       highlightColor: const Color.fromARGB(255, 16, 56, 19),
       scrollbarTheme: const ScrollbarThemeData().copyWith(
