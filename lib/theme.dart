@@ -10,7 +10,7 @@ class ThemeClass {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          primary: Colors.white,
+          foregroundColor: Colors.white,
           backgroundColor: Colors.green,
         ),
       ),
@@ -35,7 +35,7 @@ class ThemeClass {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          primary: Colors.black,
+          foregroundColor: Colors.black,
           backgroundColor: Colors.green,
         ),
       ),

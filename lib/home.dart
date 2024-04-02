@@ -216,28 +216,24 @@ class _HomeState extends State<Home> {
                 width: 10.0,
               )
             ]),
-        body: GlowingOverscrollIndicator(
-          axisDirection: AxisDirection.down,
-          color: Colors.green,
-          child: RawScrollbar(
-            thumbColor: Colors.green[800],
-            radius: const Radius.circular(15),
-            thickness: 4,
-            child: Stack(
-              children: [
-                LogsPage(
-                  entries: widget.entries,
+        body: RawScrollbar(
+          thumbColor: Colors.green[800],
+          radius: const Radius.circular(15),
+          thickness: 4,
+          child: Stack(
+            children: [
+              LogsPage(
+                entries: widget.entries,
+              ),
+              if (isTaskRunnig)
+                Container(
+                  color: MediaQuery.of(context).platformBrightness ==
+                          Brightness.dark
+                      ? Colors.black54
+                      : Colors.white54,
+                  child: const Center(child: CircularProgressIndicator()),
                 ),
-                if (isTaskRunnig)
-                  Container(
-                    color: MediaQuery.of(context).platformBrightness ==
-                            Brightness.dark
-                        ? Colors.black54
-                        : Colors.white54,
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
-              ],
-            ),
+            ],
           ),
         ));
   }
