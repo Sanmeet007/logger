@@ -39,7 +39,7 @@ class _LogsPageState extends State<LogsPage> {
 
             if (callType == "CallType.missed") {
               callType = "Missed";
-              callColor = Colors.red;
+              callColor = Colors.deepOrange;
               callIcon = Icons.call_missed;
             } else if (callType == "CallType.incoming") {
               callType = "Incoming";
@@ -56,6 +56,7 @@ class _LogsPageState extends State<LogsPage> {
             }
 
             return ListTile(
+                tileColor: const Color.fromARGB(8, 144, 92, 255),
                 onTap: () {
                   showModalBottomSheet(
                       backgroundColor: Colors.transparent,

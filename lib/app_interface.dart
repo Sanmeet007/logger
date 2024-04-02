@@ -33,7 +33,7 @@ class _ApplicationState extends State<Application> {
                 : const Color.fromARGB(255, 255, 239, 239),
             child: const Center(
               child: CircularProgressIndicator(
-                color: Colors.green,
+                color: Color.fromARGB(255, 113, 47, 255),
               ),
             ),
           );

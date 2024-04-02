@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
         content: Text(content),
         action: useAction
             ? SnackBarAction(
-                textColor: Colors.green,
+                textColor: const Color.fromARGB(255, 113, 47, 255),
                 label: buttonText!,
                 onPressed: () => buttonOnPressed!(),
               )
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                 color:
                     MediaQuery.of(context).platformBrightness == Brightness.dark
-                        ? Colors.green
+                        ? Colors.black
                         : Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
               )
             ]),
         body: RawScrollbar(
-          thumbColor: Colors.green[800],
+          thumbColor: const Color.fromARGB(255, 113, 47, 255),
           radius: const Radius.circular(15),
           thickness: 4,
           child: Stack(

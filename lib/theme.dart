@@ -5,29 +5,29 @@ class ThemeClass {
       disabledColor: const Color.fromARGB(182, 238, 238, 238),
       scaffoldBackgroundColor: Colors.white,
       colorScheme: const ColorScheme.light().copyWith(
-        primary: Colors.green,
+        primary: const Color.fromARGB(255, 195, 83, 255),
         background: Colors.white,
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: Colors.green,
+          backgroundColor: const Color.fromARGB(255, 81, 0, 255),
         ),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.green,
-      ));
+          backgroundColor: Color.fromARGB(255, 81, 0, 255),
+          iconTheme: IconThemeData(color: Colors.white)));
 
   static ThemeData darkTheme = ThemeData(
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Color.fromARGB(255, 36, 36, 36),
         contentTextStyle: TextStyle(color: Colors.grey),
-        actionTextColor: Colors.green,
+        actionTextColor: Color.fromARGB(255, 228, 215, 255),
       ),
       fontFamily: "SFPro",
       scaffoldBackgroundColor: Colors.black,
       colorScheme: const ColorScheme.dark().copyWith(
-        primary: Colors.green,
+        primary: const Color.fromARGB(255, 113, 47, 255),
       ),
       highlightColor: const Color.fromARGB(255, 16, 56, 19),
       scrollbarTheme: const ScrollbarThemeData().copyWith(
@@ -36,15 +36,15 @@ class ThemeClass {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: Colors.black,
-          backgroundColor: Colors.green,
+          backgroundColor: const Color.fromARGB(255, 174, 136, 255),
         ),
       ),
       buttonTheme: const ButtonThemeData(
-        buttonColor: Colors.green,
+        buttonColor: Color.fromARGB(255, 174, 136, 255),
         shape: RoundedRectangleBorder(),
         textTheme: ButtonTextTheme.accent,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color.fromARGB(255, 0, 27, 0),
-      ));
+          backgroundColor: Color.fromARGB(255, 174, 136, 255),
+          iconTheme: IconThemeData(color: Colors.black)));
 }

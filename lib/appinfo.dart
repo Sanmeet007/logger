@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class AppInfo extends StatelessWidget {
   const AppInfo({Key? key}) : super(key: key);
@@ -16,11 +17,29 @@ class AppInfo extends StatelessWidget {
             ),
             Text("App Information"),
           ]),
-      content: Text("""
-      This appilcation has been created for extracting call logs from exsisting log history stored in your phone for the purposes of analysis . None of your call log data will be saved to any remote server. Files generated are saved on your phone and can be located in Download floder in your system. 
-
-      """
-          .trim()),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("""
+              This application is specifically crafted to extract call logs from your phone's existing log history, enabling thorough analysis. Rest assured, none of your call log data will ever be stored on any remote server. The generated files are securely saved directly onto your phone, conveniently accessible in the Download folder of your system
+          """
+              .trim()),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("OKAY")),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
