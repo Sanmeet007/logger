@@ -131,10 +131,11 @@ class _HomeState extends State<Home> {
       bool fileGenerationSuccess = await downloadFile(showStatus: false);
 
       if (fileGenerationSuccess) {
-        // await Share.shareXFiles(
-        //   subject: "Call Logs",
-        //   text: "Share call logs file via gmail , whatsapp etc...",
-        // );
+        await Share.shareXFiles(
+          [XFile(currentFilePath)],
+          subject: "Call Logs",
+          text: "Share call logs file via gmail , whatsapp etc...",
+        );
       } else {
         showSnackBar(
             content:
