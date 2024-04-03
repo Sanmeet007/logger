@@ -4,7 +4,7 @@ import 'theme.dart';
 
 void main() async {
   runApp(MaterialApp(
-    title: "Logger.",
+    title: "Logger",
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.system,
     theme: ThemeClass.lightTheme,

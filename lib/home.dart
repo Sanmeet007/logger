@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
             elevation: 0,
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             title: Text(
-              "Logger.",
+              "Logger",
               style: TextStyle(
                 color:
                     MediaQuery.of(context).platformBrightness == Brightness.dark

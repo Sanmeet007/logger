@@ -1,5 +1,5 @@
-name: logger
-description: Logger helps you to export or download call logs in csv format
+name: Dlog
+description: Dlog helps you to export or download call logs in csv format
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -94,13 +94,13 @@ flutter_native_splash:
   color: "#ffefef"
   color_dark: "#001010"
   image: "assets/background.png"
-  branding: "assets/branding.png"
-  branding_dark: "assets/branding_dark.png"
+  # branding: "assets/branding.png"
+  # branding_dark: "assets/branding_dark.png"
 
   android_12:
     color: "#ffefef"
     color_dark: "#001010"
     image: "assets/background_android12.png"
     image_dark: "assets/background_android12.png"
-    branding: "assets/branding.png"
-    branding_dark: "assets/branding_dark.png"
+    # branding: "assets/branding.png"
+    # branding_dark: "assets/branding_dark.png"
