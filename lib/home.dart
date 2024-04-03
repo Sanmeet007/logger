@@ -5,7 +5,7 @@ import 'package:open_file_plus/open_file_plus.dart';
 import 'appinfo.dart';
 import 'logspage.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Home extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -131,16 +131,10 @@ class _HomeState extends State<Home> {
       bool fileGenerationSuccess = await downloadFile(showStatus: false);
 
       if (fileGenerationSuccess) {
-        bool? shareDialogOpenSuccess = await FlutterShare.shareFile(
-          title: "Call Logs",
-          text: "Share call logs file via gmail , whatsapp etc...",
-          filePath: currentFilePath,
-        );
-        if (shareDialogOpenSuccess == null || shareDialogOpenSuccess == false) {
-          showSnackBar(
-              content:
-                  "An error occured while sharing file. Please try again later");
-        }
+        // await Share.shareXFiles(
+        //   subject: "Call Logs",
+        //   text: "Share call logs file via gmail , whatsapp etc...",
+        // );
       } else {
         showSnackBar(
             content:
