@@ -165,13 +165,10 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
             elevation: 0,
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-            title: Text(
-              "Logger",
+            title: const Text(
+              "LOGGER",
               style: TextStyle(
-                color:
-                    MediaQuery.of(context).platformBrightness == Brightness.dark
-                        ? Colors.black
-                        : Colors.white,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

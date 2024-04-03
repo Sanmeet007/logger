@@ -5,17 +5,17 @@ class ThemeClass {
       disabledColor: const Color.fromARGB(182, 238, 238, 238),
       scaffoldBackgroundColor: Colors.white,
       colorScheme: const ColorScheme.light().copyWith(
-        primary: const Color.fromARGB(255, 195, 83, 255),
+        primary: const Color.fromARGB(255, 102, 0, 255),
         background: Colors.white,
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: const Color.fromARGB(255, 81, 0, 255),
+          backgroundColor: const Color.fromARGB(255, 102, 0, 255),
         ),
       ),
       appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 81, 0, 255),
+          backgroundColor: Color.fromARGB(255, 106, 26, 227),
           iconTheme: IconThemeData(color: Colors.white)));
 
   static ThemeData darkTheme = ThemeData(
@@ -29,22 +29,21 @@ class ThemeClass {
       colorScheme: const ColorScheme.dark().copyWith(
         primary: const Color.fromARGB(255, 196, 169, 255),
       ),
-      highlightColor: const Color.fromARGB(255, 16, 56, 19),
+      highlightColor: const Color.fromARGB(85, 53, 0, 133),
       scrollbarTheme: const ScrollbarThemeData().copyWith(
         thumbColor: MaterialStateProperty.all(Colors.grey[500]),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: Colors.black,
-          backgroundColor: const Color.fromARGB(255, 174, 136, 255),
+          backgroundColor: const Color.fromARGB(255, 180, 130, 255),
         ),
       ),
       buttonTheme: const ButtonThemeData(
-        buttonColor: Color.fromARGB(255, 174, 136, 255),
+        buttonColor: Color.fromARGB(255, 180, 130, 255),
         shape: RoundedRectangleBorder(),
         textTheme: ButtonTextTheme.accent,
       ),
-      appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 174, 136, 255),
-          iconTheme: IconThemeData(color: Colors.black)));
+      appBarTheme:
+          const AppBarTheme(backgroundColor: Color.fromRGBO(27, 12, 49, 1)));
 }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
-  const LogsPage({Key? key, this.entries}) : super(key: key);
+  const LogsPage({super.key, this.entries});
 
   @override
   State<LogsPage> createState() => _LogsPageState();
@@ -14,7 +14,16 @@ class _LogsPageState extends State<LogsPage> {
   @override
   Widget build(BuildContext context) {
     if (widget.entries != null && widget.entries!.isNotEmpty) {
-      return ListView.builder(
+      return ListView.separated(
+          separatorBuilder: (context, index) {
+            return Divider(
+              color:
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? const Color.fromARGB(255, 18, 0, 40)
+                      : const Color.fromRGBO(246, 239, 255, 1),
+              height: 0,
+            );
+          },
           itemCount: widget.entries!.length,
           itemBuilder: (BuildContext context, int index) {
             String name = widget.entries!.elementAt(index).name ?? "Unknown";
@@ -148,7 +157,12 @@ class _LogsPageState extends State<LogsPage> {
                 ),
                 trailing: Text(
                   formattedDate,
-                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                  style: TextStyle(
+                      color: MediaQuery.of(context).platformBrightness ==
+                              Brightness.dark
+                          ? const Color.fromARGB(255, 206, 206, 206)
+                          : const Color.fromARGB(255, 80, 76, 81),
+                      fontSize: 12),
                 ),
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

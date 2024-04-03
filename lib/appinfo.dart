@@ -33,7 +33,7 @@ class AppInfo extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("OKAY")),
+                    child: const Text("I Understand")),
               )
             ],
           )
