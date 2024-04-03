@@ -29,7 +29,6 @@ class ThemeClass {
       colorScheme: const ColorScheme.dark().copyWith(
         primary: const Color.fromARGB(255, 196, 169, 255),
       ),
-      highlightColor: const Color.fromARGB(85, 53, 0, 133),
       scrollbarTheme: const ScrollbarThemeData().copyWith(
         thumbColor: MaterialStateProperty.all(Colors.grey[500]),
       ),

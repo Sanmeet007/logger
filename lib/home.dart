@@ -66,9 +66,11 @@ class _HomeState extends State<Home> {
       }
       final snackbar = SnackBar(
         content: Text(content),
+        duration: const Duration(seconds: 1),
         action: useAction
             ? SnackBarAction(
-                textColor: const Color.fromARGB(255, 215, 197, 255),
+                backgroundColor: const Color.fromARGB(255, 106, 26, 227),
+                textColor: const Color.fromARGB(255, 255, 255, 255),
                 label: buttonText!,
                 onPressed: () => buttonOnPressed!(),
               )
@@ -82,7 +84,7 @@ class _HomeState extends State<Home> {
       switch (status) {
         case "success":
           showSnackBar(
-              content: "File downloaded successfully",
+              content: "Call logs extracted and downloaded successfully",
               useAction: true,
               buttonText: "OPEN",
               buttonOnPressed: () {
