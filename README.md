@@ -11,7 +11,7 @@
 
 Logger is a user-friendly Android application built with Flutter that empowers you to view and export your call logs.
 
-**Key Features:**
+## 🧐 Key Features
 
 * **Comprehensive Call Log Viewing:** Access and review your call history directly within the app.
 * **Convenient CSV Export:** Generate a CSV (Comma-Separated Values) file for further analysis or record-keeping.
@@ -24,7 +24,7 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 * Gain valuable insights by analyzing your call log data exported in a readily usable CSV format.
 * Maintain organized call records outside your device for future reference or data analysis.
 
-## Screenshots
+## 🚀 Screenshots
 
 ![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-2.png)
 ![Screenshot-2](https://sanmeet007.github.io/public/logger/screenshot-1.png)
@@ -34,7 +34,7 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 * Flutter: [https://flutter.dev/](https://flutter.dev/)
 * Android: [https://www.android.com/](https://www.android.com/)
 
-## Contributing
+## 🍰 Contributing
 
 We welcome contributions to improve Logger! Please follow the standard GitHub Flow by creating a branch, adding commits, and opening a pull request: [https://github.com/git-guides](https://github.com/git-guides)
 
