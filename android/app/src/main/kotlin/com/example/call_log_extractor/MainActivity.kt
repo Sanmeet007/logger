@@ -1,4 +1,4 @@
-package com.example.call_log_extractor
+package com.logger.app
 
 import io.flutter.embedding.android.FlutterActivity
 

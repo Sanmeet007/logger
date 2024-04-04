@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.example.call_log_extractor"
+    namespace "com.logger.app"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
