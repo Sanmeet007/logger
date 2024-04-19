@@ -185,7 +185,7 @@ class _HomeState extends State<Home> {
       var tempDir = await getTemporaryDirectory();
 
       DateTime now = DateTime.now();
-      String suffix = DateFormat('yyyy-MM-dd').format(now);
+      String suffix = DateFormat('yyyyMMdd').format(now);
       File file = File("${tempDir.path}/logger_${suffix}_output.csv");
       bool fileGenerationSuccess = await addLogsToFile(file);
       String filePath = file.path;
@@ -214,7 +214,7 @@ class _HomeState extends State<Home> {
 
       var tempDir = await getTemporaryDirectory();
       DateTime now = DateTime.now();
-      String suffix = DateFormat('yyyy-MM-dd').format(now);
+      String suffix = DateFormat('yyyyMMdd').format(now);
       File file = File("${tempDir.path}/logger_${suffix}_output.csv");
 
       bool fileGenerationSuccess = await addLogsToFile(file);
