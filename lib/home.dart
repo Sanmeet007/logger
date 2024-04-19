@@ -83,15 +83,6 @@ class _HomeState extends State<Home> {
       }
     }
 
-    String? getCurrentFilePath() {
-      if (currentFilePath != null) {
-        String filePath = currentFilePath!.toFilePath(windows: false);
-        return filePath;
-      } else {
-        return null;
-      }
-    }
-
     void openFile() async {
       if (currentFilePath != null) {
         await openDocumentFile(currentFilePath as Uri);
