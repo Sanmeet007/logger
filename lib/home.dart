@@ -1,11 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file_plus/open_file_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'appinfo.dart';
 import 'logspage.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
+import "package:shared_storage/shared_storage.dart";
 
 class Home extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -19,14 +21,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String currentFilePath = "";
+  Uri? currentFilePath;
   bool isTaskRunnig = false;
 
   @override
   Widget build(BuildContext context) {
     const fileNameWithExtension = "output.csv";
 
-    bool addLogsToFile(File file) {
+    Future<bool> generateLogsFile(Uri parentUri, String filename) async {
       String contents = "";
       try {
         // Labels
@@ -39,6 +41,38 @@ class _HomeState extends State<Home> {
                   "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}")
               .toList()
               .join("\n");
+
+          DocumentFile? file = await createFileAsString(
+            parentUri,
+            mimeType: "text/csv",
+            displayName: filename,
+            content: contents,
+          );
+          if (file != null) {
+            currentFilePath = file.uri;
+          }
+          return file != null;
+        }
+        return false;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    Future<bool> addLogsToFile(File file) async {
+      String contents = "";
+      try {
+        // Labels
+        contents +=
+            "name,duration,number,phone_account_id,call_type,formattedNumber,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
+
+        if (widget.entries != null) {
+          contents += widget.entries!
+              .map((entry) =>
+                  "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}")
+              .toList()
+              .join("\n");
+
           file.writeAsStringSync(contents);
           return true;
         }
@@ -48,8 +82,19 @@ class _HomeState extends State<Home> {
       }
     }
 
-    void openFile() {
-      OpenFile.open(currentFilePath);
+    String? getCurrentFilePath() {
+      if (currentFilePath != null) {
+        String filePath = currentFilePath!.toFilePath(windows: false);
+        return filePath;
+      } else {
+        return null;
+      }
+    }
+
+    void openFile() async {
+      if (currentFilePath != null) {
+        await openDocumentFile(currentFilePath as Uri);
+      }
     }
 
     void showSnackBar({
@@ -106,15 +151,17 @@ class _HomeState extends State<Home> {
 
     Future<bool> downloadFile({bool showStatus = false}) async {
       setState(() => isTaskRunnig = true);
-      PermissionStatus permissionState = await Permission.storage.request();
-      if (permissionState.isGranted) {
-        var downloadDir = "/storage/emulated/0/Download/";
+
+      final Uri? grantedUri =
+          await openDocumentTree(grantWritePermission: true);
+
+      if (grantedUri != null) {
         var milliseconds = DateTime.now().millisecondsSinceEpoch;
-        String filePath = "$downloadDir/$milliseconds-$fileNameWithExtension";
-        File csvFile = File(filePath);
-        bool fileStatus = addLogsToFile(csvFile);
+        String filename = "$milliseconds-$fileNameWithExtension";
+
+        bool fileStatus = await generateLogsFile(grantedUri, filename);
+
         if (fileStatus) {
-          currentFilePath = filePath;
           if (showStatus) downloadStatusSnackbar(status: "success");
           if (showStatus) setState(() => isTaskRunnig = false);
           return true;
@@ -131,11 +178,17 @@ class _HomeState extends State<Home> {
     }
 
     void shareFile() async {
-      bool fileGenerationSuccess = await downloadFile(showStatus: false);
+      setState(() {
+        isTaskRunnig = true;
+      });
+      var tempDir = await getTemporaryDirectory();
+      File file = File("${tempDir.path}/output.csv");
+      bool fileGenerationSuccess = await addLogsToFile(file);
+      String filePath = file.path;
 
       if (fileGenerationSuccess) {
         await Share.shareXFiles(
-          [XFile(currentFilePath)],
+          [XFile(filePath)],
           subject: "Call Logs",
           text: "Share call logs file via gmail , whatsapp etc...",
         );
@@ -150,12 +203,23 @@ class _HomeState extends State<Home> {
       });
     }
 
-    void downloadAndOpenFile() async {
-      showSnackBar(content: "Opening file", showCloseIcon: false);
-      bool isFileDownloaded = await downloadFile(showStatus: false);
-      if (isFileDownloaded && currentFilePath != "") {
-        OpenFile.open(currentFilePath);
-        setState(() => isTaskRunnig = false);
+    void generateAndOpenFile() async {
+      setState(() {
+        isTaskRunnig = true;
+      });
+
+      var tempDir = await getTemporaryDirectory();
+      File file = File("${tempDir.path}/output.csv");
+      bool fileGenerationSuccess = await addLogsToFile(file);
+      String filePath = file.path;
+
+      setState(() {
+        isTaskRunnig = false;
+      });
+
+      if (fileGenerationSuccess) {
+        showSnackBar(content: "Opening file", showCloseIcon: false);
+        OpenFile.open(filePath);
       } else {
         showSnackBar(content: "Unable to open file please try again later");
       }
@@ -187,7 +251,7 @@ class _HomeState extends State<Home> {
                 tooltip: "Export Open",
                 splashRadius: 22.0,
                 icon: const Icon(Icons.file_open_outlined),
-                onPressed: !isTaskRunnig ? () => downloadAndOpenFile() : null,
+                onPressed: !isTaskRunnig ? () => generateAndOpenFile() : null,
               ),
               IconButton(
                 tooltip: "Share",
