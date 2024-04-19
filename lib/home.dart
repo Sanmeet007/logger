@@ -54,9 +54,10 @@ class _HomeState extends State<Home> {
 
     void showSnackBar({
       required String content,
-      bool useAction = false,
       String? buttonText,
       Function? buttonOnPressed,
+      bool useAction = false,
+      bool showCloseIcon = true,
     }) {
       if (useAction) {
         if (buttonText == null || buttonOnPressed == null) {
@@ -75,6 +76,8 @@ class _HomeState extends State<Home> {
                 onPressed: () => buttonOnPressed!(),
               )
             : null,
+        showCloseIcon: showCloseIcon,
+        closeIconColor: Colors.white,
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -148,7 +151,7 @@ class _HomeState extends State<Home> {
     }
 
     void downloadAndOpenFile() async {
-      showSnackBar(content: "Opening file");
+      showSnackBar(content: "Opening file", showCloseIcon: false);
       bool isFileDownloaded = await downloadFile(showStatus: false);
       if (isFileDownloaded && currentFilePath != "") {
         OpenFile.open(currentFilePath);
