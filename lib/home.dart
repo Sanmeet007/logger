@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'appinfo.dart';
@@ -157,7 +158,7 @@ class _HomeState extends State<Home> {
 
       if (grantedUri != null) {
         var milliseconds = DateTime.now().millisecondsSinceEpoch;
-        String filename = "$milliseconds-$fileNameWithExtension";
+        String filename = "logger-$milliseconds-$fileNameWithExtension";
 
         bool fileStatus = await generateLogsFile(grantedUri, filename);
 
@@ -182,7 +183,10 @@ class _HomeState extends State<Home> {
         isTaskRunnig = true;
       });
       var tempDir = await getTemporaryDirectory();
-      File file = File("${tempDir.path}/output.csv");
+
+      DateTime now = DateTime.now();
+      String suffix = DateFormat('yyyy-MM-dd').format(now);
+      File file = File("${tempDir.path}/logger_${suffix}_output.csv");
       bool fileGenerationSuccess = await addLogsToFile(file);
       String filePath = file.path;
 
@@ -209,7 +213,10 @@ class _HomeState extends State<Home> {
       });
 
       var tempDir = await getTemporaryDirectory();
-      File file = File("${tempDir.path}/output.csv");
+      DateTime now = DateTime.now();
+      String suffix = DateFormat('yyyy-MM-dd').format(now);
+      File file = File("${tempDir.path}/logger_${suffix}_output.csv");
+
       bool fileGenerationSuccess = await addLogsToFile(file);
       String filePath = file.path;
 
