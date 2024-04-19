@@ -2,7 +2,7 @@
 # Logger
 
 <p align="center">
-<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.3.0">
+<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.4.2">
 <img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 </p>
