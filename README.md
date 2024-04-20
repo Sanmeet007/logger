@@ -13,7 +13,7 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/com.logger.app" alt="IzzyOnDroid F-Droid Repository Link" width="100" height="18"/>
 </a>
 <a href="https://developer.android.com/tools/releases/platforms">
-<img src="https://img.shields.io/badge/min%20sdk%20version-29-red" alt="SDK Platform release notes " width="100" height="18"/>
+<img src="https://img.shields.io/badge/min%20sdk%20version-21-red" alt="SDK Platform release notes " width="100" height="18"/>
 </a>
 
 
@@ -57,7 +57,7 @@ For inquiries or feedback, feel free to reach out via:
 
 This section provides options to download the Logger app, both the official release and the build available on the F-Droid repository. Choose the method that best suits your needs.
 <p>
-<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.4.5">
+<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.4.6">
 <img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
