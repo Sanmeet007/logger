@@ -6,9 +6,16 @@
 
 Logger is a user-friendly Android application built with Flutter that empowers you to view and export your call logs.
 
+<a href="https://developer.android.com/">
+<img src="https://img.shields.io/badge/Android-34A853.svg?style=for-the-badge&logo=Android&logoColor=white" alt="IzzyOnDroid F-Droid Repository Link" width="70" height="18"/>
+</a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
 <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/com.logger.app" alt="IzzyOnDroid F-Droid Repository Link" width="100" height="18"/>
 </a>
+<a href="https://developer.android.com/tools/releases/platforms">
+<img src="https://img.shields.io/badge/min%20sdk%20version-29-yellowgreen" alt="SDK Platform release notes " width="100" height="18"/>
+</a>
+
 
 
 ## 🧐 Key Features
