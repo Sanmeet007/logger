@@ -57,7 +57,7 @@ For inquiries or feedback, feel free to reach out via:
 
 This section provides options to download the Logger app, both the official release and the build available on the F-Droid repository. Choose the method that best suits your needs.
 <p>
-<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.4.6">
+<a href="https://github.com/Sanmeet007/logger/releases/tag/v1.4.7">
 <img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
