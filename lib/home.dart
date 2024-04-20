@@ -163,7 +163,10 @@ class _HomeState extends State<Home> {
           return false;
         }
       } else {
-        if (showStatus) showSnackBar(content: "Unable to get permissions");
+        if (showStatus) {
+          showSnackBar(
+              content: "Unable to get permissions", showCloseIcon: false);
+        }
         setState(() => isTaskRunnig = false);
         return false;
       }
@@ -219,7 +222,9 @@ class _HomeState extends State<Home> {
         showSnackBar(content: "Opening file", showCloseIcon: false);
         OpenFile.open(filePath);
       } else {
-        showSnackBar(content: "Unable to open file please try again later");
+        showSnackBar(
+            content: "Unable to open file please try again later",
+            showCloseIcon: false);
       }
     }
 
