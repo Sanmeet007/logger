@@ -20,7 +20,7 @@ class AppInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text("""
-              This application is specifically crafted to extract call logs from your phone's existing log history, enabling thorough analysis. Rest assured, none of your call log data will ever be stored on any remote server. The generated files are securely saved directly onto your phone, conveniently accessible in the Download folder of your system
+            This app utilizes temporary storage for generated files, automatically deleting them when you exit. Additionally, you have the option to download call logs to your preferred location on the device. Rest assured, Logger prioritizes your privacy by accessing only call logs and never touching other files on your system.
           """
               .trim()),
           const SizedBox(
