@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
       }
       final snackbar = SnackBar(
         content: Text(content),
-        duration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 4),
         action: useAction
             ? SnackBarAction(
                 backgroundColor: const Color.fromARGB(255, 106, 26, 227),
