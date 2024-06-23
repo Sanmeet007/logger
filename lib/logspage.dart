@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
-  const LogsPage({super.key, this.entries});
+  final bool showTimeField;
+  const LogsPage({super.key, this.entries, required this.showTimeField});
 
   @override
   State<LogsPage> createState() => _LogsPageState();
@@ -42,6 +43,7 @@ class _LogsPageState extends State<LogsPage> {
             int timestamp = widget.entries!.elementAt(index).timestamp ?? 1;
             var date = DateTime.fromMicrosecondsSinceEpoch(timestamp * 1000);
             String formattedDate = DateFormat.yMMMEd().format(date);
+            String timeString = DateFormat('hh:mm a').format(date);
 
             late Color callColor;
             late IconData callIcon;
@@ -68,67 +70,87 @@ class _LogsPageState extends State<LogsPage> {
                 tileColor: const Color.fromARGB(8, 144, 92, 255),
                 onTap: () {
                   showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
+                      showDragHandle: true,
                       context: context,
                       isScrollControlled: true,
                       builder: (context) {
-                        return ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(10), bottom: Radius.zero),
-                          child: SingleChildScrollView(
-                            child: Container(
-                                padding: const EdgeInsets.all(12),
-                                color: Theme.of(context).canvasColor,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ListTile(
-                                      title: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(name),
-                                          Text(
-                                            "${widget.entries!.elementAt(index).number}",
-                                            style: const TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 13),
-                                          )
-                                        ],
-                                      ),
-                                      trailing: Icon(
-                                        callIcon,
-                                        color: callColor,
-                                      ),
-                                      leading: CircleAvatar(
-                                          child: Text(
-                                        name[0],
-                                      )),
+                        return SingleChildScrollView(
+                          child: Container(
+                              padding: const EdgeInsets.all(12),
+                              color: Theme.of(context).canvasColor,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListTile(
+                                    title: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(name),
+                                        Text(
+                                          "${widget.entries!.elementAt(index).number}",
+                                          style: const TextStyle(
+                                              color: Colors.grey, fontSize: 13),
+                                        )
+                                      ],
                                     ),
-                                    ListTile(
-                                      title: const Text("Date"),
-                                      trailing: Text(formattedDate),
+                                    trailing: Icon(
+                                      callIcon,
+                                      color: callColor,
                                     ),
-                                    ListTile(
-                                      title: const Text("Duration"),
-                                      trailing: Text("$duration" "s"),
+                                    leading: CircleAvatar(
+                                        child: Text(
+                                      name[0],
+                                    )),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 10.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.black45
+                                          : const Color.fromARGB(
+                                              255, 249, 245, 255),
                                     ),
-                                    ListTile(
-                                      title: const Text("Call Type"),
-                                      trailing: Text(callType),
+                                    child: Column(
+                                      children: [
+                                        ListTile(
+                                          title: const Text("Time"),
+                                          trailing: Text(timeString),
+                                        ),
+                                        ListTile(
+                                          title: const Text("Date"),
+                                          trailing: Text(formattedDate),
+                                        ),
+                                        ListTile(
+                                          title: const Text("Duration"),
+                                          trailing: Text("$duration" "s"),
+                                        ),
+                                        ListTile(
+                                          title: const Text("Call Type"),
+                                          trailing: Text(callType),
+                                        ),
+                                        ListTile(
+                                          title: const Text("SIM Display Name"),
+                                          trailing: Text(sim),
+                                        ),
+                                        ListTile(
+                                          title:
+                                              const Text("Phone Account ID "),
+                                          trailing: Text(phoneAccountId),
+                                        ),
+                                      ],
                                     ),
-                                    ListTile(
-                                      title: const Text("SIM Display Name"),
-                                      trailing: Text(sim),
-                                    ),
-                                    ListTile(
-                                      title: const Text("Phone Account ID "),
-                                      trailing: Text(phoneAccountId),
-                                    ),
-                                    const SizedBox(
-                                      height: 20.0,
-                                    ),
-                                    Row(
+                                  ),
+                                  const SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 0, horizontal: 10.0),
+                                    child: Row(
                                       children: [
                                         Expanded(
                                           child: TextButton(
@@ -139,10 +161,10 @@ class _LogsPageState extends State<LogsPage> {
                                           ),
                                         )
                                       ],
-                                    )
-                                  ],
-                                )),
-                          ),
+                                    ),
+                                  )
+                                ],
+                              )),
                         );
                       });
                 },
@@ -155,14 +177,30 @@ class _LogsPageState extends State<LogsPage> {
                     child: Icon(callIcon),
                   ),
                 ),
-                trailing: Text(
-                  formattedDate,
-                  style: TextStyle(
-                      color: MediaQuery.of(context).platformBrightness ==
-                              Brightness.dark
-                          ? const Color.fromARGB(255, 206, 206, 206)
-                          : const Color.fromARGB(255, 80, 76, 81),
-                      fontSize: 12),
+                trailing: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      formattedDate,
+                      style: TextStyle(
+                          color: MediaQuery.of(context).platformBrightness ==
+                                  Brightness.dark
+                              ? const Color.fromARGB(255, 206, 206, 206)
+                              : const Color.fromARGB(255, 80, 76, 81),
+                          fontSize: 12),
+                    ),
+                    if (widget.showTimeField)
+                      Text(
+                        timeString,
+                        style: TextStyle(
+                            color: MediaQuery.of(context).platformBrightness ==
+                                    Brightness.dark
+                                ? const Color.fromARGB(255, 206, 206, 206)
+                                : const Color.fromARGB(255, 80, 76, 81),
+                            fontSize: 12),
+                      ),
+                  ],
                 ),
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

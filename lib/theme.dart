@@ -30,7 +30,7 @@ class ThemeClass {
         primary: const Color.fromARGB(255, 196, 169, 255),
       ),
       scrollbarTheme: const ScrollbarThemeData().copyWith(
-        thumbColor: MaterialStateProperty.all(Colors.grey[500]),
+        thumbColor: WidgetStateProperty.all(Colors.grey[500]),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
