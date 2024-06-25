@@ -6,7 +6,7 @@ class ThemeClass {
       scaffoldBackgroundColor: Colors.white,
       colorScheme: const ColorScheme.light().copyWith(
         primary: const Color.fromARGB(255, 102, 0, 255),
-        background: Colors.white,
+        surface: Colors.white,
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
