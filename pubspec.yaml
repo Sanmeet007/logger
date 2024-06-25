@@ -41,6 +41,7 @@ dependencies:
   permission_handler: ^11.3.1
   url_launcher: ^6.3.0
   shared_preferences: ^2.2.3
+  google_nav_bar: ^5.0.6
 
 dev_dependencies:
   flutter_test:

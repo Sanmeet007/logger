@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'logspage.dart';
+import '../../logspage.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 
