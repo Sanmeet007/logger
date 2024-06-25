@@ -279,42 +279,72 @@ class _ScreenManagerState extends State<ScreenManager> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              actions: _selectedIndex == 0
-                  ? [
-                      IconButton(
-                        tooltip: "Download",
-                        splashRadius: 22.0,
-                        icon: const Icon(
-                          Icons.file_download_outlined,
-                          size: 30.0,
+              actions: [
+                ...(_selectedIndex == 0
+                    ? [
+                        IconButton(
+                          tooltip: "Download",
+                          splashRadius: 22.0,
+                          icon: const Icon(
+                            Icons.file_download_outlined,
+                            size: 30.0,
+                          ),
+                          onPressed: !isTaskRunnig
+                              ? () => downloadFile(showStatus: true)
+                              : null,
                         ),
-                        onPressed: !isTaskRunnig
-                            ? () => downloadFile(showStatus: true)
-                            : null,
-                      ),
-                      IconButton(
-                        tooltip: "Export Open",
-                        splashRadius: 22.0,
-                        icon: const Icon(Icons.file_open_outlined),
-                        onPressed:
-                            !isTaskRunnig ? () => generateAndOpenFile() : null,
-                      ),
-                      IconButton(
-                        tooltip: "Share",
-                        splashRadius: 22.0,
-                        icon: const Icon(Icons.share_rounded),
-                        onPressed: !isTaskRunnig ? () => shareFile() : null,
-                      ),
-                      IconButton(
-                        tooltip: "Filter",
-                        onPressed: () {},
-                        icon: const Icon(Icons.filter_alt_rounded),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      )
-                    ]
-                  : []),
+                        IconButton(
+                          tooltip: "Export Open",
+                          splashRadius: 22.0,
+                          icon: const Icon(Icons.file_open_outlined),
+                          onPressed: !isTaskRunnig
+                              ? () => generateAndOpenFile()
+                              : null,
+                        ),
+                        IconButton(
+                          tooltip: "Share",
+                          splashRadius: 22.0,
+                          icon: const Icon(Icons.share_rounded),
+                          onPressed: !isTaskRunnig ? () => shareFile() : null,
+                        ),
+                      ]
+                    : []),
+                if (_selectedIndex == 1 || _selectedIndex == 0)
+                  IconButton(
+                    tooltip: "Filter",
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          showDragHandle: true,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return StatefulBuilder(
+                              builder: (context, setState) =>
+                                  SingleChildScrollView(
+                                child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    color: Theme.of(context).canvasColor,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Switch(
+                                          value: true,
+                                          onChanged: (value) {},
+                                        ),
+                                        Text("Date filtering")
+                                      ],
+                                    )),
+                              ),
+                            );
+                          });
+                    },
+                    icon: const Icon(Icons.filter_alt_rounded),
+                  ),
+                const SizedBox(
+                  width: 10.0,
+                )
+              ]),
           bottomNavigationBar: NavigationBar(
             indicatorColor: const Color.fromARGB(217, 223, 202, 255),
             onDestinationSelected: (int index) {

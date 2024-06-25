@@ -192,7 +192,7 @@ class LogEntry extends StatelessWidget {
             children: [
               Text(name),
               Text(
-                callType,
+                phoneNumber,
                 style: TextStyle(color: Colors.grey[600]),
               ),
             ],
