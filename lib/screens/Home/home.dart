@@ -476,18 +476,16 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 10.0,
             )
           ]),
-      body: Container(
-        child: RawScrollbar(
-          crossAxisMargin: 10.0,
-          mainAxisMargin: 10.0,
-          thickness: 10.0,
-          minThumbLength: 50.0,
-          radius: Radius.circular(10.0),
-          interactive: true,
-          child: LogsPage(
-            showTimeField: isDisplayLogTimeEnabled,
-            entries: widget.entries,
-          ),
+      body: RawScrollbar(
+        crossAxisMargin: 10.0,
+        mainAxisMargin: 10.0,
+        thickness: 10.0,
+        minThumbLength: 50.0,
+        radius: const Radius.circular(10.0),
+        interactive: true,
+        child: LogsPage(
+          showTimeField: isDisplayLogTimeEnabled,
+          entries: widget.entries,
         ),
       ),
     );
