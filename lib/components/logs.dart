@@ -1,9 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:logger/components/logs_builder.dart';
 import 'package:logger/utils/utils.dart';
-import 'log_entry.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
