@@ -28,12 +28,6 @@ class ThemeClass {
     scrollbarTheme: const ScrollbarThemeData().copyWith(
       thumbColor: WidgetStateProperty.all(Colors.grey[500]),
     ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.black,
-        backgroundColor: const Color.fromARGB(255, 180, 130, 255),
-      ),
-    ),
     buttonTheme: const ButtonThemeData(
       buttonColor: Color.fromARGB(255, 180, 130, 255),
       shape: RoundedRectangleBorder(),

@@ -34,10 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late bool isShareButtonDisabled;
   late bool isDisplayLogTimeEnabled;
 
-  final Uri reportLink =
-      Uri.parse('https://github.com/Sanmeet007/logger/issues');
-  final Uri repoLink = Uri.parse('https://github.com/Sanmeet007/logger');
-
   @override
   void initState() {
     super.initState();
@@ -248,20 +244,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     }
 
-    Future<void> launchUrl(Uri url) async {
-      if (!await url_launcher.launchUrl(url)) {
-        showSnackBar(content: "Unable to open url");
-      }
-    }
-
-    void launchReportLink() {
-      launchUrl(reportLink);
-    }
-
-    void launchRepoLink() {
-      launchUrl(repoLink);
-    }
-
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -298,180 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: !isTaskRunnig ? () => shareFile() : null,
               ),
             IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                      showDragHandle: true,
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (context) {
-                        return StatefulBuilder(builder: (context, setState) {
-                          return SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  20.0, 0.0, 20.0, 20.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Settings",
-                                    style: TextStyle(fontSize: 25.0),
-                                  ),
-                                  const SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? Colors.black45
-                                          : const Color.fromARGB(
-                                              255, 249, 245, 255),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Text(
-                                              "Display time on main page",
-                                              style: TextStyle(
-                                                fontSize: 16.0,
-                                              ),
-                                            ),
-                                            Switch(
-                                              value: isDisplayLogTimeEnabled,
-                                              onChanged: (v) async {
-                                                try {
-                                                  await widget
-                                                      .setDisplayTimeState(v);
-                                                  setState(() {
-                                                    isDisplayLogTimeEnabled = v;
-                                                  });
-                                                  this.setState(() {});
-                                                } catch (_) {
-                                                  showSnackBar(
-                                                      content:
-                                                          "Unable to save state");
-                                                }
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                        Divider(
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? const Color.fromARGB(
-                                                  255, 48, 47, 47)
-                                              : const Color.fromARGB(
-                                                  255, 230, 213, 255),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Text(
-                                              "Hide share button",
-                                              style: TextStyle(
-                                                fontSize: 16.0,
-                                              ),
-                                            ),
-                                            Switch(
-                                              value: isShareButtonDisabled,
-                                              onChanged: (v) async {
-                                                try {
-                                                  await widget.setShareState(v);
-                                                  setState(() {
-                                                    isShareButtonDisabled = v;
-                                                  });
-                                                  this.setState(() {});
-                                                } catch (_) {
-                                                  showSnackBar(
-                                                      content:
-                                                          "Unable to save state");
-                                                }
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  const Text(
-                                    "Storage Policy",
-                                    style: TextStyle(fontSize: 25.0),
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  Container(
-                                    padding: const EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? Colors.black45
-                                          : const Color.fromARGB(
-                                              255, 249, 245, 255),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: const Text(
-                                      """This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.""",
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          launchRepoLink();
-                                        },
-                                        child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text("Explore Project on Github")
-                                            ]),
-                                      ),
-                                      TextButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateColor.transparent,
-                                          elevation:
-                                              WidgetStateProperty.all(0.0),
-                                        ),
-                                        onPressed: () {
-                                          launchReportLink();
-                                        },
-                                        child: const Text(
-                                          "Report Problem or Bug",
-                                          style: TextStyle(
-                                            decorationColor: Color.fromARGB(
-                                                255, 138, 138, 138),
-                                            color: Color.fromARGB(
-                                                255, 138, 138, 138),
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        });
-                      });
-                },
-                icon: const Icon(Icons.more_vert_rounded)),
+                onPressed: () {}, icon: const Icon(Icons.more_vert_rounded)),
             const SizedBox(
               width: 10.0,
             )

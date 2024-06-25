@@ -12,109 +12,126 @@ class AboutScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedText(
-                  "Software Information",
-                  size: 25.0,
-                ),
-                const Spacer(),
-                IconButton(
-                    iconSize: 30.0,
-                    onPressed: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const Dialog(
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CircularProgressIndicator(),
-                                    SizedBox(
-                                      width: 20.0,
-                                    ),
-                                    Text(
-                                      "Opening Support",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
-
-                      bool launced =
-                          await url_launcher.launchUrl(Uri.parse(supportURL()));
-                      if (launced) {
-                        if (context.mounted) Navigator.of(context).pop();
-                      } else {
-                        if (context.mounted) Navigator.of(context).pop();
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.help,
-                    )),
-              ],
+            const SizedText(
+              "Software Information",
+              size: 25.0,
             ),
             const SizedBox(
               height: 10.0,
             ),
-            Table(
-              border:
-                  TableBorder.all(color: const Color.fromARGB(255, 80, 80, 80)),
-              children: [
-                TableRow(children: [
-                  const TableCell(
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(115, 32, 32, 32)
+                    : const Color.fromARGB(255, 249, 245, 255),
+                border: Border.all(
+                  width: 1,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(115, 53, 52, 52)
+                      : const Color.fromARGB(255, 249, 245, 255),
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Table(
+                border: TableBorder.symmetric(
+                  inside: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(115, 53, 52, 52)
+                        : const Color.fromARGB(255, 249, 245, 255),
+                  ),
+                ),
+                children: [
+                  TableRow(children: [
+                    const TableCell(
                       child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("version"))),
-                  TableCell(
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(getVersion()))),
-                ]),
-                TableRow(children: [
-                  const TableCell(
-                      child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("platform"))),
-                  TableCell(
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: isTabView(context)
-                              ? const Text("Android Device")
-                              : const Text("Android Phone"))),
-                ]),
-                TableRow(children: [
-                  const TableCell(
-                      child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("Support Email"))),
-                  TableCell(
-                      child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        url_launcher
-                            .launchUrl(Uri.parse("mailto:${supportEmail()}"));
-                      },
-                      child: Text(
-                        supportEmail(),
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("version"),
                       ),
                     ),
-                  )),
-                ]),
-              ],
+                    TableCell(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          getVersion(),
+                        ),
+                      ),
+                    ),
+                  ]),
+                  const TableRow(
+                    children: [
+                      TableCell(
+                          child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text("platform"))),
+                      TableCell(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Android"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            const SizedText(
+              "Storage Policy",
+              size: 25.0,
+            ),
+            const SizedBox(height: 10.0),
+            Container(
+              padding: const EdgeInsets.all(15.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(115, 32, 32, 32)
+                    : const Color.fromARGB(255, 249, 245, 255),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: const Text(
+                """This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.""",
+              ),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    url_launcher.launchUrl(getRepoLink());
+                  },
+                  child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text("Explore Project on Github")]),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateColor.transparent,
+                    elevation: WidgetStateProperty.all(0.0),
+                  ),
+                  onPressed: () {
+                    url_launcher.launchUrl(getReportLink());
+                  },
+                  child: const Text(
+                    "Report Problem or Bug",
+                    style: TextStyle(
+                      decorationColor: Color.fromARGB(255, 138, 138, 138),
+                      color: Color.fromARGB(255, 138, 138, 138),
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

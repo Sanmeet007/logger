@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 String getVersion() {
-  return "1.4.5";
+  return "2.1.0";
 }
 
 String getDeviceType(BuildContext context) {
@@ -53,4 +53,14 @@ Map<String, List<CallLogEntry>> groupCallLogsByDate(
   }
 
   return groupedCallLogs;
+}
+
+Uri getReportLink() {
+  Uri reportLink = Uri.parse('https://github.com/Sanmeet007/logger/issues');
+  return reportLink;
+}
+
+Uri getRepoLink() {
+  Uri reportLink = Uri.parse('https://github.com/Sanmeet007/logger');
+  return reportLink;
 }
