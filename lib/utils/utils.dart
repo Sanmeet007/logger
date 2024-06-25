@@ -19,9 +19,9 @@ bool isLargestView(BuildContext context) {
 }
 
 String supportURL() {
-  return "https://pyrix.vercel.app#request";
+  return "https://github.com/Sanmeet007/logger";
 }
 
 String supportEmail() {
-  return "help.pyrix@gmail.com";
+  return "ssanmeet123@gmail.com";
 }
