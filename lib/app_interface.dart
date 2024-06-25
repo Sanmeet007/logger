@@ -1,4 +1,7 @@
 import 'package:call_log/call_log.dart';
+import 'package:logger/screens/About/about.dart';
+import 'package:logger/screens/Analytics/analytics.dart';
+import 'package:logger/screens/manager.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/app_error.dart';
@@ -50,13 +53,32 @@ class _ApplicationState extends State<Application> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var entries = snapshot.data as Iterable<CallLogEntry>?;
-                  return Home(
-                    setDisplayTimeState: setTimePrefernce,
-                    setShareState: setSharePrefernce,
-                    initialDisplayLogTimeState: isDisplayLogTimeEnabled,
-                    initialShareButtonState: isShareButtonDisabled,
-                    entries: entries,
-                  );
+                  return ScreenManager(items: <Screen>[
+                    Screen(
+                      label: "Logs",
+                      icon: Icons.call_outlined,
+                      selectedIcon: Icons.call,
+                      screen: HomeScreen(
+                        setDisplayTimeState: setTimePrefernce,
+                        setShareState: setSharePrefernce,
+                        initialDisplayLogTimeState: isDisplayLogTimeEnabled,
+                        initialShareButtonState: isShareButtonDisabled,
+                        entries: entries,
+                      ),
+                    ),
+                    const Screen(
+                      label: "Analytics",
+                      icon: Icons.pie_chart_outline,
+                      selectedIcon: Icons.pie_chart,
+                      screen: AnalyticsScreen(),
+                    ),
+                    const Screen(
+                      label: "About",
+                      icon: Icons.info,
+                      selectedIcon: Icons.info,
+                      screen: AboutScreen(),
+                    ),
+                  ]);
                 } else if (snapshot.hasError) {
                   return const AppError(
                     displayIcon: Icons.error,

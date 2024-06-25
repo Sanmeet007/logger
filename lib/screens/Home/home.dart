@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import '../../components/logs.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
   final bool initialShareButtonState, initialDisplayLogTimeState;
   final Future<void> Function(bool) setDisplayTimeState, setShareState;
 
-  const Home({
+  const HomeScreen({
     super.key,
     required this.setDisplayTimeState,
     required this.setShareState,
@@ -25,10 +25,10 @@ class Home extends StatefulWidget {
   });
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   Uri? currentFilePath;
   bool isTaskRunnig = false;
   late bool isShareButtonDisabled;
@@ -249,7 +249,7 @@ class _HomeState extends State<Home> {
     }
 
     Future<void> launchUrl(Uri url) async {
-      if (!await UrlLauncher.launchUrl(url)) {
+      if (!await url_launcher.launchUrl(url)) {
         showSnackBar(content: "Unable to open url");
       }
     }
@@ -263,245 +263,233 @@ class _HomeState extends State<Home> {
     }
 
     return Scaffold(
-        appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-            title: const Text(
-              "LOGGER",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+      appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          title: const Text(
+            "Logger",
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
             ),
-            actions: [
-              IconButton(
-                tooltip: "Download",
-                splashRadius: 22.0,
-                icon: const Icon(
-                  Icons.file_download_outlined,
-                  size: 30.0,
-                ),
-                onPressed:
-                    !isTaskRunnig ? () => downloadFile(showStatus: true) : null,
+          ),
+          actions: [
+            IconButton(
+              tooltip: "Download",
+              splashRadius: 22.0,
+              icon: const Icon(
+                Icons.file_download_outlined,
+                size: 30.0,
               ),
+              onPressed:
+                  !isTaskRunnig ? () => downloadFile(showStatus: true) : null,
+            ),
+            IconButton(
+              tooltip: "Export Open",
+              splashRadius: 22.0,
+              icon: const Icon(Icons.file_open_outlined),
+              onPressed: !isTaskRunnig ? () => generateAndOpenFile() : null,
+            ),
+            if (!isShareButtonDisabled)
               IconButton(
-                tooltip: "Export Open",
+                tooltip: "Share",
                 splashRadius: 22.0,
-                icon: const Icon(Icons.file_open_outlined),
-                onPressed: !isTaskRunnig ? () => generateAndOpenFile() : null,
+                icon: const Icon(Icons.share_rounded),
+                onPressed: !isTaskRunnig ? () => shareFile() : null,
               ),
-              if (!isShareButtonDisabled)
-                IconButton(
-                  tooltip: "Share",
-                  splashRadius: 22.0,
-                  icon: const Icon(Icons.share_rounded),
-                  onPressed: !isTaskRunnig ? () => shareFile() : null,
-                ),
-              IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                        showDragHandle: true,
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) {
-                          return StatefulBuilder(builder: (context, setState) {
-                            return SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    20.0, 0.0, 20.0, 20.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Settings",
-                                      style: TextStyle(fontSize: 25.0),
+            IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      showDragHandle: true,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(builder: (context, setState) {
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  20.0, 0.0, 20.0, 20.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Settings",
+                                    style: TextStyle(fontSize: 25.0),
+                                  ),
+                                  const SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.black45
+                                          : const Color.fromARGB(
+                                              255, 249, 245, 255),
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.black45
-                                            : const Color.fromARGB(
-                                                255, 249, 245, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const Text(
-                                                "Display time on main page",
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                ),
-                                              ),
-                                              Switch(
-                                                value: isDisplayLogTimeEnabled,
-                                                onChanged: (v) async {
-                                                  try {
-                                                    await widget
-                                                        .setDisplayTimeState(v);
-                                                    setState(() {
-                                                      isDisplayLogTimeEnabled =
-                                                          v;
-                                                    });
-                                                    this.setState(() {});
-                                                  } catch (_) {
-                                                    showSnackBar(
-                                                        content:
-                                                            "Unable to save state");
-                                                  }
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color:
-                                                Theme.of(context).brightness ==
-                                                        Brightness.dark
-                                                    ? const Color.fromARGB(
-                                                        255, 48, 47, 47)
-                                                    : const Color.fromARGB(
-                                                        255, 230, 213, 255),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const Text(
-                                                "Hide share button",
-                                                style: TextStyle(
-                                                  fontSize: 16.0,
-                                                ),
-                                              ),
-                                              Switch(
-                                                value: isShareButtonDisabled,
-                                                onChanged: (v) async {
-                                                  try {
-                                                    await widget
-                                                        .setShareState(v);
-                                                    setState(() {
-                                                      isShareButtonDisabled = v;
-                                                    });
-                                                    this.setState(() {});
-                                                  } catch (_) {
-                                                    showSnackBar(
-                                                        content:
-                                                            "Unable to save state");
-                                                  }
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    const Text(
-                                      "Storage Policy",
-                                      style: TextStyle(fontSize: 25.0),
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Container(
-                                      padding: const EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.black45
-                                            : const Color.fromARGB(
-                                                255, 249, 245, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: const Text(
-                                        """This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.""",
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15.0,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                    child: Column(
                                       children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            launchRepoLink();
-                                          },
-                                          child: const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "Explore Project on Github")
-                                              ]),
-                                        ),
-                                        TextButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                WidgetStateColor.transparent,
-                                            elevation:
-                                                WidgetStateProperty.all(0.0),
-                                          ),
-                                          onPressed: () {
-                                            launchReportLink();
-                                          },
-                                          child: const Text(
-                                            "Report Problem or Bug",
-                                            style: TextStyle(
-                                              decorationColor: Color.fromARGB(
-                                                  255, 138, 138, 138),
-                                              color: Color.fromARGB(
-                                                  255, 138, 138, 138),
-                                              decoration:
-                                                  TextDecoration.underline,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "Display time on main page",
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                              ),
                                             ),
-                                          ),
+                                            Switch(
+                                              value: isDisplayLogTimeEnabled,
+                                              onChanged: (v) async {
+                                                try {
+                                                  await widget
+                                                      .setDisplayTimeState(v);
+                                                  setState(() {
+                                                    isDisplayLogTimeEnabled = v;
+                                                  });
+                                                  this.setState(() {});
+                                                } catch (_) {
+                                                  showSnackBar(
+                                                      content:
+                                                          "Unable to save state");
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? const Color.fromARGB(
+                                                  255, 48, 47, 47)
+                                              : const Color.fromARGB(
+                                                  255, 230, 213, 255),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "Hide share button",
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                              ),
+                                            ),
+                                            Switch(
+                                              value: isShareButtonDisabled,
+                                              onChanged: (v) async {
+                                                try {
+                                                  await widget.setShareState(v);
+                                                  setState(() {
+                                                    isShareButtonDisabled = v;
+                                                  });
+                                                  this.setState(() {});
+                                                } catch (_) {
+                                                  showSnackBar(
+                                                      content:
+                                                          "Unable to save state");
+                                                }
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  const Text(
+                                    "Storage Policy",
+                                    style: TextStyle(fontSize: 25.0),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.black45
+                                          : const Color.fromARGB(
+                                              255, 249, 245, 255),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: const Text(
+                                      """This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.""",
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          launchRepoLink();
+                                        },
+                                        child: const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text("Explore Project on Github")
+                                            ]),
+                                      ),
+                                      TextButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              WidgetStateColor.transparent,
+                                          elevation:
+                                              WidgetStateProperty.all(0.0),
+                                        ),
+                                        onPressed: () {
+                                          launchReportLink();
+                                        },
+                                        child: const Text(
+                                          "Report Problem or Bug",
+                                          style: TextStyle(
+                                            decorationColor: Color.fromARGB(
+                                                255, 138, 138, 138),
+                                            color: Color.fromARGB(
+                                                255, 138, 138, 138),
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            );
-                          });
+                            ),
+                          );
                         });
-                  },
-                  icon: const Icon(Icons.more_vert_rounded)),
-              const SizedBox(
-                width: 10.0,
-              )
-            ]),
-        body: RawScrollbar(
-          thumbColor: const Color.fromARGB(255, 113, 47, 255),
-          radius: const Radius.circular(15),
-          thickness: 4,
-          child: Stack(
-            children: [
-              LogsPage(
-                showTimeField: isDisplayLogTimeEnabled,
-                entries: widget.entries,
-              ),
-              if (isTaskRunnig)
-                Container(
-                  color: MediaQuery.of(context).platformBrightness ==
-                          Brightness.dark
-                      ? Colors.black54
-                      : Colors.white54,
-                  child: const Center(child: CircularProgressIndicator()),
-                ),
-            ],
+                      });
+                },
+                icon: const Icon(Icons.more_vert_rounded)),
+            const SizedBox(
+              width: 10.0,
+            )
+          ]),
+      body: Container(
+        child: RawScrollbar(
+          crossAxisMargin: 10.0,
+          mainAxisMargin: 10.0,
+          thickness: 10.0,
+          minThumbLength: 50.0,
+          radius: Radius.circular(10.0),
+          interactive: true,
+          child: LogsPage(
+            showTimeField: isDisplayLogTimeEnabled,
+            entries: widget.entries,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
