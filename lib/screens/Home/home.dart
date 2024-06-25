@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../components/logs.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
@@ -248,18 +248,18 @@ class _HomeState extends State<Home> {
       }
     }
 
-    Future<void> launchUrlFn(Uri url) async {
-      if (!await launchUrl(url)) {
+    Future<void> launchUrl(Uri url) async {
+      if (!await UrlLauncher.launchUrl(url)) {
         showSnackBar(content: "Unable to open url");
       }
     }
 
     void launchReportLink() {
-      launchUrlFn(reportLink);
+      launchUrl(reportLink);
     }
 
     void launchRepoLink() {
-      launchUrlFn(repoLink);
+      launchUrl(repoLink);
     }
 
     return Scaffold(
