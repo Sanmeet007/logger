@@ -53,32 +53,35 @@ class _ApplicationState extends State<Application> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var entries = snapshot.data as Iterable<CallLogEntry>?;
-                  return ScreenManager(items: <Screen>[
-                    Screen(
-                      label: "Logs",
-                      icon: Icons.call_outlined,
-                      selectedIcon: Icons.call,
-                      screen: HomeScreen(
-                        setDisplayTimeState: setTimePrefernce,
-                        setShareState: setSharePrefernce,
-                        initialDisplayLogTimeState: isDisplayLogTimeEnabled,
-                        initialShareButtonState: isShareButtonDisabled,
-                        entries: entries,
+                  return ScreenManager(
+                    logs: entries,
+                    items: <Screen>[
+                      Screen(
+                        label: "Logs",
+                        icon: Icons.call_outlined,
+                        selectedIcon: Icons.call,
+                        screen: HomeScreen(
+                          setDisplayTimeState: setTimePrefernce,
+                          setShareState: setSharePrefernce,
+                          initialDisplayLogTimeState: isDisplayLogTimeEnabled,
+                          initialShareButtonState: isShareButtonDisabled,
+                          entries: entries,
+                        ),
                       ),
-                    ),
-                    const Screen(
-                      label: "Analytics",
-                      icon: Icons.pie_chart_outline,
-                      selectedIcon: Icons.pie_chart,
-                      screen: AnalyticsScreen(),
-                    ),
-                    const Screen(
-                      label: "About",
-                      icon: Icons.info,
-                      selectedIcon: Icons.info,
-                      screen: AboutScreen(),
-                    ),
-                  ]);
+                      const Screen(
+                        label: "Analytics",
+                        icon: Icons.pie_chart_outline,
+                        selectedIcon: Icons.pie_chart,
+                        screen: AnalyticsScreen(),
+                      ),
+                      const Screen(
+                        label: "About",
+                        icon: Icons.info,
+                        selectedIcon: Icons.info,
+                        screen: AboutScreen(),
+                      ),
+                    ],
+                  );
                 } else if (snapshot.hasError) {
                   return const AppError(
                     displayIcon: Icons.error,

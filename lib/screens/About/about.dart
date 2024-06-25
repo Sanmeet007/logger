@@ -32,7 +32,7 @@ class AboutScreen extends StatelessWidget {
                       ? const Color.fromARGB(115, 53, 52, 52)
                       : const Color.fromARGB(255, 249, 245, 255),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Table(
                 border: TableBorder.symmetric(

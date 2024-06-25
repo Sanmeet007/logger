@@ -5,8 +5,7 @@ import 'package:logger/utils/utils.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
-  final bool showTimeField;
-  const LogsPage({super.key, this.entries, required this.showTimeField});
+  const LogsPage({super.key, this.entries});
 
   @override
   State<LogsPage> createState() => _LogsPageState();

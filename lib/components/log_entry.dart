@@ -33,7 +33,7 @@ class LogEntry extends StatelessWidget {
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
-        motion: StretchMotion(),
+        motion: const StretchMotion(),
 
         // All actions are defined in the children parameter.
         children: [
