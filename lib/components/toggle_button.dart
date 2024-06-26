@@ -78,6 +78,5 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
           )
           .toList(),
     );
-    ;
   }
 }

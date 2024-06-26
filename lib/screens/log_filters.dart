@@ -58,13 +58,6 @@ class _LogFiltersState extends State<LogFilters> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedText(
-                  "Filters",
-                  size: 25.0,
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
                 Container(
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15.0),
