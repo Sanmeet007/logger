@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'log_details.dart';
+
 class LogEntry extends StatelessWidget {
   const LogEntry({
     super.key,
@@ -71,94 +73,17 @@ class LogEntry extends StatelessWidget {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) {
-                  return SingleChildScrollView(
-                    child: Container(
-                        padding: const EdgeInsets.all(12),
-                        color: Theme.of(context).canvasColor,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              title: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(name),
-                                  Text(
-                                    phoneNumber,
-                                    style: const TextStyle(
-                                        color: Colors.grey, fontSize: 13),
-                                  )
-                                ],
-                              ),
-                              trailing: Icon(
-                                callIcon,
-                                color: callColor,
-                              ),
-                              leading: CircleAvatar(
-                                  child: Text(
-                                name[0],
-                              )),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? Colors.black45
-                                    : const Color.fromARGB(255, 249, 245, 255),
-                              ),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: const Text("Time"),
-                                    trailing: Text(timeString),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Date"),
-                                    trailing: Text(formattedDate),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Duration"),
-                                    trailing: Text("$duration" "s"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Call Type"),
-                                    trailing: Text(callType),
-                                  ),
-                                  ListTile(
-                                    title: const Text("SIM Display Name"),
-                                    trailing: Text(sim),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Phone Account ID "),
-                                    trailing: Text(phoneAccountId),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("CLOSE"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        )),
+                  return LogDetails(
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    callIcon: callIcon,
+                    callColor: callColor,
+                    timeString: timeString,
+                    formattedDate: formattedDate,
+                    duration: duration,
+                    callType: callType,
+                    sim: sim,
+                    phoneAccountId: phoneAccountId,
                   );
                 });
           },
