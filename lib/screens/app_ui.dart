@@ -18,16 +18,21 @@ class ApplicationUi extends StatefulWidget {
 }
 
 class _ApplicationUiState extends State<ApplicationUi> {
+  late Iterable<CallLogEntry>? currentLogs;
+  void filterLogs() {
+    setState(() {
+      // currentLogs
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentLogs = widget.entries;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Iterable<CallLogEntry>? currentLogs = widget.entries;
-
-    void filterLogs() {
-      setState(() {
-        // currentLogs
-      });
-    }
-
     return ScreenManager(
       logs: currentLogs,
       filterLogs: filterLogs,

@@ -2,6 +2,7 @@ import 'package:call_log/call_log.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
+import 'package:logger/components/toggle_button.dart';
 
 class LogFilters extends StatelessWidget {
   const LogFilters({
@@ -10,8 +11,7 @@ class LogFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Set<CallType> _segmentedButtonSelection = {...CallType.values};
-    bool enableSpecificNumber = false;
+    bool enableNumberSearch = false;
     List<CallType> callTypes = [...CallType.values];
 
     return SingleChildScrollView(
@@ -92,19 +92,7 @@ class LogFilters extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          ...callTypes.sublist(0, 3).map(
-                                (item) => CheckboxListTile(
-                                  value: true,
-                                  onChanged: (value) {
-                                    // setState(() {
-                                    //   isChecked = value!;
-                                    // });
-                                  },
-                                  title: Text(
-                                    item.toString(),
-                                  ),
-                                ),
-                              )
+                          ToggleButton(),
                         ],
                       )
                     ],
