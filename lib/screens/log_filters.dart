@@ -1,6 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
 
@@ -21,15 +22,15 @@ class LogFilters extends StatefulWidget {
 }
 
 class _LogFiltersState extends State<LogFilters> {
-  bool canApplyFilters = true, canClearFilters = false;
-
+  final formatter = DateFormat("yyyy-MM-dd");
   List<CallType> callTypes = [...CallType.values];
 
   late bool isNumberSearchEnabled;
   late String dateRangeOption;
   late List<CallType> selectedCallTypes;
-  late DateTime startDate, endDate;
-  late TextEditingController _phoneNumberInputController;
+  late TextEditingController _phoneNumberInputController,
+      _startDateController,
+      _endDateController;
 
   @override
   void initState() {
@@ -37,16 +38,21 @@ class _LogFiltersState extends State<LogFilters> {
 
     _phoneNumberInputController =
         TextEditingController(text: widget.currentFilters["phone_to_match"]);
+    _endDateController = TextEditingController(
+        text: formatter.format(widget.currentFilters["end_date"]));
+    _startDateController = TextEditingController(
+        text: formatter.format(widget.currentFilters["start_date"]));
+
     isNumberSearchEnabled = widget.currentFilters["specific_ph"];
     dateRangeOption = widget.currentFilters["date_range_op"];
-    startDate = widget.currentFilters["start_date"];
-    endDate = widget.currentFilters["start_date"];
     selectedCallTypes = widget.currentFilters["selected_call_types"];
   }
 
   @override
   void dispose() {
     _phoneNumberInputController.dispose();
+    _startDateController.dispose();
+    _endDateController.dispose();
     super.dispose();
   }
 
@@ -85,8 +91,12 @@ class _LogFiltersState extends State<LogFilters> {
       "phone_to_match": _phoneNumberInputController.text,
       "selected_call_types": selectedCallTypes, // \_(^_^)_/
       "date_range_op": dateRangeOption,
-      "start_date": startDate,
-      "end_date": endDate
+      "start_date": _startDateController.text.isEmpty
+          ? DateTime.now()
+          : DateTime.parse(_startDateController.text),
+      "end_date": _endDateController.text.isEmpty
+          ? DateTime.now()
+          : DateTime.parse(_endDateController.text)
     });
   }
 
@@ -239,6 +249,7 @@ class _LogFiltersState extends State<LogFilters> {
                               height: 15.0,
                             ),
                             DateTimePicker(
+                              controller: _startDateController,
                               decoration: const InputDecoration(
                                 icon: Icon(Icons.date_range),
                                 label: Text("Start Date"),
@@ -251,13 +262,13 @@ class _LogFiltersState extends State<LogFilters> {
                               ),
                               dateMask: "EEEE, dd MMMM yyyy",
                               firstDate: DateTime(1995),
-                              lastDate:
-                                  DateTime.now().add(const Duration(days: 365)),
+                              lastDate: DateTime.now(),
                             ),
                             const SizedBox(
                               height: 15.0,
                             ),
                             DateTimePicker(
+                              controller: _endDateController,
                               decoration: const InputDecoration(
                                 icon: Icon(Icons.date_range),
                                 label: Text("End Date"),
@@ -284,13 +295,20 @@ class _LogFiltersState extends State<LogFilters> {
                 const SizedBox(height: 15.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 79, 69, 81)),
-                  onPressed: canApplyFilters ? applyFilters : null,
-                  child: const Text("Apply Filters"),
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(255, 222, 200, 255),
+                  ),
+                  onPressed: applyFilters,
+                  child: const Text("Apply filters"),
                 ),
-                ElevatedButton(
-                  onPressed: canClearFilters ? clearFilters : null,
-                  child: const Text("Remove Filters"),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(
+                      color: Color.fromARGB(255, 79, 69, 81),
+                    ),
+                  ),
+                  onPressed: clearFilters,
+                  child: const Text("Reset to default"),
                 ),
               ],
             ),

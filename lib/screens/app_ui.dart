@@ -38,11 +38,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
     var dateRangeOption = filters["date_range_op"] as String;
     var startDate = filters["start_date"] as DateTime;
-    var endDate = filters["start_date"] as DateTime;
+    var endDate = filters["end_date"] as DateTime;
 
     setState(() {
       isProcessing = true;
-
       logFilters["start_date"] = startDate;
       logFilters["end_date"] = endDate;
       logFilters["date_range_op"] = dateRangeOption;
@@ -54,7 +53,114 @@ class _ApplicationUiState extends State<ApplicationUi> {
       // Perform actual filtering here and then update the logs !
 
       setState(() {
-        currentLogs = currentLogs?.where((e) => e.callType == CallType.missed);
+        final DateTime now = DateTime.now();
+        final DateTime today = DateTime.now();
+        final DateTime yesterday = DateTime(now.year, now.month, now.day - 1);
+        final DateTime firstDayOfCurrentYear = DateTime(now.year, 1, 1);
+        final DateTime firstDayOfPreviousYear = DateTime(now.year - 1, 1, 1);
+        final DateTime firstDayOfNextYear = DateTime(now.year + 1, 1, 1);
+        final DateTime firstDayOfCurrentMonth =
+            DateTime(now.year, now.month, 1);
+        final DateTime firstDayOfPreviousMonth = DateTime(
+            firstDayOfCurrentMonth.year, firstDayOfCurrentMonth.month - 1, 1);
+
+        switch (dateRangeOption) {
+          case "Today":
+            currentLogs = widget.entries?.where((e) {
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  DateUtils.isSameDay(today,
+                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
+            });
+            break;
+          case "Yesterday":
+            currentLogs = widget.entries?.where((e) {
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  DateUtils.isSameDay(yesterday,
+                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
+            });
+            break;
+          case "This Month":
+            currentLogs = widget.entries?.where((e) {
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  DateUtils.isSameMonth(now,
+                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
+            });
+            break;
+          case "Past Month":
+            currentLogs = widget.entries?.where((e) {
+              DateTime entryDate =
+                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  entryDate.isAfter(firstDayOfPreviousMonth
+                      .subtract(const Duration(seconds: 1))) &&
+                  entryDate.isBefore(firstDayOfCurrentMonth);
+            });
+            break;
+          case "This Year":
+            currentLogs = widget.entries?.where((e) {
+              DateTime entryDate =
+                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  entryDate.isAfter(firstDayOfCurrentYear) &&
+                  entryDate.isBefore(firstDayOfNextYear);
+            });
+            break;
+          case "Past Year":
+            currentLogs = widget.entries?.where((e) {
+              DateTime entryDate =
+                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  entryDate.isAfter(firstDayOfPreviousYear) &&
+                  entryDate.isBefore(firstDayOfCurrentYear);
+            });
+            break;
+          case "Custom":
+            currentLogs = widget.entries?.where((e) {
+              DateTime entryDate =
+                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
+              return (shouldUseSpecificPhoneNumber
+                      ? e.number?.contains(phoneToMatch) ?? false
+                      : true) &&
+                  callTypes.contains(e.callType) &&
+                  (entryDate.isAfter(
+                          startDate.subtract(const Duration(seconds: 1))) &&
+                      entryDate.isBefore(
+                        endDate.add(const Duration(seconds: 1, days: 1)),
+                      ));
+            });
+            break;
+
+          case "All Time":
+            currentLogs = widget.entries?.where((e) =>
+                (shouldUseSpecificPhoneNumber
+                    ? e.number?.contains(phoneToMatch) ?? false
+                    : true) &&
+                callTypes.contains(e.callType));
+            break;
+
+          default:
+            currentLogs =
+                widget.entries?.where((e) => callTypes.contains(e.callType));
+        }
+
         isProcessing = false;
       });
     });
