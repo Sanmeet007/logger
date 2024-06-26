@@ -16,8 +16,10 @@ class _LogsPageState extends State<LogsPage> {
   Widget build(BuildContext context) {
     if (widget.entries != null && widget.entries!.isNotEmpty) {
       var logs = groupCallLogsByDate(widget.entries!);
-      return ListView(children: [
-        ...logs.entries.map((mapEntry) {
+      return ListView.builder(
+        itemCount: logs.entries.length,
+        itemBuilder: (context, index) {
+          final mapEntry = logs.entries.elementAt(index);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -45,8 +47,8 @@ class _LogsPageState extends State<LogsPage> {
               )
             ],
           );
-        }),
-      ]);
+        },
+      );
     }
 
     return Container(
