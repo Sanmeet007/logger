@@ -221,7 +221,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
         if (isProcessing)
           Container(
               color: Colors.black38,
-              child: Center(child: CircularProgressIndicator())),
+              child: const Center(child: CircularProgressIndicator())),
       ],
     );
   }
