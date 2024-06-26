@@ -22,22 +22,25 @@ class LogFilters extends StatefulWidget {
 
 class _LogFiltersState extends State<LogFilters> {
   bool canApplyFilters = true, canClearFilters = false;
-  bool isNumberSearchEnabled = false;
-  String dateRangeOption = "All Time";
 
   List<CallType> callTypes = [...CallType.values];
+
+  late bool isNumberSearchEnabled;
+  late String dateRangeOption;
   late List<CallType> selectedCallTypes;
-
-  TextEditingController _phoneNumberInputController =
-      TextEditingController(text: "");
-
-  DateTime startDate = DateTime.now(), endDate = DateTime.now();
+  late DateTime startDate, endDate;
+  late TextEditingController _phoneNumberInputController;
 
   @override
   void initState() {
     super.initState();
 
-    _phoneNumberInputController = TextEditingController();
+    _phoneNumberInputController =
+        TextEditingController(text: widget.currentFilters["phone_to_match"]);
+    isNumberSearchEnabled = widget.currentFilters["specific_ph"];
+    dateRangeOption = widget.currentFilters["date_range_op"];
+    startDate = widget.currentFilters["start_date"];
+    endDate = widget.currentFilters["start_date"];
     selectedCallTypes = widget.currentFilters["selected_call_types"];
   }
 
@@ -79,7 +82,7 @@ class _LogFiltersState extends State<LogFilters> {
     // ! Apply validations
     widget.filterLogs({
       "specific_ph": isNumberSearchEnabled,
-      "phone_to_match": _phoneNumberInputController.value,
+      "phone_to_match": _phoneNumberInputController.text,
       "selected_call_types": selectedCallTypes, // \_(^_^)_/
       "date_range_op": dateRangeOption,
       "start_date": startDate,

@@ -33,13 +33,28 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
   void filterLogs(Map filters) {
     var callTypes = filters["selected_call_types"] as List<CallType>;
-    print(callTypes);
+    var phoneToMatch = filters["phone_to_match"] as String;
+    var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
+
+    var dateRangeOption = filters["date_range_op"] as String;
+    var startDate = filters["start_date"] as DateTime;
+    var endDate = filters["start_date"] as DateTime;
+
     setState(() {
       isProcessing = true;
+
+      logFilters["start_date"] = startDate;
+      logFilters["end_date"] = endDate;
+      logFilters["date_range_op"] = dateRangeOption;
+      logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
+      logFilters["phone_to_match"] = phoneToMatch;
     });
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
+      // Perform actual filtering here and then update the logs !
+
       setState(() {
+        currentLogs = currentLogs?.where((e) => e.callType == CallType.missed);
         isProcessing = false;
       });
     });
@@ -47,6 +62,14 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
   void removeLogFilters() {
     setState(() {
+      logFilters = {
+        "specific_ph": false,
+        "phone_to_match": "",
+        "selected_call_types": [...CallType.values],
+        "date_range_op": "All Time",
+        "start_date": DateTime.now(),
+        "end_date": DateTime.now()
+      };
       currentLogs = widget.entries;
     });
   }
