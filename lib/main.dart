@@ -14,9 +14,7 @@ void main() async {
       themeMode: ThemeMode.system,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: Application(
-        preferences: prefs,
-      ),
+      home: const Application(),
     ),
   );
 }

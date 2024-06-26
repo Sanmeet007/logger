@@ -1,6 +1,5 @@
 import 'package:call_log/call_log.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'components/app_error.dart';
 import 'components/loader.dart';
 import 'package:flutter/material.dart';
@@ -8,33 +7,19 @@ import 'package:flutter/material.dart';
 import 'screens/app_ui.dart';
 
 class Application extends StatefulWidget {
-  final SharedPreferences preferences;
-  const Application({super.key, required this.preferences});
+  const Application({super.key});
 
   @override
   State<Application> createState() => _ApplicationState();
 }
 
 class _ApplicationState extends State<Application> {
-  late bool isShareButtonDisabled;
-  late bool isDisplayLogTimeEnabled;
+  late Future<Iterable<CallLogEntry>> _futureData;
 
   @override
   void initState() {
     super.initState();
-
-    isShareButtonDisabled =
-        widget.preferences.getBool("disable_share_pref") ?? false;
-    isDisplayLogTimeEnabled =
-        widget.preferences.getBool("display_mtime_pref") ?? true;
-  }
-
-  Future<void> setSharePrefernce(bool v) {
-    return widget.preferences.setBool("disable_share_pref", v);
-  }
-
-  Future<void> setTimePrefernce(bool v) {
-    return widget.preferences.setBool("display_mtime_pref", v);
+    _futureData = CallLog.get();
   }
 
   @override
@@ -47,18 +32,36 @@ class _ApplicationState extends State<Application> {
           if (snapshot.data == PermissionStatus.granted) {
             return FutureBuilder(
               initialData: null,
-              future: CallLog.get(),
+              future: _futureData,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  var entries = snapshot.data as Iterable<CallLogEntry>?;
-                  return ApplicationUi(entries: entries);
-                } else if (snapshot.hasError) {
-                  return const AppError(
-                    displayIcon: Icons.error,
-                    errorMessage: "Ah snap! Something went wrong",
-                  );
-                } else {
-                  return const Loader();
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Loader();
+                  case ConnectionState.done:
+                  default:
+                    if (snapshot.hasData) {
+                      var entries = snapshot.data as Iterable<CallLogEntry>?;
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          await Future.delayed(const Duration(seconds: 2), () {
+                            setState(() {
+                              _futureData = CallLog.get();
+                            });
+                          });
+                        },
+                        child: ApplicationUi(entries: entries),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const AppError(
+                        displayIcon: Icons.error,
+                        errorMessage: "Ah snap! Something went wrong",
+                      );
+                    } else {
+                      return const AppError(
+                        displayIcon: Icons.info,
+                        errorMessage: "Ah snap! Something unexpected happened!",
+                      );
+                    }
                 }
               },
             );
