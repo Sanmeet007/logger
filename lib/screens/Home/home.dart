@@ -23,10 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LogsPage(
-        entries: widget.entries,
-      ),
+    return LogsPage(
+      entries: widget.entries,
     );
   }
 }

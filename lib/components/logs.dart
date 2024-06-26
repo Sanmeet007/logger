@@ -14,7 +14,7 @@ class LogsPage extends StatefulWidget {
 
 class _LogsPageState extends State<LogsPage> {
   final ScrollController _scrollController = ScrollController();
-  bool _isVisible = true;
+  bool _isVisible = false;
 
   @override
   void initState() {
