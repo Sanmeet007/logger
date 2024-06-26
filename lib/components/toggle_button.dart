@@ -1,7 +1,14 @@
+import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 
 class CustomToggleButtons extends StatefulWidget {
-  const CustomToggleButtons({super.key});
+  final List<CallType> selectedCallTypes;
+  final Function(CallType, bool) onChange;
+  const CustomToggleButtons({
+    super.key,
+    required this.selectedCallTypes,
+    required this.onChange,
+  });
 
   @override
   State<CustomToggleButtons> createState() => _CustomToggleButtonsState();
@@ -9,21 +16,74 @@ class CustomToggleButtons extends StatefulWidget {
 
 class _CustomToggleButtonsState extends State<CustomToggleButtons> {
   List options = [
-    {'title': 'Missed', 'isActive': false},
-    {'title': 'Rejected', 'isActive': false},
-    {'title': 'Incoming', 'isActive': false},
-    {'title': 'Outgoing', 'isActive': false},
-    {'title': 'Answered Externally', 'isActive': false},
-    {'title': 'Blocked', 'isActive': false},
-    {'title': 'Wifi Incoming', 'isActive': false},
-    {'title': 'Wifi Outgoing', 'isActive': false},
-    {'title': 'Voice Mail', 'isActive': false},
-    {'title': 'Uknown', 'isActive': false},
+    {
+      'title': 'Missed',
+      'isActive': false,
+      'value': CallType.missed,
+    },
+    {
+      'title': 'Rejected',
+      'isActive': false,
+      'value': CallType.rejected,
+    },
+    {
+      'title': 'Incoming',
+      'isActive': false,
+      'value': CallType.incoming,
+    },
+    {
+      'title': 'Outgoing',
+      'isActive': false,
+      'value': CallType.outgoing,
+    },
+    {
+      'title': 'Answered Externally',
+      'isActive': false,
+      'value': CallType.answeredExternally
+    },
+    {
+      'title': 'Blocked',
+      'isActive': false,
+      'value': CallType.blocked,
+    },
+    {
+      'title': 'Wifi Incoming',
+      'isActive': false,
+      'value': CallType.wifiIncoming,
+    },
+    {
+      'title': 'Wifi Outgoing',
+      'isActive': false,
+      'value': CallType.wifiOutgoing,
+    },
+    {
+      'title': 'Voice Mail',
+      'isActive': false,
+      'value': CallType.voiceMail,
+    },
+    {
+      'title': 'Uknown',
+      'isActive': false,
+      'value': CallType.unknown,
+    },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    for (var item in options) {
+      if (widget.selectedCallTypes.contains(item["value"])) {
+        item["isActive"] = true;
+      } else {
+        item["isActive"] = false;
+      }
+    }
+  }
 
   changeState(item) {
     setState(() {
       item['isActive'] = !item['isActive'];
+      widget.onChange(item["value"], item["isActive"]);
     });
   }
 

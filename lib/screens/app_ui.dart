@@ -19,9 +19,35 @@ class ApplicationUi extends StatefulWidget {
 
 class _ApplicationUiState extends State<ApplicationUi> {
   late Iterable<CallLogEntry>? currentLogs;
-  void filterLogs() {
+  bool isProcessing = false;
+
+  // Logs filters
+  Map logFilters = {
+    "specific_ph": false,
+    "phone_to_match": "",
+    "selected_call_types": [...CallType.values],
+    "date_range_op": "All Time",
+    "start_date": DateTime.now(),
+    "end_date": DateTime.now()
+  };
+
+  void filterLogs(Map filters) {
+    var callTypes = filters["selected_call_types"] as List<CallType>;
+    print(callTypes);
     setState(() {
-      // currentLogs
+      isProcessing = true;
+    });
+
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isProcessing = false;
+      });
+    });
+  }
+
+  void removeLogFilters() {
+    setState(() {
+      currentLogs = widget.entries;
     });
   }
 
@@ -33,30 +59,40 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenManager(
-      logs: currentLogs,
-      filterLogs: filterLogs,
-      items: <Screen>[
-        Screen(
-          label: "Logs",
-          icon: Icons.call_outlined,
-          selectedIcon: Icons.call,
-          screen: HomeScreen(
-            entries: currentLogs,
-          ),
+    return Stack(
+      children: [
+        ScreenManager(
+          currentFilters: logFilters,
+          logs: currentLogs,
+          filterLogs: filterLogs,
+          removeLogFilters: removeLogFilters,
+          items: <Screen>[
+            Screen(
+              label: "Logs",
+              icon: Icons.call_outlined,
+              selectedIcon: Icons.call,
+              screen: HomeScreen(
+                entries: currentLogs,
+              ),
+            ),
+            const Screen(
+              label: "Analytics",
+              icon: Icons.pie_chart_outline,
+              selectedIcon: Icons.pie_chart,
+              screen: AnalyticsScreen(),
+            ),
+            const Screen(
+              label: "About",
+              icon: Icons.info,
+              selectedIcon: Icons.info,
+              screen: AboutScreen(),
+            ),
+          ],
         ),
-        const Screen(
-          label: "Analytics",
-          icon: Icons.pie_chart_outline,
-          selectedIcon: Icons.pie_chart,
-          screen: AnalyticsScreen(),
-        ),
-        const Screen(
-          label: "About",
-          icon: Icons.info,
-          selectedIcon: Icons.info,
-          screen: AboutScreen(),
-        ),
+        if (isProcessing)
+          Container(
+              color: Colors.black38,
+              child: Center(child: CircularProgressIndicator())),
       ],
     );
   }

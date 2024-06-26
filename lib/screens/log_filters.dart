@@ -5,8 +5,15 @@ import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
 
 class LogFilters extends StatefulWidget {
+  final Function() removeFilters;
+  final Function(Map) filterLogs;
+  final Map currentFilters;
+
   const LogFilters({
     super.key,
+    required this.currentFilters,
+    required this.filterLogs,
+    required this.removeFilters,
   });
 
   @override
@@ -14,13 +21,31 @@ class LogFilters extends StatefulWidget {
 }
 
 class _LogFiltersState extends State<LogFilters> {
+  bool canApplyFilters = true, canClearFilters = false;
   bool isNumberSearchEnabled = false;
   String dateRangeOption = "All Time";
 
   List<CallType> callTypes = [...CallType.values];
+  late List<CallType> selectedCallTypes;
 
   TextEditingController _phoneNumberInputController =
       TextEditingController(text: "");
+
+  DateTime startDate = DateTime.now(), endDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _phoneNumberInputController = TextEditingController();
+    selectedCallTypes = widget.currentFilters["selected_call_types"];
+  }
+
+  @override
+  void dispose() {
+    _phoneNumberInputController.dispose();
+    super.dispose();
+  }
 
   void toggleNumberSearch(bool v) {
     setState(() {
@@ -34,16 +59,37 @@ class _LogFiltersState extends State<LogFilters> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _phoneNumberInputController = TextEditingController();
+  void handleCallTypeChange(CallType t, bool selected) {
+    setState(() {
+      if (selected) {
+        if (!selectedCallTypes.contains(t)) {
+          selectedCallTypes.add(t);
+        }
+      } else {
+        if (selectedCallTypes.contains(t)) {
+          selectedCallTypes.remove(t);
+        }
+      }
+    });
   }
 
-  @override
-  void dispose() {
-    _phoneNumberInputController.dispose();
-    super.dispose();
+  void applyFilters() {
+    Navigator.pop(context, true);
+
+    // ! Apply validations
+    widget.filterLogs({
+      "specific_ph": isNumberSearchEnabled,
+      "phone_to_match": _phoneNumberInputController.value,
+      "selected_call_types": selectedCallTypes, // \_(^_^)_/
+      "date_range_op": dateRangeOption,
+      "start_date": startDate,
+      "end_date": endDate
+    });
+  }
+
+  void clearFilters() {
+    Navigator.pop(context, true);
+    widget.removeFilters();
   }
 
   @override
@@ -110,17 +156,20 @@ class _LogFiltersState extends State<LogFilters> {
                     color: Colors.black38,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedText(
+                      const SizedText(
                         "Call Type",
                         size: 18.0,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12.0,
                       ),
-                      CustomToggleButtons()
+                      CustomToggleButtons(
+                        selectedCallTypes: selectedCallTypes,
+                        onChange: handleCallTypeChange,
+                      )
                     ],
                   ),
                 ),
@@ -231,12 +280,15 @@ class _LogFiltersState extends State<LogFilters> {
                 ),
                 const SizedBox(height: 15.0),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 79, 69, 81)),
-                    onPressed: () {},
-                    child: const Text("Apply Filters")),
-                const ElevatedButton(
-                    onPressed: null, child: Text("Remove Filters")),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 79, 69, 81)),
+                  onPressed: canApplyFilters ? applyFilters : null,
+                  child: const Text("Apply Filters"),
+                ),
+                ElevatedButton(
+                  onPressed: canClearFilters ? clearFilters : null,
+                  child: const Text("Remove Filters"),
+                ),
               ],
             ),
           )),

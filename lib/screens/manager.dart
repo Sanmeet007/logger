@@ -27,12 +27,16 @@ class ScreenManager extends StatefulWidget {
   final Iterable<CallLogEntry>? logs;
   final List<Screen> items;
   final int initialIndex;
-  final Function() filterLogs;
+  final Function() removeLogFilters;
+  final Function(Map) filterLogs;
+  final Map currentFilters;
 
   const ScreenManager({
     super.key,
     required this.logs,
+    required this.currentFilters,
     required this.filterLogs,
+    required this.removeLogFilters,
     required this.items,
     this.initialIndex = 0,
   });
@@ -270,83 +274,86 @@ class _ScreenManagerState extends State<ScreenManager> {
         return true;
       },
       child: Scaffold(
-          appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-              title: const Text(
-                "Logger",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                ),
+        appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            title: const Text(
+              "Logger",
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
               ),
-              actions: [
-                ...(_selectedIndex == 0
-                    ? [
-                        IconButton(
-                          tooltip: "Download",
-                          splashRadius: 22.0,
-                          icon: const Icon(
-                            Icons.file_download_outlined,
-                            size: 30.0,
-                          ),
-                          onPressed: !isTaskRunnig
-                              ? () => downloadFile(showStatus: true)
-                              : null,
+            ),
+            actions: [
+              ...(_selectedIndex == 0
+                  ? [
+                      IconButton(
+                        tooltip: "Download",
+                        splashRadius: 22.0,
+                        icon: const Icon(
+                          Icons.file_download_outlined,
+                          size: 30.0,
                         ),
-                        IconButton(
-                          tooltip: "Export Open",
-                          splashRadius: 22.0,
-                          icon: const Icon(Icons.file_open_outlined),
-                          onPressed: !isTaskRunnig
-                              ? () => generateAndOpenFile()
-                              : null,
-                        ),
-                        IconButton(
-                          tooltip: "Share",
-                          splashRadius: 22.0,
-                          icon: const Icon(Icons.share_rounded),
-                          onPressed: !isTaskRunnig ? () => shareFile() : null,
-                        ),
-                      ]
-                    : []),
-                if (_selectedIndex == 1 || _selectedIndex == 0)
-                  IconButton(
-                    tooltip: "Filter",
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        showDragHandle: true,
-                        isScrollControlled: true,
-                        builder: (context) => LogFilters(),
-                      );
-                    },
-                    icon: const Icon(Icons.filter_alt_rounded),
-                  ),
-                const SizedBox(
-                  width: 10.0,
-                )
-              ]),
-          bottomNavigationBar: NavigationBar(
-            indicatorColor: const Color.fromARGB(217, 223, 202, 255),
-            onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            selectedIndex: _selectedIndex,
-            destinations: widget.items
-                .map(
-                  (item) => NavigationDestination(
-                    icon: Icon(item.icon),
-                    selectedIcon: Icon(item.selectedIcon),
-                    label: item.label,
-                  ),
-                )
-                .toList(),
-          ),
-          body:
-              widget.items.map((item) => item.screen).toList()[_selectedIndex]),
+                        onPressed: !isTaskRunnig
+                            ? () => downloadFile(showStatus: true)
+                            : null,
+                      ),
+                      IconButton(
+                        tooltip: "Export Open",
+                        splashRadius: 22.0,
+                        icon: const Icon(Icons.file_open_outlined),
+                        onPressed:
+                            !isTaskRunnig ? () => generateAndOpenFile() : null,
+                      ),
+                      IconButton(
+                        tooltip: "Share",
+                        splashRadius: 22.0,
+                        icon: const Icon(Icons.share_rounded),
+                        onPressed: !isTaskRunnig ? () => shareFile() : null,
+                      ),
+                    ]
+                  : []),
+              if (_selectedIndex == 1 || _selectedIndex == 0)
+                IconButton(
+                  tooltip: "Filter",
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      showDragHandle: true,
+                      isScrollControlled: true,
+                      builder: (context) => LogFilters(
+                        currentFilters: widget.currentFilters,
+                        filterLogs: widget.filterLogs,
+                        removeFilters: widget.removeLogFilters,
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.filter_alt_rounded),
+                ),
+              const SizedBox(
+                width: 10.0,
+              )
+            ]),
+        bottomNavigationBar: NavigationBar(
+          indicatorColor: const Color.fromARGB(217, 223, 202, 255),
+          onDestinationSelected: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          selectedIndex: _selectedIndex,
+          destinations: widget.items
+              .map(
+                (item) => NavigationDestination(
+                  icon: Icon(item.icon),
+                  selectedIcon: Icon(item.selectedIcon),
+                  label: item.label,
+                ),
+              )
+              .toList(),
+        ),
+        body: widget.items.map((item) => item.screen).toList()[_selectedIndex],
+      ),
     );
   }
 }
