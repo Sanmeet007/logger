@@ -169,25 +169,6 @@ class LogDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("CLOSE"),
-                      ),
-                    )
-                  ],
-                ),
-              )
             ],
           )),
     );
