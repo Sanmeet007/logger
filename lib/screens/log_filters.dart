@@ -54,14 +54,10 @@ class LogFilters extends StatelessWidget {
                       ),
                       const TextField(
                         decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.greenAccent, width: 5.0),
-                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color.fromARGB(255, 66, 66, 66),
-                                width: 1.0),
+                              color: Color.fromARGB(255, 66, 66, 66),
+                            ),
                           ),
                           hintText: 'Mobile Number',
                         ),
@@ -199,8 +195,45 @@ class LogFilters extends StatelessWidget {
                           ),
                         ],
                       ),
-                      DateTimePicker(),
-                      DateTimePicker(),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      DateTimePicker(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.date_range),
+                          label: Text("Start Date"),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 66, 66, 66),
+                            ),
+                          ),
+                        ),
+                        dateMask: "EEEE, dd MMMM yyyy",
+                        firstDate: DateTime(1995),
+                        lastDate: DateTime.now().add(const Duration(days: 365)),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
+                      ),
+                      DateTimePicker(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.date_range),
+                          label: Text("End Date"),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 66, 66, 66),
+                            ),
+                          ),
+                        ),
+                        dateMask: "EEEE, dd MMMM yyyy",
+                        firstDate: DateTime(1995),
+                        lastDate: DateTime.now().add(const Duration(days: 0)),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                     ],
                   ),
                 ),

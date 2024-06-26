@@ -28,7 +28,7 @@ class GroupedLogsBuilder extends StatelessWidget {
       var date = DateTime.fromMicrosecondsSinceEpoch(timestamp * 1000);
       String timeString = timeFormatter.format(date);
 
-      String phoneNumber = entry.formattedNumber ?? "n/a";
+      String phoneNumber = entry.number ?? "n/a";
 
       late Color callColor;
       late IconData callIcon;
