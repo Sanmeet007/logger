@@ -4,16 +4,50 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
 
-class LogFilters extends StatelessWidget {
+class LogFilters extends StatefulWidget {
   const LogFilters({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    bool enableNumberSearch = false;
-    List<CallType> callTypes = [...CallType.values];
+  State<LogFilters> createState() => _LogFiltersState();
+}
 
+class _LogFiltersState extends State<LogFilters> {
+  bool isNumberSearchEnabled = false;
+  String dateRangeOption = "All Time";
+
+  List<CallType> callTypes = [...CallType.values];
+
+  TextEditingController _phoneNumberInputController =
+      TextEditingController(text: "");
+
+  void toggleNumberSearch(bool v) {
+    setState(() {
+      isNumberSearchEnabled = v;
+    });
+  }
+
+  void handleDateRangeOptionChange(String? v) {
+    setState(() {
+      dateRangeOption = v ?? "All Time";
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneNumberInputController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _phoneNumberInputController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
           padding:
@@ -28,10 +62,12 @@ class LogFilters extends StatelessWidget {
                   "Filters",
                   size: 25.0,
                 ),
+                const SizedBox(
+                  height: 15.0,
+                ),
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 0.0),
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
                     color: Colors.black38,
                     borderRadius: BorderRadius.circular(20.0),
@@ -44,63 +80,59 @@ class LogFilters extends StatelessWidget {
                         children: [
                           const SizedText(
                             "Specific phone number",
-                            size: 15.0,
+                            size: 18.0,
                           ),
                           Switch(
-                            value: true,
-                            onChanged: (value) {},
+                            value: isNumberSearchEnabled,
+                            onChanged: toggleNumberSearch,
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      const TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 66, 66, 66),
+                      if (isNumberSearchEnabled)
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: TextField(
+                            controller: _phoneNumberInputController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 66, 66, 66),
+                                ),
+                              ),
+                              label: Text("Mobile Number"),
+                              hintText: '9XXXX XXXX',
                             ),
+                            keyboardType:
+                                const TextInputType.numberWithOptions(),
                           ),
-                          hintText: 'Mobile Number',
                         ),
-                        keyboardType: TextInputType.numberWithOptions(),
-                      ),
-                      const SizedBox(
-                        height: 5.0,
-                      ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 10.0),
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 0.0),
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     color: Colors.black38,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedText(
                         "Call Type",
-                        size: 15.0,
+                        size: 18.0,
                       ),
                       const SizedBox(
-                        height: 20.0,
+                        height: 12.0,
                       ),
-                      Column(
-                        children: [
-                          ToggleButton(),
-                        ],
-                      )
+                      CustomToggleButtons()
                     ],
                   ),
                 ),
+                const SizedBox(height: 10.0),
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 0.0),
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
@@ -115,7 +147,7 @@ class LogFilters extends StatelessWidget {
                         children: [
                           const SizedText(
                             "Date range",
-                            size: 15.0,
+                            size: 18.0,
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -125,12 +157,13 @@ class LogFilters extends StatelessWidget {
                             ),
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20.0,
-                              vertical: 0.0,
+                              vertical: 10.0,
                             ),
                             child: DropdownButton<String>(
+                                isDense: true,
                                 underline: Container(),
                                 enableFeedback: true,
-                                value: "This Month",
+                                value: dateRangeOption,
                                 items: [
                                   ...[
                                     "Today",
@@ -144,58 +177,71 @@ class LogFilters extends StatelessWidget {
                                   ].map(
                                     (item) => DropdownMenuItem(
                                       value: item,
-                                      child: Text(item),
+                                      child: Text(
+                                        item,
+                                      ),
                                     ),
                                   )
                                 ],
-                                onChanged: (value) {}),
+                                onChanged: handleDateRangeOptionChange),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      DateTimePicker(
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.date_range),
-                          label: Text("Start Date"),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 66, 66, 66),
+                      if (dateRangeOption == "Custom")
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 15.0,
                             ),
-                          ),
-                        ),
-                        dateMask: "EEEE, dd MMMM yyyy",
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now().add(const Duration(days: 365)),
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      DateTimePicker(
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.date_range),
-                          label: Text("End Date"),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 66, 66, 66),
+                            DateTimePicker(
+                              decoration: const InputDecoration(
+                                icon: Icon(Icons.date_range),
+                                label: Text("Start Date"),
+                                border: OutlineInputBorder(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 66, 66, 66),
+                                  ),
+                                ),
+                              ),
+                              dateMask: "EEEE, dd MMMM yyyy",
+                              firstDate: DateTime(1995),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 365)),
                             ),
-                          ),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            DateTimePicker(
+                              decoration: const InputDecoration(
+                                icon: Icon(Icons.date_range),
+                                label: Text("End Date"),
+                                border: OutlineInputBorder(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 66, 66, 66),
+                                  ),
+                                ),
+                              ),
+                              dateMask: "EEEE, dd MMMM yyyy",
+                              firstDate: DateTime(1995),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 0)),
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
                         ),
-                        dateMask: "EEEE, dd MMMM yyyy",
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now().add(const Duration(days: 0)),
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 15.0),
                 ElevatedButton(
-                    onPressed: () {}, child: const Text("Apply Filters")),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 79, 69, 81)),
+                    onPressed: () {},
+                    child: const Text("Apply Filters")),
                 const ElevatedButton(
                     onPressed: null, child: Text("Remove Filters")),
               ],
