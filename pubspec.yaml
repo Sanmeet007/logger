@@ -41,9 +41,9 @@ dependencies:
   permission_handler: ^11.3.1
   url_launcher: ^6.3.0
   shared_preferences: ^2.2.3
-  flutter_sticky_widgets: ^0.0.3
   flutter_slidable: ^3.1.0
   date_time_picker: ^2.1.0
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:

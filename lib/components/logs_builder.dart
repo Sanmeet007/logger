@@ -44,7 +44,23 @@ class GroupedLogsBuilder extends StatelessWidget {
       } else if (callType == "CallType.outgoing") {
         callType = "Outgoing";
         callColor = Colors.green;
-        callIcon = Icons.call;
+        callIcon = Icons.call_made;
+      } else if (callType == "CallType.blocked") {
+        callType = "Blocked";
+        callColor = Colors.red;
+        callIcon = Icons.block_flipped;
+      } else if (callType == "CallType.rejected") {
+        callType = "Rejected";
+        callColor = Colors.blueGrey;
+        callIcon = Icons.cancel_rounded;
+      } else if (callType == "CallType.wifiIncoming") {
+        callType = "Wifi Incoming";
+        callColor = const Color.fromARGB(255, 110, 113, 255);
+        callIcon = Icons.call_received;
+      } else if (callType == "CallType.wifiOutgoing") {
+        callType = "Wifi Outgoing";
+        callColor = const Color.fromARGB(255, 110, 110, 255);
+        callIcon = Icons.call_made;
       } else {
         callType = entry.callType.toString().replaceAll("CallType.", "");
         callType =
