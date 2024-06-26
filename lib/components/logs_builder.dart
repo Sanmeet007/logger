@@ -46,7 +46,9 @@ class GroupedLogsBuilder extends StatelessWidget {
         callColor = Colors.green;
         callIcon = Icons.call;
       } else {
-        callType = "Unknown";
+        callType = entry.callType.toString().replaceAll("CallType.", "");
+        callType =
+            "${callType[0].toUpperCase()}${callType.substring(1).toLowerCase()}";
         callColor = Colors.grey;
         callIcon = Icons.call;
       }

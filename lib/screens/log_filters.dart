@@ -1,3 +1,4 @@
+import 'package:call_log/call_log.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
@@ -9,7 +10,9 @@ class LogFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Set<int> _segmentedButtonSelection = {1};
+    Set<CallType> _segmentedButtonSelection = {...CallType.values};
+    bool enableSpecificNumber = false;
+    List<CallType> callTypes = [...CallType.values];
 
     return SingleChildScrollView(
       child: Container(
@@ -87,57 +90,23 @@ class LogFilters extends StatelessWidget {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: SegmentedButton<int>(
-                          style: ButtonStyle(
-                            side: WidgetStateProperty.all<BorderSide>(
-                              const BorderSide(
-                                color: Color.fromARGB(255, 54, 53, 53),
-                              ),
-                            ),
-                            backgroundColor:
-                                WidgetStateProperty.resolveWith<Color>(
-                              (Set<WidgetState> states) {
-                                if (states.contains(WidgetState.selected)) {
-                                  return const Color.fromARGB(
-                                      255, 239, 200, 255);
-                                }
-                                return Colors.transparent;
-                              },
-                            ),
-                          ),
-                          showSelectedIcon: false,
-                          emptySelectionAllowed: false,
-                          multiSelectionEnabled: true,
-                          segments: const <ButtonSegment<int>>[
-                            ButtonSegment(
-                              value: 0,
-                              label: Text(
-                                "Missed",
-                              ),
-                            ),
-                            ButtonSegment(
-                              value: 1,
-                              label: Text(
-                                "Incoming",
-                              ),
-                            ),
-                            ButtonSegment(
-                              value: 0,
-                              label: Text(
-                                "Outgoing",
-                              ),
-                            ),
-                          ],
-                          selected: _segmentedButtonSelection,
-                          onSelectionChanged: (Set<int> newSelection) {
-                            // this.setState(() {
-                            //   _segmentedButtonSelection = newSelection;
-                            // });
-                          },
-                        ),
-                      ),
+                      Column(
+                        children: [
+                          ...callTypes.sublist(0, 3).map(
+                                (item) => CheckboxListTile(
+                                  value: true,
+                                  onChanged: (value) {
+                                    // setState(() {
+                                    //   isChecked = value!;
+                                    // });
+                                  },
+                                  title: Text(
+                                    item.toString(),
+                                  ),
+                                ),
+                              )
+                        ],
+                      )
                     ],
                   ),
                 ),

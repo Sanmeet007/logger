@@ -27,10 +27,12 @@ class ScreenManager extends StatefulWidget {
   final Iterable<CallLogEntry>? logs;
   final List<Screen> items;
   final int initialIndex;
+  final Function() filterLogs;
 
   const ScreenManager({
     super.key,
     required this.logs,
+    required this.filterLogs,
     required this.items,
     this.initialIndex = 0,
   });
