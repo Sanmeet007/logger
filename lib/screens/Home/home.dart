@@ -24,16 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RawScrollbar(
-        crossAxisMargin: 10.0,
-        mainAxisMargin: 10.0,
-        thickness: 10.0,
-        minThumbLength: 50.0,
-        radius: const Radius.circular(10.0),
-        interactive: true,
-        child: LogsPage(
-          entries: widget.entries,
-        ),
+      body: LogsPage(
+        entries: widget.entries,
       ),
     );
   }
