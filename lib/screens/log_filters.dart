@@ -113,11 +113,11 @@ class _LogFiltersState extends State<LogFilters> {
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedText(
+                      SizedText(
                         "Call Type",
                         size: 18.0,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 12.0,
                       ),
                       CustomToggleButtons()
@@ -232,7 +232,7 @@ class _LogFiltersState extends State<LogFilters> {
                 const SizedBox(height: 15.0),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 79, 69, 81)),
+                        backgroundColor: const Color.fromARGB(255, 79, 69, 81)),
                     onPressed: () {},
                     child: const Text("Apply Filters")),
                 const ElevatedButton(
