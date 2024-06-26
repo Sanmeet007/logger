@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'log_filters.dart';
+
 class Screen {
   final String label;
   final IconData icon;
@@ -314,92 +316,11 @@ class _ScreenManagerState extends State<ScreenManager> {
                     tooltip: "Filter",
                     onPressed: () {
                       showModalBottomSheet(
-                          context: context,
-                          showDragHandle: true,
-                          isScrollControlled: true,
-                          builder: (context) {
-                            Set<int> _segmentedButtonSelection = {1};
-                            return StatefulBuilder(
-                              builder: (context, setState) =>
-                                  SingleChildScrollView(
-                                child: Container(
-                                    padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
-                                    color: Theme.of(context).canvasColor,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text("Specific phone number"),
-                                              Switch(
-                                                value: true,
-                                                onChanged: (value) {},
-                                              ),
-                                            ],
-                                          ),
-                                          const TextField(
-                                            keyboardType: TextInputType
-                                                .numberWithOptions(),
-                                          ),
-                                          SegmentedButton(
-                                            segments: [
-                                              ButtonSegment(
-                                                value: 10,
-                                                label: Text("Missed"),
-                                              ),
-                                              ButtonSegment(
-                                                value: 10,
-                                                label: Text("Incoming"),
-                                              ),
-                                              ButtonSegment(
-                                                value: 10,
-                                                label: Text("Outgoing"),
-                                              ),
-                                            ],
-                                            selected: _segmentedButtonSelection,
-                                            onSelectionChanged:
-                                                (Set<int> newSelection) {
-                                              setState(() {
-                                                _segmentedButtonSelection =
-                                                    newSelection;
-                                              });
-                                            },
-                                          ),
-                                          DropdownButton<String>(items: [
-                                            ...[
-                                              "today",
-                                              "yesterday",
-                                              "this-month",
-                                              "past-month",
-                                              "past-three-months",
-                                              "this-year",
-                                              "past-year",
-                                              "alltime"
-                                            ].map(
-                                              (item) => DropdownMenuItem(
-                                                child: Text(item),
-                                                value: item,
-                                              ),
-                                            )
-                                          ], onChanged: (value) {}),
-                                          ElevatedButton(
-                                              onPressed: () {},
-                                              child: Text("Apply Filters")),
-                                          ElevatedButton(
-                                              onPressed: null,
-                                              child: Text("Remove Filters")),
-                                        ],
-                                      ),
-                                    )),
-                              ),
-                            );
-                          });
+                        context: context,
+                        showDragHandle: true,
+                        isScrollControlled: true,
+                        builder: (context) => LogFilters(),
+                      );
                     },
                     icon: const Icon(Icons.filter_alt_rounded),
                   ),
