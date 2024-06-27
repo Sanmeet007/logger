@@ -72,11 +72,11 @@ String prettifyNumbers(int n) {
 
 String prettifyDuration(Duration duration) {
   if (duration.inSeconds < 60) {
-    return '${duration.inSeconds}s';
+    return '${duration.inSeconds} s';
   } else if (duration.inMinutes < 60) {
-    return '${duration.inMinutes}min';
+    return '${duration.inMinutes} min';
   } else if (duration.inHours < 24) {
-    return '${duration.inHours}hrs';
+    return '${duration.inHours} hrs';
   } else {
     return '${duration.inDays}day${duration.inDays > 1 ? 's' : ''}';
   }

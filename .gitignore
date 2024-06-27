@@ -1,4 +1,5 @@
 # Miscellaneous
+.ig*
 .vscode
 *.class
 *.log

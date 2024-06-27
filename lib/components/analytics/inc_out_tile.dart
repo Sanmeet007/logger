@@ -4,7 +4,13 @@ import 'package:logger/components/sized_text.dart';
 
 class IncomingVsOutgoingTile extends StatelessWidget {
   final double spacing;
-  const IncomingVsOutgoingTile({super.key, this.spacing = 20.0});
+  final int incomingCallsCount, outgoingCallsCount;
+  const IncomingVsOutgoingTile({
+    super.key,
+    required this.incomingCallsCount,
+    required this.outgoingCallsCount,
+    this.spacing = 20.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +34,11 @@ class IncomingVsOutgoingTile extends StatelessWidget {
           height: 200.0,
           child: PieChart(PieChartData(sections: [
             PieChartSectionData(
-              value: 100,
+              value: incomingCallsCount.toDouble(),
               color: Colors.blue,
             ),
             PieChartSectionData(
-              value: 100,
+              value: outgoingCallsCount.toDouble(),
               color: Colors.red,
             ),
           ])),

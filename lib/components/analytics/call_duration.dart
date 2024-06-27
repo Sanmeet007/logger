@@ -3,7 +3,14 @@ import 'package:logger/components/sized_text.dart';
 
 class CallDurationTile extends StatelessWidget {
   final double spacing;
-  const CallDurationTile({super.key, this.spacing = 20.0});
+  final List<String> labels;
+  final List<String> values;
+  const CallDurationTile({
+    super.key,
+    required this.labels,
+    required this.values,
+    this.spacing = 20.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class CallDurationTile extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 10.0,
                   horizontal: 5.0,
                 ),
@@ -34,13 +41,13 @@ class CallDurationTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Average call duration",
+                      labels[0],
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),
                     ),
                     Text(
-                      "100s",
+                      values[0],
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),
@@ -63,13 +70,13 @@ class CallDurationTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Longest call duration",
+                      labels[1],
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),
                     ),
                     Text(
-                      "100s",
+                      values[1],
                       style: const TextStyle(
                         fontSize: 16.0,
                       ),

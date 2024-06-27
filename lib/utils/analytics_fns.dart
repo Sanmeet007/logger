@@ -2,6 +2,12 @@ import 'dart:math';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
 
+class CallLogEntryWithFreq {
+  final CallLogEntry entry;
+  final int count;
+  const CallLogEntryWithFreq({required this.entry, required this.count});
+}
+
 class CallLogAnalyzer {
   final Iterable<CallLogEntry> logs;
   const CallLogAnalyzer({required this.logs});
@@ -62,7 +68,7 @@ class CallLogAnalyzer {
     return Duration(seconds: seconds);
   }
 
-  Future<Duration> getLongestCallDuration(CallType type) {
+  Future<Duration> getLongestCallDuration() {
     return compute(_getLongestCallDuration, logs);
   }
 
@@ -79,7 +85,7 @@ class CallLogAnalyzer {
     return compute(_getTop5CallDurationEntries, logs);
   }
 
-  static List<CallLogEntry> _getMaxLeastFrequentlyCalledEntries(
+  static List<CallLogEntryWithFreq> _getMaxLeastFrequentlyCalledEntries(
       Iterable<CallLogEntry> logs) {
     var filterdedLogs = logs.where((e) =>
         (e.callType == CallType.outgoing) ||
@@ -98,23 +104,28 @@ class CallLogAnalyzer {
       ..sort((a, b) => b.value.compareTo(a.value));
 
     // Get the most frequently called phone number
-    String mostFrequentPhoneNumber = sortedFrequencyList.first.key;
+    var mostFrequentPhoneNumber = sortedFrequencyList.first;
     // Get the least frequently called phone number
-    String leastFrequentPhoneNumber = sortedFrequencyList.last.key;
+    var leastFrequentPhoneNumber = sortedFrequencyList.last;
 
     // Create a list of CallLogEntry for the most and least frequently called phone numbers
     List<CallLogEntry> resultEntries = [];
     // Add the most frequently called entry
     resultEntries.add(filterdedLogs
-        .firstWhere((entry) => entry.number == mostFrequentPhoneNumber));
+        .firstWhere((entry) => entry.number == mostFrequentPhoneNumber.key));
     // Add the least frequently called entry
     resultEntries.add(filterdedLogs
-        .firstWhere((entry) => entry.number == leastFrequentPhoneNumber));
+        .firstWhere((entry) => entry.number == leastFrequentPhoneNumber.key));
 
-    return resultEntries;
+    return [
+      CallLogEntryWithFreq(
+          entry: resultEntries[0], count: mostFrequentPhoneNumber.value),
+      CallLogEntryWithFreq(
+          entry: resultEntries[0], count: leastFrequentPhoneNumber.value)
+    ];
   }
 
-  Future<List<CallLogEntry>> getMaxLeastFrequentlyCalledEntries() {
+  Future<List<CallLogEntryWithFreq>> getMaxLeastFrequentlyCalledEntries() {
     return compute(_getMaxLeastFrequentlyCalledEntries, logs);
   }
 }

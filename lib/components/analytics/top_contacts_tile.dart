@@ -1,9 +1,15 @@
+import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
 
 class TopContactsTile extends StatelessWidget {
   final double spacing;
-  const TopContactsTile({super.key, this.spacing = 20.0});
+  final List<CallLogEntry> entries;
+  const TopContactsTile({
+    super.key,
+    required this.entries,
+    this.spacing = 20.0,
+  });
 
   @override
   Widget build(BuildContext context) {
