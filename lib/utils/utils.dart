@@ -87,6 +87,65 @@ String parsePhoneNumber(String phnum) {
   if (phnum.isEmpty) {
     return phnum;
   }
-  var parseNumber = PhoneNumber.parse(phnum);
-  return phnum.replaceAll("+${parseNumber.countryCode}", "");
+  if (phnum.startsWith("+")) {
+    var parseNumber = PhoneNumber.parse(phnum);
+    return phnum.replaceAll("+${parseNumber.countryCode}", "");
+  } else {
+    return phnum;
+  }
+}
+
+List getCallDisplayFields(CallType callType) {
+  String rCallType;
+  late Color callColor;
+  late IconData callIcon;
+
+  if (callType == CallType.missed) {
+    rCallType = "Missed";
+    callColor = Colors.deepOrange;
+    callIcon = Icons.call_missed;
+  } else if (callType == CallType.incoming) {
+    rCallType = "Incoming";
+    callColor = Colors.blue;
+    callIcon = Icons.call_received;
+  } else if (callType == CallType.outgoing) {
+    rCallType = "Outgoing";
+    callColor = Colors.green;
+    callIcon = Icons.call_made;
+  } else if (callType == CallType.blocked) {
+    rCallType = "Blocked";
+    callColor = Colors.red;
+    callIcon = Icons.block_flipped;
+  } else if (callType == CallType.rejected) {
+    rCallType = "Rejected";
+    callColor = Colors.blueGrey;
+    callIcon = Icons.cancel_rounded;
+  } else if (callType == CallType.wifiIncoming) {
+    rCallType = "Wifi Incoming";
+    callColor = const Color.fromARGB(255, 110, 113, 255);
+    callIcon = Icons.call_received;
+  } else if (callType == CallType.wifiOutgoing) {
+    rCallType = "Wifi Outgoing";
+    callColor = const Color.fromARGB(255, 110, 110, 255);
+    callIcon = Icons.call_made;
+  } else {
+    rCallType = callType.toString().replaceAll("CallType.", "");
+    rCallType =
+        "${rCallType[0].toUpperCase()}${rCallType.substring(1).toLowerCase()}";
+    callColor = Colors.grey;
+    callIcon = Icons.call;
+  }
+  return [callColor, callIcon, rCallType];
+}
+
+String formatTimeFromTimeStamp(int timestamp) {
+  final timeFormatter = DateFormat('hh:mm a');
+  var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return timeFormatter.format(date);
+}
+
+String formatDateFromTimestamp(int timestamp) {
+  final formatter = DateFormat("yyyy-MM-dd");
+  var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return formatter.format(date);
 }

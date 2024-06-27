@@ -1,15 +1,16 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:logger/components/log_details.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ContactLog extends StatelessWidget {
+class ContactLogFreq extends StatelessWidget {
   final CallLogEntry logDetails;
-  const ContactLog({
+  final int count;
+  const ContactLogFreq({
     super.key,
     required this.logDetails,
+    required this.count,
   });
 
   @override
@@ -45,33 +46,6 @@ class ContactLog extends StatelessWidget {
           ],
         ),
         child: ListTile(
-            onTap: () {
-              String name = logDetails.name ?? "Unknown";
-              if (name == "") name = "Unknown";
-              int duration = logDetails.duration ?? 0;
-              int timestamp = logDetails.timestamp ?? 1;
-              var details =
-                  getCallDisplayFields(logDetails.callType ?? CallType.unknown);
-
-              showModalBottomSheet(
-                  showDragHandle: true,
-                  context: context,
-                  isScrollControlled: true,
-                  builder: (context) {
-                    return LogDetails(
-                      name: logDetails.name ?? "Unknown",
-                      phoneNumber: logDetails.number ?? "n/a",
-                      callIcon: details[1],
-                      callColor: details[0],
-                      timeString: formatTimeFromTimeStamp(timestamp),
-                      formattedDate: formatDateFromTimestamp(timestamp),
-                      duration: duration,
-                      callType: details[2],
-                      sim: logDetails.simDisplayName ?? "Unknown",
-                      phoneAccountId: logDetails.phoneAccountId ?? "Unknown",
-                    );
-                  });
-            },
             minVerticalPadding: 14.0,
             leading: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
@@ -87,9 +61,9 @@ class ContactLog extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              prettifyDuration(
-                Duration(seconds: logDetails.duration ?? 0),
-              ),
+              "${prettifyNumbers(
+                count,
+              )}x",
               style: const TextStyle(
                 fontSize: 14.0,
               ),

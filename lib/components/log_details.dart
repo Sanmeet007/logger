@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/utils/utils.dart';
 
 class LogDetails extends StatelessWidget {
   const LogDetails({
@@ -114,7 +115,7 @@ class LogDetails extends StatelessWidget {
                         style: TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
-                        "$duration" "s",
+                        prettifyDuration(Duration(seconds: duration)),
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),

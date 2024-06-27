@@ -18,7 +18,7 @@ class TopContactsTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedText(
-          "Top 5 Call Durations",
+          "Top 5 Longest Calls",
           size: 20.0,
         ),
         SizedBox(
@@ -32,7 +32,22 @@ class TopContactsTile extends StatelessWidget {
           ),
           child: Column(
             children: [
-              ...(entries.map((item) => ContactLog(logDetails: item))),
+              ...(entries.asMap().entries.map(
+                (item) {
+                  return Column(
+                    children: [
+                      if (item.key != 0)
+                        Divider(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? const Color.fromARGB(255, 30, 30, 30)
+                              : const Color.fromARGB(255, 230, 213, 255),
+                          height: 1.0,
+                        ),
+                      ContactLog(logDetails: item.value),
+                    ],
+                  );
+                },
+              )),
             ],
           ),
         )

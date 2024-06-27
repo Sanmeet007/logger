@@ -82,11 +82,7 @@ class CallLogAnalyzer {
 
     List<String> result = LinkedHashSet<String>.from(sortedLogs.map((item) {
       if (item.number != null) {
-        if (item.number!.startsWith("+")) {
-          return parsePhoneNumber(item.number!);
-        } else {
-          return item.number;
-        }
+        return parsePhoneNumber(item.number!);
       } else {
         return null;
       }
@@ -106,7 +102,7 @@ class CallLogAnalyzer {
     return compute(_getTop5CallDurationEntries, logs);
   }
 
-  static List<CallLogEntryWithFreq> _getMaxLeastFrequentlyCalledEntries(
+  static CallLogEntryWithFreq _getMaxFrequentlyCalledEntry(
       Iterable<CallLogEntry> logs) {
     var filterdedLogs = logs.where((e) =>
         (e.callType == CallType.outgoing) ||
@@ -115,8 +111,10 @@ class CallLogAnalyzer {
     // Create a frequency map to count occurrences of each phone number
     Map<String, int> frequencyMap = {};
     for (var entry in filterdedLogs) {
-      frequencyMap[entry.number ?? 'na'] =
-          (frequencyMap[entry.number ?? 'na'] ?? 0) + 1;
+      if (entry.number != null) {
+        var x = parsePhoneNumber(entry.number!);
+        frequencyMap[x] = (frequencyMap[x] ?? 0) + 1;
+      }
     }
 
     // Convert the map to a list of entries sorted by frequency in descending order
@@ -126,27 +124,19 @@ class CallLogAnalyzer {
 
     // Get the most frequently called phone number
     var mostFrequentPhoneNumber = sortedFrequencyList.first;
-    // Get the least frequently called phone number
-    var leastFrequentPhoneNumber = sortedFrequencyList.last;
 
     // Create a list of CallLogEntry for the most and least frequently called phone numbers
     List<CallLogEntry> resultEntries = [];
     // Add the most frequently called entry
-    resultEntries.add(filterdedLogs
-        .firstWhere((entry) => entry.number == mostFrequentPhoneNumber.key));
-    // Add the least frequently called entry
-    resultEntries.add(filterdedLogs
-        .firstWhere((entry) => entry.number == leastFrequentPhoneNumber.key));
+    resultEntries.add(filterdedLogs.firstWhere((entry) =>
+        parsePhoneNumber(entry.number ?? "") == mostFrequentPhoneNumber.key));
 
-    return [
-      CallLogEntryWithFreq(
-          entry: resultEntries[0], count: mostFrequentPhoneNumber.value),
-      CallLogEntryWithFreq(
-          entry: resultEntries[0], count: leastFrequentPhoneNumber.value)
-    ];
+    // Add the least frequently called entry
+    return CallLogEntryWithFreq(
+        entry: resultEntries[0], count: mostFrequentPhoneNumber.value);
   }
 
-  Future<List<CallLogEntryWithFreq>> getMaxLeastFrequentlyCalledEntries() {
-    return compute(_getMaxLeastFrequentlyCalledEntries, logs);
+  Future<CallLogEntryWithFreq> getMaxFrequentlyCalledEntry() {
+    return compute(_getMaxFrequentlyCalledEntry, logs);
   }
 }

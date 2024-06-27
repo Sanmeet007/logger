@@ -100,10 +100,9 @@ class CallFreqTileBuilder extends StatelessWidget {
     required this.analyzer,
   });
 
-  Future<List<CallLogEntryWithFreq>> getValues() async {
+  Future<CallLogEntryWithFreq> getValues() async {
     return Future(() async {
-      var li = await analyzer.getMaxLeastFrequentlyCalledEntries();
-      return li;
+      return await analyzer.getMaxFrequentlyCalledEntry();
     });
   }
 
@@ -118,13 +117,13 @@ class CallFreqTileBuilder extends StatelessWidget {
               return const Text("Loading most and least frequent");
             default:
               if (snapshot.hasData) {
-                var values = snapshot.data as List<CallLogEntryWithFreq>;
+                var entry = snapshot.data as CallLogEntryWithFreq;
                 return CallFreqTile(
-                  mostFrequent: values[0],
-                  leastFrequent: values[1],
+                  mostFrequent: entry,
                 );
               } else {
-                return const Text("Hmm. Something went wrong");
+                // return const Text("Hmm. Something went wrong");
+                return Text(snapshot.error.toString());
               }
           }
         });
@@ -242,12 +241,33 @@ class CallStatsTileBuilder extends StatelessWidget {
               return const Text("Loading call stats");
             default:
               if (snapshot.hasData) {
-                return CallStatsTile(labels: const [
-                  "Calls Made",
-                  "Calls Rejected",
-                  "Calls Missed",
-                  "Calls Blocked",
-                ], values: snapshot.data as List<String>);
+                return CallStatsTile(
+                  labels: const [
+                    "Calls Made",
+                    "Calls Rejected",
+                    "Calls Missed",
+                    "Calls Blocked",
+                  ],
+                  icons: const [
+                    Icon(
+                      Icons.call_made,
+                      color: Colors.blue,
+                    ),
+                    Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.redAccent,
+                    ),
+                    Icon(
+                      Icons.call_missed,
+                      color: Colors.red,
+                    ),
+                    Icon(
+                      Icons.block,
+                      color: Colors.orangeAccent,
+                    ),
+                  ],
+                  values: snapshot.data as List<String>,
+                );
               } else {
                 return const Text("Hmm. Something went wrong");
               }
