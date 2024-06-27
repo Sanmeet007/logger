@@ -64,3 +64,20 @@ Uri getRepoLink() {
   Uri reportLink = Uri.parse('https://github.com/Sanmeet007/logger');
   return reportLink;
 }
+
+String prettifyNumbers(int n) {
+  final formatter = NumberFormat.compact(locale: "en_US");
+  return formatter.format(n);
+}
+
+String prettifyDuration(Duration duration) {
+  if (duration.inSeconds < 60) {
+    return '${duration.inSeconds}s';
+  } else if (duration.inMinutes < 60) {
+    return '${duration.inMinutes}min';
+  } else if (duration.inHours < 24) {
+    return '${duration.inHours}hrs';
+  } else {
+    return '${duration.inDays}day${duration.inDays > 1 ? 's' : ''}';
+  }
+}

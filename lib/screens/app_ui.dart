@@ -1,9 +1,11 @@
 import 'package:call_log/call_log.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/screens/About/about.dart';
 import 'package:logger/screens/Analytics/analytics.dart';
 import 'package:logger/screens/Home/home.dart';
 import 'package:logger/screens/manager.dart';
+import 'package:logger/utils/filters.dart';
 
 class ApplicationUi extends StatefulWidget {
   final Future<void> Function() refresher;
@@ -33,11 +35,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
     "end_date": DateTime.now()
   };
 
-  void filterLogs(Map filters) {
+  void filterLogs(Map filters) async {
     var callTypes = filters["selected_call_types"] as List<CallType>;
     var phoneToMatch = filters["phone_to_match"] as String;
     var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
-
     var dateRangeOption = filters["date_range_op"] as String;
     var startDate = filters["start_date"] as DateTime;
     var endDate = filters["end_date"] as DateTime;
@@ -52,120 +53,17 @@ class _ApplicationUiState extends State<ApplicationUi> {
       logFilters["selected_call_types"] = callTypes;
     });
 
-    Future.delayed(const Duration(seconds: 2), () {
-      // Perform actual filtering here and then update the logs !
+    var filteredLogs = await fetchFilteredLogs();
+    setState(() {
+      currentLogs = filteredLogs;
+      isProcessing = false;
+    });
+  }
 
-      setState(() {
-        final DateTime now = DateTime.now();
-        final DateTime today = DateTime.now();
-        final DateTime yesterday = DateTime(now.year, now.month, now.day - 1);
-        final DateTime firstDayOfCurrentYear = DateTime(now.year, 1, 1);
-        final DateTime firstDayOfPreviousYear = DateTime(now.year - 1, 1, 1);
-        final DateTime firstDayOfNextYear = DateTime(now.year + 1, 1, 1);
-        final DateTime firstDayOfCurrentMonth =
-            DateTime(now.year, now.month, 1);
-        final DateTime firstDayOfPreviousMonth = DateTime(
-            firstDayOfCurrentMonth.year, firstDayOfCurrentMonth.month - 1, 1);
-
-        switch (dateRangeOption) {
-          case "Today":
-            currentLogs = widget.entries?.where((e) {
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  DateUtils.isSameDay(today,
-                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
-            });
-            break;
-          case "Yesterday":
-            currentLogs = widget.entries?.where((e) {
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  DateUtils.isSameDay(yesterday,
-                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
-            });
-            break;
-          case "This Month":
-            currentLogs = widget.entries?.where((e) {
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  DateUtils.isSameMonth(now,
-                      DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
-            });
-            break;
-          case "Past Month":
-            currentLogs = widget.entries?.where((e) {
-              DateTime entryDate =
-                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  entryDate.isAfter(firstDayOfPreviousMonth
-                      .subtract(const Duration(seconds: 1))) &&
-                  entryDate.isBefore(firstDayOfCurrentMonth);
-            });
-            break;
-          case "This Year":
-            currentLogs = widget.entries?.where((e) {
-              DateTime entryDate =
-                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  entryDate.isAfter(firstDayOfCurrentYear) &&
-                  entryDate.isBefore(firstDayOfNextYear);
-            });
-            break;
-          case "Past Year":
-            currentLogs = widget.entries?.where((e) {
-              DateTime entryDate =
-                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  entryDate.isAfter(firstDayOfPreviousYear) &&
-                  entryDate.isBefore(firstDayOfCurrentYear);
-            });
-            break;
-          case "Custom":
-            currentLogs = widget.entries?.where((e) {
-              DateTime entryDate =
-                  DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
-              return (shouldUseSpecificPhoneNumber
-                      ? e.number?.contains(phoneToMatch) ?? false
-                      : true) &&
-                  callTypes.contains(e.callType) &&
-                  (entryDate.isAfter(
-                          startDate.subtract(const Duration(seconds: 1))) &&
-                      entryDate.isBefore(
-                        endDate.add(const Duration(seconds: 1, days: 1)),
-                      ));
-            });
-            break;
-
-          case "All Time":
-            currentLogs = widget.entries?.where((e) =>
-                (shouldUseSpecificPhoneNumber
-                    ? e.number?.contains(phoneToMatch) ?? false
-                    : true) &&
-                callTypes.contains(e.callType));
-            break;
-
-          default:
-            currentLogs =
-                widget.entries?.where((e) => callTypes.contains(e.callType));
-        }
-
-        isProcessing = false;
-      });
+  Future<Iterable<CallLogEntry>> fetchFilteredLogs() {
+    return compute(getFilteredLogs, {
+      "logs": currentLogs,
+      "filters": logFilters,
     });
   }
 
@@ -210,12 +108,14 @@ class _ApplicationUiState extends State<ApplicationUi> {
                 refreshEntries: widget.refresher,
               ),
             ),
-            const Screen(
+            Screen(
               index: 1,
               label: "Analytics",
               icon: Icons.pie_chart_outline,
               selectedIcon: Icons.pie_chart,
-              screen: AnalyticsScreen(),
+              screen: AnalyticsScreen(
+                entries: currentLogs,
+              ),
             ),
             const Screen(
               label: "About",
