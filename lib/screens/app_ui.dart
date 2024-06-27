@@ -6,9 +6,11 @@ import 'package:logger/screens/Home/home.dart';
 import 'package:logger/screens/manager.dart';
 
 class ApplicationUi extends StatefulWidget {
+  final Future<void> Function() refresher;
   const ApplicationUi({
     super.key,
     required this.entries,
+    required this.refresher,
   });
 
   final Iterable<CallLogEntry>? entries;
@@ -192,6 +194,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
+          initialIndex: 1,
           currentFilters: logFilters,
           logs: currentLogs,
           filterLogs: filterLogs,
@@ -204,6 +207,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               selectedIcon: Icons.call,
               screen: HomeScreen(
                 entries: currentLogs,
+                refreshEntries: widget.refresher,
               ),
             ),
             const Screen(

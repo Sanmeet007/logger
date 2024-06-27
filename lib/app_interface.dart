@@ -63,6 +63,14 @@ class RefreshableBuilderState extends State<RefreshableBuilder> {
     _futureData = CallLog.get();
   }
 
+  Future<void> refresh() async {
+    await Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _futureData = CallLog.get();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -75,15 +83,9 @@ class RefreshableBuilderState extends State<RefreshableBuilder> {
           default:
             if (snapshot.hasData) {
               var entries = snapshot.data as Iterable<CallLogEntry>?;
-              return RefreshIndicator(
-                onRefresh: () async {
-                  await Future.delayed(const Duration(seconds: 2), () {
-                    setState(() {
-                      _futureData = CallLog.get();
-                    });
-                  });
-                },
-                child: ApplicationUi(entries: entries),
+              return ApplicationUi(
+                entries: entries,
+                refresher: refresh,
               );
             } else if (snapshot.hasError) {
               return const AppError(

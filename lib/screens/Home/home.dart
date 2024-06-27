@@ -5,10 +5,12 @@ import '../../components/logs.dart';
 
 class HomeScreen extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
+  final Future<void> Function() refreshEntries;
 
   const HomeScreen({
     super.key,
     required this.entries,
+    required this.refreshEntries,
   });
 
   @override
@@ -23,8 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return LogsPage(
-      entries: widget.entries,
+    return RefreshIndicator(
+      onRefresh: () async {
+        await widget.refreshEntries();
+      },
+      child: LogsPage(
+        entries: widget.entries,
+      ),
     );
   }
 }
