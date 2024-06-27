@@ -5,6 +5,7 @@ import 'package:logger/screens/About/about.dart';
 import 'package:logger/screens/Analytics/analytics.dart';
 import 'package:logger/screens/Home/home.dart';
 import 'package:logger/screens/manager.dart';
+import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
 
 class ApplicationUi extends StatefulWidget {
@@ -115,6 +116,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
               selectedIcon: Icons.pie_chart,
               screen: AnalyticsScreen(
                 entries: currentLogs,
+                analyzer: CallLogAnalyzer(
+                    logs: currentLogs ?? const Iterable.empty()),
               ),
             ),
             const Screen(

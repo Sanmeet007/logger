@@ -8,23 +8,12 @@ import 'package:logger/components/analytics/top_contacts_tile.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/utils.dart';
 
-class AnalyticsScreen extends StatefulWidget {
+class AnalyticsScreen extends StatelessWidget {
   final Iterable<CallLogEntry>? entries;
-  const AnalyticsScreen({super.key, required this.entries});
+  final CallLogAnalyzer analyzer;
 
-  @override
-  State<AnalyticsScreen> createState() => _AnalyticsScreenState();
-}
-
-class _AnalyticsScreenState extends State<AnalyticsScreen> {
-  late final CallLogAnalyzer analyzer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    analyzer = CallLogAnalyzer(logs: widget.entries ?? const Iterable.empty());
-  }
+  const AnalyticsScreen(
+      {super.key, required this.entries, required this.analyzer});
 
   @override
   Widget build(BuildContext context) {
