@@ -197,6 +197,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
           removeLogFilters: removeLogFilters,
           items: <Screen>[
             Screen(
+              index: 0,
               label: "Logs",
               icon: Icons.call_outlined,
               selectedIcon: Icons.call,
@@ -205,6 +206,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               ),
             ),
             const Screen(
+              index: 1,
               label: "Analytics",
               icon: Icons.pie_chart_outline,
               selectedIcon: Icons.pie_chart,
@@ -212,6 +214,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
             ),
             const Screen(
               label: "About",
+              index: 2,
               icon: Icons.info,
               selectedIcon: Icons.info,
               screen: AboutScreen(),
