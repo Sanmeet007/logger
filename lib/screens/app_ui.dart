@@ -47,6 +47,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
       logFilters["date_range_op"] = dateRangeOption;
       logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
       logFilters["phone_to_match"] = phoneToMatch;
+      logFilters["selected_call_types"] = callTypes;
     });
 
     Future.delayed(const Duration(seconds: 2), () {

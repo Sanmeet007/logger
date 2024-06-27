@@ -72,10 +72,11 @@ class _LogFiltersState extends State<LogFilters> {
     setState(() {
       if (selected) {
         if (!selectedCallTypes.contains(t)) {
-          selectedCallTypes.add(t);
+          selectedCallTypes = [...selectedCallTypes, t];
         }
       } else {
         if (selectedCallTypes.contains(t)) {
+          selectedCallTypes = [...selectedCallTypes];
           selectedCallTypes.remove(t);
         }
       }
