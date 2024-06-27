@@ -8,7 +8,7 @@ import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/filters.dart';
 
 class ApplicationUi extends StatefulWidget {
-  final Future<void> Function() refresher;
+  final Future<void> Function()? refresher;
   const ApplicationUi({
     super.key,
     required this.entries,

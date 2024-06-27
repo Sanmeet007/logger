@@ -82,7 +82,7 @@ class RefreshableBuilderState extends State<RefreshableBuilder> {
             return const Loader();
           default:
             if (snapshot.hasData) {
-              var entries = snapshot.data as Iterable<CallLogEntry>?;
+              final entries = snapshot.data as Iterable<CallLogEntry>?;
               return ApplicationUi(
                 entries: entries,
                 refresher: refresh,

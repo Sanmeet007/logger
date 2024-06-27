@@ -266,99 +266,98 @@ class _ScreenManagerState extends State<ScreenManager> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        if (_selectedIndex != widget.initialIndex) {
-          setState(() {
-            _selectedIndex = widget.initialIndex;
-          });
-          return false;
-        }
-        return true;
-      },
-      child: Scaffold(
-          appBar: AppBar(
-              elevation: 0,
-              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-              title: const Text(
-                "Logger",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
+        onWillPop: () async {
+          if (_selectedIndex != widget.initialIndex) {
+            setState(() {
+              _selectedIndex = widget.initialIndex;
+            });
+            return false;
+          }
+          return true;
+        },
+        child: Scaffold(
+            appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                title: const Text(
+                  "Logger",
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              actions: [
-                ...(_selectedIndex == 0
-                    ? [
-                        IconButton(
-                          tooltip: "Download",
-                          splashRadius: 22.0,
-                          icon: const Icon(
-                            Icons.file_download_outlined,
-                            size: 30.0,
+                actions: [
+                  ...(_selectedIndex == 0
+                      ? [
+                          IconButton(
+                            tooltip: "Download",
+                            splashRadius: 22.0,
+                            icon: const Icon(
+                              Icons.file_download_outlined,
+                              size: 30.0,
+                            ),
+                            onPressed: !isTaskRunnig
+                                ? () => downloadFile(showStatus: true)
+                                : null,
                           ),
-                          onPressed: !isTaskRunnig
-                              ? () => downloadFile(showStatus: true)
-                              : null,
-                        ),
-                        IconButton(
-                          tooltip: "Export Open",
-                          splashRadius: 22.0,
-                          icon: const Icon(Icons.file_open_outlined),
-                          onPressed: !isTaskRunnig
-                              ? () => generateAndOpenFile()
-                              : null,
-                        ),
-                        IconButton(
-                          tooltip: "Share",
-                          splashRadius: 22.0,
-                          icon: const Icon(Icons.share_rounded),
-                          onPressed: !isTaskRunnig ? () => shareFile() : null,
-                        ),
-                      ]
-                    : []),
-                if (_selectedIndex == 1 || _selectedIndex == 0)
-                  IconButton(
-                    tooltip: "Filter",
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        showDragHandle: true,
-                        isScrollControlled: true,
-                        builder: (context) => LogFilters(
-                          currentFilters: widget.currentFilters,
-                          filterLogs: widget.filterLogs,
-                          removeFilters: widget.removeLogFilters,
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.filter_alt_rounded),
-                  ),
-                const SizedBox(
-                  width: 10.0,
-                )
-              ]),
-          bottomNavigationBar: NavigationBar(
-            indicatorColor: const Color.fromARGB(217, 223, 202, 255),
-            onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            selectedIndex: _selectedIndex,
-            destinations: widget.items
-                .map(
-                  (item) => NavigationDestination(
-                    icon: Icon(item.icon),
-                    selectedIcon: Icon(item.selectedIcon),
-                    label: item.label,
-                  ),
-                )
-                .toList(),
-          ),
-          body: Stack(children: [
-            ...widget.items.map((item) => Visibility(
-                visible: _selectedIndex == item.index, child: item.screen)),
-          ])),
-    );
+                          IconButton(
+                            tooltip: "Export Open",
+                            splashRadius: 22.0,
+                            icon: const Icon(Icons.file_open_outlined),
+                            onPressed: !isTaskRunnig
+                                ? () => generateAndOpenFile()
+                                : null,
+                          ),
+                          IconButton(
+                            tooltip: "Share",
+                            splashRadius: 22.0,
+                            icon: const Icon(Icons.share_rounded),
+                            onPressed: !isTaskRunnig ? () => shareFile() : null,
+                          ),
+                        ]
+                      : []),
+                  if (_selectedIndex == 1 || _selectedIndex == 0)
+                    IconButton(
+                      tooltip: "Filter",
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          showDragHandle: true,
+                          isScrollControlled: true,
+                          builder: (context) => LogFilters(
+                            currentFilters: widget.currentFilters,
+                            filterLogs: widget.filterLogs,
+                            removeFilters: widget.removeLogFilters,
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.filter_alt_rounded),
+                    ),
+                  const SizedBox(
+                    width: 10.0,
+                  )
+                ]),
+            bottomNavigationBar: NavigationBar(
+              indicatorColor: const Color.fromARGB(217, 223, 202, 255),
+              onDestinationSelected: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              selectedIndex: _selectedIndex,
+              destinations: widget.items
+                  .map(
+                    (item) => NavigationDestination(
+                      icon: Icon(item.icon),
+                      selectedIcon: Icon(item.selectedIcon),
+                      label: item.label,
+                    ),
+                  )
+                  .toList(),
+            ),
+            body: IndexedStack(
+              index: _selectedIndex,
+              children: [...widget.items.map((e) => e.screen)],
+            )));
   }
 }

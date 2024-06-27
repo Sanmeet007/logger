@@ -43,6 +43,7 @@ dependencies:
   flutter_slidable: ^3.1.0
   date_time_picker: ^2.1.0
   fl_chart: ^0.68.0
+  phone_numbers_parser: ^8.3.0
 
 dev_dependencies:
   flutter_test:

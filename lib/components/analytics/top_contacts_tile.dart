@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/components/contact_log.dart';
 import 'package:logger/components/sized_text.dart';
 
 class TopContactsTile extends StatelessWidget {
@@ -17,30 +18,21 @@ class TopContactsTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedText(
-          "Top 5 Contacts by call duration",
+          "Top 5 Call Durations",
           size: 20.0,
         ),
         SizedBox(
           height: spacing - 5,
         ),
         Container(
-          padding: const EdgeInsets.all(10.0),
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             color: const Color.fromARGB(250, 42, 40, 40),
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Text("Top  5"),
-                ],
-              ),
-              Row(
-                children: [
-                  Text("Top  5"),
-                ],
-              ),
+              ...(entries.map((item) => ContactLog(logDetails: item))),
             ],
           ),
         )

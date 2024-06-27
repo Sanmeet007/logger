@@ -5,7 +5,7 @@ import '../../components/logs.dart';
 
 class HomeScreen extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
-  final Future<void> Function() refreshEntries;
+  final Future<void> Function()? refreshEntries;
 
   const HomeScreen({
     super.key,
@@ -27,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        await widget.refreshEntries();
+        if (widget.refreshEntries != null) {
+          await widget.refreshEntries!();
+        }
       },
       child: LogsPage(
         entries: widget.entries,

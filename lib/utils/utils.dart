@@ -1,6 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 String getVersion() {
   return "2.1.0";
@@ -80,4 +81,12 @@ String prettifyDuration(Duration duration) {
   } else {
     return '${duration.inDays}day${duration.inDays > 1 ? 's' : ''}';
   }
+}
+
+String parsePhoneNumber(String phnum) {
+  if (phnum.isEmpty) {
+    return phnum;
+  }
+  var parseNumber = PhoneNumber.parse(phnum);
+  return phnum.replaceAll("+${parseNumber.countryCode}", "");
 }

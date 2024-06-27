@@ -1,3 +1,5 @@
+import 'package:logger/utils/utils.dart';
+import 'dart:collection';
 import 'dart:math';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
@@ -78,7 +80,26 @@ class CallLogAnalyzer {
     sortedLogs.sort((a, b) => Duration(seconds: b.duration ?? 0)
         .compareTo(Duration(seconds: a.duration ?? 0)));
 
-    return sortedLogs.take(5).toList();
+    List<String> result = LinkedHashSet<String>.from(sortedLogs.map((item) {
+      if (item.number != null) {
+        if (item.number!.startsWith("+")) {
+          return parsePhoneNumber(item.number!);
+        } else {
+          return item.number;
+        }
+      } else {
+        return null;
+      }
+    })).toList();
+
+    List<CallLogEntry> finalList = [];
+
+    result.take(5).forEach((String num) {
+      finalList.add(sortedLogs
+          .firstWhere((x) => parsePhoneNumber(x.number ?? "") == num));
+    });
+
+    return finalList;
   }
 
   Future<List<CallLogEntry>> getTop5CallDurationEntries() {
