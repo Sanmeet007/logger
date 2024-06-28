@@ -2,17 +2,28 @@ import 'package:flutter/material.dart';
 
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
-      disabledColor: const Color.fromARGB(182, 238, 238, 238),
-      scaffoldBackgroundColor: Colors.white,
-      colorScheme: const ColorScheme.light().copyWith(
-        primary: const Color.fromARGB(255, 102, 0, 255),
+    disabledColor: const Color.fromARGB(182, 106, 75, 115),
+    scaffoldBackgroundColor: Colors.white,
+    colorScheme: const ColorScheme.light().copyWith(
+      secondary: const Color.fromARGB(255, 249, 245, 255),
+      primary: const Color.fromARGB(255, 106, 26, 227),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+        foregroundColor: const Color.fromARGB(255, 11, 1, 26),
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: const Color.fromARGB(255, 102, 0, 255),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: const Color.fromARGB(255, 95, 61, 148),
+        side: const BorderSide(
+          color: Color.fromARGB(255, 215, 189, 255),
         ),
-      ));
+      ),
+    ),
+  );
 
   static ThemeData darkTheme = ThemeData(
     snackBarTheme: const SnackBarThemeData(

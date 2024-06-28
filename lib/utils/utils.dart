@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 String getVersion() {
-  return "2.1.0";
+  return "2.0.1";
 }
 
 String getDeviceType(BuildContext context) {
@@ -102,7 +102,7 @@ List getCallDisplayFields(CallType callType) {
 
   if (callType == CallType.missed) {
     rCallType = "Missed";
-    callColor = Colors.deepOrange;
+    callColor = Colors.redAccent;
     callIcon = Icons.call_missed;
   } else if (callType == CallType.incoming) {
     rCallType = "Incoming";
@@ -110,16 +110,16 @@ List getCallDisplayFields(CallType callType) {
     callIcon = Icons.call_received;
   } else if (callType == CallType.outgoing) {
     rCallType = "Outgoing";
-    callColor = Colors.green;
+    callColor = const Color.fromARGB(255, 175, 121, 255);
     callIcon = Icons.call_made;
   } else if (callType == CallType.blocked) {
     rCallType = "Blocked";
-    callColor = Colors.red;
-    callIcon = Icons.block_flipped;
+    callColor = Colors.orange;
+    callIcon = Icons.block;
   } else if (callType == CallType.rejected) {
     rCallType = "Rejected";
-    callColor = Colors.blueGrey;
-    callIcon = Icons.cancel_rounded;
+    callColor = Colors.red;
+    callIcon = Icons.cancel_outlined;
   } else if (callType == CallType.wifiIncoming) {
     rCallType = "Wifi Incoming";
     callColor = const Color.fromARGB(255, 110, 113, 255);

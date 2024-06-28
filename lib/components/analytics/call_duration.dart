@@ -28,9 +28,9 @@ class CallDurationTile extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(250, 42, 40, 40),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(250, 42, 40, 40)
+                  : const Color.fromARGB(155, 240, 230, 255)),
           child: Column(
             children: [
               Container(

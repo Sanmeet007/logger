@@ -33,7 +33,9 @@ class TopContactsTile extends StatelessWidget {
         Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(250, 42, 40, 40),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color.fromARGB(250, 42, 40, 40)
+                : const Color.fromARGB(155, 240, 230, 255),
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(

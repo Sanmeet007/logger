@@ -32,7 +32,9 @@ class IncomingVsOutgoingTile extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(250, 42, 40, 40),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color.fromARGB(250, 42, 40, 40)
+                : const Color.fromARGB(155, 240, 230, 255),
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
@@ -42,7 +44,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                 children: <Widget>[
                   Indicator(
                     text: 'Outgoing',
-                    color: Colors.red,
+                    color: const Color.fromARGB(255, 175, 121, 255),
                     isSquare: false,
                     size: 16,
                     textColor: Theme.of(context).brightness == Brightness.dark
@@ -85,7 +87,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                           PieChartSectionData(
                             value: outgoingCallsCount.toDouble(),
                             title: prettifyNumbers(outgoingCallsCount),
-                            color: Colors.red,
+                            color: const Color.fromARGB(255, 175, 121, 255),
                           ),
                         ],
                       ),

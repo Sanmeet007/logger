@@ -336,7 +336,9 @@ class _ScreenManagerState extends State<ScreenManager> {
                       tooltip: "Filter",
                       onPressed: showFiltersModal,
                       icon: widget.areFiltersApplied
-                          ? const Badge(child: Icon(Icons.filter_alt_rounded))
+                          ? Badge(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              child: const Icon(Icons.filter_alt_rounded))
                           : const Icon(Icons.filter_alt_rounded),
                     ),
                   const SizedBox(

@@ -26,7 +26,7 @@ class ContactLog extends StatelessWidget {
                 var uri = Uri.parse("tel:${logDetails.number}");
                 await launchUrl(uri);
               },
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.black,
               foregroundColor: Colors.white,
               icon: Icons.call,
               label: 'Call',
@@ -37,7 +37,7 @@ class ContactLog extends StatelessWidget {
                 var uri = Uri.parse("sms:${logDetails.number}");
                 await launchUrl(uri);
               },
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 134, 53, 255),
               foregroundColor: Colors.white,
               icon: Icons.message,
               label: 'SMS',

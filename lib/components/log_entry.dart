@@ -46,7 +46,7 @@ class LogEntry extends StatelessWidget {
               var uri = Uri.parse("tel:$phoneNumber");
               await launchUrl(uri);
             },
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.black,
             foregroundColor: Colors.white,
             icon: Icons.call,
             label: 'Call',
@@ -58,7 +58,7 @@ class LogEntry extends StatelessWidget {
               var uri = Uri.parse("sms:$phoneNumber");
               await launchUrl(uri);
             },
-            backgroundColor: Colors.blue,
+            backgroundColor: const Color.fromARGB(255, 134, 53, 255),
             foregroundColor: Colors.white,
             icon: Icons.message,
             label: 'SMS',
@@ -66,7 +66,9 @@ class LogEntry extends StatelessWidget {
         ],
       ),
       child: ListTile(
-          tileColor: const Color.fromARGB(8, 144, 92, 255),
+          tileColor: Theme.of(context).brightness == Brightness.dark
+              ? const Color.fromARGB(250, 42, 40, 40)
+              : const Color.fromARGB(255, 249, 245, 255),
           onTap: () {
             showModalBottomSheet(
                 showDragHandle: true,

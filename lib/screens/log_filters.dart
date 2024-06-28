@@ -178,7 +178,9 @@ class _LogFiltersState extends State<LogFilters> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
-                    color: Colors.black38,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(250, 42, 40, 40)
+                        : const Color.fromARGB(155, 240, 230, 255),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
@@ -224,7 +226,9 @@ class _LogFiltersState extends State<LogFilters> {
                 Container(
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
-                    color: Colors.black38,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(250, 42, 40, 40)
+                        : const Color.fromARGB(155, 240, 230, 255),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
@@ -249,7 +253,9 @@ class _LogFiltersState extends State<LogFilters> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
-                    color: Colors.black38,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(250, 42, 40, 40)
+                        : const Color.fromARGB(155, 240, 230, 255),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
@@ -264,8 +270,10 @@ class _LogFiltersState extends State<LogFilters> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              border:
-                                  Border.all(width: 1.0, color: Colors.white10),
+                              border: Border.all(
+                                width: 1.0,
+                                color: Colors.black87,
+                              ),
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: DropdownButton<String>(
@@ -362,11 +370,6 @@ class _LogFiltersState extends State<LogFilters> {
                   child: const Text("Apply filters"),
                 ),
                 OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Color.fromARGB(255, 79, 69, 81),
-                    ),
-                  ),
                   onPressed: clearFilters,
                   child: const Text("Reset to default"),
                 ),

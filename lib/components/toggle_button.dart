@@ -87,16 +87,32 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
     });
   }
 
-  customBoxDecoration(isActive) {
+  customBoxDecorationLight(isActive) {
+    return BoxDecoration(
+      color: isActive
+          ? const Color.fromARGB(255, 216, 189, 255)
+          : Colors.transparent,
+      border: Border.all(
+        color: isActive
+            ? const Color.fromARGB(255, 196, 155, 255)
+            : const Color.fromARGB(101, 31, 3, 70),
+        width: 1.0,
+      ),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(5.0),
+      ),
+    );
+  }
+
+  customBoxDecorationDark(isActive) {
     return BoxDecoration(
       color: isActive
           ? const Color.fromARGB(255, 186, 169, 210)
           : const Color.fromARGB(255, 44, 43, 43),
-      border: const Border(
-          left: BorderSide(color: Colors.black12, width: 1.0),
-          bottom: BorderSide(color: Colors.black12, width: 1.0),
-          top: BorderSide(color: Colors.black12, width: 1.0),
-          right: BorderSide(color: Colors.black12, width: 1.0)),
+      border: Border.all(
+        color: const Color.fromARGB(255, 196, 155, 255),
+        width: 1.0,
+      ),
       borderRadius: const BorderRadius.all(
         Radius.circular(5.0),
       ),
@@ -112,7 +128,9 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
           .map(
             (option) => Container(
               clipBehavior: Clip.hardEdge,
-              decoration: customBoxDecoration(option['isActive']),
+              decoration: Theme.of(context).brightness == Brightness.dark
+                  ? customBoxDecorationDark(option['isActive'])
+                  : customBoxDecorationLight(option['isActive']),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -127,8 +145,12 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: option['isActive']
-                            ? const Color.fromARGB(255, 0, 0, 0)
-                            : const Color.fromARGB(221, 165, 165, 165),
+                            ? Theme.of(context).brightness == Brightness.dark
+                                ? const Color.fromARGB(255, 0, 0, 0)
+                                : const Color.fromARGB(255, 21, 0, 52)
+                            : Theme.of(context).brightness == Brightness.dark
+                                ? const Color.fromARGB(221, 165, 165, 165)
+                                : const Color.fromARGB(255, 31, 3, 70),
                       ),
                     ),
                   ),

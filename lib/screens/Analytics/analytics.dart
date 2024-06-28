@@ -254,7 +254,7 @@ class CallStatsTileBuilder extends StatelessWidget {
                   icons: const [
                     Icon(
                       Icons.call_made,
-                      color: Colors.blue,
+                      color: Color.fromARGB(255, 124, 70, 204),
                     ),
                     Icon(
                       Icons.cancel_outlined,

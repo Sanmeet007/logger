@@ -39,7 +39,7 @@ class AboutScreen extends StatelessWidget {
                   inside: BorderSide(
                     color: Theme.of(context).brightness == Brightness.dark
                         ? const Color.fromARGB(115, 53, 52, 52)
-                        : const Color.fromARGB(255, 249, 245, 255),
+                        : const Color.fromARGB(201, 233, 216, 255),
                   ),
                 ),
                 children: [
