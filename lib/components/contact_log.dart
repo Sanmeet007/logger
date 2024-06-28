@@ -103,7 +103,11 @@ class ContactLog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  logDetails.name ?? "Uknown",
+                  logDetails.name == null
+                      ? "Unknown"
+                      : logDetails.name!.isEmpty
+                          ? "Unknown"
+                          : logDetails.name!,
                 ),
                 Text(
                   logDetails.number.toString(),
