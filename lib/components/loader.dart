@@ -9,11 +9,11 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: MediaQuery.of(context).platformBrightness == Brightness.dark
-          ? const Color.fromARGB(255, 0, 16, 16)
-          : const Color.fromARGB(255, 255, 239, 239),
+          ? const Color.fromARGB(255, 0, 0, 0)
+          : const Color.fromARGB(255, 255, 255, 255),
       child: const Center(
         child: CircularProgressIndicator(
-          color: Color.fromARGB(255, 113, 47, 255),
+          color: Color.fromARGB(255, 106, 26, 227),
         ),
       ),
     );

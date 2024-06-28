@@ -110,7 +110,7 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
           ? const Color.fromARGB(255, 186, 169, 210)
           : const Color.fromARGB(255, 44, 43, 43),
       border: Border.all(
-        color: const Color.fromARGB(255, 196, 155, 255),
+        color: const Color.fromARGB(255, 108, 85, 139),
         width: 1.0,
       ),
       borderRadius: const BorderRadius.all(

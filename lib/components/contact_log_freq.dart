@@ -27,8 +27,12 @@ class ContactLogFreq extends StatelessWidget {
                 var uri = Uri.parse("tel:${logDetails.number}");
                 await launchUrl(uri);
               },
-              backgroundColor: Colors.black,
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(255, 60, 60, 60)
+                  : Colors.black,
+              foregroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(255, 235, 235, 235)
+                  : Colors.white,
               icon: Icons.call,
               label: 'Call',
             ),
@@ -77,7 +81,10 @@ class ContactLogFreq extends StatelessWidget {
                 ),
                 Text(
                   logDetails.number.toString(),
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey
+                          : Colors.grey[600]),
                 ),
               ],
             )),

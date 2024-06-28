@@ -70,8 +70,11 @@ class TopContactsTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Skeleton(
+              return Skeleton(
                 height: 300.0,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(255, 64, 58, 72)
+                    : const Color.fromARGB(255, 240, 230, 255),
               );
             default:
               if (snapshot.hasData) {
@@ -107,10 +110,12 @@ class CallFreqTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Skeleton(
-                height: 100.0,
-                margin: EdgeInsets.only(bottom: 20.0),
-              );
+              return Skeleton(
+                  height: 100.0,
+                  margin: const EdgeInsets.only(bottom: 20.0),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 64, 58, 72)
+                      : const Color.fromARGB(255, 240, 230, 255));
             default:
               if (snapshot.hasData) {
                 var entry = snapshot.data as CallLogEntryWithFreq?;
@@ -149,9 +154,11 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Skeleton(
-                margin: EdgeInsets.only(bottom: 20.0),
-              );
+              return Skeleton(
+                  margin: const EdgeInsets.only(bottom: 20.0),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 64, 58, 72)
+                      : const Color.fromARGB(255, 240, 230, 255));
             default:
               if (snapshot.hasData) {
                 var values = snapshot.data as List<int>;
@@ -191,10 +198,12 @@ class CallDurationTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Skeleton(
-                margin: EdgeInsets.only(bottom: 20.0),
-                height: 100.0,
-              );
+              return Skeleton(
+                  margin: const EdgeInsets.only(bottom: 20.0),
+                  height: 100.0,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 64, 58, 72)
+                      : const Color.fromARGB(255, 240, 230, 255));
             default:
               if (snapshot.hasData) {
                 return CallDurationTile(
@@ -238,10 +247,12 @@ class CallStatsTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const GridSkeleton(
-                childAspectRatio: 1.4,
-                margin: EdgeInsets.only(bottom: 20.0),
-              );
+              return GridSkeleton(
+                  childAspectRatio: 1.4,
+                  margin: const EdgeInsets.only(bottom: 20.0),
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 64, 58, 72)
+                      : const Color.fromARGB(255, 240, 230, 255));
             default:
               if (snapshot.hasData) {
                 return CallStatsTile(

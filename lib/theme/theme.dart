@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
+    fontFamily: "SFPro",
     disabledColor: const Color.fromARGB(182, 106, 75, 115),
     scaffoldBackgroundColor: Colors.white,
     colorScheme: const ColorScheme.light().copyWith(
@@ -26,23 +27,33 @@ class ThemeClass {
   );
 
   static ThemeData darkTheme = ThemeData(
+    fontFamily: "SFPro",
+    scaffoldBackgroundColor: Colors.black,
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: Color.fromARGB(255, 36, 36, 36),
       contentTextStyle: TextStyle(color: Colors.grey),
       actionTextColor: Color.fromARGB(255, 228, 215, 255),
     ),
-    fontFamily: "SFPro",
-    scaffoldBackgroundColor: Colors.black,
     colorScheme: const ColorScheme.dark().copyWith(
       primary: const Color.fromARGB(255, 196, 169, 255),
     ),
     scrollbarTheme: const ScrollbarThemeData().copyWith(
       thumbColor: WidgetStateProperty.all(Colors.grey[500]),
     ),
-    buttonTheme: const ButtonThemeData(
-      buttonColor: Color.fromARGB(255, 180, 130, 255),
-      shape: RoundedRectangleBorder(),
-      textTheme: ButtonTextTheme.accent,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+        foregroundColor: const Color.fromARGB(255, 11, 1, 26),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: const Color.fromARGB(255, 202, 169, 255),
+        side: const BorderSide(
+          color: Color.fromARGB(255, 69, 59, 84),
+        ),
+      ),
     ),
   );
 }

@@ -272,7 +272,10 @@ class _LogFiltersState extends State<LogFilters> {
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 1.0,
-                                color: Colors.black87,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color.fromARGB(255, 65, 65, 65)
+                                    : Colors.black87,
                               ),
                               borderRadius: BorderRadius.circular(100.0),
                             ),
