@@ -1,6 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/contact_log.dart';
+import 'package:logger/components/divider.dart';
 import 'package:logger/components/sized_text.dart';
 
 class TopContactsTile extends StatelessWidget {
@@ -41,13 +42,7 @@ class TopContactsTile extends StatelessWidget {
                 (item) {
                   return Column(
                     children: [
-                      if (item.key != 0)
-                        Divider(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? const Color.fromARGB(255, 30, 30, 30)
-                              : const Color.fromARGB(255, 230, 213, 255),
-                          height: 1.0,
-                        ),
+                      if (item.key != 0) const LogDivider(),
                       ContactLog(logDetails: item.value),
                     ],
                   );

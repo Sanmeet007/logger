@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/components/divider.dart';
 import 'package:logger/utils/utils.dart';
 
 class LogDetails extends StatelessWidget {
@@ -87,12 +88,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(255, 30, 30, 30)
-                          : const Color.fromARGB(255, 230, 213, 255),
-                      height: 1.0,
-                    ),
+                    const LogDivider(),
                     ListTile(
                       title: const Text(
                         "Date",
@@ -103,12 +99,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(255, 30, 30, 30)
-                          : const Color.fromARGB(255, 230, 213, 255),
-                      height: 1.0,
-                    ),
+                    const LogDivider(),
                     ListTile(
                       title: const Text(
                         "Duration",
@@ -119,12 +110,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(255, 30, 30, 30)
-                          : const Color.fromARGB(255, 230, 213, 255),
-                      height: 1.0,
-                    ),
+                    const LogDivider(),
                     ListTile(
                       title: const Text(
                         "Call Type",
@@ -135,12 +121,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(255, 30, 30, 30)
-                          : const Color.fromARGB(255, 230, 213, 255),
-                      height: 1.0,
-                    ),
+                    const LogDivider(),
                     ListTile(
                       title: const Text(
                         "SIM Display Name",
@@ -151,12 +132,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(255, 30, 30, 30)
-                          : const Color.fromARGB(255, 230, 213, 255),
-                      height: 1.0,
-                    ),
+                    const LogDivider(),
                     ListTile(
                       title: const Text(
                         "Phone Account ID ",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/components/divider.dart';
 import 'package:logger/components/sized_text.dart';
 
 class CallDurationTile extends StatelessWidget {
@@ -55,12 +56,7 @@ class CallDurationTile extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? const Color.fromARGB(255, 30, 30, 30)
-                    : const Color.fromARGB(255, 230, 213, 255),
-                height: 1.0,
-              ),
+              const LogDivider(),
               Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10.0,

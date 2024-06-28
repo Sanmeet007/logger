@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/components/divider.dart';
 import 'package:logger/components/log_entry.dart';
 import 'package:logger/utils/utils.dart';
 
@@ -31,13 +32,7 @@ class GroupedLogsBuilder extends StatelessWidget {
       int index = entries.indexOf(entry);
       return Column(
         children: [
-          if (index != 0)
-            Divider(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(255, 30, 30, 30)
-                  : const Color.fromARGB(255, 230, 213, 255),
-              height: 1.0,
-            ),
+          if (index != 0) const LogDivider(),
           LogEntry(
             name: name,
             phoneNumber: phoneNumber,
