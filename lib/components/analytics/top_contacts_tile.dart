@@ -17,8 +17,12 @@ class TopContactsTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedText(
-          "Top 5 Longest Calls",
+        SizedText(
+          entries.length < 2
+              ? "Longest Call"
+              : entries.length > 4
+                  ? "Top 5 Longest Calls"
+                  : "Top ${entries.length} Longest Calls",
           size: 20.0,
         ),
         SizedBox(

@@ -74,7 +74,7 @@ class TopContactsTileBuilder extends StatelessWidget {
                 var entries = snapshot.data as List<CallLogEntry>;
                 return TopContactsTile(entries: entries);
               } else {
-                return const Text("Hmm. Something went wrong");
+                return Container();
               }
           }
         });
@@ -89,7 +89,7 @@ class CallFreqTileBuilder extends StatelessWidget {
     required this.analyzer,
   });
 
-  Future<CallLogEntryWithFreq> getValues() async {
+  Future<CallLogEntryWithFreq?> getValues() async {
     return Future(() async {
       return await analyzer.getMaxFrequentlyCalledEntry();
     });
@@ -106,13 +106,12 @@ class CallFreqTileBuilder extends StatelessWidget {
               return const Text("Loading most and least frequent");
             default:
               if (snapshot.hasData) {
-                var entry = snapshot.data as CallLogEntryWithFreq;
+                var entry = snapshot.data as CallLogEntryWithFreq?;
                 return CallFreqTile(
                   mostFrequent: entry,
                 );
               } else {
-                // return const Text("Hmm. Something went wrong");
-                return Text(snapshot.error.toString());
+                return Container();
               }
           }
         });
@@ -152,7 +151,7 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
                   outgoingCallsCount: values[1],
                 );
               } else {
-                return const Text("Hmm. Something went wrong");
+                return Container();
               }
           }
         });
@@ -191,7 +190,7 @@ class CallDurationTileBuilder extends StatelessWidget {
                   values: snapshot.data as List<String>,
                 );
               } else {
-                return const Text("Hmm. Something went wrong");
+                return Container();
               }
           }
         });
@@ -258,7 +257,7 @@ class CallStatsTileBuilder extends StatelessWidget {
                   values: snapshot.data as List<String>,
                 );
               } else {
-                return const Text("Hmm. Something went wrong");
+                return Container();
               }
           }
         });

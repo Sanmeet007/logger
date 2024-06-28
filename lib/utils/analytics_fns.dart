@@ -14,11 +14,25 @@ class CallLogAnalyzer {
   final Iterable<CallLogEntry> logs;
   const CallLogAnalyzer({required this.logs});
 
-  int _getCallTypeCount(Map params) {
+  static int _getCallTypeCount(Map params) {
     var logs = params["logs"] as Iterable<CallLogEntry>;
     var type = params["type"] as CallType;
 
     return logs.where((e) => e.callType == type).length;
+  }
+
+  static int _getCallTypesCount(Map params) {
+    var logs = params["logs"] as Iterable<CallLogEntry>;
+    var types = params["types"] as List<CallType>;
+
+    return logs.where((e) => types.contains(e.callType)).length;
+  }
+
+  Future<int> getCallTypesCount(List<CallType> types) {
+    return compute(_getCallTypesCount, {
+      "logs": logs,
+      "type": types,
+    });
   }
 
   Future<int> getCallTypeCount(CallType type) {
@@ -53,9 +67,13 @@ class CallLogAnalyzer {
   }
 
   static Duration _getAvgCallDuration(Iterable<CallLogEntry> logs) {
-    var seconds =
-        logs.map((e) => e.duration ?? 0).reduce((v, e) => v + e) ~/ logs.length;
-    return Duration(seconds: seconds);
+    if (logs.isNotEmpty) {
+      var seconds = logs.map((e) => e.duration ?? 0).reduce((v, e) => v + e) ~/
+          logs.length;
+      return Duration(seconds: seconds);
+    } else {
+      return const Duration(seconds: 0);
+    }
   }
 
   Future<Duration> getAvgCallDuration() {
@@ -63,6 +81,7 @@ class CallLogAnalyzer {
   }
 
   static Duration _getLongestCallDuration(Iterable<CallLogEntry> logs) {
+    if (logs.isEmpty) return const Duration(seconds: 0);
     var seconds = logs.map((e) => e.duration ?? 0).reduce((v, e) {
       v = max(v, e);
       return v;
@@ -76,6 +95,8 @@ class CallLogAnalyzer {
 
   static List<CallLogEntry> _getTop5CallDurationEntries(
       Iterable<CallLogEntry> logs) {
+    if (logs.isEmpty) return List.empty();
+
     List<CallLogEntry> sortedLogs = logs.toList();
     sortedLogs.sort((a, b) => Duration(seconds: b.duration ?? 0)
         .compareTo(Duration(seconds: a.duration ?? 0)));
@@ -102,8 +123,10 @@ class CallLogAnalyzer {
     return compute(_getTop5CallDurationEntries, logs);
   }
 
-  static CallLogEntryWithFreq _getMaxFrequentlyCalledEntry(
+  static CallLogEntryWithFreq? _getMaxFrequentlyCalledEntry(
       Iterable<CallLogEntry> logs) {
+    if (logs.isEmpty) return null;
+
     var filterdedLogs = logs.where((e) =>
         (e.callType == CallType.outgoing) ||
         (e.callType == CallType.wifiOutgoing));
@@ -123,6 +146,8 @@ class CallLogAnalyzer {
       ..sort((a, b) => b.value.compareTo(a.value));
 
     // Get the most frequently called phone number
+    if (sortedFrequencyList.isEmpty) return null;
+
     var mostFrequentPhoneNumber = sortedFrequencyList.first;
 
     // Create a list of CallLogEntry for the most and least frequently called phone numbers
@@ -131,12 +156,14 @@ class CallLogAnalyzer {
     resultEntries.add(filterdedLogs.firstWhere((entry) =>
         parsePhoneNumber(entry.number ?? "") == mostFrequentPhoneNumber.key));
 
+    if (resultEntries.isEmpty) return null;
+
     // Add the least frequently called entry
     return CallLogEntryWithFreq(
         entry: resultEntries[0], count: mostFrequentPhoneNumber.value);
   }
 
-  Future<CallLogEntryWithFreq> getMaxFrequentlyCalledEntry() {
+  Future<CallLogEntryWithFreq?> getMaxFrequentlyCalledEntry() {
     return compute(_getMaxFrequentlyCalledEntry, logs);
   }
 }

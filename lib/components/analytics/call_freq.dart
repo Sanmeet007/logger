@@ -5,13 +5,14 @@ import 'package:logger/utils/analytics_fns.dart';
 
 class CallFreqTile extends StatelessWidget {
   final double spacing;
-  final CallLogEntryWithFreq mostFrequent;
+  final CallLogEntryWithFreq? mostFrequent;
 
   const CallFreqTile(
       {super.key, required this.mostFrequent, this.spacing = 20.0});
 
   @override
   Widget build(BuildContext context) {
+    if (mostFrequent == null) return Container();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,8 +30,8 @@ class CallFreqTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: ContactLogFreq(
-            logDetails: mostFrequent.entry,
-            count: mostFrequent.count,
+            logDetails: mostFrequent!.entry,
+            count: mostFrequent!.count,
           ),
         ),
         SizedBox(
