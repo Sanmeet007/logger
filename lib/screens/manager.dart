@@ -145,8 +145,10 @@ class _ScreenManagerState extends State<ScreenManager> {
       duration: const Duration(seconds: 4),
       action: useAction
           ? SnackBarAction(
-              backgroundColor: const Color.fromARGB(255, 106, 26, 227),
-              textColor: const Color.fromARGB(255, 255, 255, 255),
+              backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+              textColor: const Color.fromARGB(255, 11, 1, 26),
+              // backgroundColor: const Color.fromARGB(255, 106, 26, 227),
+              // textColor: const Color.fromARGB(255, 255, 255, 255),
               label: buttonText!,
               onPressed: () => buttonOnPressed!(),
             )
@@ -166,6 +168,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             useAction: true,
             buttonText: "OPEN",
             buttonOnPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
               openFile();
             });
         break;
