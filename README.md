@@ -18,14 +18,17 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 
 - **Comprehensive Call Log Viewing:** Access and review your call history directly within the app.
 - **Convenient CSV Export:** Generate a CSV (Comma-Separated Values) file for further analysis or record-keeping.
-- **Streamlined Workflow:** Manage your call logs effortlessly on your Android device.
 - **Data Security:** Logger prioritizes your privacy by not storing any call log data on our servers.
-- **Intuitive Interface:** Enjoy a straightforward and user-friendly experience for effortless call log management.
+- **Intuitive Interface**: Enjoy a straightforward and user-friendly experience for effortless call log management.
+- **Enhanced Filtering Options**: Easily filter call logs by phone number, date range, and call type.
+- **Customizable On-Device Call Log Analysis**: Perform light analysis including basic call statistics, call direction analysis, call duration, and more directly on your device.
 
 **Benefits:**
 
 - Gain valuable insights by analyzing your call log data exported in a readily usable CSV format.
 - Maintain organized call records outside your device for future reference or data analysis.
+- Analyze call statistics, call directions, and durations directly on your device, empowering informed decision-making.
+- Easily import and export CSV files within the app, ensuring seamless data organization and accessibility.
 
 ## 🚀 Screenshots
 
