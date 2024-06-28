@@ -59,11 +59,13 @@ class _LogsPageState extends State<LogsPage> {
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
         floatingActionButton: AnimatedOpacity(
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 500),
           opacity: _isVisible ? 1.0 : 0.0,
           child: _isVisible
               ? FloatingActionButton.small(
                   shape: const CircleBorder(),
+                  foregroundColor: Colors.black,
+                  backgroundColor: const Color.fromARGB(255, 203, 169, 255),
                   enableFeedback: true,
                   onPressed: scrollToTop,
                   child: const Icon(
