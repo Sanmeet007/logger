@@ -5,6 +5,8 @@ import 'package:logger/components/analytics/call_freq.dart';
 import 'package:logger/components/analytics/call_stats.dart';
 import 'package:logger/components/analytics/inc_out_tile.dart';
 import 'package:logger/components/analytics/top_contacts_tile.dart';
+import 'package:logger/components/grid_skeleton.dart';
+import 'package:logger/components/skeleton.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/utils.dart';
 
@@ -68,7 +70,9 @@ class TopContactsTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Text("Loading most and least frequent");
+              return const Skeleton(
+                height: 300.0,
+              );
             default:
               if (snapshot.hasData) {
                 var entries = snapshot.data as List<CallLogEntry>;
@@ -103,7 +107,10 @@ class CallFreqTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Text("Loading most and least frequent");
+              return const Skeleton(
+                height: 100.0,
+                margin: EdgeInsets.only(bottom: 20.0),
+              );
             default:
               if (snapshot.hasData) {
                 var entry = snapshot.data as CallLogEntryWithFreq?;
@@ -142,7 +149,9 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Text("Loading incoming outgoing graph");
+              return const Skeleton(
+                margin: EdgeInsets.only(bottom: 20.0),
+              );
             default:
               if (snapshot.hasData) {
                 var values = snapshot.data as List<int>;
@@ -151,7 +160,7 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
                   outgoingCallsCount: values[1],
                 );
               } else {
-                return Container();
+                return const Text("Hmm. Something went wrong");
               }
           }
         });
@@ -182,7 +191,10 @@ class CallDurationTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Text("Loading call duration data");
+              return const Skeleton(
+                margin: EdgeInsets.only(bottom: 20.0),
+                height: 100.0,
+              );
             default:
               if (snapshot.hasData) {
                 return CallDurationTile(
@@ -226,7 +238,10 @@ class CallStatsTileBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return const Text("Loading call stats");
+              return const GridSkeleton(
+                childAspectRatio: 1.4,
+                margin: EdgeInsets.only(bottom: 20.0),
+              );
             default:
               if (snapshot.hasData) {
                 return CallStatsTile(

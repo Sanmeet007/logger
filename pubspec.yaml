@@ -44,6 +44,7 @@ dependencies:
   date_time_picker: ^2.1.0
   fl_chart: ^0.68.0
   phone_numbers_parser: ^8.3.0
+  shimmer: ^3.0.0
   collection: any
 
 dev_dependencies:
