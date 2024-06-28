@@ -1,5 +1,4 @@
 import 'package:call_log/call_log.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/screens/About/about.dart';
 import 'package:logger/screens/Analytics/analytics.dart';
@@ -37,34 +36,29 @@ class _ApplicationUiState extends State<ApplicationUi> {
   };
 
   void filterLogs(Map filters) async {
-    var callTypes = filters["selected_call_types"] as List<CallType>;
+    setState(() {
+      isProcessing = true;
+    });
+
+    var selectedCallTypes = filters["selected_call_types"] as List<CallType>;
     var phoneToMatch = filters["phone_to_match"] as String;
     var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
     var dateRangeOption = filters["date_range_op"] as String;
     var startDate = filters["start_date"] as DateTime;
     var endDate = filters["end_date"] as DateTime;
 
-    setState(() {
-      isProcessing = true;
-      logFilters["start_date"] = startDate;
-      logFilters["end_date"] = endDate;
-      logFilters["date_range_op"] = dateRangeOption;
-      logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
-      logFilters["phone_to_match"] = phoneToMatch;
-      logFilters["selected_call_types"] = callTypes;
-    });
+    logFilters["start_date"] = startDate;
+    logFilters["end_date"] = endDate;
+    logFilters["date_range_op"] = dateRangeOption;
+    logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
+    logFilters["phone_to_match"] = phoneToMatch;
+    logFilters["selected_call_types"] = [...selectedCallTypes];
 
-    var filteredLogs = await fetchFilteredLogs();
+    var filteredLogs = await Filters.filterLogs(widget.entries, logFilters);
+
     setState(() {
       currentLogs = filteredLogs;
       isProcessing = false;
-    });
-  }
-
-  Future<Iterable<CallLogEntry>> fetchFilteredLogs() {
-    return compute(getFilteredLogs, {
-      "logs": currentLogs,
-      "filters": logFilters,
     });
   }
 
