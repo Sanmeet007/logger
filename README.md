@@ -29,8 +29,8 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 
 ## 🚀 Screenshots
 
-![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-2.png)
-![Screenshot-2](https://sanmeet007.github.io/public/logger/screenshot-4.png)
+![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-5.png)
+![Screenshot-2](https://sanmeet007.github.io/public/logger/screenshot-6.png)
 
 ## Built With
 
