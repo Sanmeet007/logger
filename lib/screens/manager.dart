@@ -340,8 +340,12 @@ class _ScreenManagerState extends State<ScreenManager> {
                       onPressed: showFiltersModal,
                       icon: widget.areFiltersApplied
                           ? Badge(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: const Icon(Icons.filter_alt_rounded))
+                              backgroundColor: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color.fromARGB(255, 196, 169, 255)
+                                  : const Color.fromARGB(255, 106, 26, 227),
+                              child: const Icon(Icons.filter_alt_rounded),
+                            )
                           : const Icon(Icons.filter_alt_rounded),
                     ),
                   const SizedBox(
