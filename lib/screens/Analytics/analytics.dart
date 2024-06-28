@@ -13,9 +13,23 @@ import 'package:logger/utils/utils.dart';
 class AnalyticsScreen extends StatelessWidget {
   final Iterable<CallLogEntry>? entries;
   final CallLogAnalyzer analyzer;
+  final List<CallType> currentCallTypes;
 
-  const AnalyticsScreen(
-      {super.key, required this.entries, required this.analyzer});
+  const AnalyticsScreen({
+    super.key,
+    required this.entries,
+    required this.analyzer,
+    required this.currentCallTypes,
+  });
+
+  bool containsAnyMatchingCallTypes(List<CallType> types) {
+    for (var t in currentCallTypes) {
+      if (types.contains(t)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +42,38 @@ class AnalyticsScreen extends StatelessWidget {
             CallStatsTileBuilder(
               analyzer: analyzer,
             ),
-            CallDurationTileBuilder(
-              analyzer: analyzer,
-            ),
-            IncomingVsOutgoingTileBuilder(
-              analyzer: analyzer,
-            ),
-            CallFreqTileBuilder(
-              analyzer: analyzer,
-            ),
-            TopContactsTileBuilder(
-              analyzer: analyzer,
-            ),
+            if (containsAnyMatchingCallTypes([
+              CallType.outgoing,
+              CallType.wifiOutgoing,
+            ]))
+              CallDurationTileBuilder(
+                analyzer: analyzer,
+              ),
+            if (containsAnyMatchingCallTypes([
+              CallType.incoming,
+              CallType.outgoing,
+              CallType.wifiIncoming,
+              CallType.wifiOutgoing,
+            ]))
+              IncomingVsOutgoingTileBuilder(
+                analyzer: analyzer,
+              ),
+            if (containsAnyMatchingCallTypes([
+              CallType.outgoing,
+              CallType.wifiOutgoing,
+            ]))
+              CallFreqTileBuilder(
+                analyzer: analyzer,
+              ),
+            if (containsAnyMatchingCallTypes([
+              CallType.incoming,
+              CallType.outgoing,
+              CallType.wifiIncoming,
+              CallType.wifiOutgoing,
+            ]))
+              TopContactsTileBuilder(
+                analyzer: analyzer,
+              ),
           ],
         ),
       ),

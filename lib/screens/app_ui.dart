@@ -135,6 +135,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
               selectedIcon: Icons.pie_chart,
               screen: AnalyticsScreen(
                 entries: currentLogs,
+                currentCallTypes:
+                    logFilters["selected_call_types"] as List<CallType>,
                 analyzer: CallLogAnalyzer(
                     logs: currentLogs ?? const Iterable.empty()),
               ),
