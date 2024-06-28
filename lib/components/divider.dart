@@ -8,7 +8,7 @@ class LogDivider extends StatelessWidget {
     return Divider(
       color: Theme.of(context).brightness == Brightness.dark
           ? const Color.fromARGB(255, 30, 30, 30)
-          : const Color.fromARGB(255, 230, 213, 255),
+          : const Color.fromARGB(255, 247, 241, 255),
       height: 1.0,
     );
   }
