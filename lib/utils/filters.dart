@@ -1,6 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 class Filters {
   static Iterable<CallLogEntry> _getFilteredLogs(Map params) {
@@ -130,5 +131,41 @@ class Filters {
       "logs": logs,
       "filters": filters,
     });
+  }
+
+  static bool compareFilterMasks(Map mask1, Map mask2) {
+    if (mask1["specific_ph"] != mask2["specific_ph"]) {
+      return false;
+    }
+    if (mask1["phone_to_match"] != mask2["phone_to_match"]) {
+      return false;
+    }
+    if (mask1["date_range_op"] != mask2["date_range_op"]) {
+      return false;
+    }
+    // Compare call type array
+
+    var cts1 = mask1["selected_call_types"] as List<CallType>;
+    var cts2 = mask2["selected_call_types"] as List<CallType>;
+
+    if (!const SetEquality().equals(cts1.toSet(), cts2.toSet())) {
+      return false;
+    }
+
+    // Compare dates
+    DateTime mask1StartDate = mask1["start_date"] as DateTime;
+    DateTime mask2StartDate = mask2["start_date"] as DateTime;
+
+    DateTime mask1EndDate = mask1["end_date"] as DateTime;
+    DateTime mask2EndDate = mask2["end_date"] as DateTime;
+
+    if (!DateUtils.isSameDay(mask1StartDate, mask2StartDate)) {
+      return false;
+    }
+    if (!DateUtils.isSameDay(mask1EndDate, mask2EndDate)) {
+      return false;
+    }
+
+    return true;
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
+import 'package:logger/utils/filters.dart';
 
 class LogFilters extends StatefulWidget {
   final Function() removeFilters;
@@ -31,6 +32,8 @@ class _LogFiltersState extends State<LogFilters> {
   late TextEditingController _phoneNumberInputController,
       _startDateController,
       _endDateController;
+
+  bool canApplyFilters = false;
 
   @override
   void initState() {
@@ -60,12 +63,14 @@ class _LogFiltersState extends State<LogFilters> {
     setState(() {
       isNumberSearchEnabled = v;
     });
+    checkFiltersState();
   }
 
   void handleDateRangeOptionChange(String? v) {
     setState(() {
       dateRangeOption = v ?? "All Time";
     });
+    checkFiltersState();
   }
 
   void handleCallTypeChange(CallType t, bool selected) {
@@ -81,13 +86,36 @@ class _LogFiltersState extends State<LogFilters> {
         }
       }
     });
+
+    checkFiltersState();
   }
 
   void applyFilters() {
     Navigator.pop(context, true);
 
-    // ! Apply validations
-    widget.filterLogs({
+    if (shouldApplyFilters()) {
+      widget.filterLogs({
+        "specific_ph": isNumberSearchEnabled,
+        "phone_to_match": _phoneNumberInputController.text,
+        "selected_call_types": selectedCallTypes, // \_(^_^)_/
+        "date_range_op": dateRangeOption,
+        "start_date": _startDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_startDateController.text),
+        "end_date": _endDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_endDateController.text)
+      });
+    }
+  }
+
+  void clearFilters() {
+    Navigator.pop(context, true);
+    widget.removeFilters();
+  }
+
+  bool shouldApplyFilters() {
+    return !Filters.compareFilterMasks({
       "specific_ph": isNumberSearchEnabled,
       "phone_to_match": _phoneNumberInputController.text,
       "selected_call_types": selectedCallTypes, // \_(^_^)_/
@@ -98,12 +126,40 @@ class _LogFiltersState extends State<LogFilters> {
       "end_date": _endDateController.text.isEmpty
           ? DateTime.now()
           : DateTime.parse(_endDateController.text)
-    });
+    }, widget.currentFilters);
   }
 
-  void clearFilters() {
-    Navigator.pop(context, true);
-    widget.removeFilters();
+  void checkFiltersState() {
+    if (shouldApplyFilters()) {
+      setState(() {
+        canApplyFilters = true;
+      });
+    } else {
+      setState(() {
+        canApplyFilters = false;
+      });
+    }
+  }
+
+  void handlePhoneNumberValueChange(String? v) {
+    if (v == null) return;
+    if (widget.currentFilters["phone_to_match"] != v) {
+      checkFiltersState();
+    }
+  }
+
+  void handleStartDateChanges(String? v) {
+    if (v == null) return;
+    if (formatter.format(widget.currentFilters["start_date"]) != v) {
+      checkFiltersState();
+    }
+  }
+
+  void handleEndDateChanges(String? v) {
+    if (v == null) return;
+    if (formatter.format(widget.currentFilters["end_date"]) != v) {
+      checkFiltersState();
+    }
   }
 
   @override
@@ -145,6 +201,7 @@ class _LogFiltersState extends State<LogFilters> {
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: TextField(
+                            onChanged: handlePhoneNumberValueChange,
                             controller: _phoneNumberInputController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
@@ -211,11 +268,11 @@ class _LogFiltersState extends State<LogFilters> {
                                   Border.all(width: 1.0, color: Colors.white10),
                               borderRadius: BorderRadius.circular(100.0),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                              vertical: 10.0,
-                            ),
                             child: DropdownButton<String>(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 10.0,
+                                ),
                                 isDense: true,
                                 underline: Container(),
                                 enableFeedback: true,
@@ -251,6 +308,7 @@ class _LogFiltersState extends State<LogFilters> {
                             ),
                             DateTimePicker(
                               controller: _startDateController,
+                              onChanged: handleStartDateChanges,
                               decoration: const InputDecoration(
                                 icon: Icon(Icons.date_range),
                                 label: Text("Start Date"),
@@ -270,6 +328,7 @@ class _LogFiltersState extends State<LogFilters> {
                             ),
                             DateTimePicker(
                               controller: _endDateController,
+                              onChanged: handleStartDateChanges,
                               decoration: const InputDecoration(
                                 icon: Icon(Icons.date_range),
                                 label: Text("End Date"),
@@ -299,7 +358,7 @@ class _LogFiltersState extends State<LogFilters> {
                     foregroundColor: Colors.black,
                     backgroundColor: const Color.fromARGB(255, 222, 200, 255),
                   ),
-                  onPressed: applyFilters,
+                  onPressed: canApplyFilters ? applyFilters : null,
                   child: const Text("Apply filters"),
                 ),
                 OutlinedButton(

@@ -24,6 +24,7 @@ class ApplicationUi extends StatefulWidget {
 class _ApplicationUiState extends State<ApplicationUi> {
   late Iterable<CallLogEntry>? currentLogs;
   bool isProcessing = false;
+  bool areFiltersApplied = false;
 
   // Logs filters
   Map logFilters = {
@@ -56,14 +57,37 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
     var filteredLogs = await Filters.filterLogs(widget.entries, logFilters);
 
-    setState(() {
-      currentLogs = filteredLogs;
-      isProcessing = false;
-    });
+    if (areInitalFilters()) {
+      setState(() {
+        areFiltersApplied = false;
+        currentLogs = filteredLogs;
+        isProcessing = false;
+      });
+    } else {
+      setState(() {
+        areFiltersApplied = true;
+        currentLogs = filteredLogs;
+        isProcessing = false;
+      });
+    }
+  }
+
+  bool areInitalFilters() {
+    return Filters.compareFilterMasks({
+      "specific_ph": false,
+      "phone_to_match": "",
+      "selected_call_types": [...CallType.values],
+      "date_range_op": "All Time",
+      "start_date": DateTime.now(),
+      "end_date": DateTime.now()
+    }, logFilters);
   }
 
   void removeLogFilters() {
+    if (areInitalFilters()) return;
+
     setState(() {
+      areFiltersApplied = false;
       logFilters = {
         "specific_ph": false,
         "phone_to_match": "",
@@ -90,6 +114,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
           initialIndex: 1,
           currentFilters: logFilters,
           logs: currentLogs,
+          areFiltersApplied: areFiltersApplied,
           filterLogs: filterLogs,
           removeLogFilters: removeLogFilters,
           items: <Screen>[

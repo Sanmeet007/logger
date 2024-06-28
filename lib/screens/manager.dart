@@ -32,6 +32,7 @@ class ScreenManager extends StatefulWidget {
   final Function() removeLogFilters;
   final Function(Map) filterLogs;
   final Map currentFilters;
+  final bool areFiltersApplied;
 
   const ScreenManager({
     super.key,
@@ -40,6 +41,7 @@ class ScreenManager extends StatefulWidget {
     required this.filterLogs,
     required this.removeLogFilters,
     required this.items,
+    required this.areFiltersApplied,
     this.initialIndex = 0,
   });
 
@@ -263,6 +265,19 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
   }
 
+  void showFiltersModal() {
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (context) => LogFilters(
+        currentFilters: widget.currentFilters,
+        filterLogs: widget.filterLogs,
+        removeFilters: widget.removeLogFilters,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -319,19 +334,10 @@ class _ScreenManagerState extends State<ScreenManager> {
                   if (_selectedIndex == 1 || _selectedIndex == 0)
                     IconButton(
                       tooltip: "Filter",
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          showDragHandle: true,
-                          isScrollControlled: true,
-                          builder: (context) => LogFilters(
-                            currentFilters: widget.currentFilters,
-                            filterLogs: widget.filterLogs,
-                            removeFilters: widget.removeLogFilters,
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.filter_alt_rounded),
+                      onPressed: showFiltersModal,
+                      icon: widget.areFiltersApplied
+                          ? const Badge(child: Icon(Icons.filter_alt_rounded))
+                          : const Icon(Icons.filter_alt_rounded),
                     ),
                   const SizedBox(
                     width: 10.0,
