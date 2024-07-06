@@ -17,7 +17,7 @@ class GroupedLogsBuilder extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: entries.length,
         itemBuilder: (context, entryIndex) {
-          var entry = entries[entryIndex];
+          var entry = entries.elementAt(entryIndex);
 
           String name = entry.name ?? "Unknown";
           if (name == "") name = "Unknown";
