@@ -12,46 +12,49 @@ class GroupedLogsBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var widgets = entries.map((entry) {
-      String name = entry.name ?? "Unknown";
-      if (name == "") name = "Unknown";
-      String phoneAccountId = entry.phoneAccountId ?? "Unknown";
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: entries.length,
+        itemBuilder: (context, entryIndex) {
+          var entry = entries[entryIndex];
 
-      String sim = entry.simDisplayName ?? "Unknown";
-      int duration = entry.duration ?? 0;
-      int timestamp = entry.timestamp ?? 1;
+          String name = entry.name ?? "Unknown";
+          if (name == "") name = "Unknown";
+          String phoneAccountId = entry.phoneAccountId ?? "Unknown";
 
-      String timeString = formatTimeFromTimeStamp(timestamp);
-      String phoneNumber = entry.number ?? "n/a";
+          String sim = entry.simDisplayName ?? "Unknown";
+          int duration = entry.duration ?? 0;
+          int timestamp = entry.timestamp ?? 1;
 
-      var details = getCallDisplayFields(entry.callType ?? CallType.unknown);
-      Color callColor = details[0];
-      IconData callIcon = details[1];
-      String callType = details[2];
+          String timeString = formatTimeFromTimeStamp(timestamp);
+          String phoneNumber = entry.number ?? "n/a";
 
-      int index = entries.indexOf(entry);
-      return Column(
-        children: [
-          if (index != 0) const LogDivider(),
-          LogEntry(
-            name: name,
-            phoneNumber: phoneNumber,
-            callIcon: callIcon,
-            callColor: callColor,
-            timeString: timeString,
-            formattedDate: formattedDate,
-            duration: duration,
-            callType: callType,
-            sim: sim,
-            phoneAccountId: phoneAccountId,
-          ),
-        ],
-      );
-    });
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [...widgets],
-    );
+          var details =
+              getCallDisplayFields(entry.callType ?? CallType.unknown);
+          Color callColor = details[0];
+          IconData callIcon = details[1];
+          String callType = details[2];
+
+          int index = entries.indexOf(entry);
+
+          return Column(
+            children: [
+              if (index != 0) const LogDivider(),
+              LogEntry(
+                name: name,
+                phoneNumber: phoneNumber,
+                callIcon: callIcon,
+                callColor: callColor,
+                timeString: timeString,
+                formattedDate: formattedDate,
+                duration: duration,
+                callType: callType,
+                sim: sim,
+                phoneAccountId: phoneAccountId,
+              ),
+            ],
+          );
+        });
   }
 }
