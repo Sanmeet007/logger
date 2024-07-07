@@ -107,12 +107,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  void confirmImport() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Row(children: [
+              Icon(Icons.info_outline),
+              SizedBox(
+                width: 10.0,
+              ),
+              Text("Confirm Import")
+            ]),
+            content: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Please confirm to import call logs.",
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                    """Importing call logs twice can corrupt your current call logs irreversibly. It may overwrite existing data and cause inconsistencies in your call history. Depending on your device, it could also slow down performance or lead to unexpected behavior."""),
+              ],
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                  handleCallLogImport();
+                },
+                child: const Text("Continue"),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: handleCallLogImport,
+          onPressed: confirmImport,
           child: const Text("Pick document"),
         ),
       ],

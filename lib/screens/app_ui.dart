@@ -172,7 +172,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
             const Screen(
               label: "About",
               index: 3,
-              icon: Icons.info,
+              icon: Icons.info_outline,
               selectedIcon: Icons.info,
               screen: AboutScreen(),
             ),
