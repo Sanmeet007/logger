@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/screens/About/about.dart';
 import 'package:logger/screens/Analytics/analytics.dart';
 import 'package:logger/screens/Home/home.dart';
+import 'package:logger/screens/Settings/settings.dart';
 import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
@@ -25,6 +26,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
   late Iterable<CallLogEntry>? currentLogs;
   bool isProcessing = false;
   bool areFiltersApplied = false;
+  bool shouldShowLinearLoader = false;
+  String linearLoaderText = "";
 
   // Logs filters
   Map logFilters = {
@@ -100,6 +103,20 @@ class _ApplicationUiState extends State<ApplicationUi> {
     });
   }
 
+  void showLinearProgressLoader({String waitingMessage = ""}) {
+    setState(() {
+      shouldShowLinearLoader = true;
+      linearLoaderText = waitingMessage;
+    });
+  }
+
+  void hideLinearProgressLoader() {
+    setState(() {
+      shouldShowLinearLoader = false;
+      linearLoaderText = "";
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -111,7 +128,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 0,
+          initialIndex: 2, // ! set to 0 in prod build
           currentFilters: logFilters,
           logs: currentLogs,
           areFiltersApplied: areFiltersApplied,
@@ -141,15 +158,53 @@ class _ApplicationUiState extends State<ApplicationUi> {
                     logs: currentLogs ?? const Iterable.empty()),
               ),
             ),
+            Screen(
+              label: "Settings",
+              index: 2,
+              icon: Icons.settings_outlined,
+              selectedIcon: Icons.settings,
+              screen: SettingsScreen(
+                showLinearProgressLoader: showLinearProgressLoader,
+                hideLinearProgressLoader: hideLinearProgressLoader,
+                refresher: widget.refresher,
+              ),
+            ),
             const Screen(
               label: "About",
-              index: 2,
+              index: 3,
               icon: Icons.info,
               selectedIcon: Icons.info,
               screen: AboutScreen(),
             ),
           ],
         ),
+        if (shouldShowLinearLoader)
+          Material(
+            color: Colors.transparent,
+            child: Container(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black38
+                  : const Color.fromARGB(136, 255, 255, 255),
+              child: Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(linearLoaderText),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        LinearProgressIndicator(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? const Color.fromARGB(255, 203, 169, 255)
+                              : const Color.fromARGB(255, 106, 26, 227),
+                        )
+                      ]),
+                ),
+              ),
+            ),
+          ),
         if (isProcessing)
           Container(
             color: Theme.of(context).brightness == Brightness.dark

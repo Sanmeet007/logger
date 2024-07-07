@@ -2,12 +2,17 @@ import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 
 class Filters {
   static Iterable<CallLogEntry> _getFilteredLogs(Map params) {
+    final RootIsolateToken rootIsolateToken = params["root_isolate_token"];
+
     var logs =
         params["logs"] ?? const Iterable.empty() as Iterable<CallLogEntry>;
     var filters = params["filters"] as Map;
+
+    BackgroundIsolateBinaryMessenger.ensureInitialized(rootIsolateToken);
 
     var callTypes = filters["selected_call_types"] as List<CallType>;
     var phoneToMatch = filters["phone_to_match"] as String;
@@ -127,9 +132,12 @@ class Filters {
 
   static Future<Iterable<CallLogEntry>> filterLogs(
       Iterable<CallLogEntry>? logs, Map filters) {
+    RootIsolateToken rootIsolateToken = RootIsolateToken.instance!;
+
     return compute(_getFilteredLogs, {
       "logs": logs,
       "filters": filters,
+      "root_isolate_token": rootIsolateToken,
     });
   }
 

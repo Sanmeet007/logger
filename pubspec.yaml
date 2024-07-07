@@ -46,6 +46,8 @@ dependencies:
   phone_numbers_parser: ^8.3.0
   shimmer: ^3.0.0
   collection: any
+  shared_preferences: ^2.2.3
+  csv: ^6.0.0
 
 dev_dependencies:
   flutter_test:
