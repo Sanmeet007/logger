@@ -205,13 +205,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   await widget.setShareButtonState(newState);
                               if (r == null || !r) {
                                 showSnackBar(
-                                    content: "Unable to update setting");
+                                    content:
+                                        "Failed to update settings. Please try again later");
                               } else {
                                 showSnackBar(
-                                    content: "Sharing setting updated");
+                                    content:
+                                        "Sharing settings updated successfully.");
                               }
                             } catch (_) {
-                              showSnackBar(content: "Unable to update setting");
+                              showSnackBar(
+                                  content:
+                                      "Failed to update settings. Please try again later");
                             } finally {
                               widget.hideLoader();
                             }
@@ -239,13 +243,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .setConfirmBeforeDownloadingState(newState);
                               if (r == null || !r) {
                                 showSnackBar(
-                                    content: "Unable to update setting");
+                                    content:
+                                        "Failed to update settings. Please try again later");
                               } else {
                                 showSnackBar(
-                                    content: "Downloading setting updated");
+                                    content:
+                                        "Downloading settings updated successfully.");
                               }
                             } catch (_) {
-                              showSnackBar(content: "Unable to update setting");
+                              showSnackBar(
+                                  content:
+                                      "Failed to update settings. Please try again later");
                             } finally {
                               widget.hideLoader();
                             }
@@ -273,14 +281,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .setDurationFilteringState(newState);
                               if (r == null || !r) {
                                 showSnackBar(
-                                    content: "Unable to update setting");
+                                    content:
+                                        "Failed to update settings. Please try again later");
                               } else {
                                 showSnackBar(
                                     content:
-                                        "Duration filtering setting updated");
+                                        "Duration filtering settings updated successfully.");
                               }
                             } catch (_) {
-                              showSnackBar(content: "Unable to update setting");
+                              showSnackBar(
+                                  content:
+                                      "Failed to update settings. Please try again later");
                             } finally {
                               widget.hideLoader();
                             }
@@ -363,14 +374,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     await widget.setCurrentImportType(newValue);
                                 if (r == null || !r) {
                                   showSnackBar(
-                                      content: "Unable to update setting");
+                                      content:
+                                          "Failed to update settings. Please try again later");
                                 } else {
                                   showSnackBar(
-                                      content: "Updated importing setting ");
+                                      content:
+                                          "Import settings updated successfully.");
                                 }
                               } catch (_) {
                                 showSnackBar(
-                                    content: "Unable to update setting");
+                                    content:
+                                        "Failed to update settings. Please try again later");
                               } finally {
                                 widget.hideLoader();
                               }
