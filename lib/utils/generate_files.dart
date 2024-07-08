@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:call_log/call_log.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_storage/shared_storage.dart';
 
 String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
@@ -102,7 +101,6 @@ class CallLogsFileGenerator {
       file.writeAsStringSync(contents);
       return true;
     } catch (e) {
-      debugPrint(e.toString());
       return false;
     }
   }

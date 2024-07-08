@@ -152,7 +152,7 @@ class CallFreqTileBuilder extends StatelessWidget {
                       : const Color.fromARGB(255, 240, 230, 255));
             default:
               if (snapshot.hasData) {
-                var entry = snapshot.data as CallLogEntryWithFreq?;
+                var entry = snapshot.data;
                 return CallFreqTile(
                   mostFrequent: entry,
                 );

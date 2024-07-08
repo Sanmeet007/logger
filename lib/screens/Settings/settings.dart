@@ -104,7 +104,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       isDone = true;
       widget.hideLinearProgressLoader();
       showSnackBar(content: "Something went wrong");
-      print(e);
     }
   }
 
