@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logger/components/sized_text.dart';
+import 'package:logger/screens/ExportInfo/field_builder.dart';
 
 class CsvFieldsInformation extends StatelessWidget {
   const CsvFieldsInformation({super.key});
@@ -13,26 +15,68 @@ class CsvFieldsInformation extends StatelessWidget {
         right: 20.0,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text("""
-    
-    Aute duis reprehenderit excepteur aliquip ad occaecat esse voluptate ex mollit. Veniam aute cupidatat ipsum ipsum adipisicing proident laboris nulla. Enim proident cillum ullamco quis pariatur tempor anim sint esse tempor.
-    
-    Fugiat non pariatur excepteur laboris dolore do commodo minim fugiat est ipsum do consectetur. Amet proident culpa occaecat nisi et ipsum duis cillum duis fugiat. Nulla velit dolore veniam id ut.
-    
-    Pariatur aute aliqua laborum nisi proident cillum. Eiusmod voluptate commodo ullamco culpa ea ipsum aute magna ea deserunt. Dolor voluptate pariatur occaecat laboris excepteur incididunt qui dolore consequat cillum est aute ad.
-    
-    Lorem eiusmod occaecat labore ullamco incididunt. Aliqua sunt ea eiusmod ex eu in. Ad ex incididunt eu veniam incididunt minim Lorem consectetur velit reprehenderit incididunt.
-    
-    Ipsum enim et labore enim in officia ad aliqua anim laborum nostrud veniam. Quis nulla minim et exercitation commodo labore velit ea velit amet dolor excepteur labore. Enim dolore amet aute minim ut reprehenderit deserunt qui est qui fugiat. Reprehenderit pariatur nulla aliquip qui. Pariatur nisi anim et quis incididunt ad adipisicing esse voluptate quis. Elit mollit aute voluptate esse minim laborum consequat anim.
-    
-    Commodo mollit eu adipisicing laborum dolore veniam proident veniam Lorem. Elit est aliquip nisi sit quis. Deserunt elit laboris dolore esse quis deserunt fugiat. Dolore aute laborum velit consectetur do eu cupidatat cupidatat.
-    
-    Id commodo incididunt aliquip dolor mollit fugiat consequat incididunt commodo do elit. Ipsum sint et nostrud reprehenderit sunt mollit et velit reprehenderit enim. Laboris qui laboris eiusmod nulla duis mollit ex labore. Aliquip excepteur culpa ut ea ipsum. Officia duis labore qui sunt ut minim laborum qui voluptate pariatur. In reprehenderit ipsum amet incididunt occaecat.
-    
-    
-    """),
+          const SizedText(
+            "Export fields information",
+            size: 20.0,
+          ),
+          const SizedBox(
+            height: 15.0,
+          ),
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(249, 35, 34, 34)
+                  : const Color.fromARGB(255, 249, 245, 255),
+              border: Border.all(
+                width: 1,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(115, 53, 52, 52)
+                    : const Color.fromARGB(255, 249, 245, 255),
+              ),
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Table(
+                    border: TableBorder.symmetric(
+                      inside: BorderSide(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color.fromARGB(115, 53, 52, 52)
+                            : const Color.fromARGB(201, 233, 216, 255),
+                      ),
+                    ),
+                    children: [
+                      buildTableField(
+                          "name", "Name associated with the call log entry"),
+                      buildTableField("number",
+                          "Phone number associated with the call log entry"),
+                      buildTableField("phone_account_id",
+                          "The ID of the phone account associated with the call identifies the specific account or SIM card used to place or receive the call"),
+                      buildTableField("call_type",
+                          "Type of the call (e.g., incoming, outgoing, missed)"),
+                      buildTableField("formatted_number",
+                          "Formatted phone number, formatted with formatting rules based on the country the user was in when the call was made or received."),
+                      buildTableField("sim_display_name",
+                          "Display name of the SIM card associated with the call"),
+                      buildTableField(
+                          "timestamp", "Timestamp (epoch time) of the call"),
+                      buildTableField(
+                          "duration", "Duration of the call in seconds"),
+                      buildTableField("cached_number_label",
+                          "Label associated with the cached phone number"),
+                      buildTableField("cached_number_type",
+                          "The cached number type (Home, Work, etc) associated with the phone number, if it exists."),
+                      buildTableField("cached_matched_number",
+                          "Stored or cached phone number associated with a call log entry for quick reference."),
+                    ],
+                  ),
+                ]),
+          ),
         ],
       ),
     );

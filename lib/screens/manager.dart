@@ -272,7 +272,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         context: context,
         builder: (context) {
           return DraggableScrollableSheet(
-            maxChildSize: 0.75,
+            maxChildSize: 0.9,
             expand: false,
             builder: (context, controller) => SingleChildScrollView(
               controller: controller,
