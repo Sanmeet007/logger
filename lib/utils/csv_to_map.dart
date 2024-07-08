@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'dart:isolate';
 import 'package:csv/csv.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class CsvToMapConverter {
@@ -23,9 +23,11 @@ class CsvToMapConverter {
       Uint8List fileContents) {
     RootIsolateToken rootIsolateToken = RootIsolateToken.instance!;
 
-    return compute(_generateCsvMap, {
-      "file_contents": fileContents,
-      "root_isolate_token": rootIsolateToken,
+    return Isolate.run(() {
+      return _generateCsvMap({
+        "file_contents": fileContents,
+        "root_isolate_token": rootIsolateToken,
+      });
     });
   }
 

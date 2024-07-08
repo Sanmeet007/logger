@@ -24,7 +24,7 @@ class MainActivity : FlutterActivity() {
 
                         if (callLogs != null) {
                             insertCallLogs(callLogs)
-                            result.success("Call logs inserted successfully")
+                            result.success(true)
                         } else {
                             result.error("INVALID_ARGUMENT", "Invalid call logs format", null)
                         }

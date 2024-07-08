@@ -72,7 +72,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     try {
       // Labels
       contents +=
-          "name,duration,number,phone_account_id,call_type,formattedNumber,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
+          "name,duration,number,phone_account_id,call_type,formatted_number,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
 
       if (widget.logs != null) {
         contents += widget.logs!
@@ -103,7 +103,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     try {
       // Labels
       contents +=
-          "name,duration,number,phone_account_id,call_type,formattedNumber,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
+          "name,duration,number,phone_account_id,call_type,formatted_number,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
 
       if (widget.logs != null) {
         contents += widget.logs!
