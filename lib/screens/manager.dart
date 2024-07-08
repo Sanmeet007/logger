@@ -256,14 +256,10 @@ class _ScreenManagerState extends State<ScreenManager> {
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.72,
-        expand: false,
-        builder: (context, controller) => LogFilters(
-          currentFilters: widget.currentFilters,
-          filterLogs: widget.filterLogs,
-          removeFilters: widget.removeLogFilters,
-        ),
+      builder: (context) => LogFilters(
+        currentFilters: widget.currentFilters,
+        filterLogs: widget.filterLogs,
+        removeFilters: widget.removeLogFilters,
       ),
     );
   }
