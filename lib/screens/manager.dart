@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/utils/generate_files.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';
@@ -50,10 +51,12 @@ class ScreenManager extends StatefulWidget {
 }
 
 class _ScreenManagerState extends State<ScreenManager> {
-  final fileNameWithExtension = "output.csv";
+  static const fileName = "output";
+  static const fileExtension = "json"; // get from shared prefs !
+
   late int _selectedIndex;
   Uri? currentFilePath;
-  bool isTaskRunnig = false;
+  bool isTaskRunning = false;
 
   @override
   void initState() {
@@ -67,58 +70,21 @@ class _ScreenManagerState extends State<ScreenManager> {
     });
   }
 
-  Future<bool> generateLogsFile(Uri parentUri, String filename) async {
-    String contents = "";
-    try {
-      // Labels
-      contents +=
-          "name,duration,number,phone_account_id,call_type,formatted_number,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
-
-      if (widget.logs != null) {
-        contents += widget.logs!
-            .map((entry) =>
-                "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}")
-            .toList()
-            .join("\n");
-
-        DocumentFile? file = await createFileAsString(
-          parentUri,
-          mimeType: "text/csv",
-          displayName: filename,
-          content: contents,
-        );
-        if (file != null) {
-          currentFilePath = file.uri;
-        }
-        return file != null;
-      }
-      return false;
-    } catch (e) {
-      return false;
-    }
+  Future<Uri?> generateLogsFile(Uri parentUri, String filename) async {
+    return CallLogsFileGenerator.generateLogsFile(
+      parentUri: parentUri,
+      filename: filename,
+      fileType: fileExtension,
+      callLogs: widget.logs,
+    );
   }
 
   Future<bool> addLogsToFile(File file) async {
-    String contents = "";
-    try {
-      // Labels
-      contents +=
-          "name,duration,number,phone_account_id,call_type,formatted_number,sim_display_name,timestamp,cached_number_label,cached_number_type,cached_matched_number\n";
-
-      if (widget.logs != null) {
-        contents += widget.logs!
-            .map((entry) =>
-                "${entry.name},${entry.duration},${entry.number},${entry.phoneAccountId},${entry.callType},${entry.formattedNumber},${entry.simDisplayName},${entry.timestamp},${entry.cachedNumberLabel},${entry.cachedNumberType},${entry.cachedMatchedNumber}")
-            .toList()
-            .join("\n");
-
-        file.writeAsStringSync(contents);
-        return true;
-      }
-      return false;
-    } catch (e) {
-      return false;
-    }
+    return CallLogsFileGenerator.addLogsToFile(
+      file: file,
+      callLogs: widget.logs,
+      fileType: fileExtension,
+    );
   }
 
   void openFile() async {
@@ -183,23 +149,24 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   Future<bool> downloadFile({bool showStatus = false}) async {
-    setState(() => isTaskRunnig = true);
+    setState(() => isTaskRunning = true);
 
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
       var milliseconds = DateTime.now().millisecondsSinceEpoch;
-      String filename = "logger-$milliseconds-$fileNameWithExtension";
+      String filename = "logger-$milliseconds-$fileName.$fileExtension";
 
-      bool fileStatus = await generateLogsFile(grantedUri, filename);
+      final fileUri = await generateLogsFile(grantedUri, filename);
 
-      if (fileStatus) {
+      if (fileUri != null) {
+        currentFilePath = fileUri;
         if (showStatus) downloadStatusSnackbar(status: "success");
-        if (showStatus) setState(() => isTaskRunnig = false);
+        if (showStatus) setState(() => isTaskRunning = false);
         return true;
       } else {
         if (showStatus) downloadStatusSnackbar(status: "error");
-        if (showStatus) setState(() => isTaskRunnig = false);
+        if (showStatus) setState(() => isTaskRunning = false);
         return false;
       }
     } else {
@@ -207,14 +174,14 @@ class _ScreenManagerState extends State<ScreenManager> {
         showSnackBar(
             content: "Unable to get permissions", showCloseIcon: false);
       }
-      setState(() => isTaskRunnig = false);
+      setState(() => isTaskRunning = false);
       return false;
     }
   }
 
   void shareFile() async {
     setState(() {
-      isTaskRunnig = true;
+      isTaskRunning = true;
     });
     var tempDir = await getTemporaryDirectory();
 
@@ -237,13 +204,13 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
 
     setState(() {
-      isTaskRunnig = false;
+      isTaskRunning = false;
     });
   }
 
   void generateAndOpenFile() async {
     setState(() {
-      isTaskRunnig = true;
+      isTaskRunning = true;
     });
 
     var tempDir = await getTemporaryDirectory();
@@ -255,7 +222,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     String filePath = file.path;
 
     setState(() {
-      isTaskRunnig = false;
+      isTaskRunning = false;
     });
 
     if (fileGenerationSuccess) {
@@ -284,16 +251,18 @@ class _ScreenManagerState extends State<ScreenManager> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async {
-          if (_selectedIndex != widget.initialIndex) {
-            setState(() {
-              _selectedIndex = widget.initialIndex;
-            });
-            return false;
-          }
-          return true;
-        },
-        child: Scaffold(
+      onWillPop: () async {
+        if (_selectedIndex != widget.initialIndex) {
+          setState(() {
+            _selectedIndex = widget.initialIndex;
+          });
+          return false;
+        }
+        return true;
+      },
+      child: Stack(
+        children: [
+          Scaffold(
             appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -314,7 +283,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                               Icons.file_download_outlined,
                               size: 30.0,
                             ),
-                            onPressed: !isTaskRunnig
+                            onPressed: !isTaskRunning
                                 ? () => downloadFile(showStatus: true)
                                 : null,
                           ),
@@ -322,7 +291,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                             tooltip: "Export Open",
                             splashRadius: 22.0,
                             icon: const Icon(Icons.file_open_outlined),
-                            onPressed: !isTaskRunnig
+                            onPressed: !isTaskRunning
                                 ? () => generateAndOpenFile()
                                 : null,
                           ),
@@ -330,7 +299,8 @@ class _ScreenManagerState extends State<ScreenManager> {
                             tooltip: "Share",
                             splashRadius: 22.0,
                             icon: const Icon(Icons.share_rounded),
-                            onPressed: !isTaskRunnig ? () => shareFile() : null,
+                            onPressed:
+                                !isTaskRunning ? () => shareFile() : null,
                           ),
                         ]
                       : []),
@@ -373,6 +343,18 @@ class _ScreenManagerState extends State<ScreenManager> {
             body: IndexedStack(
               index: _selectedIndex,
               children: [...widget.items.map((e) => e.screen)],
-            )));
+            ),
+          ),
+          if (isTaskRunning)
+            Container(
+              color:
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? Colors.black54
+                      : Colors.white54,
+              child: const Center(child: CircularProgressIndicator()),
+            ),
+        ],
+      ),
+    );
   }
 }
