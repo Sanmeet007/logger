@@ -17,7 +17,7 @@ class AboutScreen extends StatelessWidget {
             children: [
               const SizedText(
                 "Software Information",
-                size: 25.0,
+                size: 20.0,
               ),
               const SizedBox(
                 height: 15.0,
@@ -82,7 +82,7 @@ class AboutScreen extends StatelessWidget {
               ),
               const SizedText(
                 "Storage Policy",
-                size: 25.0,
+                size: 20.0,
               ),
               const SizedBox(height: 15.0),
               Container(
@@ -102,7 +102,7 @@ class AboutScreen extends StatelessWidget {
               ),
               const SizedText(
                 "Analytics Policy",
-                size: 25.0,
+                size: 20.0,
               ),
               const SizedBox(height: 15.0),
               Container(

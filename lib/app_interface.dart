@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'components/app_error.dart';
 import 'components/loader.dart';
 import 'package:flutter/material.dart';
@@ -13,32 +14,55 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: null,
-      future: Permission.phone.request(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
+      future: SharedPreferences.getInstance(),
+      builder: (context, prefsSnapShot) {
+        switch (prefsSnapShot.connectionState) {
           case ConnectionState.waiting:
             return const Loader();
+
           case ConnectionState.done:
           default:
-            if (snapshot.hasData) {
-              if (snapshot.data == PermissionStatus.granted) {
-                return const RefreshableBuilder();
-              } else {
-                return const AppError(
-                  displayIcon: Icons.warning,
-                  errorMessage:
-                      "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
-                );
-              }
-            } else if (snapshot.hasError) {
-              return const AppError(
-                displayIcon: Icons.error,
-                errorMessage: "Ah snap! Something went wrong",
+            if (prefsSnapShot.hasData) {
+              return FutureBuilder(
+                initialData: null,
+                future: Permission.phone.request(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return const Loader();
+                    case ConnectionState.done:
+                    default:
+                      if (snapshot.hasData) {
+                        if (snapshot.data == PermissionStatus.granted) {
+                          return RefreshableBuilder(
+                            preferences: prefsSnapShot.data,
+                          );
+                        } else {
+                          return const AppError(
+                            displayIcon: Icons.warning,
+                            errorMessage:
+                                "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
+                          );
+                        }
+                      } else if (snapshot.hasError) {
+                        return const AppError(
+                          displayIcon: Icons.error,
+                          errorMessage: "Ah snap! Something went wrong",
+                        );
+                      } else {
+                        return const AppError(
+                          displayIcon: Icons.error,
+                          errorMessage:
+                              "Ah snap! Something unexpected happened!",
+                        );
+                      }
+                  }
+                },
               );
             } else {
               return const AppError(
                 displayIcon: Icons.error,
-                errorMessage: "Ah snap! Something unexpected happened!",
+                errorMessage: "Ah! Snap error loading preferences",
               );
             }
         }
@@ -48,7 +72,8 @@ class Application extends StatelessWidget {
 }
 
 class RefreshableBuilder extends StatefulWidget {
-  const RefreshableBuilder({super.key});
+  final SharedPreferences? preferences;
+  const RefreshableBuilder({super.key, required this.preferences});
 
   @override
   State<RefreshableBuilder> createState() => RefreshableBuilderState();
@@ -86,6 +111,7 @@ class RefreshableBuilderState extends State<RefreshableBuilder> {
               return ApplicationUi(
                 entries: entries,
                 refresher: refresh,
+                preferences: widget.preferences,
               );
             } else if (snapshot.hasError) {
               return const AppError(

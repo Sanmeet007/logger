@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/components/divider.dart';
 import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:shared_storage/shared_storage.dart';
@@ -8,10 +9,30 @@ class SettingsScreen extends StatefulWidget {
   final void Function() hideLinearProgressLoader;
   final Future<void> Function()? refresher;
 
+  final bool initialDurationFilteringState;
+  final bool initialConfirmBeforeDownloadState;
+  final bool initialSharingState;
+  final String initialImportTypeState;
+  final Function showLoader, hideLoader;
+  final Future<bool?> Function(bool) setDurationFilteringState;
+  final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
+  final Future<bool?> Function(bool) setShareButtonState;
+  final Future<bool?> Function(String) setCurrentImportType;
+
   const SettingsScreen({
     super.key,
     required this.hideLinearProgressLoader,
     required this.showLinearProgressLoader,
+    required this.initialDurationFilteringState,
+    required this.initialConfirmBeforeDownloadState,
+    required this.initialSharingState,
+    required this.setDurationFilteringState,
+    required this.setConfirmBeforeDownloadingState,
+    required this.setShareButtonState,
+    required this.initialImportTypeState,
+    required this.setCurrentImportType,
+    required this.hideLoader,
+    required this.showLoader,
     this.refresher,
   });
 
@@ -112,32 +133,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Row(children: [
-              Icon(Icons.info_outline),
-              SizedBox(
-                width: 10.0,
-              ),
-              Text("Confirm Import")
-            ]),
-            content: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Please confirm to import call logs.",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                    """Importing call logs twice can corrupt your current call logs irreversibly. It may overwrite existing data and cause inconsistencies in your call history. Depending on your device, it could also slow down performance or lead to unexpected behavior."""),
-              ],
+            title: const SingleChildScrollView(
+              child: Text("Confirm Import Start"),
             ),
+            content: const Text(
+                """Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution."""),
             actions: [
               OutlinedButton(
                 onPressed: () {
@@ -161,13 +161,273 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: confirmImport,
-          child: const Text("Pick document"),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "General Settings",
+                style: TextStyle(fontSize: 20.0),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black45
+                      : const Color.fromARGB(255, 249, 245, 255),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Disable call log sharing",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.initialSharingState,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r =
+                                  await widget.setShareButtonState(newState);
+                              if (r == null || !r) {
+                                showSnackBar(
+                                    content: "Unable to update setting");
+                              } else {
+                                showSnackBar(
+                                    content: "Sharing setting updated");
+                              }
+                            } catch (_) {
+                              showSnackBar(content: "Unable to update setting");
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const LogDivider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Enable download confirmation",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.initialConfirmBeforeDownloadState,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r = await widget
+                                  .setConfirmBeforeDownloadingState(newState);
+                              if (r == null || !r) {
+                                showSnackBar(
+                                    content: "Unable to update setting");
+                              } else {
+                                showSnackBar(
+                                    content: "Downloading setting updated");
+                              }
+                            } catch (_) {
+                              showSnackBar(content: "Unable to update setting");
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const LogDivider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Enable duration filtering",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.initialDurationFilteringState,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r = await widget
+                                  .setDurationFilteringState(newState);
+                              if (r == null || !r) {
+                                showSnackBar(
+                                    content: "Unable to update setting");
+                              } else {
+                                showSnackBar(
+                                    content:
+                                        "Duration filtering setting updated");
+                              }
+                            } catch (_) {
+                              showSnackBar(content: "Unable to update setting");
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Text(
+                "Advanced Settings",
+                style: TextStyle(fontSize: 20.0),
+              ),
+              const SizedBox(height: 15.0),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black45
+                      : const Color.fromARGB(255, 249, 245, 255),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Call logs export format",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.0,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color.fromARGB(255, 65, 65, 65)
+                                  : Colors.black87,
+                            ),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                          child: DropdownButton<String>(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0,
+                              vertical: 5.0,
+                            ),
+                            isDense: true,
+                            underline: Container(),
+                            enableFeedback: true,
+                            value: widget.initialImportTypeState,
+                            items: [
+                              ...[
+                                "csv",
+                                "json",
+                              ].map(
+                                (item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item.toUpperCase(),
+                                  ),
+                                ),
+                              )
+                            ],
+                            onChanged: (String? newValue) async {
+                              if (newValue == null) return;
+
+                              widget.showLoader();
+                              try {
+                                await Future.delayed(
+                                    const Duration(seconds: 2));
+                                var r =
+                                    await widget.setCurrentImportType(newValue);
+                                if (r == null || !r) {
+                                  showSnackBar(
+                                      content: "Unable to update setting");
+                                } else {
+                                  showSnackBar(
+                                      content: "Updated importing setting ");
+                                }
+                              } catch (_) {
+                                showSnackBar(
+                                    content: "Unable to update setting");
+                              } finally {
+                                widget.hideLoader();
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    const LogDivider(),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Import Your Call Logs",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        ElevatedButton(
+                            onPressed: confirmImport,
+                            child: const Text(
+                              "Start import",
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black45
+                      : const Color.fromARGB(255, 249, 245, 255),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Text(
+                  "Please note: Only CSV format is currently supported for importing call logs.",
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }

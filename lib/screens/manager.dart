@@ -1,5 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/screens/ExportInfo/csv_fields.dart';
+import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
@@ -35,6 +37,9 @@ class ScreenManager extends StatefulWidget {
   final Map currentFilters;
   final bool areFiltersApplied;
 
+  final bool askForDownloadConfirmation, showSharingButton;
+  final String currentImportType;
+
   const ScreenManager({
     super.key,
     required this.logs,
@@ -43,6 +48,9 @@ class ScreenManager extends StatefulWidget {
     required this.removeLogFilters,
     required this.items,
     required this.areFiltersApplied,
+    required this.askForDownloadConfirmation,
+    required this.currentImportType,
+    required this.showSharingButton,
     this.initialIndex = 0,
   });
 
@@ -52,7 +60,7 @@ class ScreenManager extends StatefulWidget {
 
 class _ScreenManagerState extends State<ScreenManager> {
   static const fileName = "output";
-  static const fileExtension = "json"; // get from shared prefs !
+  late final String fileExtension;
 
   late int _selectedIndex;
   Uri? currentFilePath;
@@ -60,8 +68,9 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   @override
   void initState() {
-    _selectedIndex = widget.initialIndex;
     super.initState();
+    _selectedIndex = widget.initialIndex;
+    fileExtension = widget.currentImportType;
   }
 
   void updateIndex(int index) {
@@ -146,6 +155,12 @@ class _ScreenManagerState extends State<ScreenManager> {
       default:
       // Silenece is golden
     }
+  }
+
+  void confirmAndDownload() {
+    // TODO : implement confirm and download
+    print("IMPLEMENT IT !");
+    // downloadFile(showStatus: true)
   }
 
   Future<bool> downloadFile({bool showStatus = false}) async {
@@ -237,15 +252,40 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   void showFiltersModal() {
     showModalBottomSheet(
+      isDismissible: true,
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
-      builder: (context) => LogFilters(
-        currentFilters: widget.currentFilters,
-        filterLogs: widget.filterLogs,
-        removeFilters: widget.removeLogFilters,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.72,
+        expand: false,
+        builder: (context, controller) => LogFilters(
+          currentFilters: widget.currentFilters,
+          filterLogs: widget.filterLogs,
+          removeFilters: widget.removeLogFilters,
+        ),
       ),
     );
+  }
+
+  void openDetailedView() {
+    showModalBottomSheet(
+        isDismissible: true,
+        isScrollControlled: true,
+        showDragHandle: true,
+        context: context,
+        builder: (context) {
+          return DraggableScrollableSheet(
+            maxChildSize: 0.75,
+            expand: false,
+            builder: (context, controller) => SingleChildScrollView(
+              controller: controller,
+              child: widget.currentImportType == "csv"
+                  ? const CsvFieldsInformation()
+                  : const JsonFieldsInformation(),
+            ),
+          );
+        });
   }
 
   @override
@@ -284,7 +324,9 @@ class _ScreenManagerState extends State<ScreenManager> {
                               size: 30.0,
                             ),
                             onPressed: !isTaskRunning
-                                ? () => downloadFile(showStatus: true)
+                                ? () => widget.askForDownloadConfirmation
+                                    ? confirmAndDownload()
+                                    : downloadFile(showStatus: true)
                                 : null,
                           ),
                           IconButton(
@@ -295,13 +337,14 @@ class _ScreenManagerState extends State<ScreenManager> {
                                 ? () => generateAndOpenFile()
                                 : null,
                           ),
-                          IconButton(
-                            tooltip: "Share",
-                            splashRadius: 22.0,
-                            icon: const Icon(Icons.share_rounded),
-                            onPressed:
-                                !isTaskRunning ? () => shareFile() : null,
-                          ),
+                          if (widget.showSharingButton)
+                            IconButton(
+                              tooltip: "Share",
+                              splashRadius: 22.0,
+                              icon: const Icon(Icons.share_rounded),
+                              onPressed:
+                                  !isTaskRunning ? () => shareFile() : null,
+                            ),
                         ]
                       : []),
                   if (_selectedIndex == 1 || _selectedIndex == 0)
@@ -317,6 +360,12 @@ class _ScreenManagerState extends State<ScreenManager> {
                               child: const Icon(Icons.filter_alt_rounded),
                             )
                           : const Icon(Icons.filter_alt_rounded),
+                    ),
+                  if (_selectedIndex == 2)
+                    IconButton(
+                      tooltip: "Export Fields Info",
+                      onPressed: openDetailedView,
+                      icon: const Icon(Icons.file_present_outlined),
                     ),
                   const SizedBox(
                     width: 10.0,

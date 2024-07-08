@@ -170,7 +170,8 @@ class _LogFiltersState extends State<LogFilters> {
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           color: Theme.of(context).canvasColor,
           child: Container(
-            padding: const EdgeInsets.all(20.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -251,7 +252,9 @@ class _LogFiltersState extends State<LogFilters> {
                 const SizedBox(height: 10.0),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 15.0),
+                    vertical: 10.0,
+                    horizontal: 15.0,
+                  ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).brightness == Brightness.dark
                         ? const Color.fromARGB(250, 42, 40, 40)
@@ -364,17 +367,29 @@ class _LogFiltersState extends State<LogFilters> {
                   ),
                 ),
                 const SizedBox(height: 15.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: const Color.fromARGB(255, 222, 200, 255),
-                  ),
-                  onPressed: canApplyFilters ? applyFilters : null,
-                  child: const Text("Apply filters"),
-                ),
-                OutlinedButton(
-                  onPressed: clearFilters,
-                  child: const Text("Reset to default"),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor:
+                              const Color.fromARGB(255, 222, 200, 255),
+                        ),
+                        onPressed: canApplyFilters ? applyFilters : null,
+                        child: const Text("Apply filters"),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: clearFilters,
+                        child: const Text("Reset to default"),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

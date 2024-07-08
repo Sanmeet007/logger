@@ -7,13 +7,16 @@ import 'package:logger/screens/Settings/settings.dart';
 import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApplicationUi extends StatefulWidget {
   final Future<void> Function()? refresher;
+  final SharedPreferences? preferences;
   const ApplicationUi({
     super.key,
     required this.entries,
     required this.refresher,
+    required this.preferences,
   });
 
   final Iterable<CallLogEntry>? entries;
@@ -28,6 +31,12 @@ class _ApplicationUiState extends State<ApplicationUi> {
   bool areFiltersApplied = false;
   bool shouldShowLinearLoader = false;
   String linearLoaderText = "";
+
+  late bool isDurationFilteringEnabled;
+  late bool isConfirmBeforeDownloadEnabled;
+  late bool isAnalyticsDisabled;
+  late bool isSharingDisabled;
+  late String currentImportType;
 
   // Logs filters
   Map logFilters = {
@@ -117,10 +126,80 @@ class _ApplicationUiState extends State<ApplicationUi> {
     });
   }
 
+  Future<bool?> setDurationFilteringState(bool newState) async {
+    var saved =
+        await widget.preferences?.setBool("duration_filtering", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isDurationFilteringEnabled = newState;
+      }
+    });
+    return saved;
+  }
+
+  Future<bool?> setConfirmBeforeDownloadingState(bool newState) async {
+    var saved = await widget.preferences?.setBool("confirm_download", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isConfirmBeforeDownloadEnabled = newState;
+      }
+    });
+    return saved;
+  }
+
+  Future<bool?> setAnalyticsTabState(bool newState) async {
+    var saved = await widget.preferences?.setBool("analytics_tab", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isAnalyticsDisabled = newState;
+      }
+    });
+    return saved;
+  }
+
+  Future<bool?> setShareButtonState(bool newState) async {
+    var saved = await widget.preferences?.setBool("sharing", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isSharingDisabled = newState;
+      }
+    });
+    return saved;
+  }
+
+  Future<bool?> setCurrentImportType(String newState) async {
+    var saved = await widget.preferences?.setString("import_type", newState);
+    setState(() {
+      if (saved != null && saved) {
+        currentImportType = newState;
+      }
+    });
+    return saved;
+  }
+
+  void showLoader() {
+    setState(() {
+      isProcessing = true;
+    });
+  }
+
+  void hideLoader() {
+    setState(() {
+      isProcessing = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     currentLogs = widget.entries;
+
+    isDurationFilteringEnabled =
+        widget.preferences?.getBool("duration_filtering") ?? false;
+    isConfirmBeforeDownloadEnabled =
+        widget.preferences?.getBool("confirm_download") ?? false;
+    isSharingDisabled = widget.preferences?.getBool("sharing") ?? false;
+    currentImportType = widget.preferences?.getString("import_type") ?? "csv";
   }
 
   @override
@@ -128,12 +207,15 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 0, // ! set to 0 in prod build
+          initialIndex: 2, // ! set to 0 in prod build
           currentFilters: logFilters,
           logs: currentLogs,
           areFiltersApplied: areFiltersApplied,
           filterLogs: filterLogs,
           removeLogFilters: removeLogFilters,
+          askForDownloadConfirmation: isConfirmBeforeDownloadEnabled,
+          showSharingButton: !isSharingDisabled,
+          currentImportType: currentImportType,
           items: <Screen>[
             Screen(
               index: 0,
@@ -164,9 +246,21 @@ class _ApplicationUiState extends State<ApplicationUi> {
               icon: Icons.settings_outlined,
               selectedIcon: Icons.settings,
               screen: SettingsScreen(
+                showLoader: showLoader,
+                hideLoader: hideLoader,
                 showLinearProgressLoader: showLinearProgressLoader,
                 hideLinearProgressLoader: hideLinearProgressLoader,
                 refresher: widget.refresher,
+                initialDurationFilteringState: isDurationFilteringEnabled,
+                initialConfirmBeforeDownloadState:
+                    isConfirmBeforeDownloadEnabled,
+                initialSharingState: isSharingDisabled,
+                initialImportTypeState: currentImportType,
+                setCurrentImportType: setCurrentImportType,
+                setDurationFilteringState: setDurationFilteringState,
+                setConfirmBeforeDownloadingState:
+                    setConfirmBeforeDownloadingState,
+                setShareButtonState: setShareButtonState,
               ),
             ),
             const Screen(
