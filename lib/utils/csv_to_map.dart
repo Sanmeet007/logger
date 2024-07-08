@@ -46,6 +46,8 @@ class CsvToMapConverter {
     );
 
     const int batchSize = 100; // batch size
+    // TODO : Check the lengends length ,order and value(name)
+
     List legends = list[0];
     List<Map<String, dynamic>> allMaps = [];
 
