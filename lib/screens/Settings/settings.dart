@@ -133,11 +133,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const SingleChildScrollView(
-              child: Text("Confirm Import Start"),
+            title: const Text("Confirm Import Start"),
+            content: const SingleChildScrollView(
+              child: Text(
+                  """Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution."""),
             ),
-            content: const Text(
-                """Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution."""),
             actions: [
               OutlinedButton(
                 onPressed: () {

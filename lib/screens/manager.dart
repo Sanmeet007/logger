@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/components/sized_text.dart';
 import 'package:logger/screens/ExportInfo/csv_fields.dart';
 import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
@@ -158,9 +159,39 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void confirmAndDownload() {
-    // TODO : implement confirm and download
-    print("IMPLEMENT IT !");
-    // downloadFile(showStatus: true)
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const SizedText(
+              "Confirm Download",
+              size: 20.0,
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                      """Are you sure you want to download your call logs in ${widget.currentImportType.toUpperCase()} format? This action will save your call history to a ${widget.currentImportType.toUpperCase()} file on your device."""),
+                ],
+              ),
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  downloadFile(showStatus: true);
+                },
+                child: const Text("Continue"),
+              ),
+            ],
+          );
+        });
   }
 
   Future<bool> downloadFile({bool showStatus = false}) async {
