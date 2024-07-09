@@ -223,7 +223,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 0, // TODO ! set to 0 in prod build
+          initialIndex: 0,
           canFilterUsingDuration: isDurationFilteringEnabled,
           currentFilters: logFilters,
           logs: currentLogs,
