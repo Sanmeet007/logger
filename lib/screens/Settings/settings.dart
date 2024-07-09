@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/csv_to_map.dart';
+import 'package:logger/utils/snackbar.dart';
 import 'package:shared_storage/shared_storage.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -46,39 +47,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
   }
 
-  void showSnackBar({
-    required String content,
-    String? buttonText,
-    Function? buttonOnPressed,
-    bool useAction = false,
-    bool showCloseIcon = true,
-  }) {
-    if (useAction) {
-      if (buttonText == null || buttonOnPressed == null) {
-        throw Exception(
-            "With useAction param as true buttonText and buttonOnPressed are required");
-      }
-    }
-    final snackbar = SnackBar(
-      content: Text(content),
-      duration: const Duration(seconds: 4),
-      action: useAction
-          ? SnackBarAction(
-              backgroundColor: const Color.fromARGB(255, 203, 169, 255),
-              textColor: const Color.fromARGB(255, 11, 1, 26),
-              // backgroundColor: const Color.fromARGB(255, 106, 26, 227),
-              // textColor: const Color.fromARGB(255, 255, 255, 255),
-              label: buttonText!,
-              onPressed: () => buttonOnPressed!(),
-            )
-          : null,
-      showCloseIcon: showCloseIcon,
-      closeIconColor: Colors.white,
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-  }
-
   void handleCallLogImport() async {
     bool isDone = false;
     try {
@@ -106,25 +74,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
         var x = await CallLogWriter.batchInsertCallLogs(callLogs);
 
-        if (x) {
-          showSnackBar(
-            content: "Call logs extracted successfully",
-            useAction: true,
-            buttonOnPressed: () {
-              widget.refresher?.call();
-            },
-            buttonText: "Refresh",
-          );
-        } else {
-          showSnackBar(content: "Something went wrong");
+        if (mounted) {
+          if (x) {
+            AppSnackBar.show(
+              context,
+              content: "Call logs extracted successfully",
+              useAction: true,
+              buttonOnPressed: () {
+                widget.refresher?.call();
+              },
+              buttonText: "Refresh",
+            );
+          } else {
+            AppSnackBar.show(context, content: "Something went wrong");
+          }
+          isDone = true;
+          widget.hideLinearProgressLoader();
         }
-        isDone = true;
-        widget.hideLinearProgressLoader();
       }
     } catch (e) {
       isDone = true;
       widget.hideLinearProgressLoader();
-      showSnackBar(content: "Something went wrong");
+      if (mounted) {
+        AppSnackBar.show(context, content: "Something went wrong");
+      }
     }
   }
 
@@ -204,18 +177,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               var r =
                                   await widget.setShareButtonState(newState);
                               if (r == null || !r) {
-                                showSnackBar(
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
                               } else {
-                                showSnackBar(
-                                    content:
-                                        "Sharing settings updated successfully.");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Sharing settings updated successfully.");
+                                }
                               }
                             } catch (_) {
-                              showSnackBar(
-                                  content:
-                                      "Failed to update settings. Please try again later");
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
                             } finally {
                               widget.hideLoader();
                             }
@@ -242,18 +221,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               var r = await widget
                                   .setConfirmBeforeDownloadingState(newState);
                               if (r == null || !r) {
-                                showSnackBar(
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
                               } else {
-                                showSnackBar(
-                                    content:
-                                        "Downloading settings updated successfully.");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Downloading settings updated successfully.");
+                                }
                               }
                             } catch (_) {
-                              showSnackBar(
-                                  content:
-                                      "Failed to update settings. Please try again later");
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
                             } finally {
                               widget.hideLoader();
                             }
@@ -280,18 +265,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               var r = await widget
                                   .setDurationFilteringState(newState);
                               if (r == null || !r) {
-                                showSnackBar(
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
                               } else {
-                                showSnackBar(
-                                    content:
-                                        "Duration filtering settings updated successfully.");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Duration filtering settings updated successfully.");
+                                }
                               }
                             } catch (_) {
-                              showSnackBar(
-                                  content:
-                                      "Failed to update settings. Please try again later");
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
                             } finally {
                               widget.hideLoader();
                             }
@@ -373,18 +364,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 var r =
                                     await widget.setCurrentImportType(newValue);
                                 if (r == null || !r) {
-                                  showSnackBar(
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  if (context.mounted) {
+                                    AppSnackBar.show(context,
+                                        content:
+                                            "Failed to update settings. Please try again later");
+                                  }
                                 } else {
-                                  showSnackBar(
-                                      content:
-                                          "Import settings updated successfully.");
+                                  if (context.mounted) {
+                                    AppSnackBar.show(context,
+                                        content:
+                                            "Import settings updated successfully.");
+                                  }
                                 }
                               } catch (_) {
-                                showSnackBar(
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
                               } finally {
                                 widget.hideLoader();
                               }

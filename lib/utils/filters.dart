@@ -20,6 +20,9 @@ class Filters {
     var dateRangeOption = filters["date_range_op"] as String;
     var startDate = filters["start_date"] as DateTime;
     var endDate = filters["end_date"] as DateTime;
+    var minDuration = filters["min_duration"] as String?;
+    var maxDuration = filters["max_duration"] as String?;
+    var shouldUseDurationFiltering = filters["duration_filtering"] as bool;
 
     final DateTime now = DateTime.now();
     final DateTime today = DateTime.now();
@@ -127,6 +130,25 @@ class Filters {
         logs = logs?.where((e) => callTypes.contains(e.callType));
     }
 
+    if (shouldUseDurationFiltering) {
+      if (minDuration != null) {
+        var k = int.tryParse(minDuration);
+
+        if (k != null && k > 0) {
+          logs = (logs as Iterable<CallLogEntry>?)
+              ?.where((e) => ((e.duration ?? 0) >= k));
+        }
+      }
+
+      if (maxDuration != null) {
+        var k = int.tryParse(maxDuration);
+        if (k != null && k > 0) {
+          logs = (logs as Iterable<CallLogEntry>?)
+              ?.where((e) => ((e.duration ?? 0) <= k));
+        }
+      }
+    }
+
     return logs;
   }
 
@@ -157,6 +179,23 @@ class Filters {
     var cts2 = mask2["selected_call_types"] as List<CallType>;
 
     if (!const SetEquality().equals(cts1.toSet(), cts2.toSet())) {
+      return false;
+    }
+
+    if (mask1["duration_filtering"] != mask2["duration_filtering"]) {
+      return false;
+    }
+
+    String mask1MaxDuration = mask1["max_duration"] as String? ?? "";
+    String mask2MaxDuration = mask2["max_duration"] as String? ?? "";
+
+    String mask1MinDuration = mask1["min_duration"] as String? ?? "";
+    String mask2MinDuration = mask2["min_duration"] as String? ?? "";
+
+    if (int.tryParse(mask1MaxDuration) != int.tryParse(mask2MaxDuration)) {
+      return false;
+    }
+    if (int.tryParse(mask1MinDuration) != int.tryParse(mask2MinDuration)) {
       return false;
     }
 

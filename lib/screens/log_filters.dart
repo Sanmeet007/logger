@@ -10,12 +10,14 @@ class LogFilters extends StatefulWidget {
   final Function() removeFilters;
   final Function(Map) filterLogs;
   final Map currentFilters;
+  final bool canFilterUsingDuration;
 
   const LogFilters({
     super.key,
     required this.currentFilters,
     required this.filterLogs,
     required this.removeFilters,
+    required this.canFilterUsingDuration,
   });
 
   @override
@@ -27,11 +29,14 @@ class _LogFiltersState extends State<LogFilters> {
   List<CallType> callTypes = [...CallType.values];
 
   late bool isNumberSearchEnabled;
+  late bool isDurationFilteringOn;
   late String dateRangeOption;
   late List<CallType> selectedCallTypes;
   late TextEditingController _phoneNumberInputController,
       _startDateController,
-      _endDateController;
+      _endDateController,
+      _minDurationInputController,
+      _maxDurationInputController;
 
   bool canApplyFilters = false;
 
@@ -41,6 +46,11 @@ class _LogFiltersState extends State<LogFilters> {
 
     _phoneNumberInputController =
         TextEditingController(text: widget.currentFilters["phone_to_match"]);
+
+    _minDurationInputController = TextEditingController(
+        text: widget.currentFilters["min_duration"] ?? "0");
+    _maxDurationInputController = TextEditingController(
+        text: widget.currentFilters["max_duration"] ?? "");
     _endDateController = TextEditingController(
         text: formatter.format(widget.currentFilters["end_date"]));
     _startDateController = TextEditingController(
@@ -49,6 +59,7 @@ class _LogFiltersState extends State<LogFilters> {
     isNumberSearchEnabled = widget.currentFilters["specific_ph"];
     dateRangeOption = widget.currentFilters["date_range_op"];
     selectedCallTypes = widget.currentFilters["selected_call_types"];
+    isDurationFilteringOn = widget.currentFilters["duration_filtering"];
   }
 
   @override
@@ -56,6 +67,8 @@ class _LogFiltersState extends State<LogFilters> {
     _phoneNumberInputController.dispose();
     _startDateController.dispose();
     _endDateController.dispose();
+    _minDurationInputController.dispose();
+    _maxDurationInputController.dispose();
     super.dispose();
   }
 
@@ -90,6 +103,13 @@ class _LogFiltersState extends State<LogFilters> {
     checkFiltersState();
   }
 
+  void setFilterByDurationState(bool v) {
+    setState(() {
+      isDurationFilteringOn = v;
+    });
+    checkFiltersState();
+  }
+
   void applyFilters() {
     Navigator.pop(context, true);
 
@@ -104,7 +124,10 @@ class _LogFiltersState extends State<LogFilters> {
             : DateTime.parse(_startDateController.text),
         "end_date": _endDateController.text.isEmpty
             ? DateTime.now()
-            : DateTime.parse(_endDateController.text)
+            : DateTime.parse(_endDateController.text),
+        "min_duration": _minDurationInputController.text,
+        "max_duration": _maxDurationInputController.text,
+        "duration_filtering": isDurationFilteringOn,
       });
     }
   }
@@ -125,7 +148,10 @@ class _LogFiltersState extends State<LogFilters> {
           : DateTime.parse(_startDateController.text),
       "end_date": _endDateController.text.isEmpty
           ? DateTime.now()
-          : DateTime.parse(_endDateController.text)
+          : DateTime.parse(_endDateController.text),
+      "duration_filtering": isDurationFilteringOn,
+      "min_duration": _minDurationInputController.text,
+      "max_duration": _maxDurationInputController.text,
     }, widget.currentFilters);
   }
 
@@ -145,6 +171,26 @@ class _LogFiltersState extends State<LogFilters> {
     if (v == null) return;
     if (widget.currentFilters["phone_to_match"] != v) {
       checkFiltersState();
+    }
+  }
+
+  void handleMinDurationValueChange(String? v) {
+    if (v == null) return;
+    var k = int.tryParse(v);
+    if (k != null && k > 0) {
+      if (widget.currentFilters["min_duration"] != v) {
+        checkFiltersState();
+      }
+    }
+  }
+
+  void handleMaxDurationValueChange(String? v) {
+    if (v == null) return;
+    var k = int.tryParse(v);
+    if (k != null && k > 0) {
+      if (widget.currentFilters["max_duration"] != v) {
+        checkFiltersState();
+      }
     }
   }
 
@@ -224,6 +270,86 @@ class _LogFiltersState extends State<LogFilters> {
                   ),
                 ),
                 const SizedBox(height: 10.0),
+                if (widget.canFilterUsingDuration)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 15.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(250, 42, 40, 40)
+                          : const Color.fromARGB(155, 240, 230, 255),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedText(
+                              "Filter by call duration",
+                              size: 18.0,
+                            ),
+                            Switch(
+                              value: isDurationFilteringOn,
+                              onChanged: setFilterByDurationState,
+                            ),
+                          ],
+                        ),
+                        if (isDurationFilteringOn)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    onChanged: handleMinDurationValueChange,
+                                    controller: _minDurationInputController,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 66, 66, 66),
+                                        ),
+                                      ),
+                                      label: Text("Min (in secs)"),
+                                      hintText: 'eg. 0',
+                                    ),
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10.0,
+                                ),
+                                Flexible(
+                                  child: TextField(
+                                    onChanged: handleMaxDurationValueChange,
+                                    controller: _maxDurationInputController,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 66, 66, 66),
+                                        ),
+                                      ),
+                                      label: Text("Max (in secs)"),
+                                      hintText: 'eg. 60',
+                                    ),
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                if (widget.canFilterUsingDuration) const SizedBox(height: 10.0),
                 Container(
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
@@ -370,6 +496,15 @@ class _LogFiltersState extends State<LogFilters> {
                 Row(
                   children: [
                     Expanded(
+                      child: OutlinedButton(
+                        onPressed: clearFilters,
+                        child: const Text("Reset to default"),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black,
@@ -378,15 +513,6 @@ class _LogFiltersState extends State<LogFilters> {
                         ),
                         onPressed: canApplyFilters ? applyFilters : null,
                         child: const Text("Apply filters"),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: clearFilters,
-                        child: const Text("Reset to default"),
                       ),
                     ),
                   ],

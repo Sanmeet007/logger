@@ -4,6 +4,7 @@ import 'package:logger/components/sized_text.dart';
 import 'package:logger/screens/ExportInfo/csv_fields.dart';
 import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
+import 'package:logger/utils/snackbar.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';
@@ -40,6 +41,7 @@ class ScreenManager extends StatefulWidget {
 
   final bool askForDownloadConfirmation, showSharingButton;
   final String currentImportType;
+  final bool canFilterUsingDuration;
 
   const ScreenManager({
     super.key,
@@ -51,6 +53,7 @@ class ScreenManager extends StatefulWidget {
     required this.areFiltersApplied,
     required this.askForDownloadConfirmation,
     required this.currentImportType,
+    required this.canFilterUsingDuration,
     required this.showSharingButton,
     this.initialIndex = 0,
   });
@@ -103,53 +106,20 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
   }
 
-  void showSnackBar({
-    required String content,
-    String? buttonText,
-    Function? buttonOnPressed,
-    bool useAction = false,
-    bool showCloseIcon = true,
-  }) {
-    if (useAction) {
-      if (buttonText == null || buttonOnPressed == null) {
-        throw Exception(
-            "With useAction param as true buttonText and buttonOnPressed are required");
-      }
-    }
-    final snackbar = SnackBar(
-      content: Text(content),
-      duration: const Duration(seconds: 4),
-      action: useAction
-          ? SnackBarAction(
-              backgroundColor: const Color.fromARGB(255, 203, 169, 255),
-              textColor: const Color.fromARGB(255, 11, 1, 26),
-              // backgroundColor: const Color.fromARGB(255, 106, 26, 227),
-              // textColor: const Color.fromARGB(255, 255, 255, 255),
-              label: buttonText!,
-              onPressed: () => buttonOnPressed!(),
-            )
-          : null,
-      showCloseIcon: showCloseIcon,
-      closeIconColor: Colors.white,
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-  }
-
   void downloadStatusSnackbar({required status}) {
     switch (status) {
       case "success":
-        showSnackBar(
+        AppSnackBar.show(context,
             content: "Call logs extracted and downloaded successfully",
             useAction: true,
-            buttonText: "OPEN",
-            buttonOnPressed: () {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              openFile();
-            });
+            buttonText: "OPEN", buttonOnPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          openFile();
+        });
         break;
       case "error":
-        showSnackBar(
+        AppSnackBar.show(
+          context,
           content: "Error while downloading file !",
         );
         break;
@@ -217,8 +187,10 @@ class _ScreenManagerState extends State<ScreenManager> {
       }
     } else {
       if (showStatus) {
-        showSnackBar(
-            content: "Unable to get permissions", showCloseIcon: false);
+        if (mounted) {
+          AppSnackBar.show(context,
+              content: "Unable to get permissions", showCloseIcon: false);
+        }
       }
       setState(() => isTaskRunning = false);
       return false;
@@ -244,9 +216,11 @@ class _ScreenManagerState extends State<ScreenManager> {
         text: "Share call logs file via gmail , whatsapp etc...",
       );
     } else {
-      showSnackBar(
-          content:
-              "An error occured while generating file. Please try again later");
+      if (mounted) {
+        AppSnackBar.show(context,
+            content:
+                "An error occured while generating file. Please try again later");
+      }
     }
 
     setState(() {
@@ -271,13 +245,16 @@ class _ScreenManagerState extends State<ScreenManager> {
       isTaskRunning = false;
     });
 
-    if (fileGenerationSuccess) {
-      showSnackBar(content: "Opening file", showCloseIcon: false);
-      OpenFile.open(filePath);
-    } else {
-      showSnackBar(
-          content: "Unable to open file please try again later",
-          showCloseIcon: false);
+    if (mounted) {
+      if (fileGenerationSuccess) {
+        AppSnackBar.show(context,
+            content: "Opening file", showCloseIcon: false);
+        OpenFile.open(filePath);
+      } else {
+        AppSnackBar.show(context,
+            content: "Unable to open file please try again later",
+            showCloseIcon: false);
+      }
     }
   }
 
@@ -291,6 +268,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         currentFilters: widget.currentFilters,
         filterLogs: widget.filterLogs,
         removeFilters: widget.removeLogFilters,
+        canFilterUsingDuration: widget.canFilterUsingDuration,
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:logger/screens/Settings/settings.dart';
 import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApplicationUi extends StatefulWidget {
@@ -34,7 +35,6 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
   late bool isDurationFilteringEnabled;
   late bool isConfirmBeforeDownloadEnabled;
-  late bool isAnalyticsDisabled;
   late bool isSharingDisabled;
   late String currentImportType;
 
@@ -45,7 +45,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
     "selected_call_types": [...CallType.values],
     "date_range_op": "All Time",
     "start_date": DateTime.now(),
-    "end_date": DateTime.now()
+    "end_date": DateTime.now(),
+    "min_duration": "0",
+    "max_duration": null,
+    "duration_filtering": false,
   };
 
   void filterLogs(Map filters) async {
@@ -53,32 +56,49 @@ class _ApplicationUiState extends State<ApplicationUi> {
       isProcessing = true;
     });
 
-    var selectedCallTypes = filters["selected_call_types"] as List<CallType>;
-    var phoneToMatch = filters["phone_to_match"] as String;
-    var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
-    var dateRangeOption = filters["date_range_op"] as String;
-    var startDate = filters["start_date"] as DateTime;
-    var endDate = filters["end_date"] as DateTime;
+    try {
+      var selectedCallTypes = filters["selected_call_types"] as List<CallType>;
+      var phoneToMatch = filters["phone_to_match"] as String;
+      var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
+      var dateRangeOption = filters["date_range_op"] as String;
+      var startDate = filters["start_date"] as DateTime;
+      var endDate = filters["end_date"] as DateTime;
+      var shouldUseDurationFiltering = filters["duration_filtering"] as bool;
+      var minDuration = filters["min_duration"] as String?;
+      var maxDuration = filters["max_duration"] as String?;
 
-    logFilters["start_date"] = startDate;
-    logFilters["end_date"] = endDate;
-    logFilters["date_range_op"] = dateRangeOption;
-    logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
-    logFilters["phone_to_match"] = phoneToMatch;
-    logFilters["selected_call_types"] = [...selectedCallTypes];
+      logFilters["start_date"] = startDate;
+      logFilters["end_date"] = endDate;
+      logFilters["date_range_op"] = dateRangeOption;
+      logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
+      logFilters["phone_to_match"] = phoneToMatch;
+      logFilters["selected_call_types"] = [...selectedCallTypes];
+      logFilters['duration_filtering'] = shouldUseDurationFiltering;
+      logFilters['min_duration'] = minDuration;
+      logFilters['max_duration'] = maxDuration;
 
-    var filteredLogs = await Filters.filterLogs(widget.entries, logFilters);
+      var filteredLogs = await Filters.filterLogs(widget.entries, logFilters);
 
-    if (areInitalFilters()) {
+      if (areInitalFilters()) {
+        setState(() {
+          areFiltersApplied = false;
+          currentLogs = filteredLogs;
+          isProcessing = false;
+        });
+      } else {
+        setState(() {
+          areFiltersApplied = true;
+          currentLogs = filteredLogs;
+          isProcessing = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        AppSnackBar.show(context, content: "Filter error");
+      }
       setState(() {
         areFiltersApplied = false;
-        currentLogs = filteredLogs;
-        isProcessing = false;
-      });
-    } else {
-      setState(() {
-        areFiltersApplied = true;
-        currentLogs = filteredLogs;
+        currentLogs = widget.entries;
         isProcessing = false;
       });
     }
@@ -91,7 +111,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
       "selected_call_types": [...CallType.values],
       "date_range_op": "All Time",
       "start_date": DateTime.now(),
-      "end_date": DateTime.now()
+      "end_date": DateTime.now(),
+      "min_duration": "0",
+      "max_duration": null,
+      "duration_filtering": false,
     }, logFilters);
   }
 
@@ -106,7 +129,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
         "selected_call_types": [...CallType.values],
         "date_range_op": "All Time",
         "start_date": DateTime.now(),
-        "end_date": DateTime.now()
+        "end_date": DateTime.now(),
+        "min_duration": "0",
+        "max_duration": null,
+        "duration_filtering": false,
       };
       currentLogs = widget.entries;
     });
@@ -142,16 +168,6 @@ class _ApplicationUiState extends State<ApplicationUi> {
     setState(() {
       if (saved != null && saved) {
         isConfirmBeforeDownloadEnabled = newState;
-      }
-    });
-    return saved;
-  }
-
-  Future<bool?> setAnalyticsTabState(bool newState) async {
-    var saved = await widget.preferences?.setBool("analytics_tab", newState);
-    setState(() {
-      if (saved != null && saved) {
-        isAnalyticsDisabled = newState;
       }
     });
     return saved;
@@ -207,7 +223,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 2, // TODO ! set to 0 in prod build
+          initialIndex: 0, // TODO ! set to 0 in prod build
+          canFilterUsingDuration: isDurationFilteringEnabled,
           currentFilters: logFilters,
           logs: currentLogs,
           areFiltersApplied: areFiltersApplied,
