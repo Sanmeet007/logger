@@ -93,6 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         }
       }
     } catch (e) {
+      print(e);
       isDone = true;
       widget.hideLinearProgressLoader();
       if (mounted) {
