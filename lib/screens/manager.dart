@@ -295,15 +295,14 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (_selectedIndex != widget.initialIndex) {
+    return PopScope(
+      canPop: _selectedIndex == widget.initialIndex,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
           setState(() {
             _selectedIndex = widget.initialIndex;
           });
-          return false;
         }
-        return true;
       },
       child: Stack(
         children: [
