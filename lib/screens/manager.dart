@@ -64,7 +64,6 @@ class ScreenManager extends StatefulWidget {
 
 class _ScreenManagerState extends State<ScreenManager> {
   static const fileName = "output";
-  late final String fileExtension;
 
   late int _selectedIndex;
   Uri? currentFilePath;
@@ -74,7 +73,6 @@ class _ScreenManagerState extends State<ScreenManager> {
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
-    fileExtension = widget.currentImportType;
   }
 
   void updateIndex(int index) {
@@ -87,7 +85,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     return CallLogsFileGenerator.generateLogsFile(
       parentUri: parentUri,
       filename: filename,
-      fileType: fileExtension,
+      fileType: widget.currentImportType,
       callLogs: widget.logs,
     );
   }
@@ -96,7 +94,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     return CallLogsFileGenerator.addLogsToFile(
       file: file,
       callLogs: widget.logs,
-      fileType: fileExtension,
+      fileType: widget.currentImportType,
     );
   }
 
@@ -171,7 +169,8 @@ class _ScreenManagerState extends State<ScreenManager> {
 
     if (grantedUri != null) {
       var milliseconds = DateTime.now().millisecondsSinceEpoch;
-      String filename = "logger-$milliseconds-$fileName.$fileExtension";
+      String filename =
+          "logger-$milliseconds-$fileName.${widget.currentImportType}";
 
       final fileUri = await generateLogsFile(grantedUri, filename);
 
@@ -205,7 +204,8 @@ class _ScreenManagerState extends State<ScreenManager> {
 
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
-    File file = File("${tempDir.path}/logger_${suffix}_output.csv");
+    File file = File(
+        "${tempDir.path}/logger_${suffix}_$fileName.${widget.currentImportType}");
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 
@@ -236,8 +236,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     var tempDir = await getTemporaryDirectory();
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
-    File file = File("${tempDir.path}/logger_${suffix}_output.csv");
-
+    File file = File(
+        "${tempDir.path}/logger_${suffix}_$fileName.${widget.currentImportType}");
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 

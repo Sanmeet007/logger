@@ -72,7 +72,8 @@ class CallLogsFileGenerator {
       }
       DocumentFile? file = await createFileAsString(
         parentUri,
-        mimeType: "text/$fileType",
+        mimeType:
+            "text/${fileType == "json" ? "application/json" : "text/comma-separated-values"}",
         displayName: filename,
         content: contents,
       );
