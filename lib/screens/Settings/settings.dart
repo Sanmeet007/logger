@@ -154,7 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black45
+                      ? const Color.fromARGB(249, 35, 34, 34)
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -306,7 +306,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black45
+                      ? const Color.fromARGB(249, 35, 34, 34)
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
