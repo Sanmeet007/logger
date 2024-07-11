@@ -78,7 +78,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           if (x) {
             AppSnackBar.show(
               context,
-              content: "Call logs extracted successfully",
+              content: "Call logs imported successfully",
               useAction: true,
               buttonOnPressed: () {
                 widget.refresher?.call();
