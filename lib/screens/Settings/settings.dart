@@ -4,6 +4,10 @@ import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:shared_storage/shared_storage.dart';
+import 'dart:async';
+import 'dart:developer';
+
+import '../../helpers/exported_file_format.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function({String waitingMessage}) showLinearProgressLoader;
@@ -14,11 +18,13 @@ class SettingsScreen extends StatefulWidget {
   final bool initialConfirmBeforeDownloadState;
   final bool initialSharingState;
   final String initialImportTypeState;
+  final String initialExportedFilenameFormatState;
   final Function showLoader, hideLoader;
   final Future<bool?> Function(bool) setDurationFilteringState;
   final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
   final Future<bool?> Function(bool) setShareButtonState;
   final Future<bool?> Function(String) setCurrentImportType;
+  final Future<bool?> Function(String) setCurrentExportedFilenameFormatType;
 
   const SettingsScreen({
     super.key,
@@ -32,6 +38,8 @@ class SettingsScreen extends StatefulWidget {
     required this.setShareButtonState,
     required this.initialImportTypeState,
     required this.setCurrentImportType,
+    required this.initialExportedFilenameFormatState,
+    required this.setCurrentExportedFilenameFormatType,
     required this.hideLoader,
     required this.showLoader,
     this.refresher,
@@ -42,9 +50,28 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final TextEditingController exportedFilenameController = TextEditingController();
+  bool _isExportedFilenameValid = true;
+  Timer? _saveThrottler;
+
   @override
   void initState() {
     super.initState();
+
+    exportedFilenameController.text = widget.initialExportedFilenameFormatState;
+    exportedFilenameController.addListener(() {
+      if (_saveThrottler?.isActive ?? false) _saveThrottler?.cancel();
+      _saveThrottler = Timer(const Duration(milliseconds: 500), () {
+        String value = exportedFilenameController.text;
+        bool isValid = ExportedFileFormatHelper.validateExportedFormat(value);
+        if (isValid) {
+          widget.setCurrentExportedFilenameFormatType(value);
+        }
+        setState(() {
+          _isExportedFilenameValid = isValid;
+        });
+      });
+    });
   }
 
   void handleCallLogImport() async {
@@ -393,6 +420,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     const SizedBox(
                       height: 10.0,
+                    ),
+                    const LogDivider(),
+
+                    TextFormField(
+                      controller: exportedFilenameController,
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Exported Filename',
+                        errorText: _isExportedFilenameValid ? null : "Error invalid strf time format",
+                      ),
                     ),
                     const LogDivider(),
                     const SizedBox(
