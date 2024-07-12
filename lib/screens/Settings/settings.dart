@@ -5,7 +5,6 @@ import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:shared_storage/shared_storage.dart';
 import 'dart:async';
-import 'dart:developer';
 
 import '../../helpers/exported_file_format.dart';
 
