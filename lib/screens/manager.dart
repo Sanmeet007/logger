@@ -170,7 +170,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
-      String filename = ExportedFileFormatHelper.createFileFormat(
+      String filename = ExportedFilenameFormatHelper.createFileFormat(
           widget.currentExportedFilenameFormatType);
       String filenameWithExtension = "$filename.${widget.currentImportType}";
 

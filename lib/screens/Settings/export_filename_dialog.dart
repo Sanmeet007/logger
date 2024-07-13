@@ -41,11 +41,13 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
   }
 
   void resetToDefault() {
-    _exportedFilenameController.text = ExportedFileFormatHelper.defaultFormat;
+    _exportedFilenameController.text =
+        ExportedFilenameFormatHelper.defaultFormat;
   }
 
   void validateInput(String newState) {
-    bool isValid = ExportedFileFormatHelper.validateExportedFormat(newState);
+    bool isValid =
+        ExportedFilenameFormatHelper.validateExportedFormat(newState);
     setState(() {
       _isExportedFilenameValid = isValid;
     });
@@ -53,7 +55,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
 
   void validateAndSave() async {
     String value = _exportedFilenameController.text;
-    bool isValid = ExportedFileFormatHelper.validateExportedFormat(value);
+    bool isValid = ExportedFilenameFormatHelper.validateExportedFormat(value);
     if (isValid) {
       widget.showLoader();
       try {

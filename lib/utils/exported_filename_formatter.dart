@@ -7,7 +7,7 @@ class TimeFormatItem {
   TimeFormatItem(this.value, this.interpret);
 }
 
-class ExportedFileFormatHelper {
+class ExportedFilenameFormatHelper {
   static const defaultFormat = "logger-%y%m%d-%H%M%S";
 
   static final Map<String, String> _strfToDateFormat = {

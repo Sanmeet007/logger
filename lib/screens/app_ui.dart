@@ -234,7 +234,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
     currentExportedFilenameFormatType =
         widget.preferences?.getString("exported_filename_format") ??
-            ExportedFileFormatHelper.defaultFormat;
+            ExportedFilenameFormatHelper.defaultFormat;
   }
 
   @override
