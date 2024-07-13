@@ -6,7 +6,6 @@ import 'package:logger/screens/Home/home.dart';
 import 'package:logger/screens/Settings/settings.dart';
 import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
-import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
@@ -243,7 +242,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 2, // TODO set to 0 in prod
+          initialIndex: 0,
           canFilterUsingDuration: isDurationFilteringEnabled,
           currentFilters: logFilters,
           logs: currentLogs,
