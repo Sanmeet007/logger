@@ -9,7 +9,7 @@ import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
-import 'package:logger/utils/exported_file_format.dart';
+import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApplicationUi extends StatefulWidget {

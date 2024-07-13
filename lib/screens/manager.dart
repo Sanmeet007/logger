@@ -5,7 +5,7 @@ import 'package:logger/screens/ExportInfo/csv_fields.dart';
 import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
-import 'package:logger/utils/exported_file_format.dart';
+import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';

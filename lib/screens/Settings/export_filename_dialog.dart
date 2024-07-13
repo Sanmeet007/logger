@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:logger/utils/exported_file_format.dart';
+import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
 
 class ExportFilenameDialog extends StatefulWidget {
