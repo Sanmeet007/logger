@@ -105,7 +105,8 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                     icon: const Icon(Icons.restart_alt),
                     onPressed: resetToDefault,
                   ),
-                  border: const OutlineInputBorder(
+                  border: const OutlineInputBorder(),
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color.fromARGB(255, 66, 66, 66),
                     ),
