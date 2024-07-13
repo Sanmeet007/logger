@@ -98,13 +98,18 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                 controller: _exportedFilenameController,
                 onChanged: validateInput,
                 decoration: InputDecoration(
+                  label: const Text("Filename format"),
+                  hintText: 'my-call-logs-[%token]',
                   suffixIcon: IconButton(
                     tooltip: "Reset",
                     icon: const Icon(Icons.restart_alt),
                     onPressed: resetToDefault,
                   ),
-                  border: const OutlineInputBorder(),
-                  labelText: 'Filename format',
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 66, 66, 66),
+                    ),
+                  ),
                   errorText:
                       _isExportedFilenameValid ? null : "Error invalid format",
                 ),
