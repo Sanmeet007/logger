@@ -13,6 +13,7 @@ import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'log_filters.dart';
+import "../helpers/exported_file_format.dart";
 
 class Screen {
   final String label;
@@ -41,6 +42,7 @@ class ScreenManager extends StatefulWidget {
 
   final bool askForDownloadConfirmation, showSharingButton;
   final String currentImportType;
+  final String currentExportedFilenameFormatType;
   final bool canFilterUsingDuration;
 
   const ScreenManager({
@@ -53,6 +55,7 @@ class ScreenManager extends StatefulWidget {
     required this.areFiltersApplied,
     required this.askForDownloadConfirmation,
     required this.currentImportType,
+    required this.currentExportedFilenameFormatType,
     required this.canFilterUsingDuration,
     required this.showSharingButton,
     this.initialIndex = 0,
@@ -168,11 +171,10 @@ class _ScreenManagerState extends State<ScreenManager> {
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
-      var milliseconds = DateTime.now().millisecondsSinceEpoch;
-      String filename =
-          "logger-$milliseconds-$fileName.${widget.currentImportType}";
+      String filename = ExportedFileFormatHelper.createFileFormat(widget.currentExportedFilenameFormatType);
+      String filenameWithExtension = "$filename.${widget.currentImportType}";
 
-      final fileUri = await generateLogsFile(grantedUri, filename);
+      final fileUri = await generateLogsFile(grantedUri, filenameWithExtension);
 
       if (fileUri != null) {
         currentFilePath = fileUri;

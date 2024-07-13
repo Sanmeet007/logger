@@ -10,6 +10,8 @@ import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../helpers/exported_file_format.dart';
+
 class ApplicationUi extends StatefulWidget {
   final Future<void> Function()? refresher;
   final SharedPreferences? preferences;
@@ -37,6 +39,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
   late bool isConfirmBeforeDownloadEnabled;
   late bool isSharingDisabled;
   late String currentImportType;
+  late String currentExportedFilenameFormatType;
 
   // Logs filters
   Map logFilters = {
@@ -193,6 +196,16 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return saved;
   }
 
+  Future<bool?> setCurrentExportedFilenameFormatType(String newState) async {
+    var saved = await widget.preferences?.setString("exported_filename_format", newState);
+    setState(() {
+      if (saved != null && saved) {
+        currentExportedFilenameFormatType = newState;
+      }
+    });
+    return saved;
+  }
+
   void showLoader() {
     setState(() {
       isProcessing = true;
@@ -216,6 +229,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
         widget.preferences?.getBool("confirm_download") ?? false;
     isSharingDisabled = widget.preferences?.getBool("sharing") ?? false;
     currentImportType = widget.preferences?.getString("import_type") ?? "csv";
+
+    currentExportedFilenameFormatType = widget.preferences?.getString("exported_filename_format") ?? ExportedFileFormatHelper.defaultFormat;
   }
 
   @override
@@ -233,6 +248,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
           askForDownloadConfirmation: isConfirmBeforeDownloadEnabled,
           showSharingButton: !isSharingDisabled,
           currentImportType: currentImportType,
+          currentExportedFilenameFormatType: currentExportedFilenameFormatType,
           items: <Screen>[
             Screen(
               index: 0,
@@ -273,7 +289,9 @@ class _ApplicationUiState extends State<ApplicationUi> {
                     isConfirmBeforeDownloadEnabled,
                 initialSharingState: isSharingDisabled,
                 initialImportTypeState: currentImportType,
+                initialExportedFilenameFormatState: currentExportedFilenameFormatType,
                 setCurrentImportType: setCurrentImportType,
+                setCurrentExportedFilenameFormatType: setCurrentExportedFilenameFormatType,
                 setDurationFilteringState: setDurationFilteringState,
                 setConfirmBeforeDownloadingState:
                     setConfirmBeforeDownloadingState,
