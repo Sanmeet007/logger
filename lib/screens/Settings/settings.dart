@@ -421,7 +421,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     const LogDivider(),
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -441,11 +441,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
                     const LogDivider(),
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
