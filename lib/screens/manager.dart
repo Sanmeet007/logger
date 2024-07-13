@@ -5,15 +5,14 @@ import 'package:logger/screens/ExportInfo/csv_fields.dart';
 import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
+import 'package:logger/utils/exported_file_format.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'log_filters.dart';
-import "../helpers/exported_file_format.dart";
 
 class Screen {
   final String label;
@@ -171,7 +170,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
-      String filename = ExportedFileFormatHelper.createFileFormat(widget.currentExportedFilenameFormatType);
+      String filename = ExportedFileFormatHelper.createFileFormat(
+          widget.currentExportedFilenameFormatType);
       String filenameWithExtension = "$filename.${widget.currentImportType}";
 
       final fileUri = await generateLogsFile(grantedUri, filenameWithExtension);

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/csv_to_map.dart';
+import 'package:logger/utils/exported_file_format.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:shared_storage/shared_storage.dart';
 import 'dart:async';
-
-import '../../helpers/exported_file_format.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function({String waitingMessage}) showLinearProgressLoader;
@@ -49,28 +48,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final TextEditingController exportedFilenameController = TextEditingController();
-  bool _isExportedFilenameValid = true;
-  Timer? _saveThrottler;
+  // late final TextEditingController _exportedFilenameController;
 
   @override
   void initState() {
     super.initState();
-
-    exportedFilenameController.text = widget.initialExportedFilenameFormatState;
-    exportedFilenameController.addListener(() {
-      if (_saveThrottler?.isActive ?? false) _saveThrottler?.cancel();
-      _saveThrottler = Timer(const Duration(milliseconds: 500), () {
-        String value = exportedFilenameController.text;
-        bool isValid = ExportedFileFormatHelper.validateExportedFormat(value);
-        if (isValid) {
-          widget.setCurrentExportedFilenameFormatType(value);
-        }
-        setState(() {
-          _isExportedFilenameValid = isValid;
-        });
-      });
-    });
+    // _exportedFilenameController = TextEditingController();
   }
 
   void handleCallLogImport() async {
@@ -421,15 +404,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       height: 10.0,
                     ),
                     const LogDivider(),
+                    // TextFormField(
+                    //     // controller: exportedFilenameController,
+                    //     // decoration: InputDecoration(
+                    //     //   border: UnderlineInputBorder(),
+                    //     //   labelText: 'Exported Filename',
+                    //     //   errorText: _isExportedFilenameValid
+                    //     //       ? null
+                    //     //       : "Error invalid strf time format",
+                    //     // ),
+                    //     ),
 
-                    TextFormField(
-                      controller: exportedFilenameController,
-                      decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Exported Filename',
-                        errorText: _isExportedFilenameValid ? null : "Error invalid strf time format",
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Export filename format",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              print("open export filename format modal");
+                            },
+                            child: const Text(
+                              "Configure",
+                            )),
+                      ],
                     ),
+
                     const LogDivider(),
                     const SizedBox(
                       height: 10.0,
@@ -439,7 +444,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          "Import Your Call Logs",
+                          "Import your call logs",
                           style: TextStyle(
                             fontSize: 16.0,
                           ),

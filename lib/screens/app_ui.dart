@@ -8,9 +8,8 @@ import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/snackbar.dart';
+import 'package:logger/utils/exported_file_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../helpers/exported_file_format.dart';
 
 class ApplicationUi extends StatefulWidget {
   final Future<void> Function()? refresher;
@@ -197,7 +196,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
   }
 
   Future<bool?> setCurrentExportedFilenameFormatType(String newState) async {
-    var saved = await widget.preferences?.setString("exported_filename_format", newState);
+    var saved = await widget.preferences
+        ?.setString("exported_filename_format", newState);
     setState(() {
       if (saved != null && saved) {
         currentExportedFilenameFormatType = newState;
@@ -230,7 +230,9 @@ class _ApplicationUiState extends State<ApplicationUi> {
     isSharingDisabled = widget.preferences?.getBool("sharing") ?? false;
     currentImportType = widget.preferences?.getString("import_type") ?? "csv";
 
-    currentExportedFilenameFormatType = widget.preferences?.getString("exported_filename_format") ?? ExportedFileFormatHelper.defaultFormat;
+    currentExportedFilenameFormatType =
+        widget.preferences?.getString("exported_filename_format") ??
+            ExportedFileFormatHelper.defaultFormat;
   }
 
   @override
@@ -238,7 +240,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return Stack(
       children: [
         ScreenManager(
-          initialIndex: 0,
+          initialIndex: 2, // TODO set to 0 in prod
           canFilterUsingDuration: isDurationFilteringEnabled,
           currentFilters: logFilters,
           logs: currentLogs,
@@ -289,9 +291,11 @@ class _ApplicationUiState extends State<ApplicationUi> {
                     isConfirmBeforeDownloadEnabled,
                 initialSharingState: isSharingDisabled,
                 initialImportTypeState: currentImportType,
-                initialExportedFilenameFormatState: currentExportedFilenameFormatType,
+                initialExportedFilenameFormatState:
+                    currentExportedFilenameFormatType,
                 setCurrentImportType: setCurrentImportType,
-                setCurrentExportedFilenameFormatType: setCurrentExportedFilenameFormatType,
+                setCurrentExportedFilenameFormatType:
+                    setCurrentExportedFilenameFormatType,
                 setDurationFilteringState: setDurationFilteringState,
                 setConfirmBeforeDownloadingState:
                     setConfirmBeforeDownloadingState,
