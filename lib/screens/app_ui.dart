@@ -6,7 +6,9 @@ import 'package:logger/screens/Home/home.dart';
 import 'package:logger/screens/Settings/settings.dart';
 import 'package:logger/screens/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
+import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_file_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -228,7 +230,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
     isConfirmBeforeDownloadEnabled =
         widget.preferences?.getBool("confirm_download") ?? false;
     isSharingDisabled = widget.preferences?.getBool("sharing") ?? false;
-    currentImportType = widget.preferences?.getString("import_type") ?? "csv";
+    currentImportType = widget.preferences?.getString("import_type") ??
+        CallLogsFileGenerator.defaultImportType;
 
     currentExportedFilenameFormatType =
         widget.preferences?.getString("exported_filename_format") ??

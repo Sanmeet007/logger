@@ -8,7 +8,7 @@ class TimeFormatItem {
 }
 
 class ExportedFileFormatHelper {
-  static const defaultFormat = "call_logger-%y%m%d-%H%M%S";
+  static const defaultFormat = "logger-%y%m%d-%H%M%S";
 
   static final Map<String, String> _strfToDateFormat = {
     "Y": "yyyy", // Year with century (e.g., 2024)

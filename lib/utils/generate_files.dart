@@ -46,6 +46,7 @@ String _toJsonString(final Iterable<CallLogEntry>? callLogs) {
 }
 
 class CallLogsFileGenerator {
+  static const defaultImportType = "csv";
   static Future<String> toCsvString(
       final Iterable<CallLogEntry> callLogs) async {
     return await Isolate.run(() => _toCsvString(callLogs));
