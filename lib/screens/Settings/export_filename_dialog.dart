@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:logger/screens/Settings/datetime_table.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
 
@@ -103,7 +104,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                     onPressed: resetToDefault,
                   ),
                   border: const OutlineInputBorder(),
-                  labelText: 'Exported Filename',
+                  labelText: 'Filename format',
                   errorText:
                       _isExportedFilenameValid ? null : "Error invalid format",
                 ),
@@ -111,6 +112,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
               const SizedBox(
                 height: 15.0,
               ),
+              const DateTimeTable(),
               Row(
                 children: [
                   Expanded(
@@ -128,7 +130,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                     child: ElevatedButton(
                       onPressed:
                           _isExportedFilenameValid ? validateAndSave : null,
-                      child: const Text("Apply & Save"),
+                      child: const Text("Save"),
                     ),
                   ),
                 ],
