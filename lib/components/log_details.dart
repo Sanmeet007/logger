@@ -62,7 +62,7 @@ class LogDetails extends StatelessWidget {
                 ),
                 leading: CircleAvatar(
                   child: Text(
-                    name[0],
+                    name.isNotEmpty ? name[0] : 'Unknown',
                     style: const TextStyle(fontSize: 25),
                   ),
                 ),
