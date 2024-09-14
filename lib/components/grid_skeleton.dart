@@ -9,6 +9,7 @@ class GridSkeleton extends StatelessWidget {
   final double childAspectRatio;
   final double gridGap;
   final EdgeInsets? margin;
+  final bool useTitle;
 
   const GridSkeleton({
     super.key,
@@ -19,6 +20,7 @@ class GridSkeleton extends StatelessWidget {
     this.childAspectRatio = 1,
     this.gridGap = 10.0,
     this.margin,
+    this.useTitle = true,
   });
 
   @override
@@ -28,24 +30,26 @@ class GridSkeleton extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Shimmer.fromColors(
-            baseColor: color.withAlpha(155),
-            highlightColor: color,
-            enabled: true,
-            child: Container(
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
+          if (useTitle)
+            Shimmer.fromColors(
+              baseColor: color.withAlpha(155),
+              highlightColor: color,
+              enabled: true,
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                height: 20.0,
+                width: MediaQuery.of(context).size.width / 2.5,
               ),
-              height: 20.0,
-              width: MediaQuery.of(context).size.width / 2.5,
+              // child: ,
             ),
-            // child: ,
-          ),
-          const SizedBox(
-            height: 15.0,
-          ),
+          if (useTitle)
+            const SizedBox(
+              height: 15.0,
+            ),
           GridView.count(
             crossAxisSpacing: gridGap,
             mainAxisSpacing: gridGap,

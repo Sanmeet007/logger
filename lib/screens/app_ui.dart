@@ -38,6 +38,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
   late bool isDurationFilteringEnabled;
   late bool isConfirmBeforeDownloadEnabled;
   late bool isSharingDisabled;
+  late bool isCallLogCountVisibilityEnabled;
   late String currentImportType;
   late String currentExportedFilenameFormatType;
 
@@ -176,6 +177,16 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return saved;
   }
 
+  Future<bool?> setCallLogCountVisibility(bool newState) async {
+    var saved = await widget.preferences?.setBool("call_log_count", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isCallLogCountVisibilityEnabled = newState;
+      }
+    });
+    return saved;
+  }
+
   Future<bool?> setShareButtonState(bool newState) async {
     var saved = await widget.preferences?.setBool("sharing", newState);
     setState(() {
@@ -229,6 +240,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
     isConfirmBeforeDownloadEnabled =
         widget.preferences?.getBool("confirm_download") ?? false;
     isSharingDisabled = widget.preferences?.getBool("sharing") ?? false;
+    isCallLogCountVisibilityEnabled =
+        widget.preferences?.getBool("call_log_count") ?? false;
     currentImportType = widget.preferences?.getString("import_type") ??
         CallLogsFileGenerator.defaultImportType;
 
@@ -262,6 +275,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               screen: HomeScreen(
                 entries: currentLogs,
                 refreshEntries: widget.refresher,
+                callLogCountVisibility: isCallLogCountVisibilityEnabled,
               ),
             ),
             Screen(
@@ -295,6 +309,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
                 initialImportTypeState: currentImportType,
                 initialExportedFilenameFormatState:
                     currentExportedFilenameFormatType,
+                intialCallLogCountVisibility: isCallLogCountVisibilityEnabled,
                 setCurrentImportType: setCurrentImportType,
                 setCurrentExportedFilenameFormatType:
                     setCurrentExportedFilenameFormatType,
@@ -302,6 +317,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
                 setConfirmBeforeDownloadingState:
                     setConfirmBeforeDownloadingState,
                 setShareButtonState: setShareButtonState,
+                setCallLogCountVisibility: setCallLogCountVisibility,
               ),
             ),
             const Screen(

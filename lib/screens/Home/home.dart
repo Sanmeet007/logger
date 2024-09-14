@@ -6,11 +6,13 @@ import '../../components/logs.dart';
 class HomeScreen extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
   final Future<void> Function()? refreshEntries;
+  final bool callLogCountVisibility;
 
   const HomeScreen({
     super.key,
     required this.entries,
     required this.refreshEntries,
+    required this.callLogCountVisibility,
   });
 
   @override
@@ -33,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: LogsPage(
         entries: widget.entries,
+        callLogCountVisibility: widget.callLogCountVisibility,
       ),
     );
   }

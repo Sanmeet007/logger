@@ -2,11 +2,17 @@ import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:logger/components/logs_builder.dart';
+import 'package:logger/components/quick_summary.dart';
 import 'package:logger/utils/utils.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
-  const LogsPage({super.key, this.entries});
+  final bool callLogCountVisibility;
+  const LogsPage({
+    super.key,
+    this.entries,
+    required this.callLogCountVisibility,
+  });
 
   @override
   State<LogsPage> createState() => _LogsPageState();
@@ -91,10 +97,34 @@ class _LogsPageState extends State<LogsPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20.0),
-                    child: Text(mapEntry.key),
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        showDragHandle: true,
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return QuickLogSummary(
+                            logs: mapEntry.value,
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(mapEntry.key),
+                            if (widget.callLogCountVisibility)
+                              Text(
+                                prettifyNumbers(mapEntry.value.length),
+                              ),
+                          ],
+                        )
+                        // Text(mapEntry.key)
+                        ),
                   ),
                   Container(
                     clipBehavior: Clip.antiAlias,

@@ -15,10 +15,12 @@ class SettingsScreen extends StatefulWidget {
 
   final bool initialDurationFilteringState;
   final bool initialConfirmBeforeDownloadState;
+  final bool intialCallLogCountVisibility;
   final bool initialSharingState;
   final String initialImportTypeState;
   final String initialExportedFilenameFormatState;
   final Function showLoader, hideLoader;
+  final Future<bool?> Function(bool) setCallLogCountVisibility;
   final Future<bool?> Function(bool) setDurationFilteringState;
   final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
   final Future<bool?> Function(bool) setShareButtonState;
@@ -39,6 +41,8 @@ class SettingsScreen extends StatefulWidget {
     required this.setCurrentImportType,
     required this.initialExportedFilenameFormatState,
     required this.setCurrentExportedFilenameFormatType,
+    required this.setCallLogCountVisibility,
+    required this.intialCallLogCountVisibility,
     required this.hideLoader,
     required this.showLoader,
     this.refresher,
@@ -257,6 +261,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   AppSnackBar.show(context,
                                       content:
                                           "Downloading settings updated successfully.");
+                                }
+                              }
+                            } catch (_) {
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const LogDivider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Show call logs count",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.intialCallLogCountVisibility,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r = await widget
+                                  .setCallLogCountVisibility(newState);
+                              if (r == null || !r) {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
+                              } else {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content: "Setting updated successfully.");
                                 }
                               }
                             } catch (_) {
