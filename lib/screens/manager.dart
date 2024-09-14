@@ -6,6 +6,7 @@ import 'package:logger/screens/ExportInfo/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
+import 'package:logger/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';
@@ -13,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class Screen {
   final String label;
@@ -373,6 +375,15 @@ class _ScreenManagerState extends State<ScreenManager> {
                       onPressed: openDetailedView,
                       icon: const Icon(Icons.file_present_outlined),
                     ),
+                  if (_selectedIndex == 3)
+                    IconButton(
+                        tooltip: "Donate",
+                        onPressed: () {
+                          url_launcher.launchUrl(getDonationLink());
+                        },
+                        icon: const Icon(
+                          Icons.handshake,
+                        )),
                   const SizedBox(
                     width: 10.0,
                   )
