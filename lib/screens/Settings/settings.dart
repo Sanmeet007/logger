@@ -367,6 +367,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ],
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Show total call duration",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.initialShowTotalCallDuration,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r = await widget
+                                  .setShowTotalCallDuration(newState);
+                              if (r == null || !r) {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
+                              } else {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content: "Setting updated successfully.");
+                                }
+                              }
+                            } catch (_) {
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

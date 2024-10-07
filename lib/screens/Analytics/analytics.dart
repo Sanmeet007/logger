@@ -49,6 +49,7 @@ class AnalyticsScreen extends StatelessWidget {
               CallType.wifiOutgoing,
             ]))
               CallDurationTileBuilder(
+                showTotalCallDuration: showTotalCallDuration,
                 analyzer: analyzer,
               ),
             if (containsAnyMatchingCallTypes([
@@ -212,17 +213,32 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
 
 class CallDurationTileBuilder extends StatelessWidget {
   final CallLogAnalyzer analyzer;
+  final bool showTotalCallDuration;
 
   const CallDurationTileBuilder({
     super.key,
     required this.analyzer,
+    this.showTotalCallDuration = false,
   });
 
   Future<List<String>> getValues() async {
     return Future(() async {
       var avg = await analyzer.getAvgCallDuration();
       var longest = await analyzer.getLongestCallDuration();
-      return [prettifyDuration(avg), prettifyDuration(longest)];
+      var total = await analyzer.getTotalCallDuration();
+
+      if (showTotalCallDuration) {
+        return [
+          prettifyDuration(avg),
+          prettifyDuration(longest),
+          prettifyDuration(total)
+        ];
+      } else {
+        return [
+          prettifyDuration(avg),
+          prettifyDuration(longest),
+        ];
+      }
     });
   }
 
@@ -243,7 +259,9 @@ class CallDurationTileBuilder extends StatelessWidget {
             default:
               if (snapshot.hasData) {
                 return CallDurationTile(
-                  labels: const ["Average", "Longest"],
+                  labels: showTotalCallDuration
+                      ? ["Average", "Longest", "Total"]
+                      : ["Average", "Longest"],
                   values: snapshot.data as List<String>,
                 );
               } else {

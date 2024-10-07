@@ -76,6 +76,19 @@ class CallLogAnalyzer {
     }
   }
 
+  Future<Duration> getTotalCallDuration() {
+    return compute(_getTotalCallDuration, logs);
+  }
+
+  static Duration _getTotalCallDuration(Iterable<CallLogEntry> logs) {
+    if (logs.isEmpty) return const Duration(seconds: 0);
+    var seconds = logs.map((e) => e.duration ?? 0).reduce((acc, curr) {
+      acc += curr;
+      return acc;
+    });
+    return Duration(seconds: seconds);
+  }
+
   Future<Duration> getAvgCallDuration() {
     return compute(_getAvgCallDuration, logs);
   }

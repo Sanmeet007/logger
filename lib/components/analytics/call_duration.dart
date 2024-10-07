@@ -34,55 +34,38 @@ class CallDurationTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 5.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      labels[0],
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
+            children: labels.map((String label) {
+              final int idx = labels.indexOf(label);
+
+              return Column(
+                children: [
+                  if (idx != 0) const LogDivider(),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 5.0,
                     ),
-                    Text(
-                      values[0],
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          label,
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Text(
+                          values[idx],
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              const LogDivider(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 5.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      labels[1],
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    Text(
-                      values[1],
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
+              );
+            }).toList(),
           ),
         ),
         SizedBox(
