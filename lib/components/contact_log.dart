@@ -67,7 +67,10 @@ class ContactLog extends StatelessWidget {
                       phoneNumber: logDetails.number ?? "n/a",
                       callIcon: details[1],
                       callColor: details[0],
-                      timeString: formatTimeFromTimeStamp(timestamp),
+                      timeString: formatTimeFromTimeStamp(
+                        timestamp: timestamp,
+                        context: context,
+                      ),
                       formattedDate: formatDateFromTimestamp(timestamp),
                       duration: duration,
                       callType: details[2],

@@ -14,12 +14,14 @@ class AnalyticsScreen extends StatelessWidget {
   final Iterable<CallLogEntry>? entries;
   final CallLogAnalyzer analyzer;
   final List<CallType> currentCallTypes;
+  final bool showTotalCallDuration;
 
   const AnalyticsScreen({
     super.key,
     required this.entries,
     required this.analyzer,
     required this.currentCallTypes,
+    required this.showTotalCallDuration,
   });
 
   bool containsAnyMatchingCallTypes(List<CallType> types) {

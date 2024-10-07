@@ -41,6 +41,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
   late bool isCallLogCountVisibilityEnabled;
   late String currentImportType;
   late String currentExportedFilenameFormatType;
+  late bool shouldShowTotalCallDuration;
 
   // Logs filters
   Map logFilters = {
@@ -197,6 +198,17 @@ class _ApplicationUiState extends State<ApplicationUi> {
     return saved;
   }
 
+  Future<bool?> setShowTotalCallDuration(bool newState) async {
+    var saved =
+        await widget.preferences?.setBool("show_total_call_duration", newState);
+    setState(() {
+      if (saved != null && saved) {
+        shouldShowTotalCallDuration = newState;
+      }
+    });
+    return saved;
+  }
+
   Future<bool?> setCurrentImportType(String newState) async {
     var saved = await widget.preferences?.setString("import_type", newState);
     setState(() {
@@ -248,6 +260,9 @@ class _ApplicationUiState extends State<ApplicationUi> {
     currentExportedFilenameFormatType =
         widget.preferences?.getString("exported_filename_format") ??
             ExportedFilenameFormatHelper.defaultFormat;
+
+    shouldShowTotalCallDuration =
+        widget.preferences?.getBool("show_total_call_duration") ?? false;
   }
 
   @override
@@ -284,6 +299,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               icon: Icons.pie_chart_outline,
               selectedIcon: Icons.pie_chart,
               screen: AnalyticsScreen(
+                showTotalCallDuration: shouldShowTotalCallDuration,
                 entries: currentLogs,
                 currentCallTypes:
                     logFilters["selected_call_types"] as List<CallType>,
@@ -297,6 +313,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
               icon: Icons.settings_outlined,
               selectedIcon: Icons.settings,
               screen: SettingsScreen(
+                setShowTotalCallDuration: setShowTotalCallDuration,
+                initialShowTotalCallDuration: shouldShowTotalCallDuration,
                 showLoader: showLoader,
                 hideLoader: hideLoader,
                 showLinearProgressLoader: showLinearProgressLoader,

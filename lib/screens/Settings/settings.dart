@@ -19,8 +19,10 @@ class SettingsScreen extends StatefulWidget {
   final bool initialSharingState;
   final String initialImportTypeState;
   final String initialExportedFilenameFormatState;
+  final bool initialShowTotalCallDuration;
   final Function showLoader, hideLoader;
   final Future<bool?> Function(bool) setCallLogCountVisibility;
+  final Future<bool?> Function(bool) setShowTotalCallDuration;
   final Future<bool?> Function(bool) setDurationFilteringState;
   final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
   final Future<bool?> Function(bool) setShareButtonState;
@@ -29,6 +31,8 @@ class SettingsScreen extends StatefulWidget {
 
   const SettingsScreen({
     super.key,
+    required this.setShowTotalCallDuration,
+    required this.initialShowTotalCallDuration,
     required this.hideLinearProgressLoader,
     required this.showLinearProgressLoader,
     required this.initialDurationFilteringState,
@@ -384,6 +388,85 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 child: Column(
                   children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Call logs export format",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.0,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color.fromARGB(255, 65, 65, 65)
+                                  : Colors.black87,
+                            ),
+                            borderRadius: BorderRadius.circular(100.0),
+                          ),
+                          child: DropdownButton<String>(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0,
+                              vertical: 5.0,
+                            ),
+                            isDense: true,
+                            underline: Container(),
+                            enableFeedback: true,
+                            value: widget.initialImportTypeState,
+                            items: [
+                              ...[
+                                "csv",
+                                "json",
+                              ].map(
+                                (item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item.toUpperCase(),
+                                  ),
+                                ),
+                              )
+                            ],
+                            onChanged: (String? newValue) async {
+                              if (newValue == null) return;
+
+                              widget.showLoader();
+                              try {
+                                await Future.delayed(
+                                    const Duration(seconds: 2));
+                                var r =
+                                    await widget.setCurrentImportType(newValue);
+                                if (r == null || !r) {
+                                  if (context.mounted) {
+                                    AppSnackBar.show(context,
+                                        content:
+                                            "Failed to update settings. Please try again later");
+                                  }
+                                } else {
+                                  if (context.mounted) {
+                                    AppSnackBar.show(context,
+                                        content:
+                                            "Import settings updated successfully.");
+                                  }
+                                }
+                              } catch (_) {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
+                              } finally {
+                                widget.hideLoader();
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

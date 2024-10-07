@@ -27,7 +27,11 @@ class GroupedLogsBuilder extends StatelessWidget {
           int duration = entry.duration ?? 0;
           int timestamp = entry.timestamp ?? 1;
 
-          String timeString = formatTimeFromTimeStamp(timestamp);
+          String timeString = formatTimeFromTimeStamp(
+            context: context,
+            timestamp: timestamp,
+          );
+
           String phoneNumber = entry.number ?? "n/a";
 
           var details =

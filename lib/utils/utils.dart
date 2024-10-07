@@ -143,8 +143,15 @@ List getCallDisplayFields(CallType callType) {
   return [callColor, callIcon, rCallType];
 }
 
-String formatTimeFromTimeStamp(int timestamp) {
-  final timeFormatter = DateFormat('hh:mm a');
+String formatTimeFromTimeStamp({
+  required int timestamp,
+  required BuildContext context,
+}) {
+  final bool use24HrsFormat = MediaQuery.of(context).alwaysUse24HourFormat;
+
+  String format = use24HrsFormat ? 'HH:mm' : 'hh:mm a';
+
+  final timeFormatter = DateFormat(format);
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return timeFormatter.format(date);
 }
