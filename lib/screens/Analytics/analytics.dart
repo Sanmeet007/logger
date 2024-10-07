@@ -231,7 +231,7 @@ class CallDurationTileBuilder extends StatelessWidget {
         return [
           prettifyDuration(avg),
           prettifyDuration(longest),
-          prettifyDuration(total)
+          prettifyDuration(total, showDistinct: true),
         ];
       } else {
         return [

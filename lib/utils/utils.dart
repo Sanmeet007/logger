@@ -76,15 +76,35 @@ String prettifyNumbers(int n) {
   return formatter.format(n);
 }
 
-String prettifyDuration(Duration duration) {
-  if (duration.inSeconds < 60) {
-    return '${duration.inSeconds} s';
-  } else if (duration.inMinutes < 60) {
-    return '${duration.inMinutes} min';
-  } else if (duration.inHours < 24) {
-    return '${duration.inHours} hrs';
+String prettifyDuration(Duration duration, {showDistinct = false}) {
+  if (showDistinct) {
+    if (duration.inSeconds < 60) {
+      return '${duration.inSeconds} s';
+    }
+
+    int days = duration.inDays;
+    int hours = duration.inHours.remainder(24);
+    int minutes = duration.inMinutes.remainder(60);
+    int seconds = duration.inSeconds.remainder(60);
+
+    List<String> parts = [];
+
+    if (days > 0) parts.add('$days day${days > 1 ? 's' : ''}');
+    if (hours > 0) parts.add('$hours hr${hours > 1 ? 's' : ''}');
+    if (minutes > 0) parts.add('$minutes min');
+    if (seconds > 0 && parts.isEmpty) parts.add('$seconds s');
+
+    return parts.join(' ');
   } else {
-    return '${duration.inDays}day${duration.inDays > 1 ? 's' : ''}';
+    if (duration.inSeconds < 60) {
+      return '${duration.inSeconds} s';
+    } else if (duration.inMinutes < 60) {
+      return '${duration.inMinutes} min';
+    } else if (duration.inHours < 24) {
+      return '${duration.inHours} hrs';
+    } else {
+      return '${duration.inDays} day${duration.inDays > 1 ? 's' : ''}';
+    }
   }
 }
 
