@@ -48,6 +48,7 @@ dependencies:
   collection: any
   shared_preferences: ^2.2.3
   csv: ^6.0.0
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
@@ -71,9 +72,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/on_boarding/light/1.png
+    - assets/images/on_boarding/light/2.png
+    - assets/images/on_boarding/light/3.png
+    - assets/images/on_boarding/dark/1.png
+    - assets/images/on_boarding/dark/2.png
+    - assets/images/on_boarding/dark/3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
