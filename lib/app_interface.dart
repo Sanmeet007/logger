@@ -26,8 +26,9 @@ class Application extends StatelessWidget {
           default:
             FlutterNativeSplash.remove();
             if (prefsSnapShot.hasData) {
-              bool onboardingDone = prefsSnapShot.data?.getBool("") ?? false;
-              if (!onboardingDone) {
+              bool showOnboarding =
+                  prefsSnapShot.data?.getBool("show-onboarding") ?? true;
+              if (showOnboarding) {
                 return OnboardingUI(prefs: prefsSnapShot.data);
               } else {
                 return BaseApplication(prefs: prefsSnapShot.data);
