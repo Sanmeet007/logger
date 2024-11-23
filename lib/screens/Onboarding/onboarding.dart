@@ -99,7 +99,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                       currentIndex += 1;
                       _controller.animateToPage(
                         currentIndex,
-                        duration: const Duration(milliseconds: 600),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInSine,
                       );
                     } else {
