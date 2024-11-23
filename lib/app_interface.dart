@@ -1,4 +1,6 @@
 import 'package:call_log/call_log.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:logger/screens/Onboarding/onboarding.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/app_error.dart';
@@ -8,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'screens/app_ui.dart';
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  final WidgetsBinding widgetsBinding;
+  const Application({super.key, required this.widgetsBinding});
 
   @override
   Widget build(BuildContext context) {
@@ -18,51 +21,69 @@ class Application extends StatelessWidget {
       builder: (context, prefsSnapShot) {
         switch (prefsSnapShot.connectionState) {
           case ConnectionState.waiting:
-            return const Loader();
-
+            return const SizedBox();
           case ConnectionState.done:
           default:
+            FlutterNativeSplash.remove();
             if (prefsSnapShot.hasData) {
-              return FutureBuilder(
-                initialData: null,
-                future: Permission.phone.request(),
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const Loader();
-                    case ConnectionState.done:
-                    default:
-                      if (snapshot.hasData) {
-                        if (snapshot.data == PermissionStatus.granted) {
-                          return RefreshableBuilder(
-                            preferences: prefsSnapShot.data,
-                          );
-                        } else {
-                          return const AppError(
-                            displayIcon: Icons.warning,
-                            errorMessage:
-                                "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
-                          );
-                        }
-                      } else if (snapshot.hasError) {
-                        return const AppError(
-                          displayIcon: Icons.error,
-                          errorMessage: "Ah snap! Something went wrong",
-                        );
-                      } else {
-                        return const AppError(
-                          displayIcon: Icons.error,
-                          errorMessage:
-                              "Ah snap! Something unexpected happened!",
-                        );
-                      }
-                  }
-                },
-              );
+              bool onboardingDone = prefsSnapShot.data?.getBool("") ?? false;
+              if (!onboardingDone) {
+                return OnboardingUI(prefs: prefsSnapShot.data);
+              } else {
+                return BaseApplication(prefs: prefsSnapShot.data);
+              }
             } else {
               return const AppError(
                 displayIcon: Icons.error,
                 errorMessage: "Ah! Snap error loading preferences",
+              );
+            }
+        }
+      },
+    );
+  }
+}
+
+class BaseApplication extends StatelessWidget {
+  final SharedPreferences? prefs;
+
+  const BaseApplication({
+    super.key,
+    required this.prefs,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      initialData: null,
+      future: Permission.phone.request(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return const Loader();
+          case ConnectionState.done:
+          default:
+            if (snapshot.hasData) {
+              if (snapshot.data == PermissionStatus.granted) {
+                return RefreshableBuilder(
+                  preferences: prefs,
+                );
+              } else {
+                return const AppError(
+                  displayIcon: Icons.warning,
+                  errorMessage:
+                      "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
+                );
+              }
+            } else if (snapshot.hasError) {
+              return const AppError(
+                displayIcon: Icons.error,
+                errorMessage: "Ah snap! Something went wrong",
+              );
+            } else {
+              return const AppError(
+                displayIcon: Icons.error,
+                errorMessage: "Ah snap! Something unexpected happened!",
               );
             }
         }
