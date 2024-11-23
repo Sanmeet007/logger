@@ -89,7 +89,7 @@ flutter:
   fonts:
     - family: SFPro
       fonts:
-        - asset: fonts/SourceSansPro-Regular.ttf
+        - asset: "assets/fonts/SourceSansPro-Regular.ttf"
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
@@ -104,13 +104,13 @@ flutter_native_splash:
   color: "#F3EAFF"
   color_dark: "#060010"
   image: "assets/background.png"
-  branding: "assets/branding.png"
-  branding_dark: "assets/branding_dark.png"
+  branding: "assets/images/branding/light.png"
+  branding_dark: "assets/images/branding/dark.png"
 
   android_12:
     color: "#F3EAFF"
     color_dark: "#060010"
     image: "assets/background_android12.png"
     image_dark: "assets/background_android12.png"
-    branding: "assets/branding.png"
-    branding_dark: "assets/branding_dark.png"
+    branding: "assets/images/branding/light.png"
+    branding_dark: "assets/branding/dark.png"
