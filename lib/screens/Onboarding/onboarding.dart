@@ -152,37 +152,39 @@ class OnBoardingScreenItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final dirName =
         Theme.of(context).brightness == Brightness.dark ? "dark" : "light";
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(
-          height: 50.0,
-        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 10.0),
           height: 250,
           child: Image.asset("assets/images/on_boarding/$dirName/$imageName"),
         ),
-        const SizedBox(
-          height: 100.0,
-        ),
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
+        Column(children: [
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          subtitle,
-          style: const TextStyle(
-            fontSize: 20.0,
+          const SizedBox(
+            height: 15.0,
           ),
-          textAlign: TextAlign.center,
+          Text(
+            subtitle,
+            style: TextStyle(
+              fontSize: 18.0,
+              color: isDarkTheme ? Colors.grey : Colors.black87,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ]),
+        const SizedBox(
+          height: 10.0,
         ),
       ],
     );
