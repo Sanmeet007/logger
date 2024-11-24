@@ -11,13 +11,17 @@ class LogFilters extends StatefulWidget {
   final Function(Map) filterLogs;
   final Map currentFilters;
   final bool canFilterUsingDuration;
+  final bool canFilterUsingPhoneAccountId;
+  final List<String> availablePhoneAccountIds;
 
   const LogFilters({
     super.key,
     required this.currentFilters,
+    required this.availablePhoneAccountIds,
     required this.filterLogs,
     required this.removeFilters,
     required this.canFilterUsingDuration,
+    required this.canFilterUsingPhoneAccountId,
   });
 
   @override
@@ -32,6 +36,7 @@ class _LogFiltersState extends State<LogFilters> {
   late bool isDurationFilteringOn;
   late String dateRangeOption;
   late List<CallType> selectedCallTypes;
+  late String selectedPhoneAccountId;
   late TextEditingController _phoneNumberInputController,
       _startDateController,
       _endDateController,
@@ -60,6 +65,7 @@ class _LogFiltersState extends State<LogFilters> {
     dateRangeOption = widget.currentFilters["date_range_op"];
     selectedCallTypes = widget.currentFilters["selected_call_types"];
     isDurationFilteringOn = widget.currentFilters["duration_filtering"];
+    selectedPhoneAccountId = widget.currentFilters["phone_acc_id"];
   }
 
   @override
@@ -128,6 +134,7 @@ class _LogFiltersState extends State<LogFilters> {
         "min_duration": _minDurationInputController.text,
         "max_duration": _maxDurationInputController.text,
         "duration_filtering": isDurationFilteringOn,
+        "phone_acc_id": selectedPhoneAccountId,
       });
     }
   }
@@ -152,6 +159,7 @@ class _LogFiltersState extends State<LogFilters> {
       "duration_filtering": isDurationFilteringOn,
       "min_duration": _minDurationInputController.text,
       "max_duration": _maxDurationInputController.text,
+      "phone_acc_id": selectedPhoneAccountId,
     }, widget.currentFilters);
   }
 
@@ -165,6 +173,14 @@ class _LogFiltersState extends State<LogFilters> {
         canApplyFilters = false;
       });
     }
+  }
+
+  void handlePhoneAccountIdValueChange(String? v) {
+    if (v == null) return;
+    setState(() {
+      selectedPhoneAccountId = v;
+    });
+    checkFiltersState();
   }
 
   void handlePhoneNumberValueChange(String? v) {
@@ -270,6 +286,69 @@ class _LogFiltersState extends State<LogFilters> {
                   ),
                 ),
                 const SizedBox(height: 10.0),
+                if (widget.canFilterUsingPhoneAccountId)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 15.0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(250, 42, 40, 40)
+                          : const Color.fromARGB(155, 240, 230, 255),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedText(
+                              "Phone Account Id",
+                              size: 18.0,
+                            ),
+                            Container(
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1.0,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color.fromARGB(255, 65, 65, 65)
+                                      : Colors.black87,
+                                ),
+                                borderRadius: BorderRadius.circular(100.0),
+                              ),
+                              child: DropdownButton<String>(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 10.0,
+                                ),
+                                // isDense: true,
+                                underline: Container(),
+                                isExpanded: true,
+                                isDense: true,
+                                enableFeedback: true,
+                                value: selectedPhoneAccountId,
+                                items: [
+                                  ...widget.availablePhoneAccountIds.map(
+                                    (item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        item,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                                onChanged: handlePhoneAccountIdValueChange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                if (widget.canFilterUsingPhoneAccountId)
+                  const SizedBox(height: 10.0),
                 if (widget.canFilterUsingDuration)
                   Container(
                     padding: const EdgeInsets.symmetric(

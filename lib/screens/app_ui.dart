@@ -36,12 +36,14 @@ class _ApplicationUiState extends State<ApplicationUi> {
   String linearLoaderText = "";
 
   late bool isDurationFilteringEnabled;
+  late bool isFilterUsingPhoneAccountIdEnabled;
   late bool isConfirmBeforeDownloadEnabled;
   late bool isSharingDisabled;
   late bool isCallLogCountVisibilityEnabled;
   late String currentImportType;
   late String currentExportedFilenameFormatType;
   late bool shouldShowTotalCallDuration;
+  late List<String> availablePhoneAccountIds;
 
   // Logs filters
   Map logFilters = {
@@ -54,6 +56,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
     "min_duration": "0",
     "max_duration": null,
     "duration_filtering": false,
+    "phone_acc_id": "Any",
   };
 
   void filterLogs(Map filters) async {
@@ -71,6 +74,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
       var shouldUseDurationFiltering = filters["duration_filtering"] as bool;
       var minDuration = filters["min_duration"] as String?;
       var maxDuration = filters["max_duration"] as String?;
+      var selectedPhoneAccountId = filters["phone_acc_id"] as String;
 
       logFilters["start_date"] = startDate;
       logFilters["end_date"] = endDate;
@@ -78,9 +82,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
       logFilters["specific_ph"] = shouldUseSpecificPhoneNumber;
       logFilters["phone_to_match"] = phoneToMatch;
       logFilters["selected_call_types"] = [...selectedCallTypes];
-      logFilters['duration_filtering'] = shouldUseDurationFiltering;
-      logFilters['min_duration'] = minDuration;
-      logFilters['max_duration'] = maxDuration;
+      logFilters["duration_filtering"] = shouldUseDurationFiltering;
+      logFilters["min_duration"] = minDuration;
+      logFilters["max_duration"] = maxDuration;
+      logFilters["phone_acc_id"] = selectedPhoneAccountId;
 
       var filteredLogs = await Filters.filterLogs(widget.entries, logFilters);
 
@@ -120,6 +125,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
       "min_duration": "0",
       "max_duration": null,
       "duration_filtering": false,
+      "phone_acc_id": "Any",
     }, logFilters);
   }
 
@@ -138,6 +144,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
         "min_duration": "0",
         "max_duration": null,
         "duration_filtering": false,
+        "phone_acc_id": "Any",
       };
       currentLogs = widget.entries;
     });
@@ -155,6 +162,17 @@ class _ApplicationUiState extends State<ApplicationUi> {
       shouldShowLinearLoader = false;
       linearLoaderText = "";
     });
+  }
+
+  Future<bool?> setPhoneAccountIdFilteringState(bool newState) async {
+    var saved =
+        await widget.preferences?.setBool("phone_acc_id_filtering", newState);
+    setState(() {
+      if (saved != null && saved) {
+        isFilterUsingPhoneAccountIdEnabled = newState;
+      }
+    });
+    return saved;
   }
 
   Future<bool?> setDurationFilteringState(bool newState) async {
@@ -247,6 +265,8 @@ class _ApplicationUiState extends State<ApplicationUi> {
     super.initState();
     currentLogs = widget.entries;
 
+    isFilterUsingPhoneAccountIdEnabled =
+        widget.preferences?.getBool("phone_acc_id_filtering") ?? false;
     isDurationFilteringEnabled =
         widget.preferences?.getBool("duration_filtering") ?? false;
     isConfirmBeforeDownloadEnabled =
@@ -263,6 +283,16 @@ class _ApplicationUiState extends State<ApplicationUi> {
 
     shouldShowTotalCallDuration =
         widget.preferences?.getBool("show_total_call_duration") ?? false;
+
+    if (isFilterUsingPhoneAccountIdEnabled) {
+      final uniquePhoneAccountIds = <String>{"Any"};
+      for (var entry in widget.entries ?? const Iterable.empty()) {
+        uniquePhoneAccountIds.add(entry.phoneAccountId ?? "Unknown");
+      }
+      availablePhoneAccountIds = uniquePhoneAccountIds.toList();
+    } else {
+      availablePhoneAccountIds = [];
+    }
   }
 
   @override
@@ -272,9 +302,11 @@ class _ApplicationUiState extends State<ApplicationUi> {
         ScreenManager(
           initialIndex: 0,
           canFilterUsingDuration: isDurationFilteringEnabled,
+          canFilterUsingPhoneAccountId: isFilterUsingPhoneAccountIdEnabled,
           currentFilters: logFilters,
           logs: currentLogs,
           areFiltersApplied: areFiltersApplied,
+          availablePhoneAccountIds: availablePhoneAccountIds,
           filterLogs: filterLogs,
           removeLogFilters: removeLogFilters,
           askForDownloadConfirmation: isConfirmBeforeDownloadEnabled,
@@ -313,6 +345,10 @@ class _ApplicationUiState extends State<ApplicationUi> {
               icon: Icons.settings_outlined,
               selectedIcon: Icons.settings,
               screen: SettingsScreen(
+                initialPhoneAccountIdFilteringState:
+                    isFilterUsingPhoneAccountIdEnabled,
+                setPhoneAccountIdFilteringState:
+                    setPhoneAccountIdFilteringState,
                 setShowTotalCallDuration: setShowTotalCallDuration,
                 initialShowTotalCallDuration: shouldShowTotalCallDuration,
                 showLoader: showLoader,

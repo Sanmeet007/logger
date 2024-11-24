@@ -23,6 +23,7 @@ class Filters {
     var minDuration = filters["min_duration"] as String?;
     var maxDuration = filters["max_duration"] as String?;
     var shouldUseDurationFiltering = filters["duration_filtering"] as bool;
+    var phoneAccountId = filters["phone_acc_id"] as String;
 
     final DateTime now = DateTime.now();
     final DateTime today = DateTime.now();
@@ -149,6 +150,11 @@ class Filters {
       }
     }
 
+    if (phoneAccountId != "Any") {
+      logs = (logs as Iterable<CallLogEntry>?)
+          ?.where((e) => ((e.phoneAccountId ?? "Unknown") == phoneAccountId));
+    }
+
     return logs;
   }
 
@@ -179,6 +185,10 @@ class Filters {
     var cts2 = mask2["selected_call_types"] as List<CallType>;
 
     if (!const SetEquality().equals(cts1.toSet(), cts2.toSet())) {
+      return false;
+    }
+
+    if (mask1["phone_acc_id"] != mask2["phone_acc_id"]) {
       return false;
     }
 

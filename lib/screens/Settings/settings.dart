@@ -20,10 +20,12 @@ class SettingsScreen extends StatefulWidget {
   final String initialImportTypeState;
   final String initialExportedFilenameFormatState;
   final bool initialShowTotalCallDuration;
+  final bool initialPhoneAccountIdFilteringState;
   final Function showLoader, hideLoader;
   final Future<bool?> Function(bool) setCallLogCountVisibility;
   final Future<bool?> Function(bool) setShowTotalCallDuration;
   final Future<bool?> Function(bool) setDurationFilteringState;
+  final Future<bool?> Function(bool) setPhoneAccountIdFilteringState;
   final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
   final Future<bool?> Function(bool) setShareButtonState;
   final Future<bool?> Function(String) setCurrentImportType;
@@ -31,6 +33,8 @@ class SettingsScreen extends StatefulWidget {
 
   const SettingsScreen({
     super.key,
+    required this.initialPhoneAccountIdFilteringState,
+    required this.setPhoneAccountIdFilteringState,
     required this.setShowTotalCallDuration,
     required this.initialShowTotalCallDuration,
     required this.hideLinearProgressLoader,
@@ -352,6 +356,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   AppSnackBar.show(context,
                                       content:
                                           "Duration filtering settings updated successfully.");
+                                }
+                              }
+                            } catch (_) {
+                              if (context.mounted) {
+                                AppSnackBar.show(context,
+                                    content:
+                                        "Failed to update settings. Please try again later");
+                              }
+                            } finally {
+                              widget.hideLoader();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    const LogDivider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Enable filter by account id",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Switch(
+                          value: widget.initialPhoneAccountIdFilteringState,
+                          onChanged: (bool newState) async {
+                            widget.showLoader();
+                            try {
+                              await Future.delayed(const Duration(seconds: 2));
+                              var r = await widget
+                                  .setPhoneAccountIdFilteringState(newState);
+                              if (r == null || !r) {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Failed to update settings. Please try again later");
+                                }
+                              } else {
+                                if (context.mounted) {
+                                  AppSnackBar.show(context,
+                                      content:
+                                          "Filter by phone account id settings updated successfully.");
                                 }
                               }
                             } catch (_) {

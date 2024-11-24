@@ -45,9 +45,12 @@ class ScreenManager extends StatefulWidget {
   final String currentImportType;
   final String currentExportedFilenameFormatType;
   final bool canFilterUsingDuration;
+  final bool canFilterUsingPhoneAccountId;
+  final List<String> availablePhoneAccountIds;
 
   const ScreenManager({
     super.key,
+    required this.availablePhoneAccountIds,
     required this.logs,
     required this.currentFilters,
     required this.filterLogs,
@@ -59,6 +62,7 @@ class ScreenManager extends StatefulWidget {
     required this.currentExportedFilenameFormatType,
     required this.canFilterUsingDuration,
     required this.showSharingButton,
+    required this.canFilterUsingPhoneAccountId,
     this.initialIndex = 0,
   });
 
@@ -269,10 +273,12 @@ class _ScreenManagerState extends State<ScreenManager> {
       showDragHandle: true,
       isScrollControlled: true,
       builder: (context) => LogFilters(
+        availablePhoneAccountIds: widget.availablePhoneAccountIds,
         currentFilters: widget.currentFilters,
         filterLogs: widget.filterLogs,
         removeFilters: widget.removeLogFilters,
         canFilterUsingDuration: widget.canFilterUsingDuration,
+        canFilterUsingPhoneAccountId: widget.canFilterUsingPhoneAccountId,
       ),
     );
   }
