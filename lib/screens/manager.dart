@@ -307,7 +307,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: _selectedIndex == widget.initialIndex,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (!didPop) {
           setState(() {
             _selectedIndex = widget.initialIndex;
