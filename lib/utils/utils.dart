@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 String getVersion() {
-  return "2.4.1";
+  return "2.5.7";
 }
 
 String getDeviceType(BuildContext context) {
