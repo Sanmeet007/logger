@@ -284,15 +284,11 @@ class _ApplicationUiState extends State<ApplicationUi> {
     shouldShowTotalCallDuration =
         widget.preferences?.getBool("show_total_call_duration") ?? false;
 
-    if (isFilterUsingPhoneAccountIdEnabled) {
-      final uniquePhoneAccountIds = <String>{"Any"};
-      for (var entry in widget.entries ?? const Iterable.empty()) {
-        uniquePhoneAccountIds.add(entry.phoneAccountId ?? "Unknown");
-      }
-      availablePhoneAccountIds = uniquePhoneAccountIds.toList();
-    } else {
-      availablePhoneAccountIds = [];
+    final uniquePhoneAccountIds = <String>{"Any"};
+    for (var entry in widget.entries ?? const Iterable.empty()) {
+      uniquePhoneAccountIds.add(entry.phoneAccountId ?? "Unknown");
     }
+    availablePhoneAccountIds = uniquePhoneAccountIds.toList();
   }
 
   @override
