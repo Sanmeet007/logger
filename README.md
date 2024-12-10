@@ -7,11 +7,11 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 <a href="https://developer.android.com/">
 <img src="https://img.shields.io/badge/Android-34A853.svg?style=for-the-badge&logo=Android&logoColor=white" alt="IzzyOnDroid F-Droid Repository Link" width="70" height="18"/>
 </a>
-<a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
-<img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/com.logger.app" alt="IzzyOnDroid F-Droid Repository Link" width="100" height="18"/>
-</a>
 <a href="https://developer.android.com/tools/releases/platforms">
 <img src="https://img.shields.io/badge/min%20sdk%20version-21-red" alt="SDK Platform release notes " width="100" height="18"/>
+</a>
+<a href="https://f-droid.org/en/packages/com.logger.app/">
+<img src="https://img.shields.io/f-droid/v/com.logger.app" alt="IzzyOnDroid F-Droid Repository Link" width="100" height="18"/>
 </a>
 
 ## 🧐 Key Features
@@ -59,13 +59,13 @@ This section provides options to download the Logger app, both the official rele
 
 <p>
 <a href="https://github.com/Sanmeet007/logger/releases/tag/v2.5.7">
-<img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="42"/>
+<img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
-<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid2.png" alt="Download link button" width="160" height="42"/>
+<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid2.png" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://f-droid.org/packages/com.logger.app">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Download link button" width="160" height="42" style="object-fit:cover;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Get_it_on_F-Droid_%28material_design%29.svg/1199px-Get_it_on_F-Droid_%28material_design%29.svg.png" alt="Download link button" width="160" height="40"/>
 </a>
 
 </p>
