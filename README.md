@@ -59,10 +59,13 @@ This section provides options to download the Logger app, both the official rele
 
 <p>
 <a href="https://github.com/Sanmeet007/logger/releases/tag/v2.5.7">
-<img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
+<img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="42"/>
+</a>
+<a href="https://f-droid.org/packages/com.logger.app">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Download link button" width="160" height="42" style="object-fit:cover;"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
-<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid2.png" alt="Download link button" width="160" height="40"/>
+<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid2.png" alt="Download link button" width="160" height="42"/>
 </a>
 
 </p>
