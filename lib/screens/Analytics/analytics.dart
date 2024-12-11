@@ -46,7 +46,9 @@ class AnalyticsScreen extends StatelessWidget {
             ),
             if (containsAnyMatchingCallTypes([
               CallType.outgoing,
+              CallType.incoming,
               CallType.wifiOutgoing,
+              CallType.wifiIncoming,
             ]))
               CallDurationTileBuilder(
                 showTotalCallDuration: showTotalCallDuration,
