@@ -77,9 +77,11 @@ flutter:
     - assets/images/on_boarding/light/1.png
     - assets/images/on_boarding/light/2.png
     - assets/images/on_boarding/light/3.png
+    - assets/images/on_boarding/light/4.png
     - assets/images/on_boarding/dark/1.png
     - assets/images/on_boarding/dark/2.png
     - assets/images/on_boarding/dark/3.png
+    - assets/images/on_boarding/dark/4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

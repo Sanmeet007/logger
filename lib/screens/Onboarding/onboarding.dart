@@ -35,6 +35,12 @@ class _OnboardingUIState extends State<OnboardingUI> {
   Widget build(BuildContext context) {
     const pages = <OnBoardingScreenItem>[
       OnBoardingScreenItem(
+        imageName: "4.png",
+        title: "Welcome to Logger!",
+        subtitle:
+            "Your go-to app for managing and analyzing your call logs effortlessly.",
+      ),
+      OnBoardingScreenItem(
         imageName: "1.png",
         title: "Manage Call Logs",
         subtitle:
@@ -107,7 +113,11 @@ class _OnboardingUIState extends State<OnboardingUI> {
                     }
                   },
                   child: Text(
-                    currentIndex == 2 ? "Explore now" : "Next",
+                    currentIndex == 0
+                        ? "Get Started"
+                        : currentIndex == 2
+                            ? "Explore now"
+                            : "Next",
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),
@@ -140,12 +150,14 @@ class _OnboardingUIState extends State<OnboardingUI> {
 
 class OnBoardingScreenItem extends StatelessWidget {
   final String imageName, subtitle, title;
+  final bool useImageNameAsPath;
 
   const OnBoardingScreenItem({
     super.key,
     required this.imageName,
     required this.title,
     required this.subtitle,
+    this.useImageNameAsPath = false,
   });
 
   @override
@@ -160,7 +172,11 @@ class OnBoardingScreenItem extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 10.0),
           height: 250,
-          child: Image.asset("assets/images/on_boarding/$dirName/$imageName"),
+          child: Image.asset(
+            useImageNameAsPath
+                ? imageName
+                : "assets/images/on_boarding/$dirName/$imageName",
+          ),
         ),
         Column(children: [
           Text(
