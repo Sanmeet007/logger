@@ -181,3 +181,13 @@ String formatDateFromTimestamp(int timestamp) {
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return formatter.format(date);
 }
+
+String shrinkPhoneAccountID(String input) {
+  if (input.length > 10) {
+    // Get the first 3 and last 3 digits, and add '...'
+    return '${input.substring(0, 3)}...${input.substring(input.length - 3)}';
+  } else {
+    // If length is less than or equal to 10, return the string as is
+    return input;
+  }
+}

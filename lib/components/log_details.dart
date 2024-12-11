@@ -138,9 +138,11 @@ class LogDetails extends StatelessWidget {
                         "Phone Account ID ",
                         style: TextStyle(fontSize: 18.0),
                       ),
-                      trailing: Text(
-                        phoneAccountId,
-                        style: const TextStyle(fontSize: 15.0),
+                      trailing: FittedBox(
+                        child: Text(
+                          shrinkPhoneAccountID(phoneAccountId),
+                          style: const TextStyle(fontSize: 15.0),
+                        ),
                       ),
                     ),
                   ],
