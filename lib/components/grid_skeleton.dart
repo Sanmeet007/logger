@@ -51,6 +51,7 @@ class GridSkeleton extends StatelessWidget {
               height: 15.0,
             ),
           GridView.count(
+            physics: const NeverScrollableScrollPhysics(),
             crossAxisSpacing: gridGap,
             mainAxisSpacing: gridGap,
             shrinkWrap: true,

@@ -34,6 +34,7 @@ class LogEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       startActionPane: ActionPane(
+        extentRatio: 0.6,
         // A motion is a widget used to control how the pane animates.
         motion: const StretchMotion(),
 
@@ -41,6 +42,7 @@ class LogEntry extends StatelessWidget {
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
+            autoClose: true,
             flex: 1,
             onPressed: (context) async {
               var uri = Uri.parse("tel:$phoneNumber");
@@ -56,6 +58,7 @@ class LogEntry extends StatelessWidget {
             label: 'Call',
           ),
           SlidableAction(
+            autoClose: true,
             // An action can be bigger than the others.
             flex: 1,
             onPressed: (context) async {
@@ -121,13 +124,15 @@ class LogEntry extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name),
-              Text(
-                phoneNumber,
-                style: TextStyle(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.grey
-                      : Colors.grey[600],
+              FittedBox(child: Text(name)),
+              FittedBox(
+                child: Text(
+                  phoneNumber,
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.grey
+                        : Colors.grey[600],
+                  ),
                 ),
               ),
             ],

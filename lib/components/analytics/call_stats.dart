@@ -32,11 +32,12 @@ class CallStatsTile extends StatelessWidget {
           ),
         GridView.count(
           physics: const NeverScrollableScrollPhysics(),
-          childAspectRatio: 1.5,
+          childAspectRatio:
+              MediaQuery.of(context).size.width <= 350 ? 2.5 : 1.5,
           shrinkWrap: true,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          crossAxisCount: 2,
+          crossAxisCount: MediaQuery.of(context).size.width <= 350 ? 1 : 2,
           children: [
             ...(values.asMap().entries.map(
               (entry) {
@@ -56,18 +57,27 @@ class CallStatsTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        label,
-                        style: const TextStyle(fontSize: 16.0),
+                      FittedBox(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          label,
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
                       ),
                       Row(
+                        mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           icon,
-                          Text(
-                            value,
-                            style: const TextStyle(
-                              fontSize: 35.0,
+                          FittedBox(
+                            child: Text(
+                              value,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 32.0,
+                              ),
                             ),
                           ),
                         ],

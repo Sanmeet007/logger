@@ -200,12 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Disable call log sharing",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Disable call log sharing"),
                         Switch(
                           value: widget.initialSharingState,
                           onChanged: (bool newState) async {
@@ -244,12 +239,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Enable download confirmation",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Enable download confirmation"),
                         Switch(
                           value: widget.initialConfirmBeforeDownloadState,
                           onChanged: (bool newState) async {
@@ -288,12 +278,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Show call logs count",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Show call logs count"),
                         Switch(
                           value: widget.intialCallLogCountVisibility,
                           onChanged: (bool newState) async {
@@ -331,12 +316,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Enable duration filtering",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Enable duration filtering"),
                         Switch(
                           value: widget.initialDurationFilteringState,
                           onChanged: (bool newState) async {
@@ -375,12 +355,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Enable filter by account id",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Enable filter by account id"),
                         Switch(
                           value: widget.initialPhoneAccountIdFilteringState,
                           onChanged: (bool newState) async {
@@ -419,12 +394,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Show total call duration",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Show total call duration"),
                         Switch(
                           value: widget.initialShowTotalCallDuration,
                           onChanged: (bool newState) async {
@@ -483,12 +453,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Call logs export format",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Call logs export format"),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -569,12 +534,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Export filename format",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Export filename format"),
                         ElevatedButton(
                             onPressed: openFileNameSettingsSheet,
                             child: const Text(
@@ -593,12 +553,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Import your call logs",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        const LinedText(text: "Import your call logs"),
                         ElevatedButton(
                             onPressed: confirmImport,
                             child: const Text(
@@ -629,6 +584,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class LinedText extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  const LinedText({
+    required this.text,
+    this.fontSize = 16.0,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontSize,
         ),
       ),
     );

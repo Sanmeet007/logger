@@ -19,9 +19,11 @@ class ContactLogFreq extends StatelessWidget {
       color: Colors.transparent,
       child: Slidable(
         startActionPane: ActionPane(
+          extentRatio: 0.6,
           motion: const StretchMotion(),
           children: [
             SlidableAction(
+              autoClose: true,
               flex: 1,
               onPressed: (context) async {
                 var uri = Uri.parse("tel:${logDetails.number}");
@@ -37,6 +39,7 @@ class ContactLogFreq extends StatelessWidget {
               label: 'Call',
             ),
             SlidableAction(
+              autoClose: true,
               flex: 1,
               onPressed: (context) async {
                 var uri = Uri.parse("sms:${logDetails.number}");
@@ -76,19 +79,23 @@ class ContactLogFreq extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  logDetails.name == null
-                      ? "Unknown"
-                      : logDetails.name!.isEmpty
-                          ? "Unknown"
-                          : logDetails.name!,
+                FittedBox(
+                  child: Text(
+                    logDetails.name == null
+                        ? "Unknown"
+                        : logDetails.name!.isEmpty
+                            ? "Unknown"
+                            : logDetails.name!,
+                  ),
                 ),
-                Text(
-                  logDetails.number.toString(),
-                  style: TextStyle(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey
-                          : Colors.grey[600]),
+                FittedBox(
+                  child: Text(
+                    logDetails.number.toString(),
+                    style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey
+                            : Colors.grey[600]),
+                  ),
                 ),
               ],
             )),

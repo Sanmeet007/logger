@@ -304,7 +304,10 @@ class CallStatsTileBuilder extends StatelessWidget {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return GridSkeleton(
-                  childAspectRatio: 1.4,
+                  childAspectRatio:
+                      MediaQuery.of(context).size.width <= 350 ? 2.5 : 1.5,
+                  crossAxisCount:
+                      MediaQuery.of(context).size.width <= 350 ? 1 : 2,
                   margin: const EdgeInsets.only(bottom: 20.0),
                   color: Theme.of(context).brightness == Brightness.dark
                       ? const Color.fromARGB(255, 64, 58, 72)

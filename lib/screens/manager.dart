@@ -320,11 +320,13 @@ class _ScreenManagerState extends State<ScreenManager> {
             appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-                title: const Text(
-                  "Logger",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                title: const FittedBox(
+                  child: Text(
+                    "Logger",
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 actions: [
