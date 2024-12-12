@@ -16,7 +16,7 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
 <img src="https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/com.logger.app" alt="IzzyOnDroid F-Droid Repository Link" width="100" height="18"/>
-
+</a>
 
 ## 🧐 Key Features
 
