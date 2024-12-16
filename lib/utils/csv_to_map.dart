@@ -57,7 +57,7 @@ Future<List<Map<String, dynamic>>> _generateCsvMap(Map params) async {
   final csvString = utf8.decode(fileContents as List<int>);
   final list = _csvConverter.convert(
     csvString,
-    convertEmptyTo: () => null,
+    convertEmptyTo: EmptyValue.NULL,
     eol: "\n",
     shouldParseNumbers: false,
   );
