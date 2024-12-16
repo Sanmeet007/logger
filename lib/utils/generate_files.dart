@@ -13,19 +13,18 @@ String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
   if (callLogs != null) {
     fileContent += callLogs
         .map((entry) => [
-              entry.name,
-              entry.duration,
-              entry.number,
-              entry.phoneAccountId,
-              entry.callType,
-              entry.formattedNumber,
-              entry.simDisplayName,
-              entry.timestamp,
-              entry.cachedNumberLabel,
-              entry.cachedNumberType,
-              entry.cachedMatchedNumber,
-            ].map((v) => v ?? "").join(","))
-        .toList()
+              entry.name ?? "",
+              entry.duration ?? "",
+              entry.number ?? "",
+              entry.phoneAccountId ?? "",
+              entry.callType ?? "",
+              entry.formattedNumber ?? "",
+              entry.simDisplayName ?? "",
+              entry.timestamp ?? "",
+              entry.cachedNumberLabel ?? "",
+              entry.cachedNumberType ?? "",
+              entry.cachedMatchedNumber ?? "",
+            ].join(","))
         .join("\n");
   }
   return fileContent;
