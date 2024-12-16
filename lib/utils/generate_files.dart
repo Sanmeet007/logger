@@ -71,12 +71,12 @@ class CallLogsFileGenerator {
       } else if (fileType == "json") {
         contents = await toJsonString(callLogs);
       }
-      DocumentFile? file = await createFileAsString(
+      DocumentFile? file = await createFileAsBytes(
         parentUri,
         mimeType:
             "text/${fileType == "json" ? "application/json" : "text/comma-separated-values"}",
         displayName: filename,
-        content: contents,
+        bytes: utf8.encode(contents),
       );
       if (file != null) {
         return file.uri;
