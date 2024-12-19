@@ -1,7 +1,7 @@
 import 'package:call_log/call_log.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/components/date_picker.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
 import 'package:logger/utils/filters.dart';
@@ -525,40 +525,21 @@ class _LogFiltersState extends State<LogFilters> {
                             const SizedBox(
                               height: 15.0,
                             ),
-                            DateTimePicker(
+                            LoggerDatePicker(
                               controller: _startDateController,
                               onChanged: handleStartDateChanges,
-                              decoration: const InputDecoration(
-                                icon: Icon(Icons.date_range),
-                                label: Text("Start Date"),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 66, 66, 66),
-                                  ),
-                                ),
-                              ),
-                              dateMask: "EEEE, dd MMMM yyyy",
+                              fieldTitle: "Start Date",
                               firstDate: DateTime(1995),
-                              lastDate: DateTime.now(),
+                              lastDate:
+                                  DateTime.now().add(const Duration(days: 0)),
                             ),
                             const SizedBox(
                               height: 15.0,
                             ),
-                            DateTimePicker(
+                            LoggerDatePicker(
                               controller: _endDateController,
-                              onChanged: handleStartDateChanges,
-                              decoration: const InputDecoration(
-                                icon: Icon(Icons.date_range),
-                                label: Text("End Date"),
-                                border: OutlineInputBorder(),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 66, 66, 66),
-                                  ),
-                                ),
-                              ),
-                              dateMask: "EEEE, dd MMMM yyyy",
+                              onChanged: handleEndDateChanges,
+                              fieldTitle: "End Date",
                               firstDate: DateTime(1995),
                               lastDate:
                                   DateTime.now().add(const Duration(days: 0)),
