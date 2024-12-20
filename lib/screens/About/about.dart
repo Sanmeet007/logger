@@ -103,7 +103,7 @@ class AboutScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.storagePolicyLabelText,
+                  AppLocalizations.of(context)!.storagePolicyText,
                 ),
               ),
               const SizedBox(
