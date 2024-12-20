@@ -131,7 +131,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                       : null,
                   child: Text(
                     AppLocalizations.of(context)!.skipText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18.0,
                     ),
                   ),

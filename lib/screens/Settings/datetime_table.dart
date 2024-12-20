@@ -286,7 +286,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AppLocalizations.of(context)!.randomWeekdayAbbr,
                         ),
@@ -304,7 +304,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AppLocalizations.of(context)!.dtAAcronymExapandedText,
                         ),
@@ -312,7 +312,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AppLocalizations.of(context)!.randomWeekdayName,
                         ),
@@ -330,7 +330,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           AppLocalizations.of(context)!.dtHAcronymExapandedText,
                         ),
@@ -346,7 +346,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                 ),
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('I'),
@@ -354,7 +354,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(AppLocalizations.of(context)!
                             .dtIAcronymExapandedText),
                       ),
@@ -377,7 +377,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(AppLocalizations.of(context)!
                             .dtMAcronymExapandedText),
                       ),
@@ -462,7 +462,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                 ),
                 TableRow(
                   children: [
-                    TableCell(
+                    const TableCell(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('z'),
@@ -470,7 +470,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(AppLocalizations.of(context)!
                             .dtzAcronymExapandedText),
                       ),
@@ -516,7 +516,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ),
                     TableCell(
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(AppLocalizations.of(context)!
                             .dtjAcronymExapandedText),
                       ),
