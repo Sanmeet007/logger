@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/components/log_entry.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GroupedLogsBuilder extends StatelessWidget {
   final List<CallLogEntry> entries;
@@ -19,11 +20,13 @@ class GroupedLogsBuilder extends StatelessWidget {
         itemBuilder: (context, entryIndex) {
           var entry = entries.elementAt(entryIndex);
 
-          String name = entry.name ?? "Unknown";
-          if (name == "") name = "Unknown";
-          String phoneAccountId = entry.phoneAccountId ?? "Unknown";
+          String name = entry.name ?? AppLocalizations.of(context)!.unknownText;
+          if (name == "") name = AppLocalizations.of(context)!.unknownText;
+          String phoneAccountId =
+              entry.phoneAccountId ?? AppLocalizations.of(context)!.unknownText;
 
-          String sim = entry.simDisplayName ?? "Unknown";
+          String sim =
+              entry.simDisplayName ?? AppLocalizations.of(context)!.unknownText;
           int duration = entry.duration ?? 0;
           int timestamp = entry.timestamp ?? 1;
 
@@ -34,8 +37,10 @@ class GroupedLogsBuilder extends StatelessWidget {
 
           String phoneNumber = entry.number ?? "n/a";
 
-          var details =
-              getCallDisplayFields(entry.callType ?? CallType.unknown);
+          var details = getCallDisplayFields(
+            entry.callType ?? CallType.unknown,
+            context,
+          );
           Color callColor = details[0];
           IconData callIcon = details[1];
           String callType = details[2];

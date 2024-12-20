@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppError extends StatelessWidget {
   final IconData displayIcon;
@@ -9,25 +10,25 @@ class AppError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(50.0),
+        padding: const EdgeInsets.all(50.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.error,
                 size: 80,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
-                "Ah snap! Something went wrong",
+                AppLocalizations.of(context)!.appError,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),

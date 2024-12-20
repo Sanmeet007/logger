@@ -9,6 +9,7 @@ import 'package:logger/components/grid_skeleton.dart';
 import 'package:logger/components/skeleton.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   final Iterable<CallLogEntry>? entries;
@@ -206,7 +207,9 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
                   outgoingCallsCount: values[1],
                 );
               } else {
-                return const Text("Hmm. Something went wrong");
+                return Text(
+                  AppLocalizations.of(context)!.ghostErrorMessage,
+                );
               }
           }
         });

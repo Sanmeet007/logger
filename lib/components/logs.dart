@@ -111,20 +111,19 @@ class _LogsPageState extends State<LogsPage> {
                       );
                     },
                     child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(mapEntry.key),
-                            if (widget.callLogCountVisibility)
-                              Text(
-                                prettifyNumbers(mapEntry.value.length),
-                              ),
-                          ],
-                        )
-                        // Text(mapEntry.key)
-                        ),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(mapEntry.key),
+                          if (widget.callLogCountVisibility)
+                            Text(
+                              prettifyNumbers(mapEntry.value.length),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                   Container(
                     clipBehavior: Clip.antiAlias,

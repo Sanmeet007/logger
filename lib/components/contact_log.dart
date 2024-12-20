@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/components/log_details.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactLog extends StatelessWidget {
   final CallLogEntry logDetails;
@@ -53,12 +54,17 @@ class ContactLog extends StatelessWidget {
         ),
         child: ListTile(
             onTap: () {
-              String name = logDetails.name ?? "Unknown";
-              if (name == "") name = "Unknown";
+              String name =
+                  logDetails.name ?? AppLocalizations.of(context)!.unknownText;
+              if (name == "") {
+                name = AppLocalizations.of(context)!.unknownText;
+              }
               int duration = logDetails.duration ?? 0;
               int timestamp = logDetails.timestamp ?? 1;
-              var details =
-                  getCallDisplayFields(logDetails.callType ?? CallType.unknown);
+              var details = getCallDisplayFields(
+                logDetails.callType ?? CallType.unknown,
+                context,
+              );
 
               showModalBottomSheet(
                   showDragHandle: true,
@@ -66,7 +72,8 @@ class ContactLog extends StatelessWidget {
                   isScrollControlled: true,
                   builder: (context) {
                     return LogDetails(
-                      name: logDetails.name ?? "Unknown",
+                      name: logDetails.name ??
+                          AppLocalizations.of(context)!.unknownText,
                       phoneNumber: logDetails.number ?? "n/a",
                       callIcon: details[1],
                       callColor: details[0],
@@ -77,8 +84,10 @@ class ContactLog extends StatelessWidget {
                       formattedDate: formatDateFromTimestamp(timestamp),
                       duration: duration,
                       callType: details[2],
-                      sim: logDetails.simDisplayName ?? "Unknown",
-                      phoneAccountId: logDetails.phoneAccountId ?? "Unknown",
+                      sim: logDetails.simDisplayName ??
+                          AppLocalizations.of(context)!.unknownText,
+                      phoneAccountId: logDetails.phoneAccountId ??
+                          AppLocalizations.of(context)!.unknownText,
                     );
                   });
             },
@@ -111,9 +120,9 @@ class ContactLog extends StatelessWidget {
                 FittedBox(
                   child: Text(
                     logDetails.name == null
-                        ? "Unknown"
+                        ? AppLocalizations.of(context)!.unknownText
                         : logDetails.name!.isEmpty
-                            ? "Unknown"
+                            ? AppLocalizations.of(context)!.unknownText
                             : logDetails.name!,
                   ),
                 ),

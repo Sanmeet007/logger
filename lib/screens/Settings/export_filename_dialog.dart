@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/screens/Settings/datetime_table.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExportFilenameDialog extends StatefulWidget {
   final Future<bool?> Function(String) setCurrentExportedFilenameFormatType;
@@ -98,10 +99,13 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                 controller: _exportedFilenameController,
                 onChanged: validateInput,
                 decoration: InputDecoration(
-                  label: const Text("Filename format"),
-                  hintText: 'my-call-logs-[%token]',
+                  label: Text(
+                    AppLocalizations.of(context)!.filenameFormatLabelText,
+                  ),
+                  hintText:
+                      AppLocalizations.of(context)!.filenameFormatHintText,
                   suffixIcon: IconButton(
-                    tooltip: "Reset",
+                    tooltip: AppLocalizations.of(context)!.resetText,
                     icon: const Icon(Icons.restart_alt),
                     onPressed: resetToDefault,
                   ),
@@ -126,7 +130,9 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text("Cancel"),
+                      child: Text(
+                        AppLocalizations.of(context)!.cancelText,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -136,7 +142,9 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                     child: ElevatedButton(
                       onPressed:
                           _isExportedFilenameValid ? validateAndSave : null,
-                      child: const Text("Save"),
+                      child: Text(
+                        AppLocalizations.of(context)!.saveText,
+                      ),
                     ),
                   ),
                 ],

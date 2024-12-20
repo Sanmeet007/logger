@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogDetails extends StatelessWidget {
   const LogDetails({
@@ -79,9 +80,9 @@ class LogDetails extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      title: const Text(
-                        "Time",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.timeText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
                         timeString,
@@ -90,9 +91,9 @@ class LogDetails extends StatelessWidget {
                     ),
                     const LogDivider(),
                     ListTile(
-                      title: const Text(
-                        "Date",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.dateText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
                         formattedDate,
@@ -101,9 +102,9 @@ class LogDetails extends StatelessWidget {
                     ),
                     const LogDivider(),
                     ListTile(
-                      title: const Text(
-                        "Duration",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.durationText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
                         prettifyDuration(Duration(seconds: duration)),
@@ -112,9 +113,9 @@ class LogDetails extends StatelessWidget {
                     ),
                     const LogDivider(),
                     ListTile(
-                      title: const Text(
-                        "Call Type",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.callTypeText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
                         callType,
@@ -123,9 +124,9 @@ class LogDetails extends StatelessWidget {
                     ),
                     const LogDivider(),
                     ListTile(
-                      title: const Text(
-                        "SIM Display Name",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.simText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
                         sim,
@@ -134,9 +135,9 @@ class LogDetails extends StatelessWidget {
                     ),
                     const LogDivider(),
                     ListTile(
-                      title: const Text(
-                        "Phone Account ID ",
-                        style: TextStyle(fontSize: 18.0),
+                      title: Text(
+                        AppLocalizations.of(context)!.phoneAccountIdText,
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: FittedBox(
                         child: Text(

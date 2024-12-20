@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactLogFreq extends StatelessWidget {
   final CallLogEntry logDetails;
@@ -82,9 +83,9 @@ class ContactLogFreq extends StatelessWidget {
                 FittedBox(
                   child: Text(
                     logDetails.name == null
-                        ? "Unknown"
+                        ? AppLocalizations.of(context)!.unknownText
                         : logDetails.name!.isEmpty
-                            ? "Unknown"
+                            ? AppLocalizations.of(context)!.unknownText
                             : logDetails.name!,
                   ),
                 ),

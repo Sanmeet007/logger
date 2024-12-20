@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/app_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnboardingUI extends StatefulWidget {
   final SharedPreferences? prefs;
@@ -33,30 +34,26 @@ class _OnboardingUIState extends State<OnboardingUI> {
 
   @override
   Widget build(BuildContext context) {
-    const pages = <OnBoardingScreenItem>[
+    final pages = <OnBoardingScreenItem>[
       OnBoardingScreenItem(
         imageName: "4.png",
-        title: "Welcome to Logger!",
-        subtitle:
-            "Your go-to app for managing and analyzing your call logs effortlessly.",
+        title: AppLocalizations.of(context)!.onboardingScreenOneTitle,
+        subtitle: AppLocalizations.of(context)!.onboardingScreenOneSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "1.png",
-        title: "Manage Call Logs",
-        subtitle:
-            "Search, filter, and manage your call logs with a seamless and intuitive interface.",
+        title: AppLocalizations.of(context)!.onboardingScreenTwoTitle,
+        subtitle: AppLocalizations.of(context)!.onboardingScreenTwoSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "2.png",
-        title: "Analyze Your Calls",
-        subtitle:
-            "Understand your call patterns like never before and get detailed insights to optimize your time.",
+        title: AppLocalizations.of(context)!.onboardingScreenThreeTitle,
+        subtitle: AppLocalizations.of(context)!.onboardingScreenThreeSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "3.png",
-        title: "Import & Export",
-        subtitle:
-            "Seamlessly transfer call logs between devices or export them for safekeeping and analysis.",
+        title: AppLocalizations.of(context)!.onboardingScreenFourTitle,
+        subtitle: AppLocalizations.of(context)!.onboardingScreenFourSubtitle,
       ),
     ];
 
@@ -114,10 +111,10 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   },
                   child: Text(
                     currentIndex == 0
-                        ? "Get Started"
+                        ? AppLocalizations.of(context)!.getStartedText
                         : currentIndex == 2
-                            ? "Explore now"
-                            : "Next",
+                            ? AppLocalizations.of(context)!.exploreNowText
+                            : AppLocalizations.of(context)!.nextText,
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),
@@ -132,8 +129,8 @@ class _OnboardingUIState extends State<OnboardingUI> {
                           finishOnboarding(context);
                         }
                       : null,
-                  child: const Text(
-                    "Skip",
+                  child: Text(
+                    AppLocalizations.of(context)!.skipText,
                     style: TextStyle(
                       fontSize: 18.0,
                     ),
@@ -162,7 +159,7 @@ class OnBoardingScreenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dirName =
+    final lookupDirName =
         Theme.of(context).brightness == Brightness.dark ? "dark" : "light";
     final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
 
@@ -175,7 +172,7 @@ class OnBoardingScreenItem extends StatelessWidget {
           child: Image.asset(
             useImageNameAsPath
                 ? imageName
-                : "assets/images/on_boarding/$dirName/$imageName",
+                : "assets/images/on_boarding/$lookupDirName/$imageName",
           ),
         ),
         Column(children: [

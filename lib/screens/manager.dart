@@ -15,6 +15,7 @@ import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Screen {
   final String label;
@@ -116,9 +117,10 @@ class _ScreenManagerState extends State<ScreenManager> {
     switch (status) {
       case "success":
         AppSnackBar.show(context,
-            content: "Call logs extracted and downloaded successfully",
+            content: AppLocalizations.of(context)!.callLogsExportSuccessText,
             useAction: true,
-            buttonText: "OPEN", buttonOnPressed: () {
+            buttonText: AppLocalizations.of(context)!.openText,
+            buttonOnPressed: () {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           openFile();
         });
@@ -126,7 +128,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case "error":
         AppSnackBar.show(
           context,
-          content: "Error while downloading file !",
+          content: AppLocalizations.of(context)!.callLogsExportFailureText,
         );
         break;
       default:
@@ -147,7 +149,10 @@ class _ScreenManagerState extends State<ScreenManager> {
               child: Column(
                 children: [
                   Text(
-                      """Are you sure you want to download your call logs in ${widget.currentImportType.toUpperCase()} format? This action will save your call history to a ${widget.currentImportType.toUpperCase()} file on your device."""),
+                    AppLocalizations.of(context)!.downloadConfirmationText(
+                      widget.currentImportType.toUpperCase(),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -156,14 +161,16 @@ class _ScreenManagerState extends State<ScreenManager> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Cancel"),
+                child: Text(AppLocalizations.of(context)!.cancelText),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   downloadFile(showStatus: true);
                 },
-                child: const Text("Continue"),
+                child: Text(
+                  AppLocalizations.of(context)!.continueText,
+                ),
               ),
             ],
           );
@@ -320,10 +327,10 @@ class _ScreenManagerState extends State<ScreenManager> {
             appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-                title: const FittedBox(
+                title: FittedBox(
                   child: Text(
-                    "Logger",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.appTitle,
+                    style: const TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -333,7 +340,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                   ...(_selectedIndex == 0
                       ? [
                           IconButton(
-                            tooltip: "Download",
+                            tooltip: AppLocalizations.of(context)!.downloadText,
                             splashRadius: 22.0,
                             icon: const Icon(
                               Icons.file_download_outlined,
@@ -355,7 +362,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                           ),
                           if (widget.showSharingButton)
                             IconButton(
-                              tooltip: "Share",
+                              tooltip: AppLocalizations.of(context)!.shareText,
                               splashRadius: 22.0,
                               icon: const Icon(Icons.share_rounded),
                               onPressed:
@@ -365,7 +372,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                       : []),
                   if (_selectedIndex == 1 || _selectedIndex == 0)
                     IconButton(
-                      tooltip: "Filter",
+                      tooltip: AppLocalizations.of(context)!.filterText,
                       onPressed: showFiltersModal,
                       icon: widget.areFiltersApplied
                           ? Badge(
@@ -385,7 +392,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                     ),
                   if (_selectedIndex == 3)
                     IconButton(
-                        tooltip: "Donate",
+                        tooltip: AppLocalizations.of(context)!.donateText,
                         onPressed: () {
                           url_launcher.launchUrl(getDonationLink());
                         },

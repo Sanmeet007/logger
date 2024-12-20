@@ -2,6 +2,7 @@ import 'package:call_log/call_log.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 String getVersion() {
   return "2.6.1";
@@ -120,37 +121,37 @@ String parsePhoneNumber(String phnum) {
   }
 }
 
-List getCallDisplayFields(CallType callType) {
+List getCallDisplayFields(CallType callType, BuildContext context) {
   String rCallType;
   late Color callColor;
   late IconData callIcon;
 
   if (callType == CallType.missed) {
-    rCallType = "Missed";
+    rCallType = AppLocalizations.of(context)!.missedText;
     callColor = Colors.redAccent;
     callIcon = Icons.call_missed;
   } else if (callType == CallType.incoming) {
-    rCallType = "Incoming";
+    rCallType = AppLocalizations.of(context)!.incomingText;
     callColor = Colors.blue;
     callIcon = Icons.call_received;
   } else if (callType == CallType.outgoing) {
-    rCallType = "Outgoing";
+    rCallType = AppLocalizations.of(context)!.outgoingText;
     callColor = const Color.fromARGB(255, 175, 121, 255);
     callIcon = Icons.call_made;
   } else if (callType == CallType.blocked) {
-    rCallType = "Blocked";
+    rCallType = AppLocalizations.of(context)!.blockedText;
     callColor = Colors.orange;
     callIcon = Icons.block;
   } else if (callType == CallType.rejected) {
-    rCallType = "Rejected";
+    rCallType = AppLocalizations.of(context)!.rejectedText;
     callColor = Colors.red;
     callIcon = Icons.cancel_outlined;
   } else if (callType == CallType.wifiIncoming) {
-    rCallType = "Wifi Incoming";
+    rCallType = AppLocalizations.of(context)!.wifiIncomingText;
     callColor = const Color.fromARGB(255, 110, 113, 255);
     callIcon = Icons.call_received;
   } else if (callType == CallType.wifiOutgoing) {
-    rCallType = "Wifi Outgoing";
+    rCallType = AppLocalizations.of(context)!.wifiOutgoingText;
     callColor = const Color.fromARGB(255, 110, 110, 255);
     callIcon = Icons.call_made;
   } else {

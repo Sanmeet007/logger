@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -45,10 +46,12 @@ class AboutScreen extends StatelessWidget {
                   ),
                   children: [
                     TableRow(children: [
-                      const TableCell(
+                      TableCell(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("version"),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            AppLocalizations.of(context)!.versionText,
+                          ),
                         ),
                       ),
                       TableCell(
@@ -60,16 +63,22 @@ class AboutScreen extends StatelessWidget {
                         ),
                       ),
                     ]),
-                    const TableRow(
+                    TableRow(
                       children: [
                         TableCell(
-                            child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text("platform"))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context)!.platformText,
+                            ),
+                          ),
+                        ),
                         TableCell(
                           child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text("Android"),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppLocalizations.of(context)!.platformNameText,
+                            ),
                           ),
                         ),
                       ],
@@ -80,8 +89,8 @@ class AboutScreen extends StatelessWidget {
               const SizedBox(
                 height: 15.0,
               ),
-              const SizedText(
-                "Storage Policy",
+              SizedText(
+                AppLocalizations.of(context)!.storagePolicyLabelText,
                 size: 20.0,
               ),
               const SizedBox(height: 15.0),
@@ -93,15 +102,15 @@ class AboutScreen extends StatelessWidget {
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Text(
-                  """This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.""",
+                child: Text(
+                  AppLocalizations.of(context)!.storagePolicyLabelText,
                 ),
               ),
               const SizedBox(
                 height: 15.0,
               ),
-              const SizedText(
-                "Analytics Policy",
+              SizedText(
+                AppLocalizations.of(context)!.analyticsPolicyLabelText,
                 size: 20.0,
               ),
               const SizedBox(height: 15.0),
@@ -113,8 +122,8 @@ class AboutScreen extends StatelessWidget {
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Text(
-                  """All call log data is analyzed locally on your device and never transmitted to online servers, ensuring your privacy and keeping your information safe and confidential""",
+                child: Text(
+                  AppLocalizations.of(context)!.analyticsPolicyText,
                 ),
               ),
               const SizedBox(
@@ -127,14 +136,17 @@ class AboutScreen extends StatelessWidget {
                     onPressed: () {
                       url_launcher.launchUrl(getRepoLink());
                     },
-                    child: const Row(
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Explore Project on Github"),
-                          SizedBox(
+                          Text(
+                            AppLocalizations.of(context)!
+                                .exploreProjectButtonText,
+                          ),
+                          const SizedBox(
                             width: 5.0,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.launch,
                             size: 15.0,
                           ),
@@ -148,9 +160,9 @@ class AboutScreen extends StatelessWidget {
                     onPressed: () {
                       url_launcher.launchUrl(getReportLink());
                     },
-                    child: const Text(
-                      "Report Problem or Bug",
-                      style: TextStyle(
+                    child: Text(
+                      AppLocalizations.of(context)!.reportIssueButtonText,
+                      style: const TextStyle(
                         decorationColor: Color.fromARGB(255, 138, 138, 138),
                         color: Color.fromARGB(255, 138, 138, 138),
                         decoration: TextDecoration.underline,

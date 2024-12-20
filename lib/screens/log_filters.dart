@@ -5,6 +5,7 @@ import 'package:logger/components/date_picker.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/components/toggle_button.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogFilters extends StatefulWidget {
   final Function() removeFilters;
@@ -268,15 +269,18 @@ class _LogFiltersState extends State<LogFilters> {
                           child: TextField(
                             onChanged: handlePhoneNumberValueChange,
                             controller: _phoneNumberInputController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color.fromARGB(255, 66, 66, 66),
                                 ),
                               ),
-                              label: Text("Mobile Number"),
-                              hintText: '9XXXX XXXX',
+                              label: Text(
+                                AppLocalizations.of(context)!.mobileNumberText,
+                              ),
+                              hintText: AppLocalizations.of(context)!
+                                  .hintMobileNumberText,
                             ),
                             keyboardType:
                                 const TextInputType.numberWithOptions(),
@@ -385,16 +389,20 @@ class _LogFiltersState extends State<LogFilters> {
                                   child: TextField(
                                     onChanged: handleMinDurationValueChange,
                                     controller: _minDurationInputController,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
+                                    decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color:
                                               Color.fromARGB(255, 66, 66, 66),
                                         ),
                                       ),
-                                      label: Text("Min (in secs)"),
-                                      hintText: 'eg. 0',
+                                      label: Text(
+                                        AppLocalizations.of(context)!
+                                            .minimumDurationLabelText,
+                                      ),
+                                      hintText: AppLocalizations.of(context)!
+                                          .minimumDurationHintText,
                                     ),
                                     keyboardType:
                                         const TextInputType.numberWithOptions(),
@@ -407,16 +415,20 @@ class _LogFiltersState extends State<LogFilters> {
                                   child: TextField(
                                     onChanged: handleMaxDurationValueChange,
                                     controller: _maxDurationInputController,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
+                                    decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color:
                                               Color.fromARGB(255, 66, 66, 66),
                                         ),
                                       ),
-                                      label: Text("Max (in secs)"),
-                                      hintText: 'eg. 60',
+                                      label: Text(
+                                        AppLocalizations.of(context)!
+                                            .maximumDurationLabelText,
+                                      ),
+                                      hintText: AppLocalizations.of(context)!
+                                          .maximumDurationHintText,
                                     ),
                                     keyboardType:
                                         const TextInputType.numberWithOptions(),
@@ -558,7 +570,9 @@ class _LogFiltersState extends State<LogFilters> {
                     Expanded(
                       child: OutlinedButton(
                         onPressed: clearFilters,
-                        child: const Text("Reset to default"),
+                        child: Text(
+                          AppLocalizations.of(context)!.resetToDefaultText,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -572,7 +586,9 @@ class _LogFiltersState extends State<LogFilters> {
                               const Color.fromARGB(255, 222, 200, 255),
                         ),
                         onPressed: canApplyFilters ? applyFilters : null,
-                        child: const Text("Apply filters"),
+                        child: Text(
+                          AppLocalizations.of(context)!.applyFiltersText,
+                        ),
                       ),
                     ),
                   ],

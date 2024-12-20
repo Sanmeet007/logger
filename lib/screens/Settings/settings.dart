@@ -7,6 +7,7 @@ import 'package:shared_storage/shared_storage.dart';
 import 'dart:async';
 
 import 'export_filename_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function({String waitingMessage}) showLinearProgressLoader;
@@ -120,10 +121,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               buttonOnPressed: () {
                 widget.refresher?.call();
               },
-              buttonText: "Refresh",
+              buttonText: AppLocalizations.of(context)!.refreshText,
             );
           } else {
-            AppSnackBar.show(context, content: "Something went wrong");
+            AppSnackBar.show(
+              context,
+              content: AppLocalizations.of(context)!.baseGhostErrorMessage,
+            );
           }
           isDone = true;
           widget.hideLinearProgressLoader();
@@ -134,7 +138,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       isDone = true;
       widget.hideLinearProgressLoader();
       if (mounted) {
-        AppSnackBar.show(context, content: "Something went wrong");
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context)!.baseGhostErrorMessage,
+        );
       }
     }
   }
@@ -144,17 +151,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Confirm Import Start"),
-            content: const SingleChildScrollView(
+            title: Text(
+              AppLocalizations.of(context)!.confirmImportLabelText,
+            ),
+            content: SingleChildScrollView(
               child: Text(
-                  """Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution."""),
+                AppLocalizations.of(context)!.confirmImportText,
+              ),
             ),
             actions: [
               OutlinedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text("Cancel"),
+                child: Text(
+                  AppLocalizations.of(context)!.cancelText,
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -163,7 +175,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }
                   handleCallLogImport();
                 },
-                child: const Text("Continue"),
+                child: Text(
+                  AppLocalizations.of(context)!.continueText,
+                ),
               ),
             ],
           );
@@ -180,9 +194,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "General Settings",
-                style: TextStyle(fontSize: 20.0),
+              Text(
+                AppLocalizations.of(context)!.baseSettingsLabelText,
+                style: const TextStyle(fontSize: 20.0),
               ),
               const SizedBox(
                 height: 15.0,
@@ -200,7 +214,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Disable call log sharing"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .disableLogsSharingText,
+                        ),
                         Switch(
                           value: widget.initialSharingState,
                           onChanged: (bool newState) async {
@@ -239,7 +256,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Enable download confirmation"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .enableLogsSharingText,
+                        ),
                         Switch(
                           value: widget.initialConfirmBeforeDownloadState,
                           onChanged: (bool newState) async {
@@ -278,7 +298,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Show call logs count"),
+                        LinedText(
+                            text: AppLocalizations.of(context)!
+                                .enableCallLogCountVisibilityText),
                         Switch(
                           value: widget.intialCallLogCountVisibility,
                           onChanged: (bool newState) async {
@@ -316,7 +338,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Enable duration filtering"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .enableCallDurationFilteringText,
+                        ),
                         Switch(
                           value: widget.initialDurationFilteringState,
                           onChanged: (bool newState) async {
@@ -355,7 +380,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Enable filter by account id"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .enableFilterByAccountIdText,
+                        ),
                         Switch(
                           value: widget.initialPhoneAccountIdFilteringState,
                           onChanged: (bool newState) async {
@@ -394,7 +422,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Show total call duration"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .showTotalCallDurationText,
+                        ),
                         Switch(
                           value: widget.initialShowTotalCallDuration,
                           onChanged: (bool newState) async {
@@ -434,9 +465,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              const Text(
-                "Advanced Settings",
-                style: TextStyle(fontSize: 20.0),
+              Text(
+                AppLocalizations.of(context)!.advancedSettingsLabelText,
+                style: const TextStyle(fontSize: 20.0),
               ),
               const SizedBox(height: 15.0),
               Container(
@@ -453,7 +484,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Call logs export format"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .callLogsExportFormatLabelText,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -534,12 +568,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Export filename format"),
+                        LinedText(
+                          text: AppLocalizations.of(context)!
+                              .exportFileNameFormatLabelText,
+                        ),
                         ElevatedButton(
-                            onPressed: openFileNameSettingsSheet,
-                            child: const Text(
-                              "Configure",
-                            )),
+                          onPressed: openFileNameSettingsSheet,
+                          child: Text(
+                            AppLocalizations.of(context)!.configureText,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -553,12 +591,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const LinedText(text: "Import your call logs"),
+                        LinedText(
+                          text:
+                              AppLocalizations.of(context)!.importCallLogsText,
+                        ),
                         ElevatedButton(
-                            onPressed: confirmImport,
-                            child: const Text(
-                              "Start import",
-                            )),
+                          onPressed: confirmImport,
+                          child: Text(
+                            AppLocalizations.of(context)!.startImportText,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -575,9 +617,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Text(
-                  "Please note: Only CSV format is currently supported for importing call logs.",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.supportedFormatInformation,
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                   ),
                 ),
