@@ -1,204 +1,10 @@
 {
   "@@locale": "en",
-  "appTitle": "Logger",
-  "appError": "Ah snap! Something went wrong",
-  "ghostErrorMessage": "Hmm. Something went wrong",
-  "baseGhostErrorMessage": "Something went wrong",
-  "unknownText": "Unknown",
-  "getStartedText": "Get Started",
-  "exploreNowText": "Explore now",
-  "nextText": "Next",
-  "skipText": "Skip",
-  "timeText": "Time",
-  "dateText": "Date",
-  "durationText": "Duration",
-  "callTypeText": "Call Type",
-  "simText": "SIM Display Name",
-  "phoneAccountIdText": "Phone Account ID",
-  "aboutText": "About",
-  "mobileNumberText": "Mobile Number",
-  "@appTitle": {
-    "description": "The title of the application."
-  },
-  "@appError": {
-    "description": "Generic error message displayed when an unknown error occurs."
-  },
-  "@ghostErrorMessage": {
-    "description": "Error message shown for non-specific issues, styled slightly differently from the base error message."
-  },
-  "@baseGhostErrorMessage": {
-    "description": "A base-level generic error message."
-  },
-  "@unknownText": {
-    "description": "Text displayed when the required information is not available."
-  },
-  "@getStartedText": {
-    "description": "Text displayed on a button or screen for initiating the app's onboarding process."
-  },
-  "@exploreNowText": {
-    "description": "Text encouraging the user to begin exploring the app's features."
-  },
-  "@nextText": {
-    "description": "Text displayed on a button to proceed to the next step."
-  },
-  "@skipText": {
-    "description": "Text displayed on a button to skip the current step."
-  },
-  "@timeText": {
-    "description": "Label used to display or refer to time."
-  },
-  "@dateText": {
-    "description": "Label used to display or refer to dates."
-  },
-  "@durationText": {
-    "description": "Label used to display the duration of a call or event."
-  },
-  "@callTypeText": {
-    "description": "Label used to indicate the type of a call (e.g., incoming, outgoing, missed)."
-  },
-  "@simText": {
-    "description": "Label used to display the name of the SIM card associated with the call."
-  },
-  "@phoneAccountIdText": {
-    "description": "Label used to display the identifier for the phone account used for the call."
-  },
   "@aboutText": {
     "description": "Text or label used to direct the user to an About page for the app."
   },
-  "@mobileNumberText": {
-    "description": "Label used to display or refer to a mobile number."
-  },
-  "hintMobileNumberText": "9XXXX XXXX",
-  "minimumDurationLabelText": "Min (in secs)",
-  "minimumDurationHintText": "eg: 0",
-  "maximumDurationLabelText": "Min (in secs)",
-  "maximumDurationHintText": "eg: 60",
-  "resetToDefaultText": "Reset to Default",
-  "applyFiltersText": "Apply Filters",
-  "cancelText": "Cancel",
-  "continueText": "Continue",
-  "resetText": "Reset",
-  "saveText": "Save",
-  "configureText": "Configure",
-  "versionText": "version",
-  "platformText": "platform",
-  "platformNameText": "Android",
-  "baseSettingsLabelText": "General Settings",
-  "disableLogsSharingText": "Disable call log sharing",
-  "enableLogsSharingText": "Disable call log sharing",
-  "enableCallLogCountVisibilityText": "Show call logs count",
-  "enableCallDurationFilteringText": "Enable duration filtering",
-  "enableFilterByAccountIdText": "Enable filter by account id",
-  "showTotalCallDurationText": "Show total call duration",
-  "advancedSettingsLabelText": "Advanced Settings",
-  "callLogsExportFormatLabelText": "Call logs export format",
-  "exportFileNameFormatLabelText": "Export filename format",
-  "startImportText": "Start Import",
-  "importCallLogsText": "Import your call logs",
-  "filenameFormatLabelText": "Filename format",
-  "filenameFormatHintText": "my-call-logs-[%token]",
-  "storagePolicyLabelText": "Storage Policy",
-  "@hintMobileNumberText": {
-    "description": "Hint text displayed in the input field for entering a mobile number."
-  },
-  "@minimumDurationLabelText": {
-    "description": "Label for the input field to specify the minimum call duration in seconds."
-  },
-  "@minimumDurationHintText": {
-    "description": "Hint text suggesting an example value for the minimum call duration."
-  },
-  "@maximumDurationLabelText": {
-    "description": "Label for the input field to specify the maximum call duration in seconds."
-  },
-  "@maximumDurationHintText": {
-    "description": "Hint text suggesting an example value for the maximum call duration."
-  },
-  "@resetToDefaultText": {
-    "description": "Text for a button that resets all settings or filters to their default values."
-  },
-  "@applyFiltersText": {
-    "description": "Text for a button to apply the selected filters."
-  },
-  "@cancelText": {
-    "description": "Text for a button to cancel an operation or close a dialog."
-  },
-  "@continueText": {
-    "description": "Text for a button to proceed to the next step in a process."
-  },
-  "@resetText": {
-    "description": "Text for a button to reset the current settings or input."
-  },
-  "@saveText": {
-    "description": "Text for a button to save changes or preferences."
-  },
-  "@configureText": {
-    "description": "Text for a button to configure specific settings or options."
-  },
-  "@versionText": {
-    "description": "Label used to display the app version."
-  },
-  "@platformText": {
-    "description": "Label used to display the platform on which the app is running."
-  },
-  "@platformNameText": {
-    "description": "Text indicating the name of the platform, e.g., Android."
-  },
-  "@baseSettingsLabelText": {
-    "description": "Label for a section displaying general or basic settings."
-  },
-  "@disableLogsSharingText": {
-    "description": "Text to disable the sharing of call logs."
-  },
-  "@enableLogsSharingText": {
-    "description": "Text to enable the sharing of call logs."
-  },
-  "@enableCallLogCountVisibilityText": {
-    "description": "Option to show the total count of call logs."
-  },
-  "@enableCallDurationFilteringText": {
-    "description": "Option to enable filtering of call logs by duration."
-  },
-  "@enableFilterByAccountIdText": {
-    "description": "Option to enable filtering call logs by account ID."
-  },
-  "@showTotalCallDurationText": {
-    "description": "Option to display the total duration of all calls."
-  },
   "@advancedSettingsLabelText": {
     "description": "Label for a section displaying advanced settings."
-  },
-  "@callLogsExportFormatLabelText": {
-    "description": "Label for the option to select the format for exporting call logs."
-  },
-  "@exportFileNameFormatLabelText": {
-    "description": "Label for the option to configure the filename format for exported files."
-  },
-  "@startImportText": {
-    "description": "Text for a button to start importing call logs."
-  },
-  "@importCallLogsText": {
-    "description": "Text describing the action of importing call logs into the app."
-  },
-  "@filenameFormatLabelText": {
-    "description": "Label for the input field to configure the filename format."
-  },
-  "@filenameFormatHintText": {
-    "description": "Hint text suggesting an example for the filename format."
-  },
-  "@storagePolicyLabelText": {
-    "description": "Label for the section or option related to the app's storage policy."
-  },
-  "storagePolicyText": "This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.",
-  "analyticsPolicyLabelText": "Analytics Policy",
-  "analyticsPolicyText": "All call log data is analyzed locally on your device and never transmitted to online servers, ensuring your privacy and keeping your information safe and confidential",
-  "exploreProjectButtonText": "Explore Project on Github",
-  "reportIssueButtonText": "Report a Problem or Bug",
-  "downloadConfirmationText": "Are you sure you want to download your call logs in {currentImportType} format? This action will save your call history to a {currentImportType} file on your device.",
-  "supportedFormatInformation": "Please note: Only CSV format is currently supported for importing call logs.",
-  "confirmImportLabelText": "Confirm Import Start",
-  "confirmImportText": "Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution.",
-  "@storagePolicyText": {
-    "description": "Description of the app's policy for temporary file storage and call log privacy."
   },
   "@analyticsPolicyLabelText": {
     "description": "Label for the section explaining the app's analytics policy."
@@ -206,14 +12,44 @@
   "@analyticsPolicyText": {
     "description": "Details about how call log data is analyzed locally without being transmitted to online servers, emphasizing privacy."
   },
-  "@exploreProjectButtonText": {
-    "description": "Text for a button that links to the app's project repository on GitHub."
+  "@analyticsScreenLabelText": {
+    "description": "Label for the screen displaying call analytics and insights."
   },
-  "@reportIssueButtonText": {
-    "description": "Text for a button that allows users to report a problem or bug."
+  "@appError": {
+    "description": "Generic error message displayed when an unknown error occurs."
   },
-  "@supportedFormatInformation": {
-    "description": "Information about the supported formats for importing call logs, currently limited to CSV."
+  "@appTitle": {
+    "description": "The title of the application."
+  },
+  "@applyFiltersText": {
+    "description": "Text for a button to apply the selected filters."
+  },
+  "@baseGhostErrorMessage": {
+    "description": "A base-level generic error message."
+  },
+  "@baseSettingsLabelText": {
+    "description": "Label for a section displaying general or basic settings."
+  },
+  "@blockedText": {
+    "description": "Label indicating blocked calls."
+  },
+  "@callLogsExportFailureText": {
+    "description": "Message displayed when an error occurs during the export or download of call logs."
+  },
+  "@callLogsExportFormatLabelText": {
+    "description": "Label for the option to select the format for exporting call logs."
+  },
+  "@callLogsExportSuccessText": {
+    "description": "Message displayed when call logs are successfully exported and downloaded."
+  },
+  "@callTypeText": {
+    "description": "Label used to indicate the type of a call (e.g., incoming, outgoing, missed)."
+  },
+  "@cancelText": {
+    "description": "Text for a button to cancel an operation or close a dialog."
+  },
+  "@configureText": {
+    "description": "Text for a button to configure specific settings or options."
   },
   "@confirmImportLabelText": {
     "description": "Label for the section or dialog confirming the start of the import process."
@@ -221,188 +57,35 @@
   "@confirmImportText": {
     "description": "Warning message explaining the risks and potential consequences of importing call logs, including data corruption and overwriting."
   },
-  "@downloadConfirmationText": {
-    "description": "Confirmation message shown before downloading call logs in the selected format, mentioning the type of file and its storage location.",
-    "placeholders": {
-      "currentImportType": {
-        "type": "String",
-        "example": "CSV"
-      }
-    }
+  "@continueText": {
+    "description": "Text for a button to proceed to the next step in a process."
   },
-  "onboardingScreenOneTitle": "Welcome to Logger!",
-  "onboardingScreenOneSubtitle": "Your go-to app for managing and analyzing your call logs effortlessly.",
-  "onboardingScreenTwoTitle": "Manage Call Logs",
-  "onboardingScreenTwoSubtitle": "Search, filter, and manage your call logs with a seamless and intuitive interface.",
-  "onboardingScreenThreeTitle": "Analyze Your Calls",
-  "onboardingScreenThreeSubtitle": "Understand your call patterns like never before and get detailed insights to optimize your time.",
-  "onboardingScreenFourTitle": "Import & Export",
-  "onboardingScreenFourSubtitle": "Seamlessly transfer call logs between devices or export them for safekeeping and analysis.",
-  "logsScreenLabelText": "Logs",
-  "analyticsScreenLabelText": "Analytics",
-  "settingsScreenLabelText": "Settings",
-  "openText": "Open",
-  "callLogsExportSuccessText": "Call logs extracted and downloaded successfully",
-  "callLogsExportFailureText": "Error while downloading file !",
-  "@onboardingScreenOneTitle": {
-    "description": "Title for the first onboarding screen welcoming the user to Logger."
+  "@dateText": {
+    "description": "Label used to display or refer to dates."
   },
-  "@onboardingScreenOneSubtitle": {
-    "description": "Subtitle for the first onboarding screen, introducing Logger as a call log management and analysis app."
-  },
-  "@onboardingScreenTwoTitle": {
-    "description": "Title for the second onboarding screen, highlighting the app's call log management features."
-  },
-  "@onboardingScreenTwoSubtitle": {
-    "description": "Subtitle for the second onboarding screen, describing the app's intuitive interface for managing call logs."
-  },
-  "@onboardingScreenThreeTitle": {
-    "description": "Title for the third onboarding screen, emphasizing the app's call analysis capabilities."
-  },
-  "@onboardingScreenThreeSubtitle": {
-    "description": "Subtitle for the third onboarding screen, explaining the detailed insights the app provides about call patterns."
-  },
-  "@onboardingScreenFourTitle": {
-    "description": "Title for the fourth onboarding screen, showcasing the app's import and export features."
-  },
-  "@onboardingScreenFourSubtitle": {
-    "description": "Subtitle for the fourth onboarding screen, explaining how users can transfer or export call logs."
-  },
-  "@logsScreenLabelText": {
-    "description": "Label for the screen displaying call logs."
-  },
-  "@analyticsScreenLabelText": {
-    "description": "Label for the screen displaying call analytics and insights."
-  },
-  "@settingsScreenLabelText": {
-    "description": "Label for the settings screen where users can configure the app."
-  },
-  "@openText": {
-    "description": "Text for a button or action to open a specific item or section."
-  },
-  "@callLogsExportSuccessText": {
-    "description": "Message displayed when call logs are successfully exported and downloaded."
-  },
-  "@callLogsExportFailureText": {
-    "description": "Message displayed when an error occurs during the export or download of call logs."
-  },
-  "downloadText": "Download",
-  "shareText": "Share",
-  "filterText": "Filter",
-  "donateText": "Donate",
-  "refreshText": "Refresh",
-  "missedText": "Missed",
-  "rejectedText": "Rejected",
-  "outgoingText": "Outgoing",
-  "incomingText": "Incoming",
-  "blockedText": "Blocked",
-  "wifiIncomingText": "Wifi Incoming",
-  "wifiOutgoingText": "Wifi Outgoing",
-  "viewText": "View",
-  "hideText": "Hide",
-  "tokensInfoText": "You can use the tokens provided to customize your filename format based on specific date and time preferences.",
-  "tokenAccordianText": "date & time formatting tokens",
-  "dtYAcronymExapandedText": "Year with century",
-  "dtyAcronymExapandedText": "Year without century",
-  "dtmAcronymExapandedText": "Month as a number",
-  "dtBAcronymExapandedText": "Full month name",
-  "dtbAcronymExapandedText": "Abbreviated month name",
-  "dtdAcronymExapandedText": "Day of the month",
-  "dtaAcronymExapandedText": "Abbreviated weekday name",
-  "dtAAcronymExapandedText": "Full weekday name",
-  "dtMAcronymExapandedText": "Minutes",
-  "dtHAcronymExapandedText": "Hour in 24-hour format",
-  "dtIAcronymExapandedText": "Hour in 12-hour format",
-  "dtjAcronymExapandedText": "Day of the year",
-  "dtfAcronymExapandedText": "Milliseconds",
-  "dtzAcronymExapandedText": "Time zone offset from UTC",
-  "dtUAcronymExapandedText": "Week number of the year (Sunday as the first day of the week)",
-  "dtWAcronymExapandedText": "Week number of the year (Monday as the first day of the week)",
-  "dtXAcronymExapandedText": "Time representation",
-  "dtZAcronymExapandedText": "Time zone name",
-  "dtpAcronymExapandedText": "AM/PM marker",
-  "dtSAcronymExapandedText": "Seconds",
-  "dtxAcronymExapandedText": "Date representation",
-  "dtcAcronymExapandedText": "Date and time representation",
-  "randomWeekdayAbbr": "Fri",
-  "randomWeekdayName": "Friday",
-  "randomMonthName": "July",
-  "randomMonthAbbr": "Jul",
-  "randomDTRepr": "Fri, Jul 12 2024 14:15:00",
-  "@downloadText": {
-    "description": "Text for a button to download files or data."
-  },
-  "@shareText": {
-    "description": "Text for a button to share files or information."
-  },
-  "@filterText": {
-    "description": "Text for a button to apply filters to data or views."
+  "@disableLogsSharingText": {
+    "description": "Text to disable the sharing of call logs."
   },
   "@donateText": {
     "description": "Text for a button encouraging users to donate to support the app."
   },
-  "@refreshText": {
-    "description": "Text for a button to refresh the current view or data."
+  "@downloadConfirmationText": {
+    "description": "Confirmation message shown before downloading call logs in the selected format, mentioning the type of file and its storage location.",
+    "placeholders": {
+      "currentImportType": {
+        "example": "CSV",
+        "type": "String"
+      }
+    }
   },
-  "@missedText": {
-    "description": "Label indicating missed calls."
-  },
-  "@rejectedText": {
-    "description": "Label indicating rejected calls."
-  },
-  "@outgoingText": {
-    "description": "Label indicating outgoing calls."
-  },
-  "@incomingText": {
-    "description": "Label indicating incoming calls."
-  },
-  "@blockedText": {
-    "description": "Label indicating blocked calls."
-  },
-  "@wifiIncomingText": {
-    "description": "Label indicating incoming calls made over WiFi."
-  },
-  "@wifiOutgoingText": {
-    "description": "Label indicating outgoing calls made over WiFi."
-  },
-  "@viewText": {
-    "description": "Text for a button to view details or content."
-  },
-  "@hideText": {
-    "description": "Text for a button to hide details or content."
-  },
-  "@tokensInfoText": {
-    "description": "Information about tokens that can be used to customize filename formats based on date and time."
-  },
-  "@tokenAccordianText": {
-    "description": "Label for an accordion section detailing date and time formatting tokens."
-  },
-  "@dtYAcronymExapandedText": {
-    "description": "Explanation for the token representing the year with century (e.g., 2024)."
-  },
-  "@dtyAcronymExapandedText": {
-    "description": "Explanation for the token representing the year without century (e.g., 24)."
-  },
-  "@dtmAcronymExapandedText": {
-    "description": "Explanation for the token representing the month as a number (e.g., 07 for July)."
-  },
-  "@dtBAcronymExapandedText": {
-    "description": "Explanation for the token representing the full month name (e.g., July)."
-  },
-  "@dtbAcronymExapandedText": {
-    "description": "Explanation for the token representing the abbreviated month name (e.g., Jul)."
-  },
-  "@dtdAcronymExapandedText": {
-    "description": "Explanation for the token representing the day of the month (e.g., 12)."
-  },
-  "@dtaAcronymExapandedText": {
-    "description": "Explanation for the token representing the abbreviated weekday name (e.g., Fri)."
+  "@downloadText": {
+    "description": "Text for a button to download files or data."
   },
   "@dtAAcronymExapandedText": {
     "description": "Explanation for the token representing the full weekday name (e.g., Friday)."
   },
-  "@dtMAcronymExapandedText": {
-    "description": "Explanation for the token representing minutes (e.g., 15)."
+  "@dtBAcronymExapandedText": {
+    "description": "Explanation for the token representing the full month name (e.g., July)."
   },
   "@dtHAcronymExapandedText": {
     "description": "Explanation for the token representing the hour in 24-hour format (e.g., 14 for 2 PM)."
@@ -410,14 +93,11 @@
   "@dtIAcronymExapandedText": {
     "description": "Explanation for the token representing the hour in 12-hour format (e.g., 2 for 2 PM)."
   },
-  "@dtjAcronymExapandedText": {
-    "description": "Explanation for the token representing the day of the year (e.g., 193 for July 12)."
+  "@dtMAcronymExapandedText": {
+    "description": "Explanation for the token representing minutes (e.g., 15)."
   },
-  "@dtfAcronymExapandedText": {
-    "description": "Explanation for the token representing milliseconds."
-  },
-  "@dtzAcronymExapandedText": {
-    "description": "Explanation for the token representing the time zone offset from UTC (e.g., +0530)."
+  "@dtSAcronymExapandedText": {
+    "description": "Explanation for the token representing seconds (e.g., 00)."
   },
   "@dtUAcronymExapandedText": {
     "description": "Explanation for the token representing the week number of the year with Sunday as the first day of the week."
@@ -428,20 +108,167 @@
   "@dtXAcronymExapandedText": {
     "description": "Explanation for the token representing the time representation (e.g., 14:15:00)."
   },
+  "@dtYAcronymExapandedText": {
+    "description": "Explanation for the token representing the year with century (e.g., 2024)."
+  },
   "@dtZAcronymExapandedText": {
     "description": "Explanation for the token representing the time zone name (e.g., IST)."
+  },
+  "@dtaAcronymExapandedText": {
+    "description": "Explanation for the token representing the abbreviated weekday name (e.g., Fri)."
+  },
+  "@dtbAcronymExapandedText": {
+    "description": "Explanation for the token representing the abbreviated month name (e.g., Jul)."
+  },
+  "@dtcAcronymExapandedText": {
+    "description": "Explanation for the token representing the combined date and time representation."
+  },
+  "@dtdAcronymExapandedText": {
+    "description": "Explanation for the token representing the day of the month (e.g., 12)."
+  },
+  "@dtfAcronymExapandedText": {
+    "description": "Explanation for the token representing milliseconds."
+  },
+  "@dtjAcronymExapandedText": {
+    "description": "Explanation for the token representing the day of the year (e.g., 193 for July 12)."
+  },
+  "@dtmAcronymExapandedText": {
+    "description": "Explanation for the token representing the month as a number (e.g., 07 for July)."
   },
   "@dtpAcronymExapandedText": {
     "description": "Explanation for the token representing the AM/PM marker."
   },
-  "@dtSAcronymExapandedText": {
-    "description": "Explanation for the token representing seconds (e.g., 00)."
-  },
   "@dtxAcronymExapandedText": {
     "description": "Explanation for the token representing the date representation (e.g., Fri, Jul 12, 2024)."
   },
-  "@dtcAcronymExapandedText": {
-    "description": "Explanation for the token representing the combined date and time representation."
+  "@dtyAcronymExapandedText": {
+    "description": "Explanation for the token representing the year without century (e.g., 24)."
+  },
+  "@dtzAcronymExapandedText": {
+    "description": "Explanation for the token representing the time zone offset from UTC (e.g., +0530)."
+  },
+  "@durationText": {
+    "description": "Label used to display the duration of a call or event."
+  },
+  "@enableCallDurationFilteringText": {
+    "description": "Option to enable filtering of call logs by duration."
+  },
+  "@enableCallLogCountVisibilityText": {
+    "description": "Option to show the total count of call logs."
+  },
+  "@enableFilterByAccountIdText": {
+    "description": "Option to enable filtering call logs by account ID."
+  },
+  "@enableLogsSharingText": {
+    "description": "Text to enable the sharing of call logs."
+  },
+  "@exploreNowText": {
+    "description": "Text encouraging the user to begin exploring the app's features."
+  },
+  "@exploreProjectButtonText": {
+    "description": "Text for a button that links to the app's project repository on GitHub."
+  },
+  "@exportFileNameFormatLabelText": {
+    "description": "Label for the option to configure the filename format for exported files."
+  },
+  "@filenameFormatHintText": {
+    "description": "Hint text suggesting an example for the filename format."
+  },
+  "@filenameFormatLabelText": {
+    "description": "Label for the input field to configure the filename format."
+  },
+  "@filterText": {
+    "description": "Text for a button to apply filters to data or views."
+  },
+  "@getStartedText": {
+    "description": "Text displayed on a button or screen for initiating the app's onboarding process."
+  },
+  "@ghostErrorMessage": {
+    "description": "Error message shown for non-specific issues, styled slightly differently from the base error message."
+  },
+  "@hideText": {
+    "description": "Text for a button to hide details or content."
+  },
+  "@hintMobileNumberText": {
+    "description": "Hint text displayed in the input field for entering a mobile number."
+  },
+  "@importCallLogsText": {
+    "description": "Text describing the action of importing call logs into the app."
+  },
+  "@incomingText": {
+    "description": "Label indicating incoming calls."
+  },
+  "@logsScreenLabelText": {
+    "description": "Label for the screen displaying call logs."
+  },
+  "@maximumDurationHintText": {
+    "description": "Hint text suggesting an example value for the maximum call duration."
+  },
+  "@maximumDurationLabelText": {
+    "description": "Label for the input field to specify the maximum call duration in seconds."
+  },
+  "@minimumDurationHintText": {
+    "description": "Hint text suggesting an example value for the minimum call duration."
+  },
+  "@minimumDurationLabelText": {
+    "description": "Label for the input field to specify the minimum call duration in seconds."
+  },
+  "@missedText": {
+    "description": "Label indicating missed calls."
+  },
+  "@mobileNumberText": {
+    "description": "Label used to display or refer to a mobile number."
+  },
+  "@nextText": {
+    "description": "Text displayed on a button to proceed to the next step."
+  },
+  "@onboardingScreenFourSubtitle": {
+    "description": "Subtitle for the fourth onboarding screen, explaining how users can transfer or export call logs."
+  },
+  "@onboardingScreenFourTitle": {
+    "description": "Title for the fourth onboarding screen, showcasing the app's import and export features."
+  },
+  "@onboardingScreenOneSubtitle": {
+    "description": "Subtitle for the first onboarding screen, introducing Logger as a call log management and analysis app."
+  },
+  "@onboardingScreenOneTitle": {
+    "description": "Title for the first onboarding screen welcoming the user to Logger."
+  },
+  "@onboardingScreenThreeSubtitle": {
+    "description": "Subtitle for the third onboarding screen, explaining the detailed insights the app provides about call patterns."
+  },
+  "@onboardingScreenThreeTitle": {
+    "description": "Title for the third onboarding screen, emphasizing the app's call analysis capabilities."
+  },
+  "@onboardingScreenTwoSubtitle": {
+    "description": "Subtitle for the second onboarding screen, describing the app's intuitive interface for managing call logs."
+  },
+  "@onboardingScreenTwoTitle": {
+    "description": "Title for the second onboarding screen, highlighting the app's call log management features."
+  },
+  "@openText": {
+    "description": "Text for a button or action to open a specific item or section."
+  },
+  "@outgoingText": {
+    "description": "Label indicating outgoing calls."
+  },
+  "@phoneAccountIdText": {
+    "description": "Label used to display the identifier for the phone account used for the call."
+  },
+  "@platformNameText": {
+    "description": "Text indicating the name of the platform, e.g., Android."
+  },
+  "@platformText": {
+    "description": "Label used to display the platform on which the app is running."
+  },
+  "@randomDTRepr": {
+    "description": "Example of a full date and time representation (e.g., Fri, Jul 12 2024 14:15:00)."
+  },
+  "@randomMonthAbbr": {
+    "description": "Example of an abbreviated month name (e.g., Jul)."
+  },
+  "@randomMonthName": {
+    "description": "Example of a full month name (e.g., July)."
   },
   "@randomWeekdayAbbr": {
     "description": "Example of an abbreviated weekday name (e.g., Fri)."
@@ -449,13 +276,186 @@
   "@randomWeekdayName": {
     "description": "Example of a full weekday name (e.g., Friday)."
   },
-  "@randomMonthName": {
-    "description": "Example of a full month name (e.g., July)."
+  "@refreshText": {
+    "description": "Text for a button to refresh the current view or data."
   },
-  "@randomMonthAbbr": {
-    "description": "Example of an abbreviated month name (e.g., Jul)."
+  "@rejectedText": {
+    "description": "Label indicating rejected calls."
   },
-  "@randomDTRepr": {
-    "description": "Example of a full date and time representation (e.g., Fri, Jul 12 2024 14:15:00)."
-  }
+  "@reportIssueButtonText": {
+    "description": "Text for a button that allows users to report a problem or bug."
+  },
+  "@resetText": {
+    "description": "Text for a button to reset the current settings or input."
+  },
+  "@resetToDefaultText": {
+    "description": "Text for a button that resets all settings or filters to their default values."
+  },
+  "@saveText": {
+    "description": "Text for a button to save changes or preferences."
+  },
+  "@settingsScreenLabelText": {
+    "description": "Label for the settings screen where users can configure the app."
+  },
+  "@shareText": {
+    "description": "Text for a button to share files or information."
+  },
+  "@showTotalCallDurationText": {
+    "description": "Option to display the total duration of all calls."
+  },
+  "@simText": {
+    "description": "Label used to display the name of the SIM card associated with the call."
+  },
+  "@skipText": {
+    "description": "Text displayed on a button to skip the current step."
+  },
+  "@startImportText": {
+    "description": "Text for a button to start importing call logs."
+  },
+  "@storagePolicyLabelText": {
+    "description": "Label for the section or option related to the app's storage policy."
+  },
+  "@storagePolicyText": {
+    "description": "Description of the app's policy for temporary file storage and call log privacy."
+  },
+  "@supportedFormatInformation": {
+    "description": "Information about the supported formats for importing call logs, currently limited to CSV."
+  },
+  "@timeText": {
+    "description": "Label used to display or refer to time."
+  },
+  "@tokenAccordianText": {
+    "description": "Label for an accordion section detailing date and time formatting tokens."
+  },
+  "@tokensInfoText": {
+    "description": "Information about tokens that can be used to customize filename formats based on date and time."
+  },
+  "@unknownText": {
+    "description": "Text displayed when the required information is not available."
+  },
+  "@versionText": {
+    "description": "Label used to display the app version."
+  },
+  "@viewText": {
+    "description": "Text for a button to view details or content."
+  },
+  "@wifiIncomingText": {
+    "description": "Label indicating incoming calls made over WiFi."
+  },
+  "@wifiOutgoingText": {
+    "description": "Label indicating outgoing calls made over WiFi."
+  },
+  "aboutText": "About",
+  "advancedSettingsLabelText": "Advanced Settings",
+  "analyticsPolicyLabelText": "Analytics Policy",
+  "analyticsPolicyText": "All call log data is analyzed locally on your device and never transmitted to online servers, ensuring your privacy and keeping your information safe and confidential",
+  "analyticsScreenLabelText": "Analytics",
+  "appError": "Ah snap! Something went wrong",
+  "appTitle": "Logger",
+  "applyFiltersText": "Apply Filters",
+  "baseGhostErrorMessage": "Something went wrong",
+  "baseSettingsLabelText": "General Settings",
+  "blockedText": "Blocked",
+  "callLogsExportFailureText": "Error while downloading file !",
+  "callLogsExportFormatLabelText": "Call logs export format",
+  "callLogsExportSuccessText": "Call logs extracted and downloaded successfully",
+  "callTypeText": "Call Type",
+  "cancelText": "Cancel",
+  "configureText": "Configure",
+  "confirmImportLabelText": "Confirm Import Start",
+  "confirmImportText": "Importing call logs is a significant task that can irreversibly corrupt your current logs, overwrite data, and cause inconsistencies in your history. Please be aware that this process may take some time and could lead to the issues mentioned above. Proceed with caution.",
+  "continueText": "Continue",
+  "dateText": "Date",
+  "disableLogsSharingText": "Disable call log sharing",
+  "donateText": "Donate",
+  "downloadConfirmationText": "Are you sure you want to download your call logs in {currentImportType} format? This action will save your call history to a {currentImportType} file on your device.",
+  "downloadText": "Download",
+  "dtAAcronymExapandedText": "Full weekday name",
+  "dtBAcronymExapandedText": "Full month name",
+  "dtHAcronymExapandedText": "Hour in 24-hour format",
+  "dtIAcronymExapandedText": "Hour in 12-hour format",
+  "dtMAcronymExapandedText": "Minutes",
+  "dtSAcronymExapandedText": "Seconds",
+  "dtUAcronymExapandedText": "Week number of the year (Sunday as the first day of the week)",
+  "dtWAcronymExapandedText": "Week number of the year (Monday as the first day of the week)",
+  "dtXAcronymExapandedText": "Time representation",
+  "dtYAcronymExapandedText": "Year with century",
+  "dtZAcronymExapandedText": "Time zone name",
+  "dtaAcronymExapandedText": "Abbreviated weekday name",
+  "dtbAcronymExapandedText": "Abbreviated month name",
+  "dtcAcronymExapandedText": "Date and time representation",
+  "dtdAcronymExapandedText": "Day of the month",
+  "dtfAcronymExapandedText": "Milliseconds",
+  "dtjAcronymExapandedText": "Day of the year",
+  "dtmAcronymExapandedText": "Month as a number",
+  "dtpAcronymExapandedText": "AM/PM marker",
+  "dtxAcronymExapandedText": "Date representation",
+  "dtyAcronymExapandedText": "Year without century",
+  "dtzAcronymExapandedText": "Time zone offset from UTC",
+  "durationText": "Duration",
+  "enableCallDurationFilteringText": "Enable duration filtering",
+  "enableCallLogCountVisibilityText": "Show call logs count",
+  "enableFilterByAccountIdText": "Enable filter by account id",
+  "enableLogsSharingText": "Disable call log sharing",
+  "exploreNowText": "Explore now",
+  "exploreProjectButtonText": "Explore Project on Github",
+  "exportFileNameFormatLabelText": "Export filename format",
+  "filenameFormatHintText": "my-call-logs-[%token]",
+  "filenameFormatLabelText": "Filename format",
+  "filterText": "Filter",
+  "getStartedText": "Get Started",
+  "ghostErrorMessage": "Hmm. Something went wrong",
+  "hideText": "Hide",
+  "hintMobileNumberText": "9XXXX XXXX",
+  "importCallLogsText": "Import your call logs",
+  "incomingText": "Incoming",
+  "logsScreenLabelText": "Logs",
+  "maximumDurationHintText": "eg: 60",
+  "maximumDurationLabelText": "Min (in secs)",
+  "minimumDurationHintText": "eg: 0",
+  "minimumDurationLabelText": "Min (in secs)",
+  "missedText": "Missed",
+  "mobileNumberText": "Mobile Number",
+  "nextText": "Next",
+  "onboardingScreenFourSubtitle": "Seamlessly transfer call logs between devices or export them for safekeeping and analysis.",
+  "onboardingScreenFourTitle": "Import & Export",
+  "onboardingScreenOneSubtitle": "Your go-to app for managing and analyzing your call logs effortlessly.",
+  "onboardingScreenOneTitle": "Welcome to Logger!",
+  "onboardingScreenThreeSubtitle": "Understand your call patterns like never before and get detailed insights to optimize your time.",
+  "onboardingScreenThreeTitle": "Analyze Your Calls",
+  "onboardingScreenTwoSubtitle": "Search, filter, and manage your call logs with a seamless and intuitive interface.",
+  "onboardingScreenTwoTitle": "Manage Call Logs",
+  "openText": "Open",
+  "outgoingText": "Outgoing",
+  "phoneAccountIdText": "Phone Account ID",
+  "platformNameText": "Android",
+  "platformText": "platform",
+  "randomDTRepr": "Fri, Jul 12 2024 14:15:00",
+  "randomMonthAbbr": "Jul",
+  "randomMonthName": "July",
+  "randomWeekdayAbbr": "Fri",
+  "randomWeekdayName": "Friday",
+  "refreshText": "Refresh",
+  "rejectedText": "Rejected",
+  "reportIssueButtonText": "Report a Problem or Bug",
+  "resetText": "Reset",
+  "resetToDefaultText": "Reset to Default",
+  "saveText": "Save",
+  "settingsScreenLabelText": "Settings",
+  "shareText": "Share",
+  "showTotalCallDurationText": "Show total call duration",
+  "simText": "SIM Display Name",
+  "skipText": "Skip",
+  "startImportText": "Start Import",
+  "storagePolicyLabelText": "Storage Policy",
+  "storagePolicyText": "This app temporarily stores generated files, deleting them on exit. You can download call logs to your chosen location. Logger only accesses call logs, ensuring your privacy.",
+  "supportedFormatInformation": "Please note: Only CSV format is currently supported for importing call logs.",
+  "timeText": "Time",
+  "tokenAccordianText": "date & time formatting tokens",
+  "tokensInfoText": "You can use the tokens provided to customize your filename format based on specific date and time preferences.",
+  "unknownText": "Unknown",
+  "versionText": "version",
+  "viewText": "View",
+  "wifiIncomingText": "Wifi Incoming",
+  "wifiOutgoingText": "Wifi Outgoing"
 }
