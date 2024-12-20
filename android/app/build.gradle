@@ -71,6 +71,9 @@ android {
             shrinkResources true
             signingConfig signingConfigs.release
         }
+        debug{
+            minifyEnabled true
+        }
     }
     dependenciesInfo {
         // Disables dependency metadata when building APKs.
