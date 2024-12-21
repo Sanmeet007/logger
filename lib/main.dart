@@ -15,7 +15,7 @@ void main() async {
       themeMode: ThemeMode.system,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      locale: const Locale("en"),
+      locale: const Locale("hi"),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Application(widgetsBinding: widgetsBinding),

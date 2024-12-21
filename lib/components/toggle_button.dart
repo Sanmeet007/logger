@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomToggleButtons extends StatefulWidget {
   final List<CallType> selectedCallTypes;
@@ -15,62 +16,61 @@ class CustomToggleButtons extends StatefulWidget {
 }
 
 class _CustomToggleButtonsState extends State<CustomToggleButtons> {
-  List options = [
-    {
-      'title': 'Missed',
-      'isActive': false,
-      'value': CallType.missed,
-    },
-    {
-      'title': 'Rejected',
-      'isActive': false,
-      'value': CallType.rejected,
-    },
-    {
-      'title': 'Incoming',
-      'isActive': false,
-      'value': CallType.incoming,
-    },
-    {
-      'title': 'Outgoing',
-      'isActive': false,
-      'value': CallType.outgoing,
-    },
-    {
-      'title': 'Answered Externally',
-      'isActive': false,
-      'value': CallType.answeredExternally
-    },
-    {
-      'title': 'Blocked',
-      'isActive': false,
-      'value': CallType.blocked,
-    },
-    {
-      'title': 'Wifi Incoming',
-      'isActive': false,
-      'value': CallType.wifiIncoming,
-    },
-    {
-      'title': 'Wifi Outgoing',
-      'isActive': false,
-      'value': CallType.wifiOutgoing,
-    },
-    {
-      'title': 'Voice Mail',
-      'isActive': false,
-      'value': CallType.voiceMail,
-    },
-    {
-      'title': 'Uknown',
-      'isActive': false,
-      'value': CallType.unknown,
-    },
-  ];
+  List options = [];
 
-  @override
-  void initState() {
-    super.initState();
+  void initOptions(BuildContext context) {
+    options = [
+      {
+        'title': AppLocalizations.of(context)!.missedText,
+        'isActive': false,
+        'value': CallType.missed,
+      },
+      {
+        'title': AppLocalizations.of(context)!.rejectedText,
+        'isActive': false,
+        'value': CallType.rejected,
+      },
+      {
+        'title': AppLocalizations.of(context)!.incomingText,
+        'isActive': false,
+        'value': CallType.incoming,
+      },
+      {
+        'title': AppLocalizations.of(context)!.outgoingText,
+        'isActive': false,
+        'value': CallType.outgoing,
+      },
+      {
+        'title': AppLocalizations.of(context)!.answeredExternallyText,
+        'isActive': false,
+        'value': CallType.answeredExternally
+      },
+      {
+        'title': AppLocalizations.of(context)!.blockedText,
+        'isActive': false,
+        'value': CallType.blocked,
+      },
+      {
+        'title': AppLocalizations.of(context)!.wifiIncomingText,
+        'isActive': false,
+        'value': CallType.wifiIncoming,
+      },
+      {
+        'title': AppLocalizations.of(context)!.wifiOutgoingText,
+        'isActive': false,
+        'value': CallType.wifiOutgoing,
+      },
+      {
+        'title': AppLocalizations.of(context)!.voiceMailText,
+        'isActive': false,
+        'value': CallType.voiceMail,
+      },
+      {
+        'title': AppLocalizations.of(context)!.unknownText,
+        'isActive': false,
+        'value': CallType.unknown,
+      },
+    ];
     for (var item in options) {
       if (widget.selectedCallTypes.contains(item["value"])) {
         item["isActive"] = true;
@@ -78,6 +78,15 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
         item["isActive"] = false;
       }
     }
+
+    // Updating state to reflect changes
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => initOptions(context));
   }
 
   changeState(item) {

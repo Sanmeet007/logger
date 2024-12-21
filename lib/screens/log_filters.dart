@@ -253,8 +253,8 @@ class _LogFiltersState extends State<LogFilters> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedText(
-                            "Specific phone number",
+                          SizedText(
+                            AppLocalizations.of(context)!.searchByNumberText,
                             size: 18.0,
                           ),
                           Switch(
@@ -306,8 +306,9 @@ class _LogFiltersState extends State<LogFilters> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedText(
-                              "Phone Account Id",
+                            SizedText(
+                              AppLocalizations.of(context)!
+                                  .phoneAccountIdFilterText,
                               size: 18.0,
                             ),
                             Container(
@@ -338,7 +339,10 @@ class _LogFiltersState extends State<LogFilters> {
                                     (item) => DropdownMenuItem(
                                       value: item,
                                       child: Text(
-                                        item,
+                                        item == "Any"
+                                            ? AppLocalizations.of(context)!
+                                                .anyText
+                                            : item,
                                       ),
                                     ),
                                   )
@@ -370,8 +374,9 @@ class _LogFiltersState extends State<LogFilters> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedText(
-                              "Filter by call duration",
+                            SizedText(
+                              AppLocalizations.of(context)!
+                                  .filterByDurationText,
                               size: 18.0,
                             ),
                             Switch(
@@ -452,8 +457,8 @@ class _LogFiltersState extends State<LogFilters> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedText(
-                        "Call Type",
+                      SizedText(
+                        AppLocalizations.of(context)!.filterByCallTypeText,
                         size: 18.0,
                       ),
                       const SizedBox(
@@ -484,8 +489,8 @@ class _LogFiltersState extends State<LogFilters> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const SizedText(
-                            "Date range",
+                          SizedText(
+                            AppLocalizations.of(context)!.dateRangeText,
                             size: 18.0,
                           ),
                           Container(
@@ -510,19 +515,51 @@ class _LogFiltersState extends State<LogFilters> {
                                 value: dateRangeOption,
                                 items: [
                                   ...[
-                                    "Today",
-                                    "Yesterday",
-                                    "This Month",
-                                    "Past Month",
-                                    "This Year",
-                                    "Past Year",
-                                    "All Time",
-                                    "Custom"
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .todayText,
+                                      "key": "Today"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .yesterdayText,
+                                      "key": "Yesterday"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .thisMonthText,
+                                      "key": "This Month"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .pastMonthText,
+                                      "key": "Past Month"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .thisYearText,
+                                      "key": "This Year"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .pastYearText,
+                                      "key": "Past Year"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .allTimeText,
+                                      "key": "All Time"
+                                    },
+                                    {
+                                      "value": AppLocalizations.of(context)!
+                                          .customText,
+                                      "key": "Custom"
+                                    }
                                   ].map(
                                     (item) => DropdownMenuItem(
-                                      value: item,
+                                      value: item["key"],
                                       child: Text(
-                                        item,
+                                        item["value"]!,
                                       ),
                                     ),
                                   )
@@ -540,7 +577,8 @@ class _LogFiltersState extends State<LogFilters> {
                             LoggerDatePicker(
                               controller: _startDateController,
                               onChanged: handleStartDateChanges,
-                              fieldTitle: "Start Date",
+                              fieldTitle:
+                                  AppLocalizations.of(context)!.startDateText,
                               firstDate: DateTime(1995),
                               lastDate:
                                   DateTime.now().add(const Duration(days: 0)),
@@ -551,10 +589,10 @@ class _LogFiltersState extends State<LogFilters> {
                             LoggerDatePicker(
                               controller: _endDateController,
                               onChanged: handleEndDateChanges,
-                              fieldTitle: "End Date",
+                              fieldTitle:
+                                  AppLocalizations.of(context)!.endDateText,
                               firstDate: DateTime(1995),
-                              lastDate:
-                                  DateTime.now().add(const Duration(days: 0)),
+                              lastDate: DateTime.now(),
                             ),
                             const SizedBox(
                               height: 10.0,

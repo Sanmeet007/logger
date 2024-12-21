@@ -353,7 +353,8 @@ class _ScreenManagerState extends State<ScreenManager> {
                                 : null,
                           ),
                           IconButton(
-                            tooltip: "Export Open",
+                            tooltip: AppLocalizations.of(context)!
+                                .exportOpenHintText,
                             splashRadius: 22.0,
                             icon: const Icon(Icons.file_open_outlined),
                             onPressed: !isTaskRunning
