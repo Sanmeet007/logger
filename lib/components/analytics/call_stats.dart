@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CallStatsTile extends StatelessWidget {
   final double spacing;
@@ -22,8 +23,8 @@ class CallStatsTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (showTitle)
-          const SizedText(
-            "Call Statistics",
+          SizedText(
+            AppLocalizations.of(context)!.callStatsText,
             size: 20,
           ),
         if (showTitle)

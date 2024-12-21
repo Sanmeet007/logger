@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/contact_log_freq.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/utils/analytics_fns.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CallFreqTile extends StatelessWidget {
   final double spacing;
@@ -16,8 +17,8 @@ class CallFreqTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedText(
-          "Most Called Number",
+        SizedText(
+          AppLocalizations.of(context)!.mostCalledNumberText,
           size: 20.0,
         ),
         SizedBox(

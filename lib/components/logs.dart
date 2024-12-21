@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:logger/components/logs_builder.dart';
 import 'package:logger/components/quick_summary.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -152,7 +153,10 @@ class _LogsPageState extends State<LogsPage> {
 
     return Container(
       padding: const EdgeInsets.all(10.0),
-      child: const Center(child: Text("Nothing to display")),
+      child: Center(
+          child: Text(
+        AppLocalizations.of(context)!.nothingToDisplayText,
+      )),
     );
   }
 }

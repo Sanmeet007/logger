@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/contact_log.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/components/sized_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TopContactsTile extends StatelessWidget {
   final double spacing;
@@ -21,10 +22,11 @@ class TopContactsTile extends StatelessWidget {
       children: [
         SizedText(
           entries.length < 2
-              ? "Longest Call"
+              ? AppLocalizations.of(context)!.longestCallText
               : entries.length > 4
-                  ? "Top 5 Longest Calls"
-                  : "Top ${entries.length} Longest Calls",
+                  ? AppLocalizations.of(context)!.topNLongestCalls(5)
+                  : AppLocalizations.of(context)!
+                      .topNLongestCalls(entries.length),
           size: 20.0,
         ),
         SizedBox(

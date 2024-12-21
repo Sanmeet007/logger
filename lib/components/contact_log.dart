@@ -36,7 +36,7 @@ class ContactLog extends StatelessWidget {
                   ? const Color.fromARGB(255, 235, 235, 235)
                   : Colors.white,
               icon: Icons.call,
-              label: 'Call',
+              label: AppLocalizations.of(context)!.callText,
             ),
             SlidableAction(
               autoClose: true,
@@ -48,7 +48,7 @@ class ContactLog extends StatelessWidget {
               backgroundColor: const Color.fromARGB(255, 134, 53, 255),
               foregroundColor: Colors.white,
               icon: Icons.message,
-              label: 'SMS',
+              label: AppLocalizations.of(context)!.smsText,
             ),
           ],
         ),

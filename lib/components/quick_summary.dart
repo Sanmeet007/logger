@@ -4,6 +4,7 @@ import 'package:logger/components/analytics/call_stats.dart';
 import 'package:logger/components/grid_skeleton.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuickLogSummary extends StatelessWidget {
   final Iterable<CallLogEntry> logs;
@@ -86,11 +87,11 @@ class _QuickSummaryStatsTileBuilderState
               if (snapshot.hasData) {
                 return CallStatsTile(
                   showTitle: false,
-                  labels: const [
-                    "Calls Made",
-                    "Calls Received",
-                    "Calls Missed",
-                    "Calls Rejected",
+                  labels: [
+                    AppLocalizations.of(context)!.callsMadeText,
+                    AppLocalizations.of(context)!.callsReceivedText,
+                    AppLocalizations.of(context)!.callsMissedText,
+                    AppLocalizations.of(context)!.callsRejectedText,
                   ],
                   icons: const [
                     Icon(

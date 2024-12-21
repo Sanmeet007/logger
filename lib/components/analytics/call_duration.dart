@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/components/sized_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CallDurationTile extends StatelessWidget {
   final double spacing;
@@ -18,8 +19,8 @@ class CallDurationTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedText(
-          "Call Duration",
+        SizedText(
+          AppLocalizations.of(context)!.callDurationText,
           size: 20,
         ),
         SizedBox(

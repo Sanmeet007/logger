@@ -457,5 +457,31 @@
   "versionText": "version",
   "viewText": "View",
   "wifiIncomingText": "Wifi Incoming",
-  "wifiOutgoingText": "Wifi Outgoing"
+  "wifiOutgoingText": "Wifi Outgoing",
+  "callStatsText": "Call Statistics",
+  "callDurationText":"Call Duration",
+  "mostCalledNumberText":"Most Called Number",
+  "callDirectionAnalysisText" :"Call Direction Analysis",
+  "longestCallText":"Longest Call",
+  "topNLongestCalls":"Top {n} Longest Calls",
+  "@topNLongestCalls": {
+    "description": "Text for the top N longest calls, where N is a number.",
+    "placeholders": {
+      "n": {
+        "example": "5",
+        "type": "int"
+      }
+    }
+  },
+  "callText":"Call",
+  "smsText":"SMS",
+  "nothingToDisplayText":"Nothing to display",
+  "callsMadeText":"Calls Made",
+  "callsReceivedText":"Calls Received",
+  "callsMissedText":"Calls Missed",
+  "callsRejectedText":"Calls Rejected",
+  "callsBlockedText":"Calls Blocked",
+  "averageText":"Average",
+  "longestText":"Longest",
+  "totalText":"Total"
 }

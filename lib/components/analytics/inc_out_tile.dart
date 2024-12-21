@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/analytics/indicator.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class IncomingVsOutgoingTile extends StatelessWidget {
   final double spacing;
@@ -22,8 +23,8 @@ class IncomingVsOutgoingTile extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedText(
-          "Call Direction Analysis",
+        SizedText(
+          AppLocalizations.of(context)!.callDirectionAnalysisText,
           size: 20.0,
         ),
         SizedBox(
@@ -43,7 +44,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Indicator(
-                    text: 'Outgoing',
+                    text: AppLocalizations.of(context)!.outgoingText,
                     color: const Color.fromARGB(255, 175, 121, 255),
                     isSquare: false,
                     size: 16,
@@ -53,7 +54,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                   ),
                   Indicator(
                     color: Colors.blue,
-                    text: 'Incoming',
+                    text: AppLocalizations.of(context)!.incomingText,
                     isSquare: false,
                     size: 16,
                     textColor: Theme.of(context).brightness == Brightness.dark

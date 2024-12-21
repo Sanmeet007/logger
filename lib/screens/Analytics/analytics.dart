@@ -265,8 +265,15 @@ class CallDurationTileBuilder extends StatelessWidget {
               if (snapshot.hasData) {
                 return CallDurationTile(
                   labels: showTotalCallDuration
-                      ? ["Average", "Longest", "Total"]
-                      : ["Average", "Longest"],
+                      ? [
+                          AppLocalizations.of(context)!.averageText,
+                          AppLocalizations.of(context)!.longestText,
+                          AppLocalizations.of(context)!.totalText,
+                        ]
+                      : [
+                          AppLocalizations.of(context)!.averageText,
+                          AppLocalizations.of(context)!.longestText,
+                        ],
                   values: snapshot.data as List<String>,
                 );
               } else {
@@ -318,11 +325,11 @@ class CallStatsTileBuilder extends StatelessWidget {
             default:
               if (snapshot.hasData) {
                 return CallStatsTile(
-                  labels: const [
-                    "Calls Made",
-                    "Calls Rejected",
-                    "Calls Missed",
-                    "Calls Blocked",
+                  labels: [
+                    AppLocalizations.of(context)!.callsMadeText,
+                    AppLocalizations.of(context)!.callsRejectedText,
+                    AppLocalizations.of(context)!.callsMissedText,
+                    AppLocalizations.of(context)!.callsBlockedText,
                   ],
                   icons: const [
                     Icon(
