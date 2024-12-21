@@ -93,20 +93,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
         var uri = uris.first;
         var fileContents = await getDocumentContent(uri);
         if (fileContents == null) return;
-        widget.showLinearProgressLoader(waitingMessage: "Processing file");
+        if (mounted) {
+          widget.showLinearProgressLoader(
+            waitingMessage: AppLocalizations.of(context)!.processingFileText,
+          );
+        }
 
         var callLogs = await CsvToMapConverter.generateCsvMap(fileContents);
 
-        widget.showLinearProgressLoader(waitingMessage: "Inserting logs");
+        if (mounted) {
+          widget.showLinearProgressLoader(
+            waitingMessage: AppLocalizations.of(context)!.insertingLogsText,
+          );
+        }
         Future.delayed(const Duration(seconds: 12), () {
-          if (!isDone) {
+          if (!isDone && mounted) {
             widget.showLinearProgressLoader(
-                waitingMessage: "This may take longer");
+              waitingMessage: AppLocalizations.of(context)!.takingMoreTimeText,
+            );
           }
         });
         Future.delayed(const Duration(seconds: 20), () {
-          if (!isDone) {
-            widget.showLinearProgressLoader(waitingMessage: "Please wait");
+          if (!isDone && mounted) {
+            widget.showLinearProgressLoader(
+              waitingMessage: AppLocalizations.of(context)!.pleaseWaitText,
+            );
           }
         });
 
@@ -116,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           if (x) {
             AppSnackBar.show(
               context,
-              content: "Call logs imported successfully",
+              content: AppLocalizations.of(context)!.importSuccessMessageText,
               useAction: true,
               buttonOnPressed: () {
                 widget.refresher?.call();
@@ -228,22 +239,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   await widget.setShareButtonState(newState);
                               if (r == null || !r) {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .failedToUpdateSettingsText,
+                                  );
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Sharing settings updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .shareSettingUpdateSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -270,22 +287,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .setConfirmBeforeDownloadingState(newState);
                               if (r == null || !r) {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .failedToUpdateSettingsText,
+                                  );
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Downloading settings updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .downloadSettingUpdatedSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -312,20 +335,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (r == null || !r) {
                                 if (context.mounted) {
                                   AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                      content: AppLocalizations.of(context)!
+                                          .failedToUpdateSettingsText);
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content: "Setting updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .settingUpdateSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -353,21 +381,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (r == null || !r) {
                                 if (context.mounted) {
                                   AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                      content: AppLocalizations.of(context)!
+                                          .failedToUpdateSettingsText);
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Duration filtering settings updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .durationFilterSettingUpdatedSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -394,22 +426,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .setPhoneAccountIdFilteringState(newState);
                               if (r == null || !r) {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .failedToUpdateSettingsText,
+                                  );
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Filter by phone account id settings updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .filterByPhoneAccountIdSettingUpdatedSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -436,21 +474,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   .setShowTotalCallDuration(newState);
                               if (r == null || !r) {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .failedToUpdateSettingsText,
+                                  );
                                 }
                               } else {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content: "Setting updated successfully.");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .generalSettingUpdatedSuccessMsgText,
+                                  );
                                 }
                               }
                             } catch (_) {
                               if (context.mounted) {
-                                AppSnackBar.show(context,
-                                    content:
-                                        "Failed to update settings. Please try again later");
+                                AppSnackBar.show(
+                                  context,
+                                  content: AppLocalizations.of(context)!
+                                      .failedToUpdateSettingsText,
+                                );
                               }
                             } finally {
                               widget.hideLoader();
@@ -532,22 +577,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     await widget.setCurrentImportType(newValue);
                                 if (r == null || !r) {
                                   if (context.mounted) {
-                                    AppSnackBar.show(context,
-                                        content:
-                                            "Failed to update settings. Please try again later");
+                                    AppSnackBar.show(
+                                      context,
+                                      content: AppLocalizations.of(context)!
+                                          .failedToUpdateSettingsText,
+                                    );
                                   }
                                 } else {
                                   if (context.mounted) {
-                                    AppSnackBar.show(context,
-                                        content:
-                                            "Import settings updated successfully.");
+                                    AppSnackBar.show(
+                                      context,
+                                      content: AppLocalizations.of(context)!
+                                          .importSettingUpdatedSuccessMsgText,
+                                    );
                                   }
                                 }
                               } catch (_) {
                                 if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content:
-                                          "Failed to update settings. Please try again later");
+                                  AppSnackBar.show(
+                                    context,
+                                    content: AppLocalizations.of(context)!
+                                        .failedToUpdateSettingsText,
+                                  );
                                 }
                               } finally {
                                 widget.hideLoader();

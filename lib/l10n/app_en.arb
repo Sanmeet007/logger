@@ -502,5 +502,18 @@
   "answeredExternallyText": "Answered Externally",
   "voiceMailText": "Voice Mail",
   "exportOpenHintText": "Export Open",
-  "anyText":"Any"
+  "anyText": "Any",
+  "processingFileText": "Processing file",
+  "insertingLogsText": "Inserting logs",
+  "takingMoreTimeText": "This may take longer",
+  "pleaseWaitText": "Please wait",
+  "importSuccessMessageText": "Call logs imported successfully",
+  "failedToUpdateSettingsText": "Failed to update settings. Please try again later",
+  "shareSettingUpdateSuccessMsgText": "Sharing settings updated successfully.",
+  "downloadSettingUpdatedSuccessMsgText": "Downloading settings updated successfully.",
+  "settingUpdateSuccessMsgText": "Setting updated successfully.",
+  "durationFilterSettingUpdatedSuccessMsgText": "Duration filter settings updated successfully.",
+  "filterByPhoneAccountIdSettingUpdatedSuccessMsgText": "Filter by phone account id settings updated successfully.",
+  "generalSettingUpdatedSuccessMsgText": "Settings updated successfully.",
+  "importSettingUpdatedSuccessMsgText": "Import settings updated successfully."
 }

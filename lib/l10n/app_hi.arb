@@ -156,5 +156,18 @@
   "answeredExternallyText": "बाहरी उत्तर",
   "voiceMailText": "वॉयस मेल",
   "exportOpenHintText": "निर्यात खोलें",
-  "anyText": "कोई भी"
+  "anyText": "कोई भी",
+  "processingFileText": "फ़ाइल प्रोसेस हो रही है",
+  "insertingLogsText": "लॉग्स डाले जा रहे हैं",
+  "takingMoreTimeText": "यह अधिक समय ले सकता है",
+  "pleaseWaitText": "कृपया प्रतीक्षा करें",
+  "importSuccessMessageText": "कॉल लॉग्स सफलतापूर्वक आयात किए गए",
+  "failedToUpdateSettingsText": "सेटिंग्स अपडेट करने में विफल। कृपया बाद में पुनः प्रयास करें",
+  "shareSettingUpdateSuccessMsgText": "साझा सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "downloadSettingUpdatedSuccessMsgText": "डाउनलोड सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "settingUpdateSuccessMsgText": "सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "durationFilterSettingUpdatedSuccessMsgText": "ड्यूरेशन फ़िल्टर सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "filterByPhoneAccountIdSettingUpdatedSuccessMsgText": "फोन खाता आईडी द्वारा फ़िल्टर सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "generalSettingUpdatedSuccessMsgText": "सामान्य सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "importSettingUpdatedSuccessMsgText": "आयात सेटिंग्स सफलतापूर्वक अपडेट की गईं।"
 }
