@@ -35,7 +35,8 @@ class GroupedLogsBuilder extends StatelessWidget {
             timestamp: timestamp,
           );
 
-          String phoneNumber = entry.number ?? "n/a";
+          String phoneNumber =
+              entry.number ?? AppLocalizations.of(context)!.naText;
 
           var details = getCallDisplayFields(
             entry.callType ?? CallType.unknown,

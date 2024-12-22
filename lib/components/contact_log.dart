@@ -74,14 +74,16 @@ class ContactLog extends StatelessWidget {
                     return LogDetails(
                       name: logDetails.name ??
                           AppLocalizations.of(context)!.unknownText,
-                      phoneNumber: logDetails.number ?? "n/a",
+                      phoneNumber: logDetails.number ??
+                          AppLocalizations.of(context)!.naText,
                       callIcon: details[1],
                       callColor: details[0],
                       timeString: formatTimeFromTimeStamp(
                         timestamp: timestamp,
                         context: context,
                       ),
-                      formattedDate: formatDateFromTimestamp(timestamp),
+                      formattedDate:
+                          formatDateFromTimestamp(timestamp, context),
                       duration: duration,
                       callType: details[2],
                       sim: logDetails.simDisplayName ??
@@ -107,8 +109,7 @@ class ContactLog extends StatelessWidget {
             ),
             trailing: Text(
               prettifyDuration(
-                Duration(seconds: logDetails.duration ?? 0),
-              ),
+                  Duration(seconds: logDetails.duration ?? 0), context),
               style: const TextStyle(
                 fontSize: 14.0,
               ),
