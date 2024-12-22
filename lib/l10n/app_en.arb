@@ -345,6 +345,201 @@
   "@wifiOutgoingText": {
     "description": "Label indicating outgoing calls made over WiFi."
   },
+  "@topNLongestCalls": {
+    "description": "Text for the top N longest calls, where N is a number.",
+    "placeholders": {
+      "n": {
+        "example": "5",
+        "type": "int"
+      }
+    }
+  },
+  "@callStatsText": {
+    "description": "Text for the 'Call Statistics' section"
+  },
+  "@callDurationText": {
+    "description": "Text for the 'Call Duration' section"
+  },
+  "@mostCalledNumberText": {
+    "description": "Text for the 'Most Called Number' section"
+  },
+  "@callDirectionAnalysisText": {
+    "description": "Text for the 'Call Direction Analysis' section"
+  },
+  "@longestCallText": {
+    "description": "Text for the 'Longest Call' section"
+  },
+  "@callText": {
+    "description": "Text for 'Call' button"
+  },
+  "@smsText": {
+    "description": "Text for 'SMS' section"
+  },
+  "@nothingToDisplayText": {
+    "description": "Text displayed when there's no data to show"
+  },
+  "@callsMadeText": {
+    "description": "Text for the 'Calls Made' section"
+  },
+  "@callsReceivedText": {
+    "description": "Text for the 'Calls Received' section"
+  },
+  "@callsMissedText": {
+    "description": "Text for the 'Calls Missed' section"
+  },
+  "@callsRejectedText": {
+    "description": "Text for the 'Calls Rejected' section"
+  },
+  "@callsBlockedText": {
+    "description": "Text for the 'Calls Blocked' section"
+  },
+  "@averageText": {
+    "description": "Text for 'Average' section"
+  },
+  "@longestText": {
+    "description": "Text for 'Longest' section"
+  },
+  "@totalText": {
+    "description": "Text for 'Total' section"
+  },
+  "@todayText": {
+    "description": "Text for 'Today' section"
+  },
+  "@yesterdayText": {
+    "description": "Text for 'Yesterday' section"
+  },
+  "@thisMonthText": {
+    "description": "Text for 'This Month' section"
+  },
+  "@pastMonthText": {
+    "description": "Text for 'Past Month' section"
+  },
+  "@thisYearText": {
+    "description": "Text for 'This Year' section"
+  },
+  "@pastYearText": {
+    "description": "Text for 'Past Year' section"
+  },
+  "@allTimeText": {
+    "description": "Text for 'All Time' section"
+  },
+  "@customText": {
+    "description": "Text for 'Custom' section"
+  },
+  "@startDateText": {
+    "description": "Text for the 'Start Date' field"
+  },
+  "@endDateText": {
+    "description": "Text for the 'End Date' field"
+  },
+  "@dateRangeText": {
+    "description": "Text for the 'Date range' section"
+  },
+  "@searchByNumberText": {
+    "description": "Text for searching by specific phone number"
+  },
+  "@phoneAccountIdFilterText": {
+    "description": "Text for filtering by phone account ID"
+  },
+  "@filterByDurationText": {
+    "description": "Text for filtering by call duration"
+  },
+  "@filterByCallTypeText": {
+    "description": "Text for filtering by call type"
+  },
+  "@answeredExternallyText": {
+    "description": "Text for the 'Answered Externally' section"
+  },
+  "@voiceMailText": {
+    "description": "Text for 'Voice Mail' section"
+  },
+  "@exportOpenHintText": {
+    "description": "Text for hint about exporting open"
+  },
+  "@anyText": {
+    "description": "Text for 'Any' option"
+  },
+  "@processingFileText": {
+    "description": "Text for 'Processing file' section"
+  },
+  "@insertingLogsText": {
+    "description": "Text for 'Inserting logs' section"
+  },
+  "@takingMoreTimeText": {
+    "description": "Text for 'This may take longer' message"
+  },
+  "@pleaseWaitText": {
+    "description": "Text for 'Please wait' message"
+  },
+  "@importSuccessMessageText": {
+    "description": "Text for successful import message"
+  },
+  "@failedToUpdateSettingsText": {
+    "description": "Text for failed settings update message"
+  },
+  "@shareSettingUpdateSuccessMsgText": {
+    "description": "Text for successful sharing settings update message"
+  },
+  "@downloadSettingUpdatedSuccessMsgText": {
+    "description": "Text for successful downloading settings update message"
+  },
+  "@settingUpdateSuccessMsgText": {
+    "description": "Text for successful setting update message"
+  },
+  "@durationFilterSettingUpdatedSuccessMsgText": {
+    "description": "Text for successful duration filter settings update message"
+  },
+  "@filterByPhoneAccountIdSettingUpdatedSuccessMsgText": {
+    "description": "Text for successful filter by phone account id settings update message"
+  },
+  "@generalSettingUpdatedSuccessMsgText": {
+    "description": "Text for successful general settings update message"
+  },
+  "@importSettingUpdatedSuccessMsgText": {
+    "description": "Text for successful import settings update message"
+  },
+  "@exportFieldInfoText": {
+    "description": "Text for 'Export fields information' section"
+  },
+  "@csvJsonExportNameField": {
+    "description": "Text for 'Name associated with the call log entry' field"
+  },
+  "@csvJsonExportPhoneAccountIdField": {
+    "description": "Text for 'The ID of the phone account associated with the call identifies the specific account or SIM card used to place or receive the call' field"
+  },
+  "@csvJsonExportCallTypeField": {
+    "description": "Text for 'Type of the call (e.g., incoming, outgoing, missed)' field"
+  },
+  "@csvJsonExportNumberField": {
+    "description": "Text for 'Phone number associated with the call log entry' field"
+  },
+  "@csvJsonExportFormattedNumberField": {
+    "description": "Text for 'Formatted phone number' field"
+  },
+  "@csvJsonExportSimDisplayField": {
+    "description": "Text for 'Display name of the SIM card associated with the call' field"
+  },
+  "@csvJsonExportTimestampField": {
+    "description": "Text for 'Timestamp (epoch time) of the call' field"
+  },
+  "@csvJsonExportDurationField": {
+    "description": "Text for 'Duration of the call in seconds' field"
+  },
+  "@csvJsonExportCachedNumberLabelField": {
+    "description": "Text for 'Label associated with the cached phone number' field"
+  },
+  "@csvJsonExportCachedNumberTypeField": {
+    "description": "Text for 'The cached number type (Home, Work, etc)' field"
+  },
+  "@csvJsonExportCachedMatchedNumberField": {
+    "description": "Text for 'Stored or cached phone number associated with a call log entry' field"
+  },
+  "@exportFieldInfoHintText": {
+    "description": "Text for 'Export Fields Info' hint"
+  },
+  "@naText": {
+    "description": "Text for 'n/a' (Not Applicable)"
+  },
   "aboutText": "About",
   "advancedSettingsLabelText": "Advanced Settings",
   "analyticsPolicyLabelText": "Analytics Policy",
@@ -464,15 +659,6 @@
   "callDirectionAnalysisText": "Call Direction Analysis",
   "longestCallText": "Longest Call",
   "topNLongestCalls": "Top {n} Longest Calls",
-  "@topNLongestCalls": {
-    "description": "Text for the top N longest calls, where N is a number.",
-    "placeholders": {
-      "n": {
-        "example": "5",
-        "type": "int"
-      }
-    }
-  },
   "callText": "Call",
   "smsText": "SMS",
   "nothingToDisplayText": "Nothing to display",
@@ -529,5 +715,5 @@
   "csvJsonExportCachedNumberTypeField": "The cached number type (Home, Work, etc) associated with the phone number, if it exists.",
   "csvJsonExportCachedMatchedNumberField": "Stored or cached phone number associated with a call log entry for quick reference.",
   "exportFieldInfoHintText": "Export Fields Info",
-  "naText":"n/a"
+  "naText": "n/a"
 }
