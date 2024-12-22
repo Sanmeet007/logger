@@ -7,6 +7,7 @@ class LoggerDatePicker extends StatefulWidget {
   final String fieldTitle;
   final DateTime firstDate, lastDate;
   final String dateMask;
+  final String languageCode;
 
   const LoggerDatePicker({
     super.key,
@@ -15,6 +16,7 @@ class LoggerDatePicker extends StatefulWidget {
     required this.fieldTitle,
     required this.firstDate,
     required this.lastDate,
+    required this.languageCode,
     this.dateMask = "EEEE, dd MMMM yyyy",
   });
 
@@ -32,11 +34,11 @@ class _LoggerDatePickerState extends State<LoggerDatePicker> {
   void initState() {
     super.initState();
     baseFormatter = DateFormat('yyyy-MM-dd');
-    maskedFormatter = DateFormat(widget.dateMask);
+    maskedFormatter = DateFormat(widget.dateMask, widget.languageCode);
 
     currentPickedDate = DateTime.parse(widget.controller.text);
     _controller = TextEditingController();
-    _controller.text = DateFormat(widget.dateMask).format(currentPickedDate);
+    _controller.text = maskedFormatter.format(currentPickedDate);
   }
 
   @override

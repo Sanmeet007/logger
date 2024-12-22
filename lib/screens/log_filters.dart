@@ -575,6 +575,8 @@ class _LogFiltersState extends State<LogFilters> {
                               height: 15.0,
                             ),
                             LoggerDatePicker(
+                              languageCode:
+                                  Localizations.localeOf(context).languageCode,
                               controller: _startDateController,
                               onChanged: handleStartDateChanges,
                               fieldTitle:
@@ -587,6 +589,8 @@ class _LogFiltersState extends State<LogFilters> {
                               height: 15.0,
                             ),
                             LoggerDatePicker(
+                              languageCode:
+                                  Localizations.localeOf(context).languageCode,
                               controller: _endDateController,
                               onChanged: handleEndDateChanges,
                               fieldTitle:
