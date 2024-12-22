@@ -528,5 +528,6 @@
   "csvJsonExportCachedNumberLabelField": "Label associated with the cached phone number",
   "csvJsonExportCachedNumberTypeField": "The cached number type (Home, Work, etc) associated with the phone number, if it exists.",
   "csvJsonExportCachedMatchedNumberField": "Stored or cached phone number associated with a call log entry for quick reference.",
-  "exportFieldInfoHintText": "Export Fields Info"
+  "exportFieldInfoHintText": "Export Fields Info",
+  "naText":"n/a"
 }
