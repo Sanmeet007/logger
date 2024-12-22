@@ -42,11 +42,11 @@ class _QuickSummaryStatsTileBuilderState
 
   @override
   void initState() {
-    values = getValues();
+    values = getValues(context);
     super.initState();
   }
 
-  Future<List<String>> getValues() async {
+  Future<List<String>> getValues(BuildContext context) async {
     final analyzer = CallLogAnalyzer(logs: widget.logs);
     return Future(() async {
       int rejectedCallsCount =
@@ -61,7 +61,7 @@ class _QuickSummaryStatsTileBuilderState
         incomingCallsCount,
         missedCallsCount,
         rejectedCallsCount,
-      ].map(prettifyNumbers).toList();
+      ].map((x) => prettifyNumbers(x, context)).toList();
     });
   }
 

@@ -69,9 +69,7 @@ class ContactLogFreq extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              "${prettifyNumbers(
-                count,
-              )}x",
+              "${prettifyNumbers(count, context)}x",
               style: const TextStyle(
                 fontSize: 14.0,
               ),

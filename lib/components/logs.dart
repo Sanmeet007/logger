@@ -62,7 +62,7 @@ class _LogsPageState extends State<LogsPage> {
   @override
   Widget build(BuildContext context) {
     if (widget.entries != null && widget.entries!.isNotEmpty) {
-      var logs = groupCallLogsByDate(widget.entries!);
+      var logs = groupCallLogsByDate(widget.entries!, context);
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
         floatingActionButton: AnimatedOpacity(
@@ -120,7 +120,7 @@ class _LogsPageState extends State<LogsPage> {
                           Text(mapEntry.key),
                           if (widget.callLogCountVisibility)
                             Text(
-                              prettifyNumbers(mapEntry.value.length),
+                              prettifyNumbers(mapEntry.value.length, context),
                             ),
                         ],
                       ),

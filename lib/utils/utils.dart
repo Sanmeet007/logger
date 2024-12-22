@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:duration/duration.dart' as duration_util;
+import 'package:duration/locale.dart' as duration_locale;
 
 String getVersion() {
   return "2.6.1";
@@ -30,27 +32,30 @@ String supportEmail() {
   return "ssanmeet123@gmail.com";
 }
 
-String prettifyDate(DateTime inputDate) {
+String prettifyDate(DateTime inputDate, BuildContext context) {
   DateTime now = DateTime.now();
   DateTime today = DateTime.now();
   DateTime yesterday = DateTime(now.year, now.month, now.day - 1);
 
   if (DateUtils.isSameDay(inputDate, today)) {
-    return "Today";
+    return AppLocalizations.of(context)!.todayText;
   } else if (DateUtils.isSameDay(inputDate, yesterday)) {
-    return "Yesterday";
+    return AppLocalizations.of(context)!.yesterdayText;
   } else {
-    return DateFormat('dd MMMM yyyy').format(inputDate);
+    return DateFormat(
+      'dd MMMM yyyy',
+      Localizations.localeOf(context).languageCode,
+    ).format(inputDate);
   }
 }
 
 Map<String, List<CallLogEntry>> groupCallLogsByDate(
-    Iterable<CallLogEntry> callLogs) {
+    Iterable<CallLogEntry> callLogs, BuildContext context) {
   final Map<String, List<CallLogEntry>> groupedCallLogs = {};
 
   for (var entry in callLogs) {
-    final String dateKey =
-        prettifyDate(DateTime.fromMillisecondsSinceEpoch(entry.timestamp ?? 1));
+    final String dateKey = prettifyDate(
+        DateTime.fromMillisecondsSinceEpoch(entry.timestamp ?? 1), context);
     groupedCallLogs.putIfAbsent(dateKey, () => []).add(entry);
   }
 
@@ -72,41 +77,24 @@ Uri getDonationLink() {
   return donationLink;
 }
 
-String prettifyNumbers(int n) {
-  final formatter = NumberFormat.compact(locale: "en_US");
+String prettifyNumbers(int n, BuildContext context) {
+  final formatter = NumberFormat.compact(
+    locale: Localizations.localeOf(context).languageCode,
+  );
   return formatter.format(n);
 }
 
-String prettifyDuration(Duration duration, {showDistinct = false}) {
-  if (showDistinct) {
-    if (duration.inSeconds < 60) {
-      return '${duration.inSeconds} s';
-    }
+String prettifyDuration(Duration duration, BuildContext context) {
+  final locale = Localizations.localeOf(context).languageCode;
+  duration_locale.DurationLocale? durationLocale =
+      duration_locale.DurationLocale.fromLanguageCode(locale);
 
-    int days = duration.inDays;
-    int hours = duration.inHours.remainder(24);
-    int minutes = duration.inMinutes.remainder(60);
-    int seconds = duration.inSeconds.remainder(60);
-
-    List<String> parts = [];
-
-    if (days > 0) parts.add('$days day${days > 1 ? 's' : ''}');
-    if (hours > 0) parts.add('$hours hr${hours > 1 ? 's' : ''}');
-    if (minutes > 0) parts.add('$minutes min');
-    if (seconds > 0 && parts.isEmpty) parts.add('$seconds s');
-
-    return parts.join(' ');
-  } else {
-    if (duration.inSeconds < 60) {
-      return '${duration.inSeconds} s';
-    } else if (duration.inMinutes < 60) {
-      return '${duration.inMinutes} min';
-    } else if (duration.inHours < 24) {
-      return '${duration.inHours} hrs';
-    } else {
-      return '${duration.inDays} day${duration.inDays > 1 ? 's' : ''}';
-    }
-  }
+  return duration_util.prettyDuration(
+    duration,
+    abbreviated: true,
+    locale: durationLocale ?? duration_locale.englishLocale,
+    delimiter: ' ',
+  );
 }
 
 String parsePhoneNumber(String phnum) {
@@ -172,13 +160,15 @@ String formatTimeFromTimeStamp({
 
   String format = use24HrsFormat ? 'HH:mm' : 'hh:mm a';
 
-  final timeFormatter = DateFormat(format);
+  final timeFormatter =
+      DateFormat(format, Localizations.localeOf(context).languageCode);
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return timeFormatter.format(date);
 }
 
-String formatDateFromTimestamp(int timestamp) {
-  final formatter = DateFormat("yyyy-MM-dd");
+String formatDateFromTimestamp(int timestamp, BuildContext context) {
+  final formatter =
+      DateFormat.yMMMMd(Localizations.localeOf(context).languageCode);
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return formatter.format(date);
 }

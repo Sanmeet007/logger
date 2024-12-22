@@ -73,7 +73,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                     Center(
                       child: Text(
                         prettifyNumbers(
-                            incomingCallsCount + outgoingCallsCount),
+                            incomingCallsCount + outgoingCallsCount, context),
                         style: const TextStyle(fontSize: 20.0),
                       ),
                     ),
@@ -82,12 +82,12 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                         sections: [
                           PieChartSectionData(
                             value: incomingCallsCount.toDouble(),
-                            title: prettifyNumbers(incomingCallsCount),
+                            title: prettifyNumbers(incomingCallsCount, context),
                             color: Colors.blue,
                           ),
                           PieChartSectionData(
                             value: outgoingCallsCount.toDouble(),
-                            title: prettifyNumbers(outgoingCallsCount),
+                            title: prettifyNumbers(outgoingCallsCount, context),
                             color: const Color.fromARGB(255, 175, 121, 255),
                           ),
                         ],

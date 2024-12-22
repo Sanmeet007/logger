@@ -107,7 +107,7 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
-                        prettifyDuration(Duration(seconds: duration)),
+                        prettifyDuration(Duration(seconds: duration), context),
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),

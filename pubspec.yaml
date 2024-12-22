@@ -51,6 +51,7 @@ dependencies:
   shared_preferences: ^2.2.3
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
+  duration: ^3.0.15
 
 dev_dependencies:
   flutter_test:

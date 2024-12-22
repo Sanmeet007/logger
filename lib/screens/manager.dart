@@ -387,7 +387,8 @@ class _ScreenManagerState extends State<ScreenManager> {
                     ),
                   if (_selectedIndex == 2)
                     IconButton(
-                      tooltip: "Export Fields Info",
+                      tooltip:
+                          AppLocalizations.of(context)!.exportFieldInfoHintText,
                       onPressed: openDetailedView,
                       icon: const Icon(Icons.file_present_outlined),
                     ),

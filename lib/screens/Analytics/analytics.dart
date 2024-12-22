@@ -226,23 +226,26 @@ class CallDurationTileBuilder extends StatelessWidget {
     this.showTotalCallDuration = false,
   });
 
-  Future<List<String>> getValues() async {
+  Future<List<String>> getValues(BuildContext context) async {
     return Future(() async {
       var avg = await analyzer.getAvgCallDuration();
       var longest = await analyzer.getLongestCallDuration();
       var total = await analyzer.getTotalCallDuration();
-
-      if (showTotalCallDuration) {
-        return [
-          prettifyDuration(avg),
-          prettifyDuration(longest),
-          prettifyDuration(total, showDistinct: true),
-        ];
+      if (context.mounted) {
+        if (showTotalCallDuration) {
+          return [
+            prettifyDuration(avg, context),
+            prettifyDuration(longest, context),
+            prettifyDuration(total, context),
+          ];
+        } else {
+          return [
+            prettifyDuration(avg, context),
+            prettifyDuration(longest, context),
+          ];
+        }
       } else {
-        return [
-          prettifyDuration(avg),
-          prettifyDuration(longest),
-        ];
+        return [];
       }
     });
   }
@@ -251,7 +254,7 @@ class CallDurationTileBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
         initialData: null,
-        future: getValues(),
+        future: getValues(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -288,7 +291,7 @@ class CallStatsTileBuilder extends StatelessWidget {
   final CallLogAnalyzer analyzer;
   const CallStatsTileBuilder({super.key, required this.analyzer});
 
-  Future<List<String>> getValues() async {
+  Future<List<String>> getValues(BuildContext context) async {
     return Future(() async {
       int rejectedCallsCount =
           await analyzer.getCallTypeCount(CallType.rejected);
@@ -301,7 +304,7 @@ class CallStatsTileBuilder extends StatelessWidget {
         rejectedCallsCount,
         missedCallsCount,
         blockedCallsCount
-      ].map(prettifyNumbers).toList();
+      ].map((x) => prettifyNumbers(x, context)).toList();
     });
   }
 
@@ -309,7 +312,7 @@ class CallStatsTileBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
         initialData: null,
-        future: getValues(),
+        future: getValues(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
