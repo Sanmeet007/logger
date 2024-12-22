@@ -117,9 +117,9 @@ class _ScreenManagerState extends State<ScreenManager> {
     switch (status) {
       case "success":
         AppSnackBar.show(context,
-            content: AppLocalizations.of(context)!.callLogsExportSuccessText,
+            content: AppLocalizations.of(context).callLogsExportSuccessText,
             useAction: true,
-            buttonText: AppLocalizations.of(context)!.openText,
+            buttonText: AppLocalizations.of(context).openText,
             buttonOnPressed: () {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           openFile();
@@ -128,7 +128,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case "error":
         AppSnackBar.show(
           context,
-          content: AppLocalizations.of(context)!.callLogsExportFailureText,
+          content: AppLocalizations.of(context).callLogsExportFailureText,
         );
         break;
       default:
@@ -149,7 +149,7 @@ class _ScreenManagerState extends State<ScreenManager> {
               child: Column(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.downloadConfirmationText(
+                    AppLocalizations.of(context).downloadConfirmationText(
                       widget.currentImportType.toUpperCase(),
                     ),
                   )
@@ -161,7 +161,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(AppLocalizations.of(context)!.cancelText),
+                child: Text(AppLocalizations.of(context).cancelText),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -169,7 +169,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                   downloadFile(showStatus: true);
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.continueText,
+                  AppLocalizations.of(context).continueText,
                 ),
               ),
             ],
@@ -329,7 +329,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
                 title: FittedBox(
                   child: Text(
-                    AppLocalizations.of(context)!.appTitle,
+                    AppLocalizations.of(context).appTitle,
                     style: const TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
@@ -340,7 +340,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                   ...(_selectedIndex == 0
                       ? [
                           IconButton(
-                            tooltip: AppLocalizations.of(context)!.downloadText,
+                            tooltip: AppLocalizations.of(context).downloadText,
                             splashRadius: 22.0,
                             icon: const Icon(
                               Icons.file_download_outlined,
@@ -353,8 +353,8 @@ class _ScreenManagerState extends State<ScreenManager> {
                                 : null,
                           ),
                           IconButton(
-                            tooltip: AppLocalizations.of(context)!
-                                .exportOpenHintText,
+                            tooltip:
+                                AppLocalizations.of(context).exportOpenHintText,
                             splashRadius: 22.0,
                             icon: const Icon(Icons.file_open_outlined),
                             onPressed: !isTaskRunning
@@ -363,7 +363,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                           ),
                           if (widget.showSharingButton)
                             IconButton(
-                              tooltip: AppLocalizations.of(context)!.shareText,
+                              tooltip: AppLocalizations.of(context).shareText,
                               splashRadius: 22.0,
                               icon: const Icon(Icons.share_rounded),
                               onPressed:
@@ -373,7 +373,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                       : []),
                   if (_selectedIndex == 1 || _selectedIndex == 0)
                     IconButton(
-                      tooltip: AppLocalizations.of(context)!.filterText,
+                      tooltip: AppLocalizations.of(context).filterText,
                       onPressed: showFiltersModal,
                       icon: widget.areFiltersApplied
                           ? Badge(
@@ -388,13 +388,13 @@ class _ScreenManagerState extends State<ScreenManager> {
                   if (_selectedIndex == 2)
                     IconButton(
                       tooltip:
-                          AppLocalizations.of(context)!.exportFieldInfoHintText,
+                          AppLocalizations.of(context).exportFieldInfoHintText,
                       onPressed: openDetailedView,
                       icon: const Icon(Icons.file_present_outlined),
                     ),
                   if (_selectedIndex == 3)
                     IconButton(
-                        tooltip: AppLocalizations.of(context)!.donateText,
+                        tooltip: AppLocalizations.of(context).donateText,
                         onPressed: () {
                           url_launcher.launchUrl(getDonationLink());
                         },

@@ -81,7 +81,7 @@ class LogDetails extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.timeText,
+                        AppLocalizations.of(context).timeText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
@@ -92,7 +92,7 @@ class LogDetails extends StatelessWidget {
                     const LogDivider(),
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.dateText,
+                        AppLocalizations.of(context).dateText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
@@ -103,7 +103,7 @@ class LogDetails extends StatelessWidget {
                     const LogDivider(),
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.durationText,
+                        AppLocalizations.of(context).durationText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
@@ -114,7 +114,7 @@ class LogDetails extends StatelessWidget {
                     const LogDivider(),
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.callTypeText,
+                        AppLocalizations.of(context).callTypeText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
@@ -125,7 +125,7 @@ class LogDetails extends StatelessWidget {
                     const LogDivider(),
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.simText,
+                        AppLocalizations.of(context).simText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
@@ -136,7 +136,7 @@ class LogDetails extends StatelessWidget {
                     const LogDivider(),
                     ListTile(
                       title: Text(
-                        AppLocalizations.of(context)!.phoneAccountIdText,
+                        AppLocalizations.of(context).phoneAccountIdText,
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: FittedBox(

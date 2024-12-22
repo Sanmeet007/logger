@@ -20,13 +20,13 @@ class GroupedLogsBuilder extends StatelessWidget {
         itemBuilder: (context, entryIndex) {
           var entry = entries.elementAt(entryIndex);
 
-          String name = entry.name ?? AppLocalizations.of(context)!.unknownText;
-          if (name == "") name = AppLocalizations.of(context)!.unknownText;
+          String name = entry.name ?? AppLocalizations.of(context).unknownText;
+          if (name == "") name = AppLocalizations.of(context).unknownText;
           String phoneAccountId =
-              entry.phoneAccountId ?? AppLocalizations.of(context)!.unknownText;
+              entry.phoneAccountId ?? AppLocalizations.of(context).unknownText;
 
           String sim =
-              entry.simDisplayName ?? AppLocalizations.of(context)!.unknownText;
+              entry.simDisplayName ?? AppLocalizations.of(context).unknownText;
           int duration = entry.duration ?? 0;
           int timestamp = entry.timestamp ?? 1;
 
@@ -36,7 +36,7 @@ class GroupedLogsBuilder extends StatelessWidget {
           );
 
           String phoneNumber =
-              entry.number ?? AppLocalizations.of(context)!.naText;
+              entry.number ?? AppLocalizations.of(context).naText;
 
           var details = getCallDisplayFields(
             entry.callType ?? CallType.unknown,

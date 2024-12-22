@@ -37,23 +37,23 @@ class _OnboardingUIState extends State<OnboardingUI> {
     final pages = <OnBoardingScreenItem>[
       OnBoardingScreenItem(
         imageName: "4.png",
-        title: AppLocalizations.of(context)!.onboardingScreenOneTitle,
-        subtitle: AppLocalizations.of(context)!.onboardingScreenOneSubtitle,
+        title: AppLocalizations.of(context).onboardingScreenOneTitle,
+        subtitle: AppLocalizations.of(context).onboardingScreenOneSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "1.png",
-        title: AppLocalizations.of(context)!.onboardingScreenTwoTitle,
-        subtitle: AppLocalizations.of(context)!.onboardingScreenTwoSubtitle,
+        title: AppLocalizations.of(context).onboardingScreenTwoTitle,
+        subtitle: AppLocalizations.of(context).onboardingScreenTwoSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "2.png",
-        title: AppLocalizations.of(context)!.onboardingScreenThreeTitle,
-        subtitle: AppLocalizations.of(context)!.onboardingScreenThreeSubtitle,
+        title: AppLocalizations.of(context).onboardingScreenThreeTitle,
+        subtitle: AppLocalizations.of(context).onboardingScreenThreeSubtitle,
       ),
       OnBoardingScreenItem(
         imageName: "3.png",
-        title: AppLocalizations.of(context)!.onboardingScreenFourTitle,
-        subtitle: AppLocalizations.of(context)!.onboardingScreenFourSubtitle,
+        title: AppLocalizations.of(context).onboardingScreenFourTitle,
+        subtitle: AppLocalizations.of(context).onboardingScreenFourSubtitle,
       ),
     ];
 
@@ -111,10 +111,10 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   },
                   child: Text(
                     currentIndex == 0
-                        ? AppLocalizations.of(context)!.getStartedText
+                        ? AppLocalizations.of(context).getStartedText
                         : currentIndex == 2
-                            ? AppLocalizations.of(context)!.exploreNowText
-                            : AppLocalizations.of(context)!.nextText,
+                            ? AppLocalizations.of(context).exploreNowText
+                            : AppLocalizations.of(context).nextText,
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),
@@ -130,7 +130,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                         }
                       : null,
                   child: Text(
-                    AppLocalizations.of(context)!.skipText,
+                    AppLocalizations.of(context).skipText,
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),

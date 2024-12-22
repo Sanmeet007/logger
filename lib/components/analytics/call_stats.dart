@@ -24,7 +24,7 @@ class CallStatsTile extends StatelessWidget {
       children: [
         if (showTitle)
           SizedText(
-            AppLocalizations.of(context)!.callStatsText,
+            AppLocalizations.of(context).callStatsText,
             size: 20,
           ),
         if (showTitle)

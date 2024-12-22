@@ -36,7 +36,7 @@ class ContactLog extends StatelessWidget {
                   ? const Color.fromARGB(255, 235, 235, 235)
                   : Colors.white,
               icon: Icons.call,
-              label: AppLocalizations.of(context)!.callText,
+              label: AppLocalizations.of(context).callText,
             ),
             SlidableAction(
               autoClose: true,
@@ -48,16 +48,16 @@ class ContactLog extends StatelessWidget {
               backgroundColor: const Color.fromARGB(255, 134, 53, 255),
               foregroundColor: Colors.white,
               icon: Icons.message,
-              label: AppLocalizations.of(context)!.smsText,
+              label: AppLocalizations.of(context).smsText,
             ),
           ],
         ),
         child: ListTile(
             onTap: () {
               String name =
-                  logDetails.name ?? AppLocalizations.of(context)!.unknownText;
+                  logDetails.name ?? AppLocalizations.of(context).unknownText;
               if (name == "") {
-                name = AppLocalizations.of(context)!.unknownText;
+                name = AppLocalizations.of(context).unknownText;
               }
               int duration = logDetails.duration ?? 0;
               int timestamp = logDetails.timestamp ?? 1;
@@ -73,9 +73,9 @@ class ContactLog extends StatelessWidget {
                   builder: (context) {
                     return LogDetails(
                       name: logDetails.name ??
-                          AppLocalizations.of(context)!.unknownText,
+                          AppLocalizations.of(context).unknownText,
                       phoneNumber: logDetails.number ??
-                          AppLocalizations.of(context)!.naText,
+                          AppLocalizations.of(context).naText,
                       callIcon: details[1],
                       callColor: details[0],
                       timeString: formatTimeFromTimeStamp(
@@ -87,9 +87,9 @@ class ContactLog extends StatelessWidget {
                       duration: duration,
                       callType: details[2],
                       sim: logDetails.simDisplayName ??
-                          AppLocalizations.of(context)!.unknownText,
+                          AppLocalizations.of(context).unknownText,
                       phoneAccountId: logDetails.phoneAccountId ??
-                          AppLocalizations.of(context)!.unknownText,
+                          AppLocalizations.of(context).unknownText,
                     );
                   });
             },
@@ -121,9 +121,9 @@ class ContactLog extends StatelessWidget {
                 FittedBox(
                   child: Text(
                     logDetails.name == null
-                        ? AppLocalizations.of(context)!.unknownText
+                        ? AppLocalizations.of(context).unknownText
                         : logDetails.name!.isEmpty
-                            ? AppLocalizations.of(context)!.unknownText
+                            ? AppLocalizations.of(context).unknownText
                             : logDetails.name!,
                   ),
                 ),

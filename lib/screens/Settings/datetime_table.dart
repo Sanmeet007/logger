@@ -23,7 +23,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Text(
-            AppLocalizations.of(context)!.tokensInfoText,
+            AppLocalizations.of(context).tokensInfoText,
             style: const TextStyle(fontStyle: FontStyle.italic),
           ),
         ),
@@ -50,7 +50,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     ? const Icon(Icons.keyboard_arrow_down)
                     : const Icon(Icons.keyboard_arrow_up),
                 label: Text(
-                    "${!isOpen ? AppLocalizations.of(context)!.viewText : AppLocalizations.of(context)!.hideText} ${AppLocalizations.of(context)!.tokenAccordianText}"),
+                    "${!isOpen ? AppLocalizations.of(context).viewText : AppLocalizations.of(context).hideText} ${AppLocalizations.of(context).tokenAccordianText}"),
               ),
             ),
           ],
@@ -132,7 +132,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtYAcronymExapandedText),
                       ),
                     ),
@@ -156,7 +156,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtyAcronymExapandedText,
+                          AppLocalizations.of(context).dtyAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -180,7 +180,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtmAcronymExapandedText,
+                          AppLocalizations.of(context).dtmAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -204,7 +204,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtBAcronymExapandedText,
+                          AppLocalizations.of(context).dtBAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -212,7 +212,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.randomMonthName,
+                          AppLocalizations.of(context).randomMonthName,
                         ),
                       ),
                     ),
@@ -230,7 +230,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtbAcronymExapandedText,
+                          AppLocalizations.of(context).dtbAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -238,7 +238,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.randomMonthAbbr,
+                          AppLocalizations.of(context).randomMonthAbbr,
                         ),
                       ),
                     ),
@@ -256,7 +256,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtdAcronymExapandedText,
+                          AppLocalizations.of(context).dtdAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -280,7 +280,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtaAcronymExapandedText,
+                          AppLocalizations.of(context).dtaAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -288,7 +288,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.randomWeekdayAbbr,
+                          AppLocalizations.of(context).randomWeekdayAbbr,
                         ),
                       ),
                     ),
@@ -306,7 +306,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtAAcronymExapandedText,
+                          AppLocalizations.of(context).dtAAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -314,7 +314,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.randomWeekdayName,
+                          AppLocalizations.of(context).randomWeekdayName,
                         ),
                       ),
                     ),
@@ -332,7 +332,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtHAcronymExapandedText,
+                          AppLocalizations.of(context).dtHAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -355,7 +355,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtIAcronymExapandedText),
                       ),
                     ),
@@ -378,7 +378,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtMAcronymExapandedText),
                       ),
                     ),
@@ -402,7 +402,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          AppLocalizations.of(context)!.dtSAcronymExapandedText,
+                          AppLocalizations.of(context).dtSAcronymExapandedText,
                         ),
                       ),
                     ),
@@ -425,7 +425,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtIAcronymExapandedText),
                       ),
                     ),
@@ -448,7 +448,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtfAcronymExapandedText),
                       ),
                     ),
@@ -471,7 +471,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtzAcronymExapandedText),
                       ),
                     ),
@@ -494,7 +494,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtZAcronymExapandedText),
                       ),
                     ),
@@ -517,7 +517,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtjAcronymExapandedText),
                       ),
                     ),
@@ -540,7 +540,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtUAcronymExapandedText),
                       ),
                     ),
@@ -563,7 +563,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtWAcronymExapandedText),
                       ),
                     ),
@@ -586,14 +586,14 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtcAcronymExapandedText),
                       ),
                     ),
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!.randomDTRepr),
+                        child: Text(AppLocalizations.of(context).randomDTRepr),
                       ),
                     ),
                   ],
@@ -609,7 +609,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtxAcronymExapandedText),
                       ),
                     ),
@@ -632,7 +632,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
                     TableCell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppLocalizations.of(context)!
+                        child: Text(AppLocalizations.of(context)
                             .dtXAcronymExapandedText),
                       ),
                     ),

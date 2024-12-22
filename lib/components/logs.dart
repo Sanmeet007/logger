@@ -155,7 +155,7 @@ class _LogsPageState extends State<LogsPage> {
       padding: const EdgeInsets.all(10.0),
       child: Center(
           child: Text(
-        AppLocalizations.of(context)!.nothingToDisplayText,
+        AppLocalizations.of(context).nothingToDisplayText,
       )),
     );
   }

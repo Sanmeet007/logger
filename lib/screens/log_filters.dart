@@ -254,7 +254,7 @@ class _LogFiltersState extends State<LogFilters> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedText(
-                            AppLocalizations.of(context)!.searchByNumberText,
+                            AppLocalizations.of(context).searchByNumberText,
                             size: 18.0,
                           ),
                           Switch(
@@ -277,9 +277,9 @@ class _LogFiltersState extends State<LogFilters> {
                                 ),
                               ),
                               label: Text(
-                                AppLocalizations.of(context)!.mobileNumberText,
+                                AppLocalizations.of(context).mobileNumberText,
                               ),
-                              hintText: AppLocalizations.of(context)!
+                              hintText: AppLocalizations.of(context)
                                   .hintMobileNumberText,
                             ),
                             keyboardType:
@@ -307,7 +307,7 @@ class _LogFiltersState extends State<LogFilters> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedText(
-                              AppLocalizations.of(context)!
+                              AppLocalizations.of(context)
                                   .phoneAccountIdFilterText,
                               size: 18.0,
                             ),
@@ -340,7 +340,7 @@ class _LogFiltersState extends State<LogFilters> {
                                       value: item,
                                       child: Text(
                                         item == "Any"
-                                            ? AppLocalizations.of(context)!
+                                            ? AppLocalizations.of(context)
                                                 .anyText
                                             : item,
                                       ),
@@ -375,8 +375,7 @@ class _LogFiltersState extends State<LogFilters> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedText(
-                              AppLocalizations.of(context)!
-                                  .filterByDurationText,
+                              AppLocalizations.of(context).filterByDurationText,
                               size: 18.0,
                             ),
                             Switch(
@@ -403,10 +402,10 @@ class _LogFiltersState extends State<LogFilters> {
                                         ),
                                       ),
                                       label: Text(
-                                        AppLocalizations.of(context)!
+                                        AppLocalizations.of(context)
                                             .minimumDurationLabelText,
                                       ),
-                                      hintText: AppLocalizations.of(context)!
+                                      hintText: AppLocalizations.of(context)
                                           .minimumDurationHintText,
                                     ),
                                     keyboardType:
@@ -429,10 +428,10 @@ class _LogFiltersState extends State<LogFilters> {
                                         ),
                                       ),
                                       label: Text(
-                                        AppLocalizations.of(context)!
+                                        AppLocalizations.of(context)
                                             .maximumDurationLabelText,
                                       ),
-                                      hintText: AppLocalizations.of(context)!
+                                      hintText: AppLocalizations.of(context)
                                           .maximumDurationHintText,
                                     ),
                                     keyboardType:
@@ -458,7 +457,7 @@ class _LogFiltersState extends State<LogFilters> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedText(
-                        AppLocalizations.of(context)!.filterByCallTypeText,
+                        AppLocalizations.of(context).filterByCallTypeText,
                         size: 18.0,
                       ),
                       const SizedBox(
@@ -490,7 +489,7 @@ class _LogFiltersState extends State<LogFilters> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedText(
-                            AppLocalizations.of(context)!.dateRangeText,
+                            AppLocalizations.of(context).dateRangeText,
                             size: 18.0,
                           ),
                           Container(
@@ -516,42 +515,42 @@ class _LogFiltersState extends State<LogFilters> {
                                 items: [
                                   ...[
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .todayText,
                                       "key": "Today"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .yesterdayText,
                                       "key": "Yesterday"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .thisMonthText,
                                       "key": "This Month"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .pastMonthText,
                                       "key": "Past Month"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .thisYearText,
                                       "key": "This Year"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .pastYearText,
                                       "key": "Past Year"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .allTimeText,
                                       "key": "All Time"
                                     },
                                     {
-                                      "value": AppLocalizations.of(context)!
+                                      "value": AppLocalizations.of(context)
                                           .customText,
                                       "key": "Custom"
                                     }
@@ -580,7 +579,7 @@ class _LogFiltersState extends State<LogFilters> {
                               controller: _startDateController,
                               onChanged: handleStartDateChanges,
                               fieldTitle:
-                                  AppLocalizations.of(context)!.startDateText,
+                                  AppLocalizations.of(context).startDateText,
                               firstDate: DateTime(1995),
                               lastDate:
                                   DateTime.now().add(const Duration(days: 0)),
@@ -594,7 +593,7 @@ class _LogFiltersState extends State<LogFilters> {
                               controller: _endDateController,
                               onChanged: handleEndDateChanges,
                               fieldTitle:
-                                  AppLocalizations.of(context)!.endDateText,
+                                  AppLocalizations.of(context).endDateText,
                               firstDate: DateTime(1995),
                               lastDate: DateTime.now(),
                             ),
@@ -613,7 +612,7 @@ class _LogFiltersState extends State<LogFilters> {
                       child: OutlinedButton(
                         onPressed: clearFilters,
                         child: Text(
-                          AppLocalizations.of(context)!.resetToDefaultText,
+                          AppLocalizations.of(context).resetToDefaultText,
                         ),
                       ),
                     ),
@@ -629,7 +628,7 @@ class _LogFiltersState extends State<LogFilters> {
                         ),
                         onPressed: canApplyFilters ? applyFilters : null,
                         child: Text(
-                          AppLocalizations.of(context)!.applyFiltersText,
+                          AppLocalizations.of(context).applyFiltersText,
                         ),
                       ),
                     ),

@@ -21,52 +21,52 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
   void initOptions(BuildContext context) {
     options = [
       {
-        'title': AppLocalizations.of(context)!.missedText,
+        'title': AppLocalizations.of(context).missedText,
         'isActive': false,
         'value': CallType.missed,
       },
       {
-        'title': AppLocalizations.of(context)!.rejectedText,
+        'title': AppLocalizations.of(context).rejectedText,
         'isActive': false,
         'value': CallType.rejected,
       },
       {
-        'title': AppLocalizations.of(context)!.incomingText,
+        'title': AppLocalizations.of(context).incomingText,
         'isActive': false,
         'value': CallType.incoming,
       },
       {
-        'title': AppLocalizations.of(context)!.outgoingText,
+        'title': AppLocalizations.of(context).outgoingText,
         'isActive': false,
         'value': CallType.outgoing,
       },
       {
-        'title': AppLocalizations.of(context)!.answeredExternallyText,
+        'title': AppLocalizations.of(context).answeredExternallyText,
         'isActive': false,
         'value': CallType.answeredExternally
       },
       {
-        'title': AppLocalizations.of(context)!.blockedText,
+        'title': AppLocalizations.of(context).blockedText,
         'isActive': false,
         'value': CallType.blocked,
       },
       {
-        'title': AppLocalizations.of(context)!.wifiIncomingText,
+        'title': AppLocalizations.of(context).wifiIncomingText,
         'isActive': false,
         'value': CallType.wifiIncoming,
       },
       {
-        'title': AppLocalizations.of(context)!.wifiOutgoingText,
+        'title': AppLocalizations.of(context).wifiOutgoingText,
         'isActive': false,
         'value': CallType.wifiOutgoing,
       },
       {
-        'title': AppLocalizations.of(context)!.voiceMailText,
+        'title': AppLocalizations.of(context).voiceMailText,
         'isActive': false,
         'value': CallType.voiceMail,
       },
       {
-        'title': AppLocalizations.of(context)!.unknownText,
+        'title': AppLocalizations.of(context).unknownText,
         'isActive': false,
         'value': CallType.unknown,
       },

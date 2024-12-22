@@ -24,7 +24,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedText(
-          AppLocalizations.of(context)!.callDirectionAnalysisText,
+          AppLocalizations.of(context).callDirectionAnalysisText,
           size: 20.0,
         ),
         SizedBox(
@@ -44,7 +44,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Indicator(
-                    text: AppLocalizations.of(context)!.outgoingText,
+                    text: AppLocalizations.of(context).outgoingText,
                     color: const Color.fromARGB(255, 175, 121, 255),
                     isSquare: false,
                     size: 16,
@@ -54,7 +54,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
                   ),
                   Indicator(
                     color: Colors.blue,
-                    text: AppLocalizations.of(context)!.incomingText,
+                    text: AppLocalizations.of(context).incomingText,
                     isSquare: false,
                     size: 16,
                     textColor: Theme.of(context).brightness == Brightness.dark

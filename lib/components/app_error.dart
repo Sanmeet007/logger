@@ -26,7 +26,7 @@ class AppError extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                AppLocalizations.of(context)!.appError,
+                AppLocalizations.of(context).appError,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 18,

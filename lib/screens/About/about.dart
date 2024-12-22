@@ -50,7 +50,7 @@ class AboutScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            AppLocalizations.of(context)!.versionText,
+                            AppLocalizations.of(context).versionText,
                           ),
                         ),
                       ),
@@ -69,7 +69,7 @@ class AboutScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              AppLocalizations.of(context)!.platformText,
+                              AppLocalizations.of(context).platformText,
                             ),
                           ),
                         ),
@@ -77,7 +77,7 @@ class AboutScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              AppLocalizations.of(context)!.platformNameText,
+                              AppLocalizations.of(context).platformNameText,
                             ),
                           ),
                         ),
@@ -90,7 +90,7 @@ class AboutScreen extends StatelessWidget {
                 height: 15.0,
               ),
               SizedText(
-                AppLocalizations.of(context)!.storagePolicyLabelText,
+                AppLocalizations.of(context).storagePolicyLabelText,
                 size: 20.0,
               ),
               const SizedBox(height: 15.0),
@@ -103,14 +103,14 @@ class AboutScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.storagePolicyText,
+                  AppLocalizations.of(context).storagePolicyText,
                 ),
               ),
               const SizedBox(
                 height: 15.0,
               ),
               SizedText(
-                AppLocalizations.of(context)!.analyticsPolicyLabelText,
+                AppLocalizations.of(context).analyticsPolicyLabelText,
                 size: 20.0,
               ),
               const SizedBox(height: 15.0),
@@ -123,7 +123,7 @@ class AboutScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.analyticsPolicyText,
+                  AppLocalizations.of(context).analyticsPolicyText,
                 ),
               ),
               const SizedBox(
@@ -140,7 +140,7 @@ class AboutScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!
+                            AppLocalizations.of(context)
                                 .exploreProjectButtonText,
                           ),
                           const SizedBox(
@@ -161,7 +161,7 @@ class AboutScreen extends StatelessWidget {
                       url_launcher.launchUrl(getReportLink());
                     },
                     child: Text(
-                      AppLocalizations.of(context)!.reportIssueButtonText,
+                      AppLocalizations.of(context).reportIssueButtonText,
                       style: const TextStyle(
                         decorationColor: Color.fromARGB(255, 138, 138, 138),
                         color: Color.fromARGB(255, 138, 138, 138),

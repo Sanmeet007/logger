@@ -22,10 +22,10 @@ class TopContactsTile extends StatelessWidget {
       children: [
         SizedText(
           entries.length < 2
-              ? AppLocalizations.of(context)!.longestCallText
+              ? AppLocalizations.of(context).longestCallText
               : entries.length > 4
-                  ? AppLocalizations.of(context)!.topNLongestCalls(5)
-                  : AppLocalizations.of(context)!
+                  ? AppLocalizations.of(context).topNLongestCalls(5)
+                  : AppLocalizations.of(context)
                       .topNLongestCalls(entries.length),
           size: 20.0,
         ),

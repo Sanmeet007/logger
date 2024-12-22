@@ -18,7 +18,7 @@ class CallFreqTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedText(
-          AppLocalizations.of(context)!.mostCalledNumberText,
+          AppLocalizations.of(context).mostCalledNumberText,
           size: 20.0,
         ),
         SizedBox(

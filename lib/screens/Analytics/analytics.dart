@@ -208,7 +208,7 @@ class IncomingVsOutgoingTileBuilder extends StatelessWidget {
                 );
               } else {
                 return Text(
-                  AppLocalizations.of(context)!.ghostErrorMessage,
+                  AppLocalizations.of(context).ghostErrorMessage,
                 );
               }
           }
@@ -269,13 +269,13 @@ class CallDurationTileBuilder extends StatelessWidget {
                 return CallDurationTile(
                   labels: showTotalCallDuration
                       ? [
-                          AppLocalizations.of(context)!.averageText,
-                          AppLocalizations.of(context)!.longestText,
-                          AppLocalizations.of(context)!.totalText,
+                          AppLocalizations.of(context).averageText,
+                          AppLocalizations.of(context).longestText,
+                          AppLocalizations.of(context).totalText,
                         ]
                       : [
-                          AppLocalizations.of(context)!.averageText,
-                          AppLocalizations.of(context)!.longestText,
+                          AppLocalizations.of(context).averageText,
+                          AppLocalizations.of(context).longestText,
                         ],
                   values: snapshot.data as List<String>,
                 );
@@ -329,10 +329,10 @@ class CallStatsTileBuilder extends StatelessWidget {
               if (snapshot.hasData) {
                 return CallStatsTile(
                   labels: [
-                    AppLocalizations.of(context)!.callsMadeText,
-                    AppLocalizations.of(context)!.callsRejectedText,
-                    AppLocalizations.of(context)!.callsMissedText,
-                    AppLocalizations.of(context)!.callsBlockedText,
+                    AppLocalizations.of(context).callsMadeText,
+                    AppLocalizations.of(context).callsRejectedText,
+                    AppLocalizations.of(context).callsMissedText,
+                    AppLocalizations.of(context).callsBlockedText,
                   ],
                   icons: const [
                     Icon(

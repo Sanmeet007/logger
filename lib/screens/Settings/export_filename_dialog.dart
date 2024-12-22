@@ -100,12 +100,11 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                 onChanged: validateInput,
                 decoration: InputDecoration(
                   label: Text(
-                    AppLocalizations.of(context)!.filenameFormatLabelText,
+                    AppLocalizations.of(context).filenameFormatLabelText,
                   ),
-                  hintText:
-                      AppLocalizations.of(context)!.filenameFormatHintText,
+                  hintText: AppLocalizations.of(context).filenameFormatHintText,
                   suffixIcon: IconButton(
-                    tooltip: AppLocalizations.of(context)!.resetText,
+                    tooltip: AppLocalizations.of(context).resetText,
                     icon: const Icon(Icons.restart_alt),
                     onPressed: resetToDefault,
                   ),
@@ -131,7 +130,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.cancelText,
+                        AppLocalizations.of(context).cancelText,
                       ),
                     ),
                   ),
@@ -143,7 +142,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
                       onPressed:
                           _isExportedFilenameValid ? validateAndSave : null,
                       child: Text(
-                        AppLocalizations.of(context)!.saveText,
+                        AppLocalizations.of(context).saveText,
                       ),
                     ),
                   ),

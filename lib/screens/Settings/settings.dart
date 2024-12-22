@@ -95,7 +95,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         if (fileContents == null) return;
         if (mounted) {
           widget.showLinearProgressLoader(
-            waitingMessage: AppLocalizations.of(context)!.processingFileText,
+            waitingMessage: AppLocalizations.of(context).processingFileText,
           );
         }
 
@@ -103,20 +103,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
         if (mounted) {
           widget.showLinearProgressLoader(
-            waitingMessage: AppLocalizations.of(context)!.insertingLogsText,
+            waitingMessage: AppLocalizations.of(context).insertingLogsText,
           );
         }
         Future.delayed(const Duration(seconds: 12), () {
           if (!isDone && mounted) {
             widget.showLinearProgressLoader(
-              waitingMessage: AppLocalizations.of(context)!.takingMoreTimeText,
+              waitingMessage: AppLocalizations.of(context).takingMoreTimeText,
             );
           }
         });
         Future.delayed(const Duration(seconds: 20), () {
           if (!isDone && mounted) {
             widget.showLinearProgressLoader(
-              waitingMessage: AppLocalizations.of(context)!.pleaseWaitText,
+              waitingMessage: AppLocalizations.of(context).pleaseWaitText,
             );
           }
         });
@@ -127,17 +127,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           if (x) {
             AppSnackBar.show(
               context,
-              content: AppLocalizations.of(context)!.importSuccessMessageText,
+              content: AppLocalizations.of(context).importSuccessMessageText,
               useAction: true,
               buttonOnPressed: () {
                 widget.refresher?.call();
               },
-              buttonText: AppLocalizations.of(context)!.refreshText,
+              buttonText: AppLocalizations.of(context).refreshText,
             );
           } else {
             AppSnackBar.show(
               context,
-              content: AppLocalizations.of(context)!.baseGhostErrorMessage,
+              content: AppLocalizations.of(context).baseGhostErrorMessage,
             );
           }
           isDone = true;
@@ -151,7 +151,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (mounted) {
         AppSnackBar.show(
           context,
-          content: AppLocalizations.of(context)!.baseGhostErrorMessage,
+          content: AppLocalizations.of(context).baseGhostErrorMessage,
         );
       }
     }
@@ -163,11 +163,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context)!.confirmImportLabelText,
+              AppLocalizations.of(context).confirmImportLabelText,
             ),
             content: SingleChildScrollView(
               child: Text(
-                AppLocalizations.of(context)!.confirmImportText,
+                AppLocalizations.of(context).confirmImportText,
               ),
             ),
             actions: [
@@ -176,7 +176,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.cancelText,
+                  AppLocalizations.of(context).cancelText,
                 ),
               ),
               ElevatedButton(
@@ -187,7 +187,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   handleCallLogImport();
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.continueText,
+                  AppLocalizations.of(context).continueText,
                 ),
               ),
             ],
@@ -206,7 +206,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppLocalizations.of(context)!.baseSettingsLabelText,
+                AppLocalizations.of(context).baseSettingsLabelText,
                 style: const TextStyle(fontSize: 20.0),
               ),
               const SizedBox(
@@ -226,7 +226,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .disableLogsSharingText,
                         ),
                         Switch(
@@ -241,7 +241,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .failedToUpdateSettingsText,
                                   );
                                 }
@@ -249,7 +249,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .shareSettingUpdateSuccessMsgText,
                                   );
                                 }
@@ -258,7 +258,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -274,7 +274,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .enableLogsSharingText,
                         ),
                         Switch(
@@ -289,7 +289,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .failedToUpdateSettingsText,
                                   );
                                 }
@@ -297,7 +297,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .downloadSettingUpdatedSuccessMsgText,
                                   );
                                 }
@@ -306,7 +306,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -322,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                            text: AppLocalizations.of(context)!
+                            text: AppLocalizations.of(context)
                                 .enableCallLogCountVisibilityText),
                         Switch(
                           value: widget.intialCallLogCountVisibility,
@@ -335,14 +335,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (r == null || !r) {
                                 if (context.mounted) {
                                   AppSnackBar.show(context,
-                                      content: AppLocalizations.of(context)!
+                                      content: AppLocalizations.of(context)
                                           .failedToUpdateSettingsText);
                                 }
                               } else {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .settingUpdateSuccessMsgText,
                                   );
                                 }
@@ -351,7 +351,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -367,7 +367,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .enableCallDurationFilteringText,
                         ),
                         Switch(
@@ -381,14 +381,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (r == null || !r) {
                                 if (context.mounted) {
                                   AppSnackBar.show(context,
-                                      content: AppLocalizations.of(context)!
+                                      content: AppLocalizations.of(context)
                                           .failedToUpdateSettingsText);
                                 }
                               } else {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .durationFilterSettingUpdatedSuccessMsgText,
                                   );
                                 }
@@ -397,7 +397,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -413,7 +413,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .enableFilterByAccountIdText,
                         ),
                         Switch(
@@ -428,7 +428,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .failedToUpdateSettingsText,
                                   );
                                 }
@@ -436,7 +436,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .filterByPhoneAccountIdSettingUpdatedSuccessMsgText,
                                   );
                                 }
@@ -445,7 +445,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -461,7 +461,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .showTotalCallDurationText,
                         ),
                         Switch(
@@ -476,7 +476,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .failedToUpdateSettingsText,
                                   );
                                 }
@@ -484,7 +484,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .generalSettingUpdatedSuccessMsgText,
                                   );
                                 }
@@ -493,7 +493,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               if (context.mounted) {
                                 AppSnackBar.show(
                                   context,
-                                  content: AppLocalizations.of(context)!
+                                  content: AppLocalizations.of(context)
                                       .failedToUpdateSettingsText,
                                 );
                               }
@@ -511,7 +511,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 20.0,
               ),
               Text(
-                AppLocalizations.of(context)!.advancedSettingsLabelText,
+                AppLocalizations.of(context).advancedSettingsLabelText,
                 style: const TextStyle(fontSize: 20.0),
               ),
               const SizedBox(height: 15.0),
@@ -530,7 +530,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .callLogsExportFormatLabelText,
                         ),
                         Container(
@@ -579,7 +579,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   if (context.mounted) {
                                     AppSnackBar.show(
                                       context,
-                                      content: AppLocalizations.of(context)!
+                                      content: AppLocalizations.of(context)
                                           .failedToUpdateSettingsText,
                                     );
                                   }
@@ -587,7 +587,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   if (context.mounted) {
                                     AppSnackBar.show(
                                       context,
-                                      content: AppLocalizations.of(context)!
+                                      content: AppLocalizations.of(context)
                                           .importSettingUpdatedSuccessMsgText,
                                     );
                                   }
@@ -596,7 +596,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (context.mounted) {
                                   AppSnackBar.show(
                                     context,
-                                    content: AppLocalizations.of(context)!
+                                    content: AppLocalizations.of(context)
                                         .failedToUpdateSettingsText,
                                   );
                                 }
@@ -620,13 +620,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text: AppLocalizations.of(context)!
+                          text: AppLocalizations.of(context)
                               .exportFileNameFormatLabelText,
                         ),
                         ElevatedButton(
                           onPressed: openFileNameSettingsSheet,
                           child: Text(
-                            AppLocalizations.of(context)!.configureText,
+                            AppLocalizations.of(context).configureText,
                           ),
                         ),
                       ],
@@ -643,13 +643,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                          text:
-                              AppLocalizations.of(context)!.importCallLogsText,
+                          text: AppLocalizations.of(context).importCallLogsText,
                         ),
                         ElevatedButton(
                           onPressed: confirmImport,
                           child: Text(
-                            AppLocalizations.of(context)!.startImportText,
+                            AppLocalizations.of(context).startImportText,
                           ),
                         ),
                       ],
@@ -669,7 +668,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.supportedFormatInformation,
+                  AppLocalizations.of(context).supportedFormatInformation,
                   style: const TextStyle(
                     fontStyle: FontStyle.italic,
                   ),

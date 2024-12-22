@@ -313,7 +313,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
           items: <Screen>[
             Screen(
               index: 0,
-              label: AppLocalizations.of(context)!.logsScreenLabelText,
+              label: AppLocalizations.of(context).logsScreenLabelText,
               icon: Icons.call_outlined,
               selectedIcon: Icons.call,
               screen: HomeScreen(
@@ -324,7 +324,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
             ),
             Screen(
               index: 1,
-              label: AppLocalizations.of(context)!.analyticsScreenLabelText,
+              label: AppLocalizations.of(context).analyticsScreenLabelText,
               icon: Icons.pie_chart_outline,
               selectedIcon: Icons.pie_chart,
               screen: AnalyticsScreen(
@@ -337,7 +337,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               ),
             ),
             Screen(
-              label: AppLocalizations.of(context)!.settingsScreenLabelText,
+              label: AppLocalizations.of(context).settingsScreenLabelText,
               index: 2,
               icon: Icons.settings_outlined,
               selectedIcon: Icons.settings,
@@ -372,7 +372,7 @@ class _ApplicationUiState extends State<ApplicationUi> {
               ),
             ),
             Screen(
-              label: AppLocalizations.of(context)!.aboutText,
+              label: AppLocalizations.of(context).aboutText,
               index: 3,
               icon: Icons.info_outline,
               selectedIcon: Icons.info,

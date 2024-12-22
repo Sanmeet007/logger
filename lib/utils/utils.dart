@@ -38,9 +38,9 @@ String prettifyDate(DateTime inputDate, BuildContext context) {
   DateTime yesterday = DateTime(now.year, now.month, now.day - 1);
 
   if (DateUtils.isSameDay(inputDate, today)) {
-    return AppLocalizations.of(context)!.todayText;
+    return AppLocalizations.of(context).todayText;
   } else if (DateUtils.isSameDay(inputDate, yesterday)) {
-    return AppLocalizations.of(context)!.yesterdayText;
+    return AppLocalizations.of(context).yesterdayText;
   } else {
     return DateFormat(
       'dd MMMM yyyy',
@@ -115,31 +115,31 @@ List getCallDisplayFields(CallType callType, BuildContext context) {
   late IconData callIcon;
 
   if (callType == CallType.missed) {
-    rCallType = AppLocalizations.of(context)!.missedText;
+    rCallType = AppLocalizations.of(context).missedText;
     callColor = Colors.redAccent;
     callIcon = Icons.call_missed;
   } else if (callType == CallType.incoming) {
-    rCallType = AppLocalizations.of(context)!.incomingText;
+    rCallType = AppLocalizations.of(context).incomingText;
     callColor = Colors.blue;
     callIcon = Icons.call_received;
   } else if (callType == CallType.outgoing) {
-    rCallType = AppLocalizations.of(context)!.outgoingText;
+    rCallType = AppLocalizations.of(context).outgoingText;
     callColor = const Color.fromARGB(255, 175, 121, 255);
     callIcon = Icons.call_made;
   } else if (callType == CallType.blocked) {
-    rCallType = AppLocalizations.of(context)!.blockedText;
+    rCallType = AppLocalizations.of(context).blockedText;
     callColor = Colors.orange;
     callIcon = Icons.block;
   } else if (callType == CallType.rejected) {
-    rCallType = AppLocalizations.of(context)!.rejectedText;
+    rCallType = AppLocalizations.of(context).rejectedText;
     callColor = Colors.red;
     callIcon = Icons.cancel_outlined;
   } else if (callType == CallType.wifiIncoming) {
-    rCallType = AppLocalizations.of(context)!.wifiIncomingText;
+    rCallType = AppLocalizations.of(context).wifiIncomingText;
     callColor = const Color.fromARGB(255, 110, 113, 255);
     callIcon = Icons.call_received;
   } else if (callType == CallType.wifiOutgoing) {
-    rCallType = AppLocalizations.of(context)!.wifiOutgoingText;
+    rCallType = AppLocalizations.of(context).wifiOutgoingText;
     callColor = const Color.fromARGB(255, 110, 110, 255);
     callIcon = Icons.call_made;
   } else {

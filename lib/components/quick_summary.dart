@@ -88,10 +88,10 @@ class _QuickSummaryStatsTileBuilderState
                 return CallStatsTile(
                   showTitle: false,
                   labels: [
-                    AppLocalizations.of(context)!.callsMadeText,
-                    AppLocalizations.of(context)!.callsReceivedText,
-                    AppLocalizations.of(context)!.callsMissedText,
-                    AppLocalizations.of(context)!.callsRejectedText,
+                    AppLocalizations.of(context).callsMadeText,
+                    AppLocalizations.of(context).callsReceivedText,
+                    AppLocalizations.of(context).callsMissedText,
+                    AppLocalizations.of(context).callsRejectedText,
                   ],
                   icons: const [
                     Icon(

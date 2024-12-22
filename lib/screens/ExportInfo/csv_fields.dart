@@ -20,7 +20,7 @@ class CsvFieldsInformation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedText(
-            AppLocalizations.of(context)!.exportFieldInfoText,
+            AppLocalizations.of(context).exportFieldInfoText,
             size: 20.0,
           ),
           const SizedBox(
@@ -55,55 +55,53 @@ class CsvFieldsInformation extends StatelessWidget {
                     children: [
                       buildTableField(
                         "name",
-                        AppLocalizations.of(context)!.csvJsonExportNameField,
+                        AppLocalizations.of(context).csvJsonExportNameField,
                       ),
                       buildTableField(
                         "number",
-                        AppLocalizations.of(context)!.csvJsonExportNumberField,
+                        AppLocalizations.of(context).csvJsonExportNumberField,
                       ),
                       buildTableField(
                         "phone_account_id",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportPhoneAccountIdField,
                       ),
                       buildTableField(
                         "call_type",
-                        AppLocalizations.of(context)!
-                            .csvJsonExportCallTypeField,
+                        AppLocalizations.of(context).csvJsonExportCallTypeField,
                       ),
                       buildTableField(
                         "formatted_number",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportFormattedNumberField,
                       ),
                       buildTableField(
                         "sim_display_name",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportSimDisplayField,
                       ),
                       buildTableField(
                         "timestamp",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportTimestampField,
                       ),
                       buildTableField(
                         "duration",
-                        AppLocalizations.of(context)!
-                            .csvJsonExportDurationField,
+                        AppLocalizations.of(context).csvJsonExportDurationField,
                       ),
                       buildTableField(
                         "cached_number_label",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportCachedNumberLabelField,
                       ),
                       buildTableField(
                         "cached_number_type",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportCachedNumberTypeField,
                       ),
                       buildTableField(
                         "cached_matched_number",
-                        AppLocalizations.of(context)!
+                        AppLocalizations.of(context)
                             .csvJsonExportCachedMatchedNumberField,
                       ),
                     ],

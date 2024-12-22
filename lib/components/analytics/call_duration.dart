@@ -20,7 +20,7 @@ class CallDurationTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedText(
-          AppLocalizations.of(context)!.callDurationText,
+          AppLocalizations.of(context).callDurationText,
           size: 20,
         ),
         SizedBox(
