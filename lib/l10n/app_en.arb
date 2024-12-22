@@ -515,5 +515,18 @@
   "durationFilterSettingUpdatedSuccessMsgText": "Duration filter settings updated successfully.",
   "filterByPhoneAccountIdSettingUpdatedSuccessMsgText": "Filter by phone account id settings updated successfully.",
   "generalSettingUpdatedSuccessMsgText": "Settings updated successfully.",
-  "importSettingUpdatedSuccessMsgText": "Import settings updated successfully."
+  "importSettingUpdatedSuccessMsgText": "Import settings updated successfully.",
+  "exportFieldInfoText": "Export fields information",
+  "csvJsonExportNameField": "Name associated with the call log entry",
+  "csvJsonExportPhoneAccountIdField": "The ID of the phone account associated with the call identifies the specific account or SIM card used to place or receive the call",
+  "csvJsonExportCallTypeField": "Type of the call (e.g., incoming, outgoing, missed)",
+  "csvJsonExportNumberField": "Phone number associated with the call log entry",
+  "csvJsonExportFormattedNumberField": "Formatted phone number, formatted with formatting rules based on the country the user was in when the call was made or received.",
+  "csvJsonExportSimDisplayField": "Display name of the SIM card associated with the call",
+  "csvJsonExportTimestampField": "Timestamp (epoch time) of the call",
+  "csvJsonExportDurationField": "Duration of the call in seconds",
+  "csvJsonExportCachedNumberLabelField": "Label associated with the cached phone number",
+  "csvJsonExportCachedNumberTypeField": "The cached number type (Home, Work, etc) associated with the phone number, if it exists.",
+  "csvJsonExportCachedMatchedNumberField": "Stored or cached phone number associated with a call log entry for quick reference.",
+  "exportFieldInfoHintText": "Export Fields Info"
 }

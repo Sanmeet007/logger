@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/sized_text.dart';
 import 'package:logger/screens/ExportInfo/field_builder.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class JsonFieldsInformation extends StatelessWidget {
   const JsonFieldsInformation({super.key});
@@ -18,8 +19,8 @@ class JsonFieldsInformation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedText(
-            "Export fields information",
+          SizedText(
+            AppLocalizations.of(context)!.exportFieldInfoText,
             size: 20.0,
           ),
           const SizedBox(
@@ -53,27 +54,58 @@ class JsonFieldsInformation extends StatelessWidget {
                     ),
                     children: [
                       buildTableField(
-                          "name", "Name associated with the call log entry"),
-                      buildTableField("number",
-                          "Phone number associated with the call log entry"),
-                      buildTableField("phoneAccountId",
-                          "The ID of the phone account associated with the call identifies the specific account or SIM card used to place or receive the call"),
-                      buildTableField("callType",
-                          "Type of the call (e.g., incoming, outgoing, missed)"),
-                      buildTableField("formattedNumber",
-                          "Formatted phone number, formatted with formatting rules based on the country the user was in when the call was made or received."),
-                      buildTableField("simDisplayName",
-                          "Display name of the SIM card associated with the call"),
+                        "name",
+                        AppLocalizations.of(context)!.csvJsonExportNameField,
+                      ),
                       buildTableField(
-                          "timestamp", "Timestamp (epoch time) of the call"),
+                        "number",
+                        AppLocalizations.of(context)!.csvJsonExportNumberField,
+                      ),
                       buildTableField(
-                          "duration", "Duration of the call in seconds"),
-                      buildTableField("cachedNumberLabel",
-                          "Label associated with the cached phone number"),
-                      buildTableField("cachedNumberType",
-                          "The cached number type (Home, Work, etc) associated with the phone number, if it exists."),
-                      buildTableField("cachedMatchedNumber",
-                          "Stored or cached phone number associated with a call log entry for quick reference."),
+                        "phoneAccountId",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportPhoneAccountIdField,
+                      ),
+                      buildTableField(
+                        "callType",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportCallTypeField,
+                      ),
+                      buildTableField(
+                        "formattedNumber",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportFormattedNumberField,
+                      ),
+                      buildTableField(
+                        "simDisplayName",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportSimDisplayField,
+                      ),
+                      buildTableField(
+                        "timestamp",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportTimestampField,
+                      ),
+                      buildTableField(
+                        "duration",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportDurationField,
+                      ),
+                      buildTableField(
+                        "cachedNumberLabel",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportCachedNumberLabelField,
+                      ),
+                      buildTableField(
+                        "cachedNumberType",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportCachedNumberTypeField,
+                      ),
+                      buildTableField(
+                        "cachedMatchedNumber",
+                        AppLocalizations.of(context)!
+                            .csvJsonExportCachedMatchedNumberField,
+                      ),
                     ],
                   ),
                 ]),

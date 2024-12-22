@@ -169,5 +169,18 @@
   "durationFilterSettingUpdatedSuccessMsgText": "ड्यूरेशन फ़िल्टर सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
   "filterByPhoneAccountIdSettingUpdatedSuccessMsgText": "फोन खाता आईडी द्वारा फ़िल्टर सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
   "generalSettingUpdatedSuccessMsgText": "सामान्य सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
-  "importSettingUpdatedSuccessMsgText": "आयात सेटिंग्स सफलतापूर्वक अपडेट की गईं।"
+  "importSettingUpdatedSuccessMsgText": "आयात सेटिंग्स सफलतापूर्वक अपडेट की गईं।",
+  "exportFieldInfoText": "निर्यात फ़ील्ड जानकारी",
+  "csvJsonExportNameField": "कॉल लॉग प्रविष्टि से संबंधित नाम",
+  "csvJsonExportPhoneAccountIdField": "फोन खाते का आईडी जो कॉल से संबंधित है, विशिष्ट खाता या सिम कार्ड की पहचान करता है जिसका उपयोग कॉल करने या प्राप्त करने के लिए किया गया था",
+  "csvJsonExportCallTypeField": "कॉल का प्रकार (जैसे, इनकमिंग, आउटगोइंग, मिस्ड)",
+  "csvJsonExportNumberField": "कॉल लॉग प्रविष्टि से संबंधित फोन नंबर",
+  "csvJsonExportFormattedNumberField": "फॉर्मेट किया गया फोन नंबर, उस देश के फॉर्मेटिंग नियमों के अनुसार फॉर्मेट किया गया जहां कॉल किया या प्राप्त किया गया था।",
+  "csvJsonExportSimDisplayField": "कॉल से संबंधित सिम कार्ड का डिस्प्ले नाम",
+  "csvJsonExportTimestampField": "कॉल का टाइमस्टैम्प (एपोक समय)",
+  "csvJsonExportDurationField": "कॉल की अवधि सेकंड में",
+  "csvJsonExportCachedNumberLabelField": "कैश किए गए फोन नंबर से संबंधित लेबल",
+  "csvJsonExportCachedNumberTypeField": "कैश नंबर का प्रकार (होम, वर्क, आदि) जो फोन नंबर से संबंधित है, यदि यह मौजूद है।",
+  "csvJsonExportCachedMatchedNumberField": "कॉल लॉग प्रविष्टि से संबंधित संग्रहीत या कैश किया गया फोन नंबर त्वरित संदर्भ के लिए।",
+  "exportFieldInfoHintText": "निर्यात फ़ील्ड जानकारी"
 }
