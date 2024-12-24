@@ -28,7 +28,7 @@ class Application extends StatelessWidget {
             if (prefsSnapShot.hasData) {
               bool showOnboarding =
                   prefsSnapShot.data?.getBool("show-onboarding") ?? true;
-              if (!showOnboarding) {
+              if (showOnboarding) {
                 return OnboardingUI(prefs: prefsSnapShot.data);
               } else {
                 return BaseApplication(prefs: prefsSnapShot.data);
