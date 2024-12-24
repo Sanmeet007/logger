@@ -175,5 +175,6 @@
     "exportFieldInfoHintText": "Vie kenttätiedot",
     "naText": "Ei yritetty",
     "confirmDownloadText": "Vahvista lataus",
-    "enableDownloadConfirmationText":"Ota latauksen vahvistus käyttöön"
+    "enableDownloadConfirmationText": "Ota latauksen vahvistus käyttöön",
+    "mostReceivedNumberText": "Eniten vastaanotettu numero"
 }

@@ -183,6 +183,7 @@
   "csvJsonExportCachedMatchedNumberField": "कॉल लॉग प्रविष्टि से संबंधित संग्रहीत या कैश किया गया फोन नंबर त्वरित संदर्भ के लिए।",
   "exportFieldInfoHintText": "निर्यात फ़ील्ड जानकारी",
   "naText": "लागू नहीं",
-  "confirmDownloadText":"डाउनलोड की पुष्टि करें",
-  "enableDownloadConfirmationText":"डाउनलोड पुष्टि सक्षम करें"
+  "confirmDownloadText": "डाउनलोड की पुष्टि करें",
+  "enableDownloadConfirmationText": "डाउनलोड पुष्टि सक्षम करें",
+  "mostReceivedNumberText": "सबसे प्राप्त नंबर"
 }

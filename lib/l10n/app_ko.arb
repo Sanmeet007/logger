@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "내보내기 필드 정보",
   "naText": "시도 안 함",
   "confirmDownloadText": "다운로드 확인",
-  "enableDownloadConfirmationText":"다운로드 확인 활성화"
+  "enableDownloadConfirmationText": "다운로드 확인 활성화",
+  "mostReceivedNumberText": "가장 많이 받은 번호"
 }

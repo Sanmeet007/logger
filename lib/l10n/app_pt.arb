@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "Informações dos Campos de Exportação",
   "naText": "n/d",
   "confirmDownloadText": "Confirmar download",
-  "enableDownloadConfirmationText":"Ativar confirmação de download"
+  "enableDownloadConfirmationText": "Ativar confirmação de download",
+  "mostReceivedNumberText": "Najczęściej odebrany numer"
 }

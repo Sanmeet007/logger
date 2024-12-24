@@ -175,5 +175,6 @@
     "exportFieldInfoHintText": "导出字段信息",
     "naText": "未尝试",
     "confirmDownloadText": "确认下载",
-    "enableDownloadConfirmationText": "启用下载确认"
+    "enableDownloadConfirmationText": "启用下载确认",
+    "mostReceivedNumberText": "接听最多的号码"
 }

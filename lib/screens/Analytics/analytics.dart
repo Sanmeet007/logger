@@ -11,6 +11,8 @@ import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+enum CallFreqType { received, called }
+
 class AnalyticsScreen extends StatelessWidget {
   final Iterable<CallLogEntry>? entries;
   final CallLogAnalyzer analyzer;
@@ -69,6 +71,15 @@ class AnalyticsScreen extends StatelessWidget {
               CallType.wifiOutgoing,
             ]))
               CallFreqTileBuilder(
+                freqType: CallFreqType.called,
+                analyzer: analyzer,
+              ),
+            if (containsAnyMatchingCallTypes([
+              CallType.incoming,
+              CallType.wifiIncoming,
+            ]))
+              CallFreqTileBuilder(
+                freqType: CallFreqType.received,
                 analyzer: analyzer,
               ),
             if (containsAnyMatchingCallTypes([
@@ -130,15 +141,21 @@ class TopContactsTileBuilder extends StatelessWidget {
 
 class CallFreqTileBuilder extends StatelessWidget {
   final CallLogAnalyzer analyzer;
+  final CallFreqType freqType;
 
   const CallFreqTileBuilder({
     super.key,
     required this.analyzer,
+    required this.freqType,
   });
 
   Future<CallLogEntryWithFreq?> getValues() async {
     return Future(() async {
-      return await analyzer.getMaxFrequentlyCalledEntry();
+      if (freqType == CallFreqType.received) {
+        return await analyzer.getMaxFrequentlyCalledEntry();
+      } else {
+        return await analyzer.getMaxFrequentlyReceivedEntry();
+      }
     });
   }
 
@@ -160,6 +177,7 @@ class CallFreqTileBuilder extends StatelessWidget {
               if (snapshot.hasData) {
                 var entry = snapshot.data;
                 return CallFreqTile(
+                  freqType: freqType,
                   mostFrequent: entry,
                 );
               } else {

@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "Информация o полях экспорта",
   "naText": "не предпринято",
   "confirmDownloadText": "Подтвердить загрузку",
-  "enableDownloadConfirmationText":"Включить подтверждение загрузки"
+  "enableDownloadConfirmationText": "Включить подтверждение загрузки",
+  "mostReceivedNumberText": "Самый часто принятый номер"
 }

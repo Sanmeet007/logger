@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "Info over exportvelden",
   "naText": "n.v.t.",
   "confirmDownloadText": "Download bevestigen",
-  "enableDownloadConfirmationText":"Downloadbevestiging inschakelen"
+  "enableDownloadConfirmationText": "Downloadbevestiging inschakelen",
+  "mostReceivedNumberText": "Meest ontvangen nummer"
 }

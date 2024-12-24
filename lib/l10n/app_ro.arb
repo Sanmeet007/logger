@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "Informații despre câmpurile de export",
   "naText": "nu este cazul",
   "confirmDownloadText": "Confirmați descărcarea",
-  "enableDownloadConfirmationText":"Activați confirmarea descărcării"
+  "enableDownloadConfirmationText": "Activați confirmarea descărcării",
+  "mostReceivedNumberText": "Numărul cel mai primit"
 }

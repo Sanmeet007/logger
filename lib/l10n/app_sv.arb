@@ -175,5 +175,6 @@
     "exportFieldInfoHintText": "Information om Exportfält",
     "naText": "Ej tillämpligt",
     "confirmDownloadText": "Bekräfta nedladdning",
-    "enableDownloadConfirmationText":"Aktivera nedladdningsbekräftelse"
+    "enableDownloadConfirmationText": "Aktivera nedladdningsbekräftelse",
+    "mostReceivedNumberText": "Mest mottagna nummer"
 }

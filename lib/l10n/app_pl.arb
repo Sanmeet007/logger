@@ -175,5 +175,6 @@
   "exportFieldInfoHintText": "Informacje o Polach Eksportu",
   "naText": "nie dotyczy",
   "confirmDownloadText": "Potwierdź pobieranie",
-  "enableDownloadConfirmationText":"Włącz potwierdzenie pobierania"
+  "enableDownloadConfirmationText": "Włącz potwierdzenie pobierania",
+  "mostReceivedNumberText": "Najczęściej odebrany numer"
 }

@@ -1,6 +1,9 @@
 {
   "@@locale": "en",
-  "@enableDownloadConfirmationText":{
+  "@mostReceivedNumberText": {
+    "description": "Label for most recieved number."
+  },
+  "@enableDownloadConfirmationText": {
     "description": "Label for enabling donwload confirmation setting."
   },
   "@confirmDownloadText": {
@@ -722,5 +725,6 @@
   "exportFieldInfoHintText": "Export Fields Info",
   "naText": "n/a",
   "confirmDownloadText": "Confirm Download",
-  "enableDownloadConfirmationText":"Enable download confirmation"
+  "enableDownloadConfirmationText": "Enable download confirmation",
+  "mostReceivedNumberText": "Most Recieved Number"
 }
