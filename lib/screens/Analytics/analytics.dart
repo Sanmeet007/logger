@@ -151,7 +151,7 @@ class CallFreqTileBuilder extends StatelessWidget {
 
   Future<CallLogEntryWithFreq?> getValues() async {
     return Future(() async {
-      if (freqType == CallFreqType.received) {
+      if (freqType == CallFreqType.called) {
         return await analyzer.getMaxFrequentlyCalledEntry();
       } else {
         return await analyzer.getMaxFrequentlyReceivedEntry();
