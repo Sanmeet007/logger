@@ -98,7 +98,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    if (currentIndex != 2) {
+                    if (currentIndex != pages.length - 1) {
                       currentIndex += 1;
                       _controller.animateToPage(
                         currentIndex,
@@ -112,7 +112,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   child: Text(
                     currentIndex == 0
                         ? AppLocalizations.of(context).getStartedText
-                        : currentIndex == 3
+                        : currentIndex == pages.length - 1
                             ? AppLocalizations.of(context).exploreNowText
                             : AppLocalizations.of(context).nextText,
                     style: const TextStyle(
@@ -124,7 +124,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   height: 10.0,
                 ),
                 OutlinedButton(
-                  onPressed: currentIndex != 3
+                  onPressed: currentIndex != pages.length - 1
                       ? () {
                           finishOnboarding(context);
                         }
