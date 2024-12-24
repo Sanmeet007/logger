@@ -84,7 +84,12 @@ String prettifyNumbers(int n, BuildContext context) {
   return formatter.format(n);
 }
 
-String prettifyDuration(Duration duration, BuildContext context) {
+String prettifyDuration(
+  Duration duration,
+  BuildContext context, {
+  var tersity = duration_util.DurationTersity.second,
+  var upperTersity = duration_util.DurationTersity.week,
+}) {
   final locale = Localizations.localeOf(context).languageCode;
   duration_locale.DurationLocale? durationLocale =
       duration_locale.DurationLocale.fromLanguageCode(locale);
@@ -94,6 +99,8 @@ String prettifyDuration(Duration duration, BuildContext context) {
     abbreviated: true,
     locale: durationLocale ?? duration_locale.englishLocale,
     delimiter: ' ',
+    tersity: tersity,
+    upperTersity: upperTersity,
   );
 }
 

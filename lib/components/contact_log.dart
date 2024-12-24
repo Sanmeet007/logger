@@ -1,4 +1,5 @@
 import 'package:call_log/call_log.dart';
+import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/components/log_details.dart';
@@ -109,7 +110,11 @@ class ContactLog extends StatelessWidget {
             ),
             trailing: Text(
               prettifyDuration(
-                  Duration(seconds: logDetails.duration ?? 0), context),
+                Duration(days: logDetails.duration ?? 0),
+                context,
+                tersity: DurationTersity.minute,
+                upperTersity: DurationTersity.day,
+              ),
               style: const TextStyle(
                 fontSize: 14.0,
               ),
