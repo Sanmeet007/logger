@@ -112,7 +112,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   child: Text(
                     currentIndex == 0
                         ? AppLocalizations.of(context).getStartedText
-                        : currentIndex == 2
+                        : currentIndex == 3
                             ? AppLocalizations.of(context).exploreNowText
                             : AppLocalizations.of(context).nextText,
                     style: const TextStyle(
@@ -124,7 +124,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
                   height: 10.0,
                 ),
                 OutlinedButton(
-                  onPressed: currentIndex != 2
+                  onPressed: currentIndex != 3
                       ? () {
                           finishOnboarding(context);
                         }
@@ -166,22 +166,26 @@ class OnBoardingScreenItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10.0),
-          height: 250,
-          child: Image.asset(
-            useImageNameAsPath
-                ? imageName
-                : "assets/images/on_boarding/$lookupDirName/$imageName",
+        FittedBox(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            height: 250,
+            child: Image.asset(
+              useImageNameAsPath
+                  ? imageName
+                  : "assets/images/on_boarding/$lookupDirName/$imageName",
+            ),
           ),
         ),
         Column(children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
+          FittedBox(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(
@@ -194,6 +198,8 @@ class OnBoardingScreenItem extends StatelessWidget {
               color: isDarkTheme ? Colors.grey : Colors.black87,
             ),
             textAlign: TextAlign.center,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ),
         ]),
         const SizedBox(
