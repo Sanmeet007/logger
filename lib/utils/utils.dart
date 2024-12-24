@@ -7,7 +7,7 @@ import 'package:duration/duration.dart' as duration_util;
 import 'package:duration/locale.dart' as duration_locale;
 
 String getVersion() {
-  return "2.6.1";
+  return "2.7.0";
 }
 
 String getDeviceType(BuildContext context) {
