@@ -110,7 +110,7 @@ class ContactLog extends StatelessWidget {
             ),
             trailing: Text(
               prettifyDuration(
-                Duration(days: logDetails.duration ?? 0),
+                Duration(seconds: logDetails.duration ?? 0),
                 context,
                 tersity: DurationTersity.minute,
                 upperTersity: DurationTersity.day,
