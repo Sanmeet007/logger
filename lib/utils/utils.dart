@@ -175,7 +175,7 @@ String formatTimeFromTimeStamp({
 
 String formatDateFromTimestamp(int timestamp, BuildContext context) {
   final formatter =
-      DateFormat.yMMMMd(Localizations.localeOf(context).languageCode);
+      DateFormat("dd MMMM yyyy", Localizations.localeOf(context).languageCode);
   var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
   return formatter.format(date);
 }
