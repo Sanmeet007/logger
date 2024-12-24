@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "Włącz filtrowanie czasu trwania",
   "enableCallLogCountVisibilityText": "Pokaż liczbę dzienników połączeń",
   "enableFilterByAccountIdText": "Włącz filtr po identyfikatorze konta",
-  "enableLogsSharingText": "Wyłącz udostępnianie dziennika połączeń",
   "exploreNowText": "Przeglądaj Teraz",
   "exploreProjectButtonText": "Przeglądaj Projekt na Githubie",
   "exportFileNameFormatLabelText": "Format nazwy pliku eksportu",
@@ -175,5 +174,6 @@
   "csvJsonExportCachedMatchedNumberField": "Zapisany lub zapisany w pamięci podręcznej numer telefonu powiązany z wpisem dziennika połączeń w celu szybkiego odniesienia.",
   "exportFieldInfoHintText": "Informacje o Polach Eksportu",
   "naText": "nie dotyczy",
-  "confirmDownloadText": "Potwierdź pobieranie"
+  "confirmDownloadText": "Potwierdź pobieranie",
+  "enableDownloadConfirmationText":"Włącz potwierdzenie pobierania"
 }

@@ -1,5 +1,8 @@
 {
   "@@locale": "en",
+  "@enableDownloadConfirmationText":{
+    "description": "Label for enabling donwload confirmation setting."
+  },
   "@confirmDownloadText": {
     "description": "Text or label for a confirmation dialog."
   },
@@ -594,7 +597,6 @@
   "enableCallDurationFilteringText": "Enable duration filtering",
   "enableCallLogCountVisibilityText": "Show call logs count",
   "enableFilterByAccountIdText": "Enable filter by account id",
-  "enableLogsSharingText": "Disable call log sharing",
   "exploreNowText": "Explore now",
   "exploreProjectButtonText": "Explore Project on Github",
   "exportFileNameFormatLabelText": "Export filename format",
@@ -719,5 +721,6 @@
   "csvJsonExportCachedMatchedNumberField": "Stored or cached phone number associated with a call log entry for quick reference.",
   "exportFieldInfoHintText": "Export Fields Info",
   "naText": "n/a",
-  "confirmDownloadText": "Confirm Download"
+  "confirmDownloadText": "Confirm Download",
+  "enableDownloadConfirmationText":"Enable download confirmation"
 }

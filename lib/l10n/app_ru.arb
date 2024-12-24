@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "Включить фильтрацию по длительности",
   "enableCallLogCountVisibilityText": "Показать количество журналов вызовов",
   "enableFilterByAccountIdText": "Включить фильтр по идентификатору учетной записи",
-  "enableLogsSharingText": "Отключить общий доступ к журналу вызовов",
   "exploreNowText": "Изучить сейчас",
   "exploreProjectButtonText": "Изучить проект на Github",
   "exportFileNameFormatLabelText": "Формат имени файла экспорта",
@@ -175,5 +174,6 @@
   "csvJsonExportCachedMatchedNumberField": "Сохраненный или кэшированный номер телефона, связанный c записью журнала вызовов для быстрого доступа.",
   "exportFieldInfoHintText": "Информация o полях экспорта",
   "naText": "не предпринято",
-  "confirmDownloadText": "Подтвердить загрузку"
+  "confirmDownloadText": "Подтвердить загрузку",
+  "enableDownloadConfirmationText":"Включить подтверждение загрузки"
 }

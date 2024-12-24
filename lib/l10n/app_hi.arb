@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "अवधि फ़िल्टरिंग सक्षम करें",
   "enableCallLogCountVisibilityText": "कॉल लॉग्स की संख्या दिखाएं",
   "enableFilterByAccountIdText": "खाता आईडी द्वारा फ़िल्टर सक्षम करें",
-  "enableLogsSharingText": "कॉल लॉग्स साझाकरण सक्षम करें",
   "exploreNowText": "अब एक्सप्लोर करें",
   "exploreProjectButtonText": "GitHub पर प्रोजेक्ट एक्सप्लोर करें",
   "exportFileNameFormatLabelText": "निर्यात फ़ाइल का नाम प्रारूप",
@@ -184,5 +183,6 @@
   "csvJsonExportCachedMatchedNumberField": "कॉल लॉग प्रविष्टि से संबंधित संग्रहीत या कैश किया गया फोन नंबर त्वरित संदर्भ के लिए।",
   "exportFieldInfoHintText": "निर्यात फ़ील्ड जानकारी",
   "naText": "लागू नहीं",
-  "confirmDownloadText":"डाउनलोड की पुष्टि करें"
+  "confirmDownloadText":"डाउनलोड की पुष्टि करें",
+  "enableDownloadConfirmationText":"डाउनलोड पुष्टि सक्षम करें"
 }

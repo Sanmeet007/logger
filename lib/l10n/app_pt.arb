@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "Ativar filtragem por duração",
   "enableCallLogCountVisibilityText": "Mostrar contagem de registos de chamadas",
   "enableFilterByAccountIdText": "Ativar filtro por id de conta",
-  "enableLogsSharingText": "Desativar partilha de registos de chamadas",
   "exploreNowText": "Explorar agora",
   "exploreProjectButtonText": "Explorar Projeto no Github",
   "exportFileNameFormatLabelText": "Formato do nome do ficheiro de exportação",
@@ -175,5 +174,6 @@
   "csvJsonExportCachedMatchedNumberField": "Número de telefone armazenado ou em cache associado a uma entrada de registo de chamadas para referência rápida.",
   "exportFieldInfoHintText": "Informações dos Campos de Exportação",
   "naText": "n/d",
-  "confirmDownloadText": "Confirmar download"
+  "confirmDownloadText": "Confirmar download",
+  "enableDownloadConfirmationText":"Ativar confirmação de download"
 }

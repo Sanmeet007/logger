@@ -50,7 +50,6 @@
     "enableCallDurationFilteringText": "Aktivera varaktighetsfiltrering",
     "enableCallLogCountVisibilityText": "Visa antal samtalsloggar",
     "enableFilterByAccountIdText": "Aktivera filter efter konto-id",
-    "enableLogsSharingText": "Inaktivera delning av samtalsloggar",
     "exploreNowText": "Utforska nu",
     "exploreProjectButtonText": "Utforska Projekt på Github",
     "exportFileNameFormatLabelText": "Exportfilnamnsformat",
@@ -175,5 +174,6 @@
     "csvJsonExportCachedMatchedNumberField": "Lagrat eller cachat telefonnummer som är kopplat till en samtalsloggspost för snabb referens.",
     "exportFieldInfoHintText": "Information om Exportfält",
     "naText": "Ej tillämpligt",
-    "confirmDownloadText": "Bekräfta nedladdning"
+    "confirmDownloadText": "Bekräfta nedladdning",
+    "enableDownloadConfirmationText":"Aktivera nedladdningsbekräftelse"
 }

@@ -275,7 +275,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         LinedText(
                           text: AppLocalizations.of(context)
-                              .enableLogsSharingText,
+                              .enableDownloadConfirmationText,
                         ),
                         Switch(
                           value: widget.initialConfirmBeforeDownloadState,

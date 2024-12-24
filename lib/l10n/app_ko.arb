@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "통화 시간 필터링 활성화",
   "enableCallLogCountVisibilityText": "통화 기록 개수 표시",
   "enableFilterByAccountIdText": "계정 ID로 필터링 활성화",
-  "enableLogsSharingText": "통화 기록 공유 비활성화",
   "exploreNowText": "지금 탐색",
   "exploreProjectButtonText": "Github에서 프로젝트 탐색",
   "exportFileNameFormatLabelText": "내보내기 파일 이름 형식",
@@ -175,5 +174,6 @@
   "csvJsonExportCachedMatchedNumberField": "빠른 참조를 위해 통화 기록 항목과 연결된 저장되거나 캐시된 전화 번호입니다.",
   "exportFieldInfoHintText": "내보내기 필드 정보",
   "naText": "시도 안 함",
-  "confirmDownloadText": "다운로드 확인"
+  "confirmDownloadText": "다운로드 확인",
+  "enableDownloadConfirmationText":"다운로드 확인 활성화"
 }

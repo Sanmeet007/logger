@@ -50,7 +50,6 @@
   "enableCallDurationFilteringText": "Activează filtrarea duratei",
   "enableCallLogCountVisibilityText": "Arată numărul de jurnale de apeluri",
   "enableFilterByAccountIdText": "Activează filtrarea după ID-ul contului",
-  "enableLogsSharingText": "Dezactivează partajarea jurnalului de apeluri",
   "exploreNowText": "Explorează acum",
   "exploreProjectButtonText": "Explorează proiectul pe Github",
   "exportFileNameFormatLabelText": "Formatul numelui fișierului de export",
@@ -175,5 +174,6 @@
   "csvJsonExportCachedMatchedNumberField": "Număr de telefon stocat sau memorat în cache asociat cu o intrare în jurnalul de apeluri pentru referință rapidă.",
   "exportFieldInfoHintText": "Informații despre câmpurile de export",
   "naText": "nu este cazul",
-  "confirmDownloadText": "Confirmați descărcarea"
+  "confirmDownloadText": "Confirmați descărcarea",
+  "enableDownloadConfirmationText":"Activați confirmarea descărcării"
 }

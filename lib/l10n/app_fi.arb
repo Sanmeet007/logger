@@ -50,7 +50,6 @@
     "enableCallDurationFilteringText": "Ota keston suodatus käyttöön",
     "enableCallLogCountVisibilityText": "Näytä puhelulokien määrä",
     "enableFilterByAccountIdText": "Ota suodatus käyttöön tilitunnuksen perusteella",
-    "enableLogsSharingText": "Poista puhelulokien jakaminen käytöstä",
     "exploreNowText": "Tutki nyt",
     "exploreProjectButtonText": "Tutki projektia Githubissa",
     "exportFileNameFormatLabelText": "Vientitiedostonimen muoto",
@@ -175,5 +174,6 @@
     "csvJsonExportCachedMatchedNumberField": "Tallennettu tai välimuistissa oleva puhelinnumero, joka liittyy puhelulokimerkintään nopeaa viittausta varten.",
     "exportFieldInfoHintText": "Vie kenttätiedot",
     "naText": "Ei yritetty",
-    "confirmDownloadText": "Vahvista lataus"
+    "confirmDownloadText": "Vahvista lataus",
+    "enableDownloadConfirmationText":"Ota latauksen vahvistus käyttöön"
 }

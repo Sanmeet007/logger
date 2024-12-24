@@ -50,7 +50,6 @@
     "enableCallDurationFilteringText": "期間フィルタリングを有効にする",
     "enableCallLogCountVisibilityText": "通話ログの件数を表示",
     "enableFilterByAccountIdText": "アカウントIDでフィルタリングを有効にする",
-    "enableLogsSharingText": "通話ログの共有を無効にする",
     "exploreNowText": "今すぐ探検",
     "exploreProjectButtonText": "Githubでプロジェクトを探検",
     "exportFileNameFormatLabelText": "エクスポートファイル名形式",
@@ -175,5 +174,6 @@
     "csvJsonExportCachedMatchedNumberField": "迅速な参照のために通話ログエントリに関連付けられた保存またはキャッシュされた電話番号。",
     "exportFieldInfoHintText": "エクスポートフィールド情報",
     "naText": "未対応",
-    "confirmDownloadText":"ダウンロードを確認"
+    "confirmDownloadText":"ダウンロードを確認",
+    "enableDownloadConfirmationText":"ダウンロード確認を有効にする"
 }

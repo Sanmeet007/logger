@@ -50,7 +50,6 @@
     "enableCallDurationFilteringText": "Activer le filtrage par durée",
     "enableCallLogCountVisibilityText": "Afficher le nombre de journaux d'appels",
     "enableFilterByAccountIdText": "Activer le filtre par ID de compte",
-    "enableLogsSharingText": "Désactiver le partage des journaux d'appels",
     "exploreNowText": "Explorer maintenant",
     "exploreProjectButtonText": "Explorer le projet sur Github",
     "exportFileNameFormatLabelText": "Format du nom de fichier d'exportation",
@@ -175,5 +174,6 @@
     "csvJsonExportCachedMatchedNumberField": "Numéro de téléphone stocké ou mis en cache associé à une entrée du journal d'appels pour une référence rapide.",
     "exportFieldInfoHintText": "Infos sur les champs d'exportation",
     "naText": "n.d.",
-    "confirmDownloadText": "Confirmer le téléchargement"
+    "confirmDownloadText": "Confirmer le téléchargement",
+    "enableDownloadConfirmationText":"Activer la confirmation de téléchargement"
 }

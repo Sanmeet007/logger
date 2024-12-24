@@ -50,7 +50,6 @@
     "enableCallDurationFilteringText": "启用时长筛选",
     "enableCallLogCountVisibilityText": "显示通话记录计数",
     "enableFilterByAccountIdText": "启用按帐户 ID 筛选",
-    "enableLogsSharingText": "禁用通话记录共享",
     "exploreNowText": "立即探索",
     "exploreProjectButtonText": "在 Github 上探索项目",
     "exportFileNameFormatLabelText": "导出文件名格式",
@@ -175,5 +174,6 @@
     "csvJsonExportCachedMatchedNumberField": "为快速参考而与通话记录条目关联的存储或缓存的电话号码。",
     "exportFieldInfoHintText": "导出字段信息",
     "naText": "未尝试",
-    "confirmDownloadText": "确认下载"
+    "confirmDownloadText": "确认下载",
+    "enableDownloadConfirmationText": "启用下载确认"
 }
