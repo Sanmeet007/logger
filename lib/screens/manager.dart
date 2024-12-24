@@ -141,8 +141,8 @@ class _ScreenManagerState extends State<ScreenManager> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const SizedText(
-              "Confirm Download",
+            title: SizedText(
+              AppLocalizations.of(context).confirmDownloadText,
               size: 20.0,
             ),
             content: SingleChildScrollView(

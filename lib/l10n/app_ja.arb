@@ -174,5 +174,6 @@
     "csvJsonExportCachedNumberTypeField": "電話番号に関連付けられたキャッシュされた番号の種類（自宅、職場など）。存在する場合。",
     "csvJsonExportCachedMatchedNumberField": "迅速な参照のために通話ログエントリに関連付けられた保存またはキャッシュされた電話番号。",
     "exportFieldInfoHintText": "エクスポートフィールド情報",
-    "naText": "未対応"
+    "naText": "未対応",
+    "confirmDownloadText":"ダウンロードを確認"
 }

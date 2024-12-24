@@ -174,5 +174,6 @@
     "csvJsonExportCachedNumberTypeField": "El tipo de número en caché (casa, trabajo, etc.) asociado al número de teléfono, si existe.",
     "csvJsonExportCachedMatchedNumberField": "Número de teléfono almacenado o en caché asociado a una entrada de registro de llamadas para una referencia rápida.",
      "exportFieldInfoHintText": "Información de Campos de Exportación",
-    "naText": "No intentado"
+    "naText": "No intentado",
+    "confirmDownloadText":"Download bevestigen"
 }

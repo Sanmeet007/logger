@@ -183,5 +183,6 @@
   "csvJsonExportCachedNumberTypeField": "कैश नंबर का प्रकार (होम, वर्क, आदि) जो फोन नंबर से संबंधित है, यदि यह मौजूद है।",
   "csvJsonExportCachedMatchedNumberField": "कॉल लॉग प्रविष्टि से संबंधित संग्रहीत या कैश किया गया फोन नंबर त्वरित संदर्भ के लिए।",
   "exportFieldInfoHintText": "निर्यात फ़ील्ड जानकारी",
-  "naText": "लागू नहीं"
+  "naText": "लागू नहीं",
+  "confirmDownloadText":"डाउनलोड की पुष्टि करें"
 }
