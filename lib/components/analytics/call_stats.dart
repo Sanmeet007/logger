@@ -71,13 +71,15 @@ class CallStatsTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           icon,
-                          FittedBox(
-                            child: Text(
-                              value,
-                              maxLines: 1,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 32.0,
+                          Flexible(
+                            child: FittedBox(
+                              child: Text(
+                                value,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0,
+                                ),
                               ),
                             ),
                           ),
