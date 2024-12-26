@@ -53,6 +53,10 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 - Easily export call logs for smooth data organization.
 - Restore call history from generated CSV files after a reset or device switch.
 
+## 👀 Note
+
+Logger works best with Google Dialer. If you see "Unknown" instead of saved contact names, it might be because your phone’s dialer doesn’t fully support showing names from call logs.
+
 ## 🚀 Screenshots
 
 ![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-7.png)
@@ -80,7 +84,7 @@ This section provides options to download the Logger app, both the official rele
 
 <p>
 <a href="https://github.com/Sanmeet007/logger/releases/tag/v2.7.0">
-<img src="https://img.shields.io/badge/download%20now-%2.7.0ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
+<img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
 <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid2.png" alt="Download link button" width="160" height="40"/>
@@ -88,8 +92,6 @@ This section provides options to download the Logger app, both the official rele
 <a href="https://f-droid.org/packages/com.logger.app">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Get_it_on_F-Droid_%28material_design%29.svg/1199px-Get_it_on_F-Droid_%28material_design%29.svg.png" alt="Download link button" width="160" height="40"/>
 </a>
-
-</p>
 <p align="center">
 <hr>
 Developed with ❤️ in India 🇮🇳
