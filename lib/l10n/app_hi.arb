@@ -185,5 +185,12 @@
   "naText": "लागू नहीं",
   "confirmDownloadText": "डाउनलोड की पुष्टि करें",
   "enableDownloadConfirmationText": "डाउनलोड पुष्टि सक्षम करें",
-  "mostReceivedNumberText": "सबसे प्राप्त नंबर"
+  "mostReceivedNumberText": "सबसे प्राप्त नंबर",
+  "confirmContactsSyncLabelText": "संपर्क सिंक्रनाइज़ की पुष्टि करें",
+  "confirmContactsSyncConfirmationText": "यह प्रक्रिया आपके कॉल लॉग्स को स्कैन करेगी और खोए हुए संपर्क नामों को आपके सेव किए गए संपर्कों से मिलाकर अपडेट करेगी। यह आपके कॉल इतिहास के किसी अन्य विवरण को संशोधित नहीं करेगा।",
+  "contactsSyncSuccessMessageText": "कंटैक्ट्स कॉल लॉग्स के साथ सफलतापूर्वक सिंक्रनाइज़ हो गए",
+  "contactsSyncErrorMessageText": "संपर्कों को सिंक्रनाइज़ करते समय त्रुटि!",
+  "contactsPermissionDenied": "संपर्कों की अनुमति अस्वीकृत की गई!",
+  "syncContactsLabelText": "कॉल लॉग संपर्क सिंक्रनाइज़ करें",
+  "syncContactsCTAText": "अब सिंक्रनाइज़ करें"
 }

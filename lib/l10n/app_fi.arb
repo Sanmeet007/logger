@@ -176,5 +176,12 @@
     "naText": "Ei yritetty",
     "confirmDownloadText": "Vahvista lataus",
     "enableDownloadConfirmationText": "Ota latauksen vahvistus käyttöön",
-    "mostReceivedNumberText": "Eniten vastaanotettu numero"
+    "mostReceivedNumberText": "Eniten vastaanotettu numero",
+    "confirmContactsSyncLabelText": "Vahvista yhteystietojen synkronointi",
+    "confirmContactsSyncConfirmationText": "Tämä prosessi tarkistaa puhelulokit ja päivittää puuttuvat yhteystiedot vastaamaan tallennettuja yhteystietoja. Se ei muuta muita yksityiskohtia puheluhistoriassasi.",
+    "contactsSyncSuccessMessageText": "Yhteystiedot synkronoitiin onnistuneesti puhelulokeihin",
+    "contactsSyncErrorMessageText": "Virhe yhteystietojen synkronoinnissa!",
+    "contactsPermissionDenied": "Yhteystietojen käyttöoikeus evättiin!",
+    "syncContactsLabelText": "Synkronoi puhelulokin yhteystiedot",
+    "syncContactsCTAText": "Synkronoi nyt"
 }

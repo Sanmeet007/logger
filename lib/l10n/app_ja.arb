@@ -176,5 +176,12 @@
   "naText": "未対応",
   "confirmDownloadText": "ダウンロードを確認",
   "enableDownloadConfirmationText": "ダウンロード確認を有効にする",
-  "mostReceivedNumberText": "最も受信された番号"
+  "mostReceivedNumberText": "最も受信された番号",
+  "confirmContactsSyncLabelText": "連絡先の同期を確認",
+  "confirmContactsSyncConfirmationText": "このプロセスは、通話履歴をスキャンし、欠落している連絡先名を保存した連絡先と照合して更新します。他の通話履歴の詳細は変更しません。",
+  "contactsSyncSuccessMessageText": "連絡先が通話履歴と正常に同期されました",
+  "contactsSyncErrorMessageText": "連絡先の同期中にエラーが発生しました！",
+  "contactsPermissionDenied": "連絡先の権限が拒否されました！",
+  "syncContactsLabelText": "通話履歴の連絡先を同期",
+  "syncContactsCTAText": "今すぐ同期"
 }

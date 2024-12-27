@@ -1,5 +1,4 @@
 import 'dart:isolate';
-
 import 'package:flutter/services.dart';
 
 const _methodChannelPlatform = MethodChannel("com.logger.app/imp_cl_fmc");
@@ -32,6 +31,25 @@ Future<bool> _insertCallLogs(Map params) async {
   }
 }
 
+// Top level fn required by isolate.run
+Future<bool> _fixCallLogCachedName(Map params) async {
+  final RootIsolateToken rootIsolateToken = params["token"];
+
+  try {
+    // Ensure BackgroundIsolateBinaryMessenger is initialized
+    BackgroundIsolateBinaryMessenger.ensureInitialized(rootIsolateToken);
+
+    bool success = await _methodChannelPlatform.invokeMethod('fixCallLogs');
+    if (!success) {
+      return false;
+    }
+
+    return true;
+  } on PlatformException catch (_) {
+    return false;
+  }
+}
+
 class CallLogWriter {
   static Future<bool> batchInsertCallLogs(
       final List<Map<String, dynamic>> callLogs) {
@@ -41,6 +59,18 @@ class CallLogWriter {
       () {
         return _insertCallLogs({
           "logs": callLogs,
+          "token": rootIsolateToken,
+        });
+      },
+    );
+  }
+
+  static Future<bool> fixCallLogCachedName() {
+    RootIsolateToken rootIsolateToken = RootIsolateToken.instance!;
+
+    return Isolate.run(
+      () {
+        return _fixCallLogCachedName({
           "token": rootIsolateToken,
         });
       },

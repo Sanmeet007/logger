@@ -176,5 +176,12 @@
   "naText": "n/d",
   "confirmDownloadText": "Confirmar download",
   "enableDownloadConfirmationText": "Ativar confirmação de download",
-  "mostReceivedNumberText": "Najczęściej odebrany numer"
+  "mostReceivedNumberText": "Najczęściej odebrany numer",
+  "confirmContactsSyncLabelText": "Confirmar sincronização de contatos",
+  "confirmContactsSyncConfirmationText": "Este processo irá escanear seus registros de chamadas e atualizar os nomes de contatos ausentes, correspondendo-os aos seus contatos salvos. Não modificará nenhum outro detalhe no seu histórico de chamadas.",
+  "contactsSyncSuccessMessageText": "Contatos sincronizados com sucesso com os registros de chamadas",
+  "contactsSyncErrorMessageText": "Erro ao sincronizar contatos!",
+  "contactsPermissionDenied": "Permissão para acessar os contatos negada!",
+  "syncContactsLabelText": "Sincronizar contatos do registro de chamadas",
+  "syncContactsCTAText": "Sincronizar agora"
 }

@@ -1,6 +1,9 @@
 package com.logger.app
 
 import android.Manifest
+import android.database.Cursor
+import android.net.Uri
+import android.provider.ContactsContract
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
@@ -28,6 +31,16 @@ class MainActivity : FlutterActivity() {
                         } else {
                             result.error("INVALID_ARGUMENT", "Invalid call logs format", null)
                         }
+                    }
+                    "fixCallLogs" -> {
+                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED ||
+                            ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+                                
+                            result.error("PERMISSION_DENIED", "Call log permissions are not granted", null)
+                        }
+
+                        fetchAndUpdateCallLogs()
+                        result.success(true)
                     }
                     else -> {
                         result.notImplemented()
@@ -75,4 +88,82 @@ class MainActivity : FlutterActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_CALL_LOG), 1)
         }
     }
+
+    private fun fetchAndUpdateCallLogs(): List<Map<String, String>> {
+        val callLogs = mutableListOf<Map<String, String>>()
+    
+        // Check for the required permissions
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED
+        ) {
+            throw SecurityException("Missing READ_CALL_LOG or WRITE_CALL_LOG permissions.")
+        }
+    
+        val cursor: Cursor? = context.contentResolver.query(
+            CallLog.Calls.CONTENT_URI,
+            arrayOf(CallLog.Calls._ID, CallLog.Calls.NUMBER, CallLog.Calls.CACHED_NAME),
+            null,
+            null,
+            "${CallLog.Calls.DATE} DESC"
+        )
+    
+        if (cursor != null) {
+            try {
+                while (cursor.moveToNext()) {
+                    val id = cursor.getInt(cursor.getColumnIndexOrThrow(CallLog.Calls._ID))
+                    val number = cursor.getString(cursor.getColumnIndexOrThrow(CallLog.Calls.NUMBER))
+                    var cachedName = cursor.getString(cursor.getColumnIndexOrThrow(CallLog.Calls.CACHED_NAME))
+    
+                    // If cached_name is empty, lookup the contact name
+                    if (cachedName.isNullOrEmpty() && !number.isNullOrEmpty()) {
+                        val contactName = lookupContactName(number)
+                        if (!contactName.isNullOrEmpty()) {
+                            cachedName = contactName
+                            updateCachedName(id, contactName)
+                        }
+                    }
+    
+                    // Add the call log entry to the list
+                    callLogs.add(
+                        mapOf(
+                            "id" to id.toString(),
+                            "number" to number,
+                            "cached_name" to (cachedName ?: "")
+                        )
+                    )
+                }
+            } finally {
+                cursor.close()
+            }
+        }
+    
+        return callLogs
+    }
+    
+    private fun lookupContactName(phoneNumber: String): String? {
+        val uri: Uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+        val cursor: Cursor? = context.contentResolver.query(uri, arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME), null, null, null)
+
+        var contactName: String? = null
+        cursor?.use {
+            if (it.moveToFirst()) {
+                contactName = it.getString(it.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME))
+            }
+        }
+        return contactName
+    }
+
+    private fun updateCachedName(id: Int, name: String) {
+        val contentValues = ContentValues()
+        contentValues.put(CallLog.Calls.CACHED_NAME, name)
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
+            context.contentResolver.update(
+                CallLog.Calls.CONTENT_URI,
+                contentValues,
+                "${CallLog.Calls._ID}=?",
+                arrayOf(id.toString())
+            )
+        }
+    }   
 }

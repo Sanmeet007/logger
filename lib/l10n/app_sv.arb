@@ -176,5 +176,12 @@
     "naText": "Ej tillämpligt",
     "confirmDownloadText": "Bekräfta nedladdning",
     "enableDownloadConfirmationText": "Aktivera nedladdningsbekräftelse",
-    "mostReceivedNumberText": "Mest mottagna nummer"
+    "mostReceivedNumberText": "Mest mottagna nummer",
+    "confirmContactsSyncLabelText": "Bekräfta synkronisering av kontakter",
+    "confirmContactsSyncConfirmationText": "Denna process kommer att skanna dina samtalsloggar och uppdatera saknade kontaktpersonnamn genom att matcha dem med dina sparade kontakter. Den kommer inte att ändra några andra detaljer i din samtalshistorik.",
+    "contactsSyncSuccessMessageText": "Kontakter synkroniserades framgångsrikt med samtalsloggar",
+    "contactsSyncErrorMessageText": "Fel vid synkronisering av kontakter!",
+    "contactsPermissionDenied": "Behörighet för kontakter nekades!",
+    "syncContactsLabelText": "Synkronisera samtalsloggkontakter",
+    "syncContactsCTAText": "Synkronisera nu"
 }

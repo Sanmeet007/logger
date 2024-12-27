@@ -176,5 +176,12 @@
   "naText": "не предпринято",
   "confirmDownloadText": "Подтвердить загрузку",
   "enableDownloadConfirmationText": "Включить подтверждение загрузки",
-  "mostReceivedNumberText": "Самый часто принятый номер"
+  "mostReceivedNumberText": "Самый часто принятый номер",
+  "confirmContactsSyncLabelText": "Подтвердите синхронизацию контактов",
+  "confirmContactsSyncConfirmationText": "Этот процесс сканирует ваши журналы вызовов и обновляет отсутствующие имена контактов, сопоставляя их с вашими сохраненными контактами. Он не изменит другие детали в вашей истории вызовов.",
+  "contactsSyncSuccessMessageText": "Контакты успешно синхронизированы с журналами вызовов",
+  "contactsSyncErrorMessageText": "Ошибка при синхронизации контактов!",
+  "contactsPermissionDenied": "Доступ к контактам отклонен!",
+  "syncContactsLabelText": "Синхронизировать контакты журнала вызовов",
+  "syncContactsCTAText": "Синхронизировать сейчас"
 }

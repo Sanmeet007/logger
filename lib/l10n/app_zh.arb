@@ -176,5 +176,12 @@
     "naText": "未尝试",
     "confirmDownloadText": "确认下载",
     "enableDownloadConfirmationText": "启用下载确认",
-    "mostReceivedNumberText": "接听最多的号码"
+    "mostReceivedNumberText": "接听最多的号码",
+    "confirmContactsSyncLabelText": "确认同步联系人",
+    "confirmContactsSyncConfirmationText": "此过程将扫描您的通话记录，并更新缺失的联系人姓名，通过与您的已保存联系人匹配。它不会修改您通话历史中的任何其他细节。",
+    "contactsSyncSuccessMessageText": "联系人已成功与通话记录同步",
+    "contactsSyncErrorMessageText": "同步联系人时出错！",
+    "contactsPermissionDenied": "未获得访问联系人权限！",
+    "syncContactsLabelText": "同步通话记录联系人",
+    "syncContactsCTAText": "立即同步"
 }

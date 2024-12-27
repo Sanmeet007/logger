@@ -1,5 +1,26 @@
 {
   "@@locale": "en",
+  "@confirmContactsSyncLabelText": {
+    "description": "Label for confirming the contacts sync action."
+  },
+  "@confirmContactsSyncConfirmationText": {
+    "description": "Message explaining what the sync process will do, specifically updating missing contact names in call logs without modifying other details."
+  },
+  "@contactsSyncSuccessMessageText": {
+    "description": "Success message shown after the contacts are successfully synced with the call logs."
+  },
+  "@contactsSyncErrorMessageText": {
+    "description": "Error message shown if there is an issue syncing the contacts."
+  },
+  "@contactsPermissionDenied": {
+    "description": "Message shown when the user denies permission to access contacts."
+  },
+  "@syncContactsLabelText": {
+    "description": "Label for the sync contacts feature in the UI."
+  },
+  "@syncContactsCTAText": {
+    "description": "Call-to-action button text that prompts the user to initiate the sync process."
+  },
   "@mostReceivedNumberText": {
     "description": "Label for most recieved number."
   },
@@ -726,5 +747,12 @@
   "naText": "n/a",
   "confirmDownloadText": "Confirm Download",
   "enableDownloadConfirmationText": "Enable download confirmation",
-  "mostReceivedNumberText": "Most Recieved Number"
+  "mostReceivedNumberText": "Most Recieved Number",
+  "confirmContactsSyncLabelText": "Confirm Sync Contacts",
+  "confirmContactsSyncConfirmationText": "This process will scan your call logs and update missing contact names by matching them with your saved contacts. It won't modify any other details in your call history.",
+  "contactsSyncSuccessMessageText": "Contacts synced successfully with call logs",
+  "contactsSyncErrorMessageText": "Error syncing contacts !",
+  "contactsPermissionDenied": "Permission to contacts were denied !",
+  "syncContactsLabelText": "Sync Call Log Contacts",
+  "syncContactsCTAText": "Sync Now"
 }

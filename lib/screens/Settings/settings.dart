@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
+import 'package:logger/components/sized_text.dart';
 import 'package:logger/utils/call_log_writer.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_storage/shared_storage.dart';
 import 'dart:async';
 
@@ -185,6 +187,83 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Navigator.pop(context);
                   }
                   handleCallLogImport();
+                },
+                child: Text(
+                  AppLocalizations.of(context).continueText,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  void syncContacts() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: SizedText(
+              AppLocalizations.of(context).confirmContactsSyncLabelText,
+              size: 20.0,
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)
+                        .confirmContactsSyncConfirmationText,
+                  )
+                ],
+              ),
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(AppLocalizations.of(context).cancelText),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  var permission = await Permission.contacts.request();
+                  if (permission.isGranted || permission.isLimited) {
+                    widget.showLoader();
+
+                    bool success = await CallLogWriter.fixCallLogCachedName();
+                    if (success) {
+                      if (context.mounted) {
+                        AppSnackBar.show(
+                          context,
+                          content: AppLocalizations.of(context)
+                              .contactsSyncSuccessMessageText,
+                          useAction: true,
+                          buttonOnPressed: () {
+                            widget.refresher?.call();
+                          },
+                          buttonText: AppLocalizations.of(context).refreshText,
+                        );
+                      }
+                    } else {
+                      if (context.mounted) {
+                        AppSnackBar.show(
+                          context,
+                          content: AppLocalizations.of(context)
+                              .contactsSyncErrorMessageText,
+                        );
+                      }
+                    }
+
+                    widget.hideLoader();
+                  } else {
+                    if (context.mounted) {
+                      AppSnackBar.show(
+                        context.mounted,
+                        content: AppLocalizations.of(context)
+                            .contactsPermissionDenied,
+                      );
+                    }
+                  }
                 },
                 child: Text(
                   AppLocalizations.of(context).continueText,
@@ -649,6 +728,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onPressed: confirmImport,
                           child: Text(
                             AppLocalizations.of(context).startImportText,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    const LogDivider(),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        LinedText(
+                          text: AppLocalizations.of(context)
+                              .syncContactsLabelText,
+                        ),
+                        ElevatedButton(
+                          onPressed: syncContacts,
+                          child: Text(
+                            AppLocalizations.of(context).syncContactsCTAText,
                           ),
                         ),
                       ],

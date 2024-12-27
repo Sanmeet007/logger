@@ -176,5 +176,12 @@
   "naText": "시도 안 함",
   "confirmDownloadText": "다운로드 확인",
   "enableDownloadConfirmationText": "다운로드 확인 활성화",
-  "mostReceivedNumberText": "가장 많이 받은 번호"
+  "mostReceivedNumberText": "가장 많이 받은 번호",
+  "confirmContactsSyncLabelText": "연락처 동기화 확인",
+  "confirmContactsSyncConfirmationText": "이 프로세스는 호출 로그를 스캔하고 누락된 연락처 이름을 저장된 연락처와 일치시켜 업데이트합니다. 호출 기록의 다른 세부 사항은 변경하지 않습니다.",
+  "contactsSyncSuccessMessageText": "연락처가 성공적으로 호출 로그와 동기화되었습니다",
+  "contactsSyncErrorMessageText": "연락처 동기화 중 오류가 발생했습니다!",
+  "contactsPermissionDenied": "연락처 권한이 거부되었습니다!",
+  "syncContactsLabelText": "통화 기록 연락처 동기화",
+  "syncContactsCTAText": "지금 동기화"
 }

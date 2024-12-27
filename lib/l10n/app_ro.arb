@@ -176,5 +176,12 @@
   "naText": "nu este cazul",
   "confirmDownloadText": "Confirmați descărcarea",
   "enableDownloadConfirmationText": "Activați confirmarea descărcării",
-  "mostReceivedNumberText": "Numărul cel mai primit"
+  "mostReceivedNumberText": "Numărul cel mai primit",
+  "confirmContactsSyncLabelText": "Confirmați sincronizarea contactelor",
+  "confirmContactsSyncConfirmationText": "Acest proces va analiza jurnalele de apeluri și va actualiza numele contactelor lipsă, potrivind-le cu contactele salvate. Nu va modifica alte detalii din istoricul apelurilor.",
+  "contactsSyncSuccessMessageText": "Contactele au fost sincronizate cu succes cu jurnalele de apeluri",
+  "contactsSyncErrorMessageText": "Eroare la sincronizarea contactelor!",
+  "contactsPermissionDenied": "Permisiunea pentru contacte a fost refuzată!",
+  "syncContactsLabelText": "Sincronizați contactele din jurnalul de apeluri",
+  "syncContactsCTAText": "Sincronizați acum"
 }

@@ -176,5 +176,12 @@
   "naText": "n.v.t.",
   "confirmDownloadText": "Download bevestigen",
   "enableDownloadConfirmationText": "Downloadbevestiging inschakelen",
-  "mostReceivedNumberText": "Meest ontvangen nummer"
+  "mostReceivedNumberText": "Meest ontvangen nummer",
+  "confirmContactsSyncLabelText": "Bevestig synchronisatie van contacten",
+  "confirmContactsSyncConfirmationText": "Dit proces scant je oproeplogs en werkt ontbrekende contactnamen bij door ze te matchen met je opgeslagen contacten. Het zal geen andere details in je oproephistorie wijzigen.",
+  "contactsSyncSuccessMessageText": "Contacten succesvol gesynchroniseerd met oproeplogs",
+  "contactsSyncErrorMessageText": "Fout bij het synchroniseren van contacten!",
+  "contactsPermissionDenied": "Toestemming voor contacten geweigerd!",
+  "syncContactsLabelText": "Synchroniseer oproeplog contacten",
+  "syncContactsCTAText": "Nu synchroniseren"
 }

@@ -176,5 +176,12 @@
     "naText": "No intentado",
     "confirmDownloadText": "Download bevestigen",
     "enableDownloadConfirmationText": "Download-Bestätigung aktivieren",
-    "mostReceivedNumberText": "Am meisten empfangene Nummer"
+    "mostReceivedNumberText": "Am meisten empfangene Nummer",
+    "confirmContactsSyncLabelText": "Bestätigen Sie die Synchronisierung der Kontakte",
+    "confirmContactsSyncConfirmationText": "Dieser Prozess scannt Ihre Anrufprotokolle und aktualisiert fehlende Kontaktnamen, indem er sie mit Ihren gespeicherten Kontakten abgleicht. Es wird keine anderen Details in Ihrem Anrufverlauf ändern.",
+    "contactsSyncSuccessMessageText": "Kontakte erfolgreich mit den Anrufprotokollen synchronisiert",
+    "contactsSyncErrorMessageText": "Fehler bei der Synchronisierung der Kontakte!",
+    "contactsPermissionDenied": "Zugriffsberechtigung für Kontakte verweigert!",
+    "syncContactsLabelText": "Anrufprotokollkontakte synchronisieren",
+    "syncContactsCTAText": "Jetzt synchronisieren"
 }

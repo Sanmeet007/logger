@@ -176,5 +176,12 @@
   "naText": "nie dotyczy",
   "confirmDownloadText": "Potwierdź pobieranie",
   "enableDownloadConfirmationText": "Włącz potwierdzenie pobierania",
-  "mostReceivedNumberText": "Najczęściej odebrany numer"
+  "mostReceivedNumberText": "Najczęściej odebrany numer",
+  "confirmContactsSyncLabelText": "Potwierdź synchronizację kontaktów",
+  "confirmContactsSyncConfirmationText": "Ten proces zeskanuje Twoje dzienniki połączeń i zaktualizuje brakujące nazwy kontaktów, dopasowując je do zapisanych kontaktów. Nie zmieni żadnych innych szczegółów w historii połączeń.",
+  "contactsSyncSuccessMessageText": "Kontakty pomyślnie zsynchronizowane z dziennikami połączeń",
+  "contactsSyncErrorMessageText": "Błąd synchronizacji kontaktów!",
+  "contactsPermissionDenied": "Odmówiono dostępu do kontaktów!",
+  "syncContactsLabelText": "Synchronizuj kontakty z dziennikami połączeń",
+  "syncContactsCTAText": "Synchronizuj teraz"
 }
