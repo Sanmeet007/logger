@@ -197,20 +197,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
   }
 
-  void syncContacts() async {
+  void syncContacts(BuildContext parentContext) async {
     showDialog(
-        context: context,
+        context: parentContext,
         builder: (context) {
           return AlertDialog(
             title: SizedText(
-              AppLocalizations.of(context).confirmContactsSyncLabelText,
+              AppLocalizations.of(parentContext).confirmContactsSyncLabelText,
               size: 20.0,
             ),
             content: SingleChildScrollView(
               child: Column(
                 children: [
                   Text(
-                    AppLocalizations.of(context)
+                    AppLocalizations.of(parentContext)
                         .confirmContactsSyncConfirmationText,
                   )
                 ],
@@ -221,34 +221,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text(AppLocalizations.of(context).cancelText),
+                child: Text(AppLocalizations.of(parentContext).cancelText),
               ),
               ElevatedButton(
                 onPressed: () async {
                   Navigator.pop(context);
                   var permission = await Permission.contacts.request();
-                  if (permission.isGranted || permission.isLimited) {
+                  if (!(permission.isGranted || permission.isLimited)) {
                     widget.showLoader();
 
                     bool success = await CallLogWriter.fixCallLogCachedName();
                     if (success) {
-                      if (context.mounted) {
+                      if (parentContext.mounted) {
                         AppSnackBar.show(
-                          context,
-                          content: AppLocalizations.of(context)
+                          parentContext,
+                          content: AppLocalizations.of(parentContext)
                               .contactsSyncSuccessMessageText,
                           useAction: true,
                           buttonOnPressed: () {
                             widget.refresher?.call();
                           },
-                          buttonText: AppLocalizations.of(context).refreshText,
+                          buttonText:
+                              AppLocalizations.of(parentContext).refreshText,
                         );
                       }
                     } else {
-                      if (context.mounted) {
+                      if (parentContext.mounted) {
                         AppSnackBar.show(
-                          context,
-                          content: AppLocalizations.of(context)
+                          parentContext,
+                          content: AppLocalizations.of(parentContext)
                               .contactsSyncErrorMessageText,
                         );
                       }
@@ -256,17 +257,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                     widget.hideLoader();
                   } else {
-                    if (context.mounted) {
+                    if (parentContext.mounted) {
                       AppSnackBar.show(
-                        context.mounted,
-                        content: AppLocalizations.of(context)
+                        parentContext,
+                        content: AppLocalizations.of(parentContext)
                             .contactsPermissionDenied,
                       );
                     }
                   }
                 },
                 child: Text(
-                  AppLocalizations.of(context).continueText,
+                  AppLocalizations.of(parentContext).continueText,
                 ),
               ),
             ],
@@ -748,7 +749,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .syncContactsLabelText,
                         ),
                         ElevatedButton(
-                          onPressed: syncContacts,
+                          onPressed: () => syncContacts(context),
                           child: Text(
                             AppLocalizations.of(context).syncContactsCTAText,
                           ),
