@@ -227,7 +227,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onPressed: () async {
                   Navigator.pop(context);
                   var permission = await Permission.contacts.request();
-                  if (!(permission.isGranted || permission.isLimited)) {
+                  if (permission.isGranted || permission.isLimited) {
                     widget.showLoader();
 
                     bool success = await CallLogWriter.fixCallLogCachedName();
