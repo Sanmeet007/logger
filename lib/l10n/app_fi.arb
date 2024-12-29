@@ -183,5 +183,6 @@
     "contactsSyncErrorMessageText": "Virhe yhteystietojen synkronoinnissa!",
     "contactsPermissionDenied": "Yhteystietojen käyttöoikeus evättiin!",
     "syncContactsLabelText": "Synkronoi puhelulokin yhteystiedot",
-    "syncContactsCTAText": "Synkronoi nyt"
+    "syncContactsCTAText": "Synkronoi nyt",
+    "softwareInformationText": "Ohjelmistotiedot"
 }

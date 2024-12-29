@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "Fout bij het synchroniseren van contacten!",
   "contactsPermissionDenied": "Toestemming voor contacten geweigerd!",
   "syncContactsLabelText": "Synchroniseer oproeplog contacten",
-  "syncContactsCTAText": "Nu synchroniseren"
+  "syncContactsCTAText": "Nu synchroniseren",
+  "softwareInformationText": "Software-informatie"
 }

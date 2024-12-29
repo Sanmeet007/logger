@@ -183,5 +183,6 @@
     "contactsSyncErrorMessageText": "Erreur lors de la synchronisation des contacts !",
     "contactsPermissionDenied": "Permission d'accès aux contacts refusée !",
     "syncContactsLabelText": "Synchroniser les contacts du journal d'appels",
-    "syncContactsCTAText": "Synchroniser maintenant"
+    "syncContactsCTAText": "Synchroniser maintenant",
+    "softwareInformationText": "Informations sur le logiciel"
 }

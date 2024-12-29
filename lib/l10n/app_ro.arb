@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "Eroare la sincronizarea contactelor!",
   "contactsPermissionDenied": "Permisiunea pentru contacte a fost refuzată!",
   "syncContactsLabelText": "Sincronizați contactele din jurnalul de apeluri",
-  "syncContactsCTAText": "Sincronizați acum"
+  "syncContactsCTAText": "Sincronizați acum",
+  "softwareInformationText": "Informații despre software"
 }

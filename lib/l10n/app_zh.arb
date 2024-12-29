@@ -183,5 +183,6 @@
     "contactsSyncErrorMessageText": "同步联系人时出错！",
     "contactsPermissionDenied": "未获得访问联系人权限！",
     "syncContactsLabelText": "同步通话记录联系人",
-    "syncContactsCTAText": "立即同步"
+    "syncContactsCTAText": "立即同步",
+    "softwareInformationText": "软件信息"
 }

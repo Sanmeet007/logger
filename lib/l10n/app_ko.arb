@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "연락처 동기화 중 오류가 발생했습니다!",
   "contactsPermissionDenied": "연락처 권한이 거부되었습니다!",
   "syncContactsLabelText": "통화 기록 연락처 동기화",
-  "syncContactsCTAText": "지금 동기화"
+  "syncContactsCTAText": "지금 동기화",
+  "softwareInformationText": "소프트웨어 정보"
 }

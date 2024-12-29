@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "Erro ao sincronizar contatos!",
   "contactsPermissionDenied": "Permissão para acessar os contatos negada!",
   "syncContactsLabelText": "Sincronizar contatos do registro de chamadas",
-  "syncContactsCTAText": "Sincronizar agora"
+  "syncContactsCTAText": "Sincronizar agora",
+  "softwareInformationText":"Informações do software"
 }

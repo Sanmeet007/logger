@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "Błąd synchronizacji kontaktów!",
   "contactsPermissionDenied": "Odmówiono dostępu do kontaktów!",
   "syncContactsLabelText": "Synchronizuj kontakty z dziennikami połączeń",
-  "syncContactsCTAText": "Synchronizuj teraz"
+  "syncContactsCTAText": "Synchronizuj teraz",
+  "softwareInformationText": "Informacje o oprogramowaniu"
 }

@@ -183,5 +183,6 @@
     "contactsSyncErrorMessageText": "Fel vid synkronisering av kontakter!",
     "contactsPermissionDenied": "Behörighet för kontakter nekades!",
     "syncContactsLabelText": "Synkronisera samtalsloggkontakter",
-    "syncContactsCTAText": "Synkronisera nu"
+    "syncContactsCTAText": "Synkronisera nu",
+    "softwareInformationText": "Programvaruinformation"
 }

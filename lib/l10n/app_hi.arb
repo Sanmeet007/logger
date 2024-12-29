@@ -192,5 +192,6 @@
   "contactsSyncErrorMessageText": "संपर्कों को सिंक्रनाइज़ करते समय त्रुटि!",
   "contactsPermissionDenied": "संपर्कों की अनुमति अस्वीकृत की गई!",
   "syncContactsLabelText": "कॉल लॉग संपर्क सिंक्रनाइज़ करें",
-  "syncContactsCTAText": "अब सिंक्रनाइज़ करें"
+  "syncContactsCTAText": "अब सिंक्रनाइज़ करें",
+  "softwareInformationText": "सॉफ़्टवेयर जानकारी"
 }

@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "連絡先の同期中にエラーが発生しました！",
   "contactsPermissionDenied": "連絡先の権限が拒否されました！",
   "syncContactsLabelText": "通話履歴の連絡先を同期",
-  "syncContactsCTAText": "今すぐ同期"
+  "syncContactsCTAText": "今すぐ同期",
+  "softwareInformationText": "ソフトウェア情報"
 }

@@ -183,5 +183,6 @@
     "contactsSyncErrorMessageText": "Fehler bei der Synchronisierung der Kontakte!",
     "contactsPermissionDenied": "Zugriffsberechtigung für Kontakte verweigert!",
     "syncContactsLabelText": "Anrufprotokollkontakte synchronisieren",
-    "syncContactsCTAText": "Jetzt synchronisieren"
+    "syncContactsCTAText": "Jetzt synchronisieren",
+    "softwareInformationText":"Software-Informationen"
 }

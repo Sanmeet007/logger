@@ -16,8 +16,8 @@ class AboutScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedText(
-                "Software Information",
+              SizedText(
+                AppLocalizations.of(context).softwareInformationText,
                 size: 20.0,
               ),
               const SizedBox(

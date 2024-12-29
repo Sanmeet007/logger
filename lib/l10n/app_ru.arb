@@ -183,5 +183,6 @@
   "contactsSyncErrorMessageText": "Ошибка при синхронизации контактов!",
   "contactsPermissionDenied": "Доступ к контактам отклонен!",
   "syncContactsLabelText": "Синхронизировать контакты журнала вызовов",
-  "syncContactsCTAText": "Синхронизировать сейчас"
+  "syncContactsCTAText": "Синхронизировать сейчас",
+  "softwareInformationText": "Информация o программном обеспечении"
 }
