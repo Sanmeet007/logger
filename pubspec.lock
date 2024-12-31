@@ -528,10 +528,9 @@ packages:
   shared_storage:
     dependency: "direct main"
     description:
-      name: shared_storage
-      sha256: cf20428d06af065311b71e09cbfbbfe431e979a3bf9180001c1952129b7c708f
-      url: "https://pub.dev"
-    source: hosted
+      path: shared_storage
+      relative: true
+    source: path
     version: "0.8.1"
   shimmer:
     dependency: "direct main"

@@ -1,0 +1,3 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="io.alexrintt.sharedstorage">
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+</manifest>

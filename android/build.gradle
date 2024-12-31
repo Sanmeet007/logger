@@ -1,7 +1,3 @@
-buildscript {
-    ext.kotlin_version = '2.0.0'
-}
-
 allprojects {
     repositories {
         google()
@@ -18,9 +14,16 @@ subprojects {
                 compileSdkVersion 34                
             }
         }
+
+        if (project.hasProperty('android')) {
+            project.android {
+                if (namespace == null) {
+                    namespace project.group
+                }
+            }
+        }
     }
-}
-subprojects {
+
     project.buildDir = "${rootProject.buildDir}/${project.name}"
     project.evaluationDependsOn(':app')
 }
