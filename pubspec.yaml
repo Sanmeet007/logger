@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 2.7.1+30
 
 environment:
-  flutter: 3.24.5
+  flutter: 3.27.1 
   sdk: ">=2.19.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -35,22 +35,22 @@ dependencies:
     sdk: flutter
   call_log: ^4.0.0
   intl: any
-  share_plus: ^8.0.3
+  share_plus: ^10.1.3
   cupertino_icons: ^1.0.8
-  flutter_native_splash: ^2.4.0
-  path_provider: ^2.1.3
+  flutter_native_splash: ^2.4.4
+  path_provider: ^2.1.5
   open_file_plus: ^3.4.1+1
   permission_handler: ^11.3.1
   url_launcher: ^6.3.0
   flutter_slidable: ^3.1.0
-  fl_chart: ^0.68.0
-  phone_numbers_parser: ^8.3.0
+  fl_chart: ^0.70.0
+  phone_numbers_parser: ^9.0.3
   shimmer: ^3.0.0
   collection: any
   shared_preferences: ^2.2.3
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
-  duration: ^3.0.15
+  duration: ^4.0.3
 
   # must be removed in next release
   shared_storage: 
@@ -65,7 +65,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.2
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
