@@ -41,13 +41,13 @@ dependencies:
   path_provider: ^2.1.5
   open_file_plus: ^3.4.1+1
   permission_handler: ^11.3.1
-  url_launcher: ^6.3.0
-  flutter_slidable: ^3.1.0
+  url_launcher: ^6.3.1
+  flutter_slidable: ^3.1.2
   fl_chart: ^0.70.0
   phone_numbers_parser: ^9.0.3
   shimmer: ^3.0.0
   collection: any
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.4
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
   duration: ^4.0.3
