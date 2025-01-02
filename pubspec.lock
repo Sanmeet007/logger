@@ -528,9 +528,11 @@ packages:
   shared_storage:
     dependency: "direct main"
     description:
-      path: "../shared_storage"
-      relative: true
-    source: path
+      path: "."
+      ref: master
+      resolved-ref: e61a8771fefdc33d050a39934a5f52b0875d70ed
+      url: "https://github.com/sanmeet007/shared-storage"
+    source: git
     version: "0.9.1"
   shimmer:
     dependency: "direct main"
