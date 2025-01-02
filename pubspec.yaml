@@ -52,7 +52,10 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   duration: ^4.0.3
   shared_storage: 
-    path: ./shared_storage
+    git: 
+      url: https://github.com/sanmeet007/shared-storage
+      ref: master
+    # path: ../shared_storage
 
 dev_dependencies:
   flutter_test:
