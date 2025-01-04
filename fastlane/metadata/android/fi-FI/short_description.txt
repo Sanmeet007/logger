@@ -1,1 +1,1 @@
-Tarkastele ja vie puhelulokit CSV-muodossa
+Seuraa, analysoi ja hallitse puhelujasi.

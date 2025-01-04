@@ -1,1 +1,1 @@
-Vizualizați și exportați jurnalele de apeluri în format CSV
+Urmărește, analizează și gestionează apelurile tale.

@@ -1,1 +1,1 @@
-Visa och exportera samtalsloggar i CSV-format
+Spåra, analysera och hantera dina samtal.

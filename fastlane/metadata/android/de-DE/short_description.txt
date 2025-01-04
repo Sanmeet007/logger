@@ -1,1 +1,1 @@
-Ansehen und Exportieren von Anrufprotokollen im CSV-Format
+Verfolgen, analysieren und verwalten Sie Ihre Anrufe.

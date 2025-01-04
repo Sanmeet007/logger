@@ -1,1 +1,1 @@
-Wyświetl i eksportuj dzienniki połączeń w formacie CSV
+Śledź, analizuj i zarządzaj swoimi połączeniami.
