@@ -1,1 +1,1 @@
-view and export call logs in CSV format
+Track, Analyze, and Manage Your Calls
