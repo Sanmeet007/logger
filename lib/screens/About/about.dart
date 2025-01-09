@@ -26,7 +26,7 @@ class AboutScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 35, 34, 34)
+                      ? const Color.fromARGB(249, 34, 34, 34)
                       : const Color.fromARGB(255, 249, 245, 255),
                   border: Border.all(
                     width: 1,
@@ -98,7 +98,7 @@ class AboutScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 35, 34, 34)
+                      ? const Color.fromARGB(249, 34, 34, 34)
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -118,7 +118,7 @@ class AboutScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 35, 34, 34)
+                      ? const Color.fromARGB(249, 34, 34, 34)
                       : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),

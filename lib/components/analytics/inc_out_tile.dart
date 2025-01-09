@@ -34,7 +34,7 @@ class IncomingVsOutgoingTile extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             color: Theme.of(context).brightness == Brightness.dark
-                ? const Color.fromARGB(250, 42, 40, 40)
+                ? const Color.fromARGB(249, 34, 34, 34)
                 : const Color.fromARGB(155, 240, 230, 255),
             borderRadius: BorderRadius.circular(10.0),
           ),

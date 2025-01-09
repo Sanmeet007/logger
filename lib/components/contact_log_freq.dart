@@ -19,37 +19,54 @@ class ContactLogFreq extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Slidable(
+        closeOnScroll: true,
         startActionPane: ActionPane(
           extentRatio: 0.6,
           motion: const StretchMotion(),
           children: [
-            SlidableAction(
-              autoClose: true,
-              flex: 1,
-              onPressed: (context) async {
-                var uri = Uri.parse("tel:${logDetails.number}");
-                await launchUrl(uri);
-              },
-              backgroundColor: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(255, 60, 60, 60)
-                  : Colors.black,
-              foregroundColor: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(255, 235, 235, 235)
-                  : Colors.white,
-              icon: Icons.call,
-              label: AppLocalizations.of(context).callText,
+            Theme(
+              data: Theme.of(context).copyWith(
+                outlinedButtonTheme: OutlinedButtonThemeData(
+                  style: ButtonStyle(
+                      iconColor: Theme.of(context).brightness == Brightness.dark
+                          ? WidgetStatePropertyAll(
+                              Color.fromARGB(255, 235, 235, 235))
+                          : WidgetStatePropertyAll(Colors.white)),
+                ),
+              ),
+              child: SlidableAction(
+                autoClose: true,
+                flex: 1,
+                onPressed: (context) async {
+                  var uri = Uri.parse("tel:${logDetails.number}");
+                  await launchUrl(uri);
+                },
+                backgroundColor: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(255, 60, 60, 60)
+                    : Colors.black,
+                icon: Icons.call,
+                label: AppLocalizations.of(context).callText,
+              ),
             ),
-            SlidableAction(
-              autoClose: true,
-              flex: 1,
-              onPressed: (context) async {
-                var uri = Uri.parse("sms:${logDetails.number}");
-                await launchUrl(uri);
-              },
-              backgroundColor: const Color.fromARGB(255, 134, 53, 255),
-              foregroundColor: Colors.white,
-              icon: Icons.message,
-              label: AppLocalizations.of(context).smsText,
+            Theme(
+              data: Theme.of(context).copyWith(
+                outlinedButtonTheme: OutlinedButtonThemeData(
+                  style: ButtonStyle(
+                      iconColor: WidgetStatePropertyAll(Colors.white)),
+                ),
+              ),
+              child: SlidableAction(
+                autoClose: true,
+                flex: 1,
+                onPressed: (context) async {
+                  var uri = Uri.parse("sms:${logDetails.number}");
+                  await launchUrl(uri);
+                },
+                backgroundColor: const Color.fromARGB(255, 134, 53, 255),
+                foregroundColor: Colors.white,
+                icon: Icons.message,
+                label: AppLocalizations.of(context).smsText,
+              ),
             ),
           ],
         ),

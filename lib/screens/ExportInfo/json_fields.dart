@@ -31,7 +31,7 @@ class JsonFieldsInformation extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(249, 35, 34, 34)
+                  ? const Color.fromARGB(249, 34, 34, 34)
                   : const Color.fromARGB(255, 249, 245, 255),
               border: Border.all(
                 width: 1,

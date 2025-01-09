@@ -33,6 +33,7 @@ class LogEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
+      closeOnScroll: true,
       startActionPane: ActionPane(
         extentRatio: 0.6,
         // A motion is a widget used to control how the pane animates.
@@ -41,34 +42,50 @@ class LogEntry extends StatelessWidget {
         // All actions are defined in the children parameter.
         children: [
           // A SlidableAction can have an icon and/or a label.
-          SlidableAction(
-            autoClose: true,
-            flex: 1,
-            onPressed: (context) async {
-              var uri = Uri.parse("tel:$phoneNumber");
-              await launchUrl(uri);
-            },
-            backgroundColor: Theme.of(context).brightness == Brightness.dark
-                ? const Color.fromARGB(255, 60, 60, 60)
-                : Colors.black,
-            foregroundColor: Theme.of(context).brightness == Brightness.dark
-                ? const Color.fromARGB(255, 235, 235, 235)
-                : Colors.white,
-            icon: Icons.call,
-            label: 'Call',
+          Theme(
+            data: Theme.of(context).copyWith(
+              outlinedButtonTheme: OutlinedButtonThemeData(
+                style: ButtonStyle(
+                    iconColor: Theme.of(context).brightness == Brightness.dark
+                        ? WidgetStatePropertyAll(
+                            Color.fromARGB(255, 235, 235, 235))
+                        : WidgetStatePropertyAll(Colors.white)),
+              ),
+            ),
+            child: SlidableAction(
+              autoClose: true,
+              flex: 1,
+              onPressed: (context) async {
+                var uri = Uri.parse("tel:$phoneNumber");
+                await launchUrl(uri);
+              },
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(255, 60, 60, 60)
+                  : Colors.black,
+              icon: Icons.call,
+              label: 'Call',
+            ),
           ),
-          SlidableAction(
-            autoClose: true,
-            // An action can be bigger than the others.
-            flex: 1,
-            onPressed: (context) async {
-              var uri = Uri.parse("sms:$phoneNumber");
-              await launchUrl(uri);
-            },
-            backgroundColor: const Color.fromARGB(255, 134, 53, 255),
-            foregroundColor: Colors.white,
-            icon: Icons.message,
-            label: 'SMS',
+          Theme(
+            data: Theme.of(context).copyWith(
+              outlinedButtonTheme: const OutlinedButtonThemeData(
+                style: ButtonStyle(
+                    iconColor: WidgetStatePropertyAll(Colors.white)),
+              ),
+            ),
+            child: SlidableAction(
+              autoClose: true,
+              // An action can be bigger than the others.
+              flex: 1,
+              onPressed: (context) async {
+                var uri = Uri.parse("sms:$phoneNumber");
+                await launchUrl(uri);
+              },
+              backgroundColor: const Color.fromARGB(255, 134, 53, 255),
+              foregroundColor: Colors.white,
+              icon: Icons.message,
+              label: 'SMS',
+            ),
           ),
         ],
       ),
