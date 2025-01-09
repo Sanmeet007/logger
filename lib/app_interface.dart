@@ -57,7 +57,10 @@ class BaseApplication extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       initialData: null,
-      future: Permission.phone.request(),
+      future: [
+        Permission.phone,
+        Permission.contacts,
+      ].request(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
