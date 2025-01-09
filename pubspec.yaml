@@ -52,10 +52,10 @@ dependencies:
   duration: ^4.0.3
 
   call_log: 
-    # git: 
-    #   url: https://github.com/Sanmeet007/call_log
-    #   ref: master
-    path: ../flutter_packages/call_log
+    git: 
+      url: https://github.com/Sanmeet007/call_log
+      ref: master
+    # path: ../flutter_packages/call_log
 
 
   shared_storage: 
