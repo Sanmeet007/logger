@@ -95,6 +95,7 @@ class ContactLog extends StatelessWidget {
                   isScrollControlled: true,
                   builder: (context) {
                     return LogDetails(
+                      parentContext: context,
                       isUnknown: isUnknown,
                       name: name,
                       phoneNumber: logDetails.number ??

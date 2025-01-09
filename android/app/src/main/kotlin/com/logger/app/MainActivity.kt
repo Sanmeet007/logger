@@ -1,6 +1,7 @@
 package com.logger.app
 
 import android.Manifest
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
@@ -41,6 +42,16 @@ class MainActivity : FlutterActivity() {
 
                         fetchAndUpdateCallLogs()
                         result.success(true)
+                    }
+                    "addContact"->{
+                        val phoneNumber = call.argument<String>("phoneNumber")
+
+                        if (phoneNumber != null) {
+                            addToContacts(phoneNumber)
+                            result.success(true)
+                        } else {
+                            result.error("INVALID_ARGUMENT", "Phone number is null", null)
+                        }
                     }
                     else -> {
                         result.notImplemented()
@@ -165,5 +176,14 @@ class MainActivity : FlutterActivity() {
                 arrayOf(id.toString())
             )
         }
+    }
+
+    private fun addToContacts(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_INSERT_OR_EDIT).apply {
+            type = ContactsContract.Contacts.CONTENT_ITEM_TYPE
+            putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber)
+        }
+        
+        startActivity(intent)
     }   
 }

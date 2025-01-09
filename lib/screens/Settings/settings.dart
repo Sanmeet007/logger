@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
 import 'package:logger/components/sized_text.dart';
-import 'package:logger/utils/call_log_writer.dart';
+import 'package:logger/utils/kotlin_methods.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:permission_handler/permission_handler.dart';

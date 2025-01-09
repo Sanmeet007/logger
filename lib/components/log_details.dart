@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
+import 'package:logger/utils/kotlin_methods.dart';
+import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogDetails extends StatelessWidget {
   const LogDetails({
     super.key,
+    required this.parentContext,
     required this.name,
     required this.phoneNumber,
     required this.callIcon,
@@ -19,6 +22,7 @@ class LogDetails extends StatelessWidget {
     required this.isUnknown,
   });
 
+  final BuildContext parentContext;
   final bool isUnknown;
   final String name;
   final String phoneNumber;
@@ -151,6 +155,29 @@ class LogDetails extends StatelessWidget {
                   ],
                 ),
               ),
+              if (isUnknown)
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          bool launchSuccess =
+                              await KotlinMethods.addToContacts(phoneNumber);
+                          if (!launchSuccess) {
+                            if (parentContext.mounted) {
+                              AppSnackBar.show(parentContext,
+                                  content: "Unable to add new contact");
+                            }
+                          }
+                        },
+                        child: Text("Add to contacts"),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           )),
     );
