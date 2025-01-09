@@ -186,5 +186,8 @@
     "syncContactsCTAText": "立即同步",
     "softwareInformationText": "软件信息",
     "addToContactsText": "添加到联系人",
-    "addToContactsErrorText": "无法添加新联系人"
+    "addToContactsErrorText": "无法添加新联系人",
+    "appPermissionsDeniedError": "哎呀！似乎访问通话记录被拒绝了。为了确保 Logger 正常工作，请授予权限。",
+    "appFatalError": "哎呀！发生了意想不到的事情！",
+    "appPreferencesError": "哎呀！加载偏好设置时出错。"
 }

@@ -186,5 +186,8 @@
   "syncContactsCTAText": "Nu synchroniseren",
   "softwareInformationText": "Software-informatie",
   "addToContactsText": "Toevoegen aan contacten",
-  "addToContactsErrorText": "Kan nieuw contact niet toevoegen"
+  "addToContactsErrorText": "Kan nieuw contact niet toevoegen",
+  "appPermissionsDeniedError": "Oeps! Het lijkt erop dat toegang tot oproeplogboeken is geweigerd. Geef toestemming om ervoor te zorgen dat Logger soepel werkt.",
+  "appFatalError": "Oeps! Er is iets onverwachts gebeurd!",
+  "appPreferencesError": "Oeps! Fout bij het laden van voorkeuren."
 }

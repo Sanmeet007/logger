@@ -186,5 +186,8 @@
     "syncContactsCTAText": "Synkronisera nu",
     "softwareInformationText": "Programvaruinformation",
     "addToContactsText": "Lägg till i kontakter",
-    "addToContactsErrorText": "Kunde inte lägga till ny kontakt"
+    "addToContactsErrorText": "Kunde inte lägga till ny kontakt",
+    "appPermissionsDeniedError": "Oj då! Det verkar som att åtkomst till samtalsloggar har nekats. För att Logger ska fungera smidigt, vänligen ge tillstånd.",
+    "appFatalError": "Åh nej! Något oväntat hände!",
+    "appPreferencesError": "Åh nej! Fel vid inläsning av inställningar."
 }

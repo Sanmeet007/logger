@@ -186,5 +186,8 @@
   "syncContactsCTAText": "Sincronizar agora",
   "softwareInformationText": "Informações do software",
   "addToContactsText": "Adicionar aos contatos",
-  "addToContactsErrorText": "Não foi possível adicionar o novo contato"
+  "addToContactsErrorText": "Não foi possível adicionar o novo contato",
+  "appPermissionsDeniedError": "Ops! Parece que o acesso aos registros de chamadas foi negado. Para garantir que o Logger funcione corretamente, conceda a permissão.",
+  "appFatalError": "Ah não! Algo inesperado aconteceu!",
+  "appPreferencesError": "Ah não! Erro ao carregar preferências."
 }

@@ -186,5 +186,8 @@
     "syncContactsCTAText": "Synkronoi nyt",
     "softwareInformationText": "Ohjelmistotiedot",
     "addToContactsText": "Lisää yhteystietoihin",
-    "addToContactsErrorText": "Uuden yhteystiedon lisääminen epäonnistui"
+    "addToContactsErrorText": "Uuden yhteystiedon lisääminen epäonnistui",
+    "appPermissionsDeniedError": "Hups! Näyttää siltä, että pääsy puhelulokeihin on evätty. Jotta Logger toimii sujuvasti, anna lupa.",
+    "appFatalError": "Voi ei! Jotain odottamatonta tapahtui!",
+    "appPreferencesError": "Voi ei! Asetusten lataamisessa tapahtui virhe."
 }

@@ -186,5 +186,8 @@
   "syncContactsCTAText": "Sincronizați acum",
   "softwareInformationText": "Informații despre software",
   "addToContactsText": "Adaugă la contacte",
-  "addToContactsErrorText": "Nu s-a putut adăuga un nou contact"
+  "addToContactsErrorText": "Nu s-a putut adăuga un nou contact",
+  "appPermissionsDeniedError": "Oh, nu! Se pare că accesul la jurnalele de apeluri a fost refuzat. Pentru a asigura funcționarea corectă a Logger, acordați permisiunea.",
+  "appFatalError": "Ah, vai! S-a întâmplat ceva neașteptat!",
+  "appPreferencesError": "Ah, vai! Eroare la încărcarea preferințelor."
 }

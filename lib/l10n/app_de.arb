@@ -186,5 +186,8 @@
     "syncContactsCTAText": "Jetzt synchronisieren",
     "softwareInformationText": "Software-Informationen",
     "addToContactsText": "Zu Kontakten hinzufügen",
-    "addToContactsErrorText": "Neuen Kontakt konnte nicht hinzugefügt werden"
+    "addToContactsErrorText": "Neuen Kontakt konnte nicht hinzugefügt werden",
+    "appPermissionsDeniedError": "Oh nein! Es scheint, als ob der Zugriff auf die Anrufprotokolle verweigert wurde. Bitte erteile die Berechtigung, damit Logger reibungslos funktioniert.",
+    "appFatalError": "Oh je! Etwas Unerwartetes ist passiert!",
+    "appPreferencesError": "Oh je! Fehler beim Laden der Einstellungen."
 }

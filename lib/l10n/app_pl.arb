@@ -186,5 +186,8 @@
   "syncContactsCTAText": "Synchronizuj teraz",
   "softwareInformationText": "Informacje o oprogramowaniu",
   "addToContactsText": "Dodaj do kontaktów",
-  "addToContactsErrorText": "Nie można dodać nowego kontaktu"
+  "addToContactsErrorText": "Nie można dodać nowego kontaktu",
+  "appPermissionsDeniedError": "Ups! Wygląda na to, że odmówiono dostępu do dzienników połączeń. Aby Logger działał poprawnie, udziel zgody.",
+  "appFatalError": "Ups! Wystąpił nieoczekiwany błąd!",
+  "appPreferencesError": "Ups! Błąd podczas ładowania preferencji."
 }

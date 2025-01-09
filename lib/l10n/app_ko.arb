@@ -186,5 +186,8 @@
   "syncContactsCTAText": "지금 동기화",
   "softwareInformationText": "소프트웨어 정보",
   "addToContactsText": "연락처에 추가",
-  "addToContactsErrorText": "새 연락처를 추가할 수 없습니다"
+  "addToContactsErrorText": "새 연락처를 추가할 수 없습니다",
+  "appPermissionsDeniedError": "앗! 통화 기록에 대한 액세스가 거부된 것 같습니다. Logger가 원활하게 작동하려면 권한을 허용해 주세요.",
+  "appFatalError": "앗! 예상치 못한 일이 발생했습니다!",
+  "appPreferencesError": "앗! 환경설정을 로드하는 중 오류가 발생했습니다."
 }

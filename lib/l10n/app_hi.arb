@@ -195,5 +195,8 @@
   "syncContactsCTAText": "अब सिंक्रनाइज़ करें",
   "softwareInformationText": "सॉफ़्टवेयर जानकारी",
   "addToContactsText": "संपर्कों में जोड़ें",
-  "addToContactsErrorText": "नया संपर्क जोड़ने में असमर्थ"
+  "addToContactsErrorText": "नया संपर्क जोड़ने में असमर्थ",
+  "appPermissionsDeniedError": "अरे नहीं! ऐसा लगता है कि कॉल लॉग्स तक पहुंच को मना कर दिया गया है। लॉगर को सुचारू रूप से काम करने के लिए कृपया अनुमति दें।",
+  "appFatalError": "ओह! कुछ अप्रत्याशित हुआ!",
+  "appPreferencesError": "ओह! वरीयताएँ लोड करने में त्रुटि।"
 }

@@ -186,5 +186,8 @@
     "syncContactsCTAText": "Synchroniser maintenant",
     "softwareInformationText": "Informations sur le logiciel",
     "addToContactsText": "Ajouter aux contacts",
-    "addToContactsErrorText": "Impossible d'ajouter un nouveau contact"
+    "addToContactsErrorText": "Impossible d'ajouter un nouveau contact",
+    "appPermissionsDeniedError": "Oups ! Il semble que l'accès aux journaux d'appels ait été refusé. Pour que Logger fonctionne correctement, veuillez accorder la permission.",
+    "appFatalError": "Oh mince ! Quelque chose d'inattendu s'est produit !",
+    "appPreferencesError": "Oh mince ! Erreur lors du chargement des préférences."
 }
