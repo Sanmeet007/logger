@@ -59,10 +59,6 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 - Easily export call logs for smooth data organization.
 - Restore call history from generated CSV files after a reset or device switch.
 
-## 👀 Note
-
-Logger works best with Google Dialer. If you see "Unknown" instead of saved contact names, it might be because your phone’s dialer doesn’t fully support showing names from call logs.
-
 ## 🚀 Screenshots
 
 ![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-7.png)
