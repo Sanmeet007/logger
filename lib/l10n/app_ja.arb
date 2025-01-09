@@ -187,7 +187,7 @@
   "softwareInformationText": "ソフトウェア情報",
   "addToContactsText": "連絡先に追加",
   "addToContactsErrorText": "新しい連絡先の追加に失敗しました",
-  "appPermissionsDeniedError": "おっと！通話ログへのアクセスが拒否されたようです。Logger をスムーズに動作させるには、権限を許可してください。",
+  "appPermissionsDeniedError": "おっと! 通話ログへのアクセスが拒否されたようです。Logger をスムーズに動作させるには、権限を許可してください。",
   "appFatalError": "あらら！予期しないことが起こりました！",
   "appPreferencesError": "あらら！設定の読み込み中にエラーが発生しました。"
 }
