@@ -20,8 +20,16 @@ class GroupedLogsBuilder extends StatelessWidget {
         itemBuilder: (context, entryIndex) {
           var entry = entries.elementAt(entryIndex);
 
-          String name = entry.name ?? AppLocalizations.of(context).unknownText;
-          if (name == "") name = AppLocalizations.of(context).unknownText;
+          bool isUnknown = true;
+
+          String name = entry.name ?? "";
+          if (name.isEmpty) {
+            isUnknown = true;
+            name = AppLocalizations.of(context).unknownText;
+          } else {
+            isUnknown = false;
+          }
+
           String phoneAccountId =
               entry.phoneAccountId ?? AppLocalizations.of(context).unknownText;
 
@@ -52,6 +60,7 @@ class GroupedLogsBuilder extends StatelessWidget {
             children: [
               if (index != 0) const LogDivider(),
               LogEntry(
+                isUnknown: isUnknown,
                 name: name,
                 phoneNumber: phoneNumber,
                 callIcon: callIcon,

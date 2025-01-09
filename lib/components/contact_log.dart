@@ -72,11 +72,16 @@ class ContactLog extends StatelessWidget {
         ),
         child: ListTile(
             onTap: () {
-              String name =
-                  logDetails.name ?? AppLocalizations.of(context).unknownText;
-              if (name == "") {
+              bool isUnknown = true;
+
+              String name = logDetails.name ?? "";
+              if (name.isEmpty) {
+                isUnknown = true;
                 name = AppLocalizations.of(context).unknownText;
+              } else {
+                isUnknown = false;
               }
+
               int duration = logDetails.duration ?? 0;
               int timestamp = logDetails.timestamp ?? 1;
               var details = getCallDisplayFields(
@@ -90,6 +95,7 @@ class ContactLog extends StatelessWidget {
                   isScrollControlled: true,
                   builder: (context) {
                     return LogDetails(
+                      isUnknown: isUnknown,
                       name: name,
                       phoneNumber: logDetails.number ??
                           AppLocalizations.of(context).naText,

@@ -16,8 +16,10 @@ class LogDetails extends StatelessWidget {
     required this.callType,
     required this.sim,
     required this.phoneAccountId,
+    required this.isUnknown,
   });
 
+  final bool isUnknown;
   final String name;
   final String phoneNumber;
   final IconData callIcon;
@@ -63,7 +65,7 @@ class LogDetails extends StatelessWidget {
                 ),
                 leading: CircleAvatar(
                   child: Text(
-                    name.isNotEmpty ? name[0] : '?',
+                    isUnknown ? '?' : name[0],
                     style: const TextStyle(fontSize: 25),
                   ),
                 ),

@@ -17,8 +17,10 @@ class LogEntry extends StatelessWidget {
     required this.sim,
     required this.phoneAccountId,
     required this.phoneNumber,
+    required this.isUnknown,
   });
 
+  final bool isUnknown;
   final String name;
   final String phoneNumber;
   final IconData callIcon;
@@ -100,6 +102,7 @@ class LogEntry extends StatelessWidget {
                 isScrollControlled: true,
                 builder: (context) {
                   return LogDetails(
+                    isUnknown: isUnknown,
                     name: name,
                     phoneNumber: phoneNumber,
                     callIcon: callIcon,

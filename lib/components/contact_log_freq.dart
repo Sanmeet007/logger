@@ -97,11 +97,9 @@ class ContactLogFreq extends StatelessWidget {
               children: [
                 FittedBox(
                   child: Text(
-                    logDetails.name == null
-                        ? AppLocalizations.of(context).unknownText
-                        : logDetails.name!.isEmpty
-                            ? AppLocalizations.of(context).unknownText
-                            : logDetails.name!,
+                    logDetails.name?.isNotEmpty == true
+                        ? logDetails.name!
+                        : AppLocalizations.of(context).unknownText,
                   ),
                 ),
                 FittedBox(
