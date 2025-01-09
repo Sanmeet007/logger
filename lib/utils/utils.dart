@@ -73,7 +73,7 @@ Uri getRepoLink() {
 }
 
 Uri getDonationLink() {
-  Uri donationLink = Uri.parse('https://github.com/sponsors/Sanmeet007');
+  Uri donationLink = Uri.parse('https://buymeacoffee.com/sanmeet007');
   return donationLink;
 }
 
