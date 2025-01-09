@@ -18,6 +18,7 @@ class ThemeClass {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        elevation: 0,
         foregroundColor: const Color.fromARGB(255, 95, 61, 148),
         side: const BorderSide(
           color: Color.fromARGB(255, 215, 189, 255),
@@ -49,6 +50,7 @@ class ThemeClass {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        elevation: 0,
         foregroundColor: const Color.fromARGB(255, 202, 169, 255),
         side: const BorderSide(
           color: Color.fromARGB(255, 69, 59, 84),
