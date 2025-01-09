@@ -68,7 +68,10 @@ class BaseApplication extends StatelessWidget {
           case ConnectionState.done:
           default:
             if (snapshot.hasData) {
-              if (snapshot.data == PermissionStatus.granted) {
+              if (snapshot.data![Permission.phone] ==
+                      PermissionStatus.granted &&
+                  snapshot.data![Permission.contacts] ==
+                      PermissionStatus.granted) {
                 return RefreshableBuilder(
                   preferences: prefs,
                 );

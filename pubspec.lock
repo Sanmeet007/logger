@@ -44,10 +44,9 @@ packages:
   call_log:
     dependency: "direct main"
     description:
-      name: call_log
-      sha256: "943fdc3cd1b2a395633817f4b66267c93accb38d359da4d95db1e389f8f898d6"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../flutter_packages/call_log"
+      relative: true
+    source: path
     version: "4.0.0"
   characters:
     dependency: transitive

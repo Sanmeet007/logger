@@ -100,10 +100,7 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private fun fetchAndUpdateCallLogs(): List<Map<String, String>> {
-        val callLogs = mutableListOf<Map<String, String>>()
-    
-        // Check for the required permissions
+    private fun fetchAndUpdateCallLogs() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED ||
             ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) != PackageManager.PERMISSION_GRANTED
         ) {
@@ -123,34 +120,51 @@ class MainActivity : FlutterActivity() {
                 while (cursor.moveToNext()) {
                     val id = cursor.getInt(cursor.getColumnIndexOrThrow(CallLog.Calls._ID))
                     val number = cursor.getString(cursor.getColumnIndexOrThrow(CallLog.Calls.NUMBER))
-                    var cachedName = cursor.getString(cursor.getColumnIndexOrThrow(CallLog.Calls.CACHED_NAME))
+                    var cachedName: String? = cursor.getString(cursor.getColumnIndexOrThrow(CallLog.Calls.CACHED_NAME))
     
-                    // If cached_name is empty, lookup the contact name
-                    if (cachedName.isNullOrEmpty() && !number.isNullOrEmpty()) {
+                    if (cachedName.isNullOrEmpty()) {
                         val contactName = lookupContactName(number)
-                        if (!contactName.isNullOrEmpty()) {
+    
+                        if (contactName.isNullOrEmpty()) {
+                            cachedName = null
+                            updateCachedName(id, "")
+                        } else {
                             cachedName = contactName
                             updateCachedName(id, contactName)
                         }
+                    } else {
+                        val currentContactName = lookupContactName(number)
+                        if (currentContactName.isNullOrEmpty()) {
+                            cachedName = null
+                            updateCachedName(id, "")
+                        } else if (currentContactName != cachedName) {
+                            cachedName = currentContactName
+                            updateCachedName(id, currentContactName)
+                        }
                     }
-    
-                    // Add the call log entry to the list
-                    callLogs.add(
-                        mapOf(
-                            "id" to id.toString(),
-                            "number" to number,
-                            "cached_name" to (cachedName ?: "")
-                        )
-                    )
                 }
             } finally {
                 cursor.close()
             }
         }
-    
-        return callLogs
     }
     
+    private fun updateCachedName(id: Int, name: String?) {
+        val contentValues = ContentValues()
+        contentValues.put(CallLog.Calls.CACHED_NAME, name ?: "")
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
+            context.contentResolver.update(
+                CallLog.Calls.CONTENT_URI,
+                contentValues,
+                "${CallLog.Calls._ID}=?",
+                arrayOf(id.toString())
+            )
+        } else {
+            throw SecurityException("WRITE_CALL_LOG permission is required.")
+        }
+    }       
+
     private fun lookupContactName(phoneNumber: String): String? {
         val uri: Uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
         val cursor: Cursor? = context.contentResolver.query(uri, arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME), null, null, null)
@@ -163,21 +177,7 @@ class MainActivity : FlutterActivity() {
         }
         return contactName
     }
-
-    private fun updateCachedName(id: Int, name: String) {
-        val contentValues = ContentValues()
-        contentValues.put(CallLog.Calls.CACHED_NAME, name)
-
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
-            context.contentResolver.update(
-                CallLog.Calls.CONTENT_URI,
-                contentValues,
-                "${CallLog.Calls._ID}=?",
-                arrayOf(id.toString())
-            )
-        }
-    }
-
+    
     private fun addToContacts(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_INSERT_OR_EDIT).apply {
             type = ContactsContract.Contacts.CONTENT_ITEM_TYPE

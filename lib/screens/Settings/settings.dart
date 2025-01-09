@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
-import 'package:logger/components/sized_text.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_storage/shared_storage.dart';
 import 'dart:async';
 
@@ -190,84 +188,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
                 child: Text(
                   AppLocalizations.of(context).continueText,
-                ),
-              ),
-            ],
-          );
-        });
-  }
-
-  void syncContacts(BuildContext parentContext) async {
-    showDialog(
-        context: parentContext,
-        builder: (context) {
-          return AlertDialog(
-            title: SizedText(
-              AppLocalizations.of(parentContext).confirmContactsSyncLabelText,
-              size: 20.0,
-            ),
-            content: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(
-                    AppLocalizations.of(parentContext)
-                        .confirmContactsSyncConfirmationText,
-                  )
-                ],
-              ),
-            ),
-            actions: [
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(AppLocalizations.of(parentContext).cancelText),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  var permission = await Permission.contacts.request();
-                  if (permission.isGranted || permission.isLimited) {
-                    widget.showLoader();
-
-                    bool success = await CallLogWriter.fixCallLogCachedName();
-                    if (success) {
-                      if (parentContext.mounted) {
-                        AppSnackBar.show(
-                          parentContext,
-                          content: AppLocalizations.of(parentContext)
-                              .contactsSyncSuccessMessageText,
-                          useAction: true,
-                          buttonOnPressed: () {
-                            widget.refresher?.call();
-                          },
-                          buttonText:
-                              AppLocalizations.of(parentContext).refreshText,
-                        );
-                      }
-                    } else {
-                      if (parentContext.mounted) {
-                        AppSnackBar.show(
-                          parentContext,
-                          content: AppLocalizations.of(parentContext)
-                              .contactsSyncErrorMessageText,
-                        );
-                      }
-                    }
-
-                    widget.hideLoader();
-                  } else {
-                    if (parentContext.mounted) {
-                      AppSnackBar.show(
-                        parentContext,
-                        content: AppLocalizations.of(parentContext)
-                            .contactsPermissionDenied,
-                      );
-                    }
-                  }
-                },
-                child: Text(
-                  AppLocalizations.of(parentContext).continueText,
                 ),
               ),
             ],
@@ -736,26 +656,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     const SizedBox(
                       height: 5.0,
-                    ),
-                    const LogDivider(),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
-                              .syncContactsLabelText,
-                        ),
-                        ElevatedButton(
-                          onPressed: () => syncContacts(context),
-                          child: Text(
-                            AppLocalizations.of(context).syncContactsCTAText,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
