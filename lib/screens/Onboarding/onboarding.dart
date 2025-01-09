@@ -169,7 +169,7 @@ class OnBoardingScreenItem extends StatelessWidget {
         FittedBox(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
-            height: 250,
+            height: MediaQuery.of(context).size.height * 0.3,
             child: Image.asset(
               useImageNameAsPath
                   ? imageName

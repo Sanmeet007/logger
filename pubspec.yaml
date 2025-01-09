@@ -50,6 +50,7 @@ dependencies:
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
   duration: ^4.0.3
+  device_preview: ^1.2.0
 
   call_log: 
     git: 
@@ -63,6 +64,7 @@ dependencies:
       url: https://github.com/sanmeet007/shared-storage
       ref: master
     # path: ../flutter_packages/shared_storage
+
 
 dev_dependencies:
   flutter_test:
