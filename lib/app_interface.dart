@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'components/app_error.dart';
 import 'components/loader.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/app_ui.dart';
 
 class Application extends StatelessWidget {
@@ -34,9 +34,9 @@ class Application extends StatelessWidget {
                 return BaseApplication(prefs: prefsSnapShot.data);
               }
             } else {
-              return const AppError(
+              return AppError(
                 displayIcon: Icons.error,
-                errorMessage: "Ah! Snap error loading preferences",
+                errorMessage: AppLocalizations.of(context).appPreferencesError,
               );
             }
         }
@@ -76,21 +76,21 @@ class BaseApplication extends StatelessWidget {
                   preferences: prefs,
                 );
               } else {
-                return const AppError(
+                return AppError(
                   displayIcon: Icons.warning,
                   errorMessage:
-                      "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
+                      AppLocalizations.of(context).appPermissionsDeniedError,
                 );
               }
             } else if (snapshot.hasError) {
-              return const AppError(
+              return AppError(
                 displayIcon: Icons.error,
-                errorMessage: "Ah snap! Something went wrong",
+                errorMessage: AppLocalizations.of(context).appError,
               );
             } else {
-              return const AppError(
+              return AppError(
                 displayIcon: Icons.error,
-                errorMessage: "Ah snap! Something unexpected happened!",
+                errorMessage: AppLocalizations.of(context).appFatalError,
               );
             }
         }
@@ -142,14 +142,14 @@ class RefreshableBuilderState extends State<RefreshableBuilder> {
                 preferences: widget.preferences,
               );
             } else if (snapshot.hasError) {
-              return const AppError(
+              return AppError(
                 displayIcon: Icons.error,
-                errorMessage: "Ah snap! Something went wrong",
+                errorMessage: AppLocalizations.of(context).appError,
               );
             } else {
-              return const AppError(
+              return AppError(
                 displayIcon: Icons.info,
-                errorMessage: "Ah snap! Something unexpected happened!",
+                errorMessage: AppLocalizations.of(context).appFatalError,
               );
             }
         }
