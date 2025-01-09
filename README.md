@@ -1,6 +1,6 @@
 # Logger
 
-**Effortlessly Manage Your Call Logs**
+**Track, Analyze, and Manage Your Calls**
 
 Logger is a user-friendly Android application built with Flutter that empowers you to view and export your call logs.
 
@@ -77,7 +77,7 @@ We welcome contributions to improve Logger! Please follow the standard GitHub Fl
 
 For inquiries or feedback, feel free to reach out via:
 
-[![LinkedInURL](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sanmeet-singh-780526205/)
+[![LinkedInURL](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sanmeet007/)
 [![GmailURL](https://img.shields.io/badge/gmail-%23ca0b4a.svg?&style=for-the-badge&logo=gmail&logoColor=white)](mailto:ssanmeet123@gmail.com)
 
 ## ⬇️ Get Your Logger App
