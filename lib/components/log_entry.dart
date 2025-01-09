@@ -91,7 +91,7 @@ class LogEntry extends StatelessWidget {
       ),
       child: ListTile(
           tileColor: Theme.of(context).brightness == Brightness.dark
-              ? const Color.fromARGB(249, 35, 34, 34)
+              ? const Color.fromARGB(249, 34, 34, 34)
               : const Color.fromARGB(255, 249, 245, 255),
           onTap: () {
             showModalBottomSheet(
