@@ -13,17 +13,17 @@ void main() async {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => AppPreviewWrapper(
+      builder: (context) => AppContainer(
         widgetsBinding: widgetsBinding,
       ),
     ),
   );
 }
 
-class AppPreviewWrapper extends StatelessWidget {
+class AppContainer extends StatelessWidget {
   final WidgetsBinding widgetsBinding;
 
-  const AppPreviewWrapper({super.key, required this.widgetsBinding});
+  const AppContainer({super.key, required this.widgetsBinding});
 
   @override
   Widget build(BuildContext context) {
