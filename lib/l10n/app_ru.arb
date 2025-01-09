@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "Доступ к контактам отклонен!",
   "syncContactsLabelText": "Синхронизировать контакты журнала вызовов",
   "syncContactsCTAText": "Синхронизировать сейчас",
-  "softwareInformationText": "Информация o программном обеспечении"
+  "softwareInformationText": "Информация o программном обеспечении",
+  "addToContactsText": "Добавить в контакты",
+  "addToContactsErrorText": "Не удалось добавить новый контакт"
 }

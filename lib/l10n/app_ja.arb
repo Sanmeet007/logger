@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "連絡先の権限が拒否されました！",
   "syncContactsLabelText": "通話履歴の連絡先を同期",
   "syncContactsCTAText": "今すぐ同期",
-  "softwareInformationText": "ソフトウェア情報"
+  "softwareInformationText": "ソフトウェア情報",
+  "addToContactsText": "連絡先に追加",
+  "addToContactsErrorText": "新しい連絡先の追加に失敗しました"
 }

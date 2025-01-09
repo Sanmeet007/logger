@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "Toestemming voor contacten geweigerd!",
   "syncContactsLabelText": "Synchroniseer oproeplog contacten",
   "syncContactsCTAText": "Nu synchroniseren",
-  "softwareInformationText": "Software-informatie"
+  "softwareInformationText": "Software-informatie",
+  "addToContactsText": "Toevoegen aan contacten",
+  "addToContactsErrorText": "Kan nieuw contact niet toevoegen"
 }

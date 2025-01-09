@@ -184,5 +184,7 @@
     "contactsPermissionDenied": "未获得访问联系人权限！",
     "syncContactsLabelText": "同步通话记录联系人",
     "syncContactsCTAText": "立即同步",
-    "softwareInformationText": "软件信息"
+    "softwareInformationText": "软件信息",
+    "addToContactsText": "添加到联系人",
+    "addToContactsErrorText": "无法添加新联系人"
 }

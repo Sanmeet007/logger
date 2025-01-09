@@ -184,5 +184,7 @@
     "contactsPermissionDenied": "Zugriffsberechtigung für Kontakte verweigert!",
     "syncContactsLabelText": "Anrufprotokollkontakte synchronisieren",
     "syncContactsCTAText": "Jetzt synchronisieren",
-    "softwareInformationText":"Software-Informationen"
+    "softwareInformationText": "Software-Informationen",
+    "addToContactsText": "Zu Kontakten hinzufügen",
+    "addToContactsErrorText": "Neuen Kontakt konnte nicht hinzugefügt werden"
 }

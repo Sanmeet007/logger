@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "Permisiunea pentru contacte a fost refuzată!",
   "syncContactsLabelText": "Sincronizați contactele din jurnalul de apeluri",
   "syncContactsCTAText": "Sincronizați acum",
-  "softwareInformationText": "Informații despre software"
+  "softwareInformationText": "Informații despre software",
+  "addToContactsText": "Adaugă la contacte",
+  "addToContactsErrorText": "Nu s-a putut adăuga un nou contact"
 }

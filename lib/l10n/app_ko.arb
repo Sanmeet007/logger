@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "연락처 권한이 거부되었습니다!",
   "syncContactsLabelText": "통화 기록 연락처 동기화",
   "syncContactsCTAText": "지금 동기화",
-  "softwareInformationText": "소프트웨어 정보"
+  "softwareInformationText": "소프트웨어 정보",
+  "addToContactsText": "연락처에 추가",
+  "addToContactsErrorText": "새 연락처를 추가할 수 없습니다"
 }

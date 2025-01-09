@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "Odmówiono dostępu do kontaktów!",
   "syncContactsLabelText": "Synchronizuj kontakty z dziennikami połączeń",
   "syncContactsCTAText": "Synchronizuj teraz",
-  "softwareInformationText": "Informacje o oprogramowaniu"
+  "softwareInformationText": "Informacje o oprogramowaniu",
+  "addToContactsText": "Dodaj do kontaktów",
+  "addToContactsErrorText": "Nie można dodać nowego kontaktu"
 }

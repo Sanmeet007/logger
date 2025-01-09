@@ -184,5 +184,7 @@
   "contactsPermissionDenied": "¡Permiso para acceder a los contactos denegado!",
   "syncContactsLabelText": "Sincronizar contactos del registro de llamadas",
   "syncContactsCTAText": "Sincronizar ahora",
-  "softwareInformationText": "Información del software"
+  "softwareInformationText": "Información del software",
+  "addToContactsText": "Agregar a contactos",
+  "addToContactsErrorText": "No se pudo agregar un nuevo contacto"
 }

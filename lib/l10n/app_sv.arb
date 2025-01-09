@@ -184,5 +184,7 @@
     "contactsPermissionDenied": "Behörighet för kontakter nekades!",
     "syncContactsLabelText": "Synkronisera samtalsloggkontakter",
     "syncContactsCTAText": "Synkronisera nu",
-    "softwareInformationText": "Programvaruinformation"
+    "softwareInformationText": "Programvaruinformation",
+    "addToContactsText": "Lägg till i kontakter",
+    "addToContactsErrorText": "Kunde inte lägga till ny kontakt"
 }

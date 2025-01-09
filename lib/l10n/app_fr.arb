@@ -184,5 +184,7 @@
     "contactsPermissionDenied": "Permission d'accès aux contacts refusée !",
     "syncContactsLabelText": "Synchroniser les contacts du journal d'appels",
     "syncContactsCTAText": "Synchroniser maintenant",
-    "softwareInformationText": "Informations sur le logiciel"
+    "softwareInformationText": "Informations sur le logiciel",
+    "addToContactsText": "Ajouter aux contacts",
+    "addToContactsErrorText": "Impossible d'ajouter un nouveau contact"
 }
