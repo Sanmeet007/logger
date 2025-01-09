@@ -50,7 +50,6 @@ dependencies:
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
   duration: ^4.0.3
-  device_preview: ^1.2.0
 
   call_log: 
     git: 
