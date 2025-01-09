@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/divider.dart';
-import 'package:logger/utils/kotlin_methods.dart';
+import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,6 +34,20 @@ class LogDetails extends StatelessWidget {
   final String callType;
   final String sim;
   final String phoneAccountId;
+
+  void handleAddToContacts(BuildContext context) async {
+    Navigator.pop(context);
+
+    bool launchSuccess = await NativeMethods.addToContacts(phoneNumber);
+    if (!launchSuccess) {
+      if (parentContext.mounted) {
+        AppSnackBar.show(
+          parentContext,
+          content: AppLocalizations.of(context).addToContactsErrorText,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,17 +177,10 @@ class LogDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ElevatedButton(
-                        onPressed: () async {
-                          bool launchSuccess =
-                              await KotlinMethods.addToContacts(phoneNumber);
-                          if (!launchSuccess) {
-                            if (parentContext.mounted) {
-                              AppSnackBar.show(parentContext,
-                                  content: "Unable to add new contact");
-                            }
-                          }
-                        },
-                        child: Text("Add to contacts"),
+                        onPressed: () => handleAddToContacts(context),
+                        child: Text(
+                          AppLocalizations.of(context).addToContactsText,
+                        ),
                       ),
                     ],
                   ),

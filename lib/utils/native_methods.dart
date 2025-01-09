@@ -50,7 +50,7 @@ Future<bool> _fixCallLogCachedName(Map params) async {
   }
 }
 
-class KotlinMethods {
+class NativeMethods {
   static Future<bool> addToContacts(String phoneNumber) async {
     try {
       bool success = await _methodChannelPlatform

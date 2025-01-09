@@ -755,5 +755,7 @@
   "contactsPermissionDenied": "Permission to contacts were denied !",
   "syncContactsLabelText": "Sync Call Log Contacts",
   "syncContactsCTAText": "Sync Now",
-  "softwareInformationText":"Software Information"
+  "softwareInformationText": "Software Information",
+  "addToContactsText": "Add to contacts",
+  "addToContactsErrorText": "Unable to add new contact"
 }
