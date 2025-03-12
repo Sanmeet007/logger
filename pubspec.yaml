@@ -41,7 +41,7 @@ dependencies:
   open_file_plus: ^3.4.1+1
   permission_handler: ^11.3.1
   url_launcher: ^6.3.1
-  flutter_slidable: ^3.1.2
+  flutter_slidable: ^4.0.0
   fl_chart: ^0.70.0
   phone_numbers_parser: ^9.0.3
   shimmer: ^3.0.0
@@ -50,6 +50,8 @@ dependencies:
   csv: ^6.0.0
   smooth_page_indicator: ^1.2.0+3
   duration: ^4.0.3
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
 
   call_log:
     git:
@@ -73,6 +75,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

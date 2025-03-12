@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'app_interface.dart';
+import 'core/app_core.dart';
 import 'theme/theme.dart';
 
 void main() async {
@@ -20,7 +20,9 @@ void main() async {
         Locale('en'),
         ...AppLocalizations.supportedLocales,
       ],
-      home: Application(widgetsBinding: widgetsBinding),
+      home: AppCore(
+        widgetsBinding: widgetsBinding,
+      ),
     ),
   );
 }

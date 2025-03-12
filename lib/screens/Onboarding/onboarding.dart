@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logger/app_interface.dart';
+import 'package:logger/core/app_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,7 +25,7 @@ class _OnboardingUIState extends State<OnboardingUI> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => BaseApplication(
+        builder: (context) => BaseAppCore(
           prefs: widget.prefs,
         ),
       ),
