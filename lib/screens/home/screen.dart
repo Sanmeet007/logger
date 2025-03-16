@@ -1,40 +1,28 @@
-import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/logs/logs.dart';
+import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/current_call_logs_provider.dart';
+import 'package:logger/providers/shared_utility_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  final Iterable<CallLogEntry>? entries;
-  final Future<void> Function()? refreshEntries;
-  final bool callLogCountVisibility;
-
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({
     super.key,
-    required this.entries,
-    required this.refreshEntries,
-    required this.callLogCountVisibility,
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final entries = ref.watch(currentCallLogsNotifierProvider);
+    final showCallLogCount =
+        ref.watch(sharedUtilityProvider).isCallLogCountVisible();
 
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        if (widget.refreshEntries != null) {
-          await widget.refreshEntries!();
-        }
+        ref.read(callLogsNotifierProvider.notifier).hardRefresh();
       },
       child: LogsPage(
-        entries: widget.entries,
-        callLogCountVisibility: widget.callLogCountVisibility,
+        entries: entries,
+        callLogCountVisibility: showCallLogCount,
       ),
     );
   }

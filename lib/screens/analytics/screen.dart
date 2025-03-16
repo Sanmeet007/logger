@@ -1,5 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/analytics/call_duration.dart';
 import 'package:logger/components/analytics/call_freq.dart';
 import 'package:logger/components/analytics/call_stats.dart';
@@ -7,37 +8,24 @@ import 'package:logger/components/analytics/inc_out_tile.dart';
 import 'package:logger/components/analytics/top_contacts_tile.dart';
 import 'package:logger/components/common/grid_skeleton.dart';
 import 'package:logger/components/common/skeleton.dart';
+import 'package:logger/providers/call_logs_analyzer.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/format_helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum CallFreqType { received, called }
 
-class AnalyticsScreen extends StatelessWidget {
-  final Iterable<CallLogEntry>? entries;
-  final CallLogAnalyzer analyzer;
-  final List<CallType> currentCallTypes;
-  final bool showTotalCallDuration;
-
+class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({
     super.key,
-    required this.entries,
-    required this.analyzer,
-    required this.currentCallTypes,
-    required this.showTotalCallDuration,
   });
 
-  bool containsAnyMatchingCallTypes(List<CallType> types) {
-    for (var t in currentCallTypes) {
-      if (types.contains(t)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final filteredLogsProvider = ref.watch(logsFilterProvider.notifier);
+    final analyzer = ref.watch(callLogAnalysisProvider);
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -47,17 +35,16 @@ class AnalyticsScreen extends StatelessWidget {
             CallStatsTileBuilder(
               analyzer: analyzer,
             ),
-            if (containsAnyMatchingCallTypes([
+            if (filteredLogsProvider.containsAnyMatchingCallTypes([
               CallType.outgoing,
               CallType.incoming,
               CallType.wifiOutgoing,
               CallType.wifiIncoming,
             ]))
               CallDurationTileBuilder(
-                showTotalCallDuration: showTotalCallDuration,
                 analyzer: analyzer,
               ),
-            if (containsAnyMatchingCallTypes([
+            if (filteredLogsProvider.containsAnyMatchingCallTypes([
               CallType.incoming,
               CallType.outgoing,
               CallType.wifiIncoming,
@@ -66,7 +53,7 @@ class AnalyticsScreen extends StatelessWidget {
               IncomingVsOutgoingTileBuilder(
                 analyzer: analyzer,
               ),
-            if (containsAnyMatchingCallTypes([
+            if (filteredLogsProvider.containsAnyMatchingCallTypes([
               CallType.outgoing,
               CallType.wifiOutgoing,
             ]))
@@ -74,7 +61,7 @@ class AnalyticsScreen extends StatelessWidget {
                 freqType: CallFreqType.called,
                 analyzer: analyzer,
               ),
-            if (containsAnyMatchingCallTypes([
+            if (filteredLogsProvider.containsAnyMatchingCallTypes([
               CallType.incoming,
               CallType.wifiIncoming,
             ]))
@@ -82,7 +69,7 @@ class AnalyticsScreen extends StatelessWidget {
                 freqType: CallFreqType.received,
                 analyzer: analyzer,
               ),
-            if (containsAnyMatchingCallTypes([
+            if (filteredLogsProvider.containsAnyMatchingCallTypes([
               CallType.incoming,
               CallType.outgoing,
               CallType.wifiIncoming,
