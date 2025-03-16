@@ -1,7 +1,6 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-
-import '../../components/logs.dart';
+import 'package:logger/components/logs/logs.dart';
 
 class HomeScreen extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
