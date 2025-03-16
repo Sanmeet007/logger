@@ -1,11 +1,11 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:logger/screens/Onboarding/onboarding.dart';
+import 'package:logger/components/common/app_error.dart';
+import 'package:logger/components/common/loader.dart';
+import 'package:logger/screens/onboarding/screen.dart';
 import 'package:logger/core/app_ui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../components/app_error.dart';
-import '../components/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -1,8 +1,8 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/components/sized_text.dart';
-import 'package:logger/screens/ExportInfo/csv_fields.dart';
-import 'package:logger/screens/ExportInfo/json_fields.dart';
+import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
+import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';

@@ -1,9 +1,9 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/components/date_picker.dart';
-import 'package:logger/components/sized_text.dart';
-import 'package:logger/components/toggle_button.dart';
+import 'package:logger/components/common/date_picker.dart';
+import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/components/common/toggle_button.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

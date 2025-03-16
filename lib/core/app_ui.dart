@@ -1,9 +1,9 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/screens/About/about.dart';
-import 'package:logger/screens/Analytics/analytics.dart';
-import 'package:logger/screens/Home/home.dart';
-import 'package:logger/screens/Settings/settings.dart';
+import 'package:logger/screens/about/screen.dart';
+import 'package:logger/screens/analytics/screen.dart';
+import 'package:logger/screens/home/screen.dart';
+import 'package:logger/screens/settings/screen.dart';
 import 'package:logger/core/manager.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/filters.dart';

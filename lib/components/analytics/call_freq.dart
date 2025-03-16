@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:logger/components/contact_log_freq.dart';
-import 'package:logger/components/sized_text.dart';
-import 'package:logger/screens/Analytics/analytics.dart';
+import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/components/logs/contact_log_freq.dart';
+import 'package:logger/screens/analytics/screen.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

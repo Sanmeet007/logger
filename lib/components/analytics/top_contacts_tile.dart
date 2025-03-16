@@ -1,9 +1,9 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/components/contact_log.dart';
-import 'package:logger/components/divider.dart';
-import 'package:logger/components/sized_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/components/common/divider.dart';
+import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/components/logs/contact_log.dart';
 
 class TopContactsTile extends StatelessWidget {
   final double spacing;

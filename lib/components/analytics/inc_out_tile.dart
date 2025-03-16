@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/analytics/indicator.dart';
-import 'package:logger/components/sized_text.dart';
+import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
