@@ -5,9 +5,9 @@ class ThemeClass {
     fontFamily: "SFPro",
     disabledColor: const Color.fromARGB(182, 106, 75, 115),
     scaffoldBackgroundColor: Colors.white,
-    colorScheme: const ColorScheme.light().copyWith(
-      secondary: const Color.fromARGB(255, 249, 245, 255),
-      primary: const Color.fromARGB(255, 106, 26, 227),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color.fromARGB(255, 106, 26, 227),
+      brightness: Brightness.light,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -35,8 +35,9 @@ class ThemeClass {
       contentTextStyle: TextStyle(color: Colors.grey),
       actionTextColor: Color.fromARGB(255, 228, 215, 255),
     ),
-    colorScheme: const ColorScheme.dark().copyWith(
-      primary: const Color.fromARGB(255, 196, 169, 255),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color.fromARGB(255, 196, 169, 255),
+      brightness: Brightness.dark,
     ),
     scrollbarTheme: const ScrollbarThemeData().copyWith(
       thumbColor: WidgetStateProperty.all(Colors.grey[500]),
