@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/core/app_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:logger/providers/shared_utility_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OnboardingUI extends StatefulWidget {
-  final SharedPreferences? prefs;
-
-  const OnboardingUI({
+class OnboardingScreen extends ConsumerStatefulWidget {
+  const OnboardingScreen({
     super.key,
-    required this.prefs,
   });
 
   @override
-  State<OnboardingUI> createState() => _OnboardingUIState();
+  ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingUIState extends State<OnboardingUI> {
+class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _controller = PageController(viewportFraction: 1, keepPage: true);
   int currentIndex = 0;
 
   void finishOnboarding(context) async {
-    await widget.prefs?.setBool("show-onboarding", false);
+    await ref.read(sharedUtilityProvider).markOnboardingComplete();
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => BaseAppCore(
-          prefs: widget.prefs,
-        ),
+        builder: (context) => AppInitializer(),
       ),
     );
   }
