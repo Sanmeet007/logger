@@ -1,8 +1,8 @@
-import 'package:logger/utils/utils.dart';
 import 'dart:collection';
 import 'dart:math';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/utils/phone_formatter.dart';
 
 class CallLogEntryWithFreq {
   final CallLogEntry entry;
@@ -116,7 +116,7 @@ class CallLogAnalyzer {
 
     List<String> result = LinkedHashSet<String>.from(sortedLogs.map((item) {
       if (item.number != null) {
-        return parsePhoneNumber(item.number!);
+        return PhoneFormatter.parsePhoneNumber(item.number!);
       } else {
         return null;
       }
@@ -125,8 +125,8 @@ class CallLogAnalyzer {
     List<CallLogEntry> finalList = [];
 
     result.take(5).forEach((String num) {
-      finalList.add(sortedLogs
-          .firstWhere((x) => parsePhoneNumber(x.number ?? "") == num));
+      finalList.add(sortedLogs.firstWhere(
+          (x) => PhoneFormatter.parsePhoneNumber(x.number ?? "") == num));
     });
 
     return finalList;
@@ -148,7 +148,7 @@ class CallLogAnalyzer {
     Map<String, int> frequencyMap = {};
     for (var entry in filterdedLogs) {
       if (entry.number != null) {
-        var x = parsePhoneNumber(entry.number!);
+        var x = PhoneFormatter.parsePhoneNumber(entry.number!);
         frequencyMap[x] = (frequencyMap[x] ?? 0) + 1;
       }
     }
@@ -167,7 +167,8 @@ class CallLogAnalyzer {
     List<CallLogEntry> resultEntries = [];
     // Add the most frequently called entry
     resultEntries.add(filterdedLogs.firstWhere((entry) =>
-        parsePhoneNumber(entry.number ?? "") == mostFrequentPhoneNumber.key));
+        PhoneFormatter.parsePhoneNumber(entry.number ?? "") ==
+        mostFrequentPhoneNumber.key));
 
     if (resultEntries.isEmpty) return null;
 
@@ -187,7 +188,7 @@ class CallLogAnalyzer {
     Map<String, int> frequencyMap = {};
     for (var entry in filterdedLogs) {
       if (entry.number != null) {
-        var x = parsePhoneNumber(entry.number!);
+        var x = PhoneFormatter.parsePhoneNumber(entry.number!);
         frequencyMap[x] = (frequencyMap[x] ?? 0) + 1;
       }
     }
@@ -206,7 +207,8 @@ class CallLogAnalyzer {
     List<CallLogEntry> resultEntries = [];
     // Add the most frequently called entry
     resultEntries.add(filterdedLogs.firstWhere((entry) =>
-        parsePhoneNumber(entry.number ?? "") == mostFrequentPhoneNumber.key));
+        PhoneFormatter.parsePhoneNumber(entry.number ?? "") ==
+        mostFrequentPhoneNumber.key));
 
     if (resultEntries.isEmpty) return null;
 
