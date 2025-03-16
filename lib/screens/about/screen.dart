@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/common/sized_text.dart';
-import 'package:logger/utils/utils.dart';
+import 'package:logger/utils/app_information.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -58,7 +58,7 @@ class AboutScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            getVersion(),
+                            AppInformation.getVersion(),
                           ),
                         ),
                       ),
@@ -134,7 +134,7 @@ class AboutScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      url_launcher.launchUrl(getRepoLink());
+                      url_launcher.launchUrl(AppInformation.getRepoLink());
                     },
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +158,7 @@ class AboutScreen extends StatelessWidget {
                       elevation: WidgetStateProperty.all(0.0),
                     ),
                     onPressed: () {
-                      url_launcher.launchUrl(getReportLink());
+                      url_launcher.launchUrl(AppInformation.getReportLink());
                     },
                     child: Text(
                       AppLocalizations.of(context).reportIssueButtonText,

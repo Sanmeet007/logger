@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:logger/components/logs/logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
-import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/utils/call_log_grouper.dart';
+import 'package:logger/utils/format_helpers.dart';
 
 class LogsPage extends StatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -62,7 +63,7 @@ class _LogsPageState extends State<LogsPage> {
   @override
   Widget build(BuildContext context) {
     if (widget.entries != null && widget.entries!.isNotEmpty) {
-      var logs = groupCallLogsByDate(widget.entries!, context);
+      var logs = CallLogGrouper.groupCallLogsByDate(widget.entries!, context);
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
         floatingActionButton: AnimatedOpacity(
@@ -120,7 +121,8 @@ class _LogsPageState extends State<LogsPage> {
                           Text(mapEntry.key),
                           if (widget.callLogCountVisibility)
                             Text(
-                              prettifyNumbers(mapEntry.value.length, context),
+                              FromatHelpers.prettifyNumbers(
+                                  mapEntry.value.length, context),
                             ),
                         ],
                       ),

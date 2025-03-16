@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/common/divider.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/native_methods.dart';
+import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
-import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogDetails extends StatelessWidget {
@@ -127,7 +128,8 @@ class LogDetails extends StatelessWidget {
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       trailing: Text(
-                        prettifyDuration(Duration(seconds: duration), context),
+                        FromatHelpers.prettifyDuration(
+                            Duration(seconds: duration), context),
                         style: const TextStyle(fontSize: 15.0),
                       ),
                     ),
@@ -161,7 +163,7 @@ class LogDetails extends StatelessWidget {
                       ),
                       trailing: FittedBox(
                         child: Text(
-                          shrinkPhoneAccountID(phoneAccountId),
+                          PhoneFormatter.shrinkPhoneAccountID(phoneAccountId),
                           style: const TextStyle(fontSize: 15.0),
                         ),
                       ),

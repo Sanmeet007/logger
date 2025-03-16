@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
+import 'package:logger/utils/app_information.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
-import 'package:logger/utils/utils.dart';
 import 'package:share_plus/share_plus.dart';
 import "package:shared_storage/shared_storage.dart";
 import 'dart:io';
@@ -396,7 +396,8 @@ class _ScreenManagerState extends State<ScreenManager> {
                     IconButton(
                         tooltip: AppLocalizations.of(context).donateText,
                         onPressed: () {
-                          url_launcher.launchUrl(getDonationLink());
+                          url_launcher
+                              .launchUrl(AppInformation.getDonationLink());
                         },
                         icon: const Icon(
                           Icons.handshake,

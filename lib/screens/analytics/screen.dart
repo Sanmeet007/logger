@@ -8,7 +8,7 @@ import 'package:logger/components/analytics/top_contacts_tile.dart';
 import 'package:logger/components/common/grid_skeleton.dart';
 import 'package:logger/components/common/skeleton.dart';
 import 'package:logger/utils/analytics_fns.dart';
-import 'package:logger/utils/utils.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum CallFreqType { received, called }
@@ -252,14 +252,14 @@ class CallDurationTileBuilder extends StatelessWidget {
       if (context.mounted) {
         if (showTotalCallDuration) {
           return [
-            prettifyDuration(avg, context),
-            prettifyDuration(longest, context),
-            prettifyDuration(total, context),
+            FromatHelpers.prettifyDuration(avg, context),
+            FromatHelpers.prettifyDuration(longest, context),
+            FromatHelpers.prettifyDuration(total, context),
           ];
         } else {
           return [
-            prettifyDuration(avg, context),
-            prettifyDuration(longest, context),
+            FromatHelpers.prettifyDuration(avg, context),
+            FromatHelpers.prettifyDuration(longest, context),
           ];
         }
       } else {
@@ -322,7 +322,7 @@ class CallStatsTileBuilder extends StatelessWidget {
         rejectedCallsCount,
         missedCallsCount,
         blockedCallsCount
-      ].map((x) => prettifyNumbers(x, context)).toList();
+      ].map((x) => FromatHelpers.prettifyNumbers(x, context)).toList();
     });
   }
 

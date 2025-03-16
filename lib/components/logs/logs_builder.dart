@@ -2,8 +2,9 @@ import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/components/common/log_entry.dart';
-import 'package:logger/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/utils/call_display_helper.dart';
+import 'package:logger/utils/format_helpers.dart';
 
 class GroupedLogsBuilder extends StatelessWidget {
   final List<CallLogEntry> entries;
@@ -38,7 +39,7 @@ class GroupedLogsBuilder extends StatelessWidget {
           int duration = entry.duration ?? 0;
           int timestamp = entry.timestamp ?? 1;
 
-          String timeString = formatTimeFromTimeStamp(
+          String timeString = FromatHelpers.formatTimeFromTimeStamp(
             context: context,
             timestamp: timestamp,
           );
@@ -46,7 +47,7 @@ class GroupedLogsBuilder extends StatelessWidget {
           String phoneNumber =
               entry.number ?? AppLocalizations.of(context).naText;
 
-          var details = getCallDisplayFields(
+          var details = CallDisplayHelper.getCallDisplayFields(
             entry.callType ?? CallType.unknown,
             context,
           );

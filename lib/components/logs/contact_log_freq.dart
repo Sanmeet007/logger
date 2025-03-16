@@ -1,7 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:logger/utils/utils.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -86,7 +86,7 @@ class ContactLogFreq extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              "${prettifyNumbers(count, context)}x",
+              "${FromatHelpers.prettifyNumbers(count, context)}x",
               style: const TextStyle(
                 fontSize: 14.0,
               ),

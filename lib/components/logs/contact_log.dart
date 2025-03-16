@@ -3,7 +3,8 @@ import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/components/logs/log_details.dart';
-import 'package:logger/utils/utils.dart';
+import 'package:logger/utils/call_display_helper.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -84,7 +85,7 @@ class ContactLog extends StatelessWidget {
 
               int duration = logDetails.duration ?? 0;
               int timestamp = logDetails.timestamp ?? 1;
-              var details = getCallDisplayFields(
+              var details = CallDisplayHelper.getCallDisplayFields(
                 logDetails.callType ?? CallType.unknown,
                 context,
               );
@@ -102,12 +103,12 @@ class ContactLog extends StatelessWidget {
                           AppLocalizations.of(context).naText,
                       callIcon: details[1],
                       callColor: details[0],
-                      timeString: formatTimeFromTimeStamp(
+                      timeString: FromatHelpers.formatTimeFromTimeStamp(
                         timestamp: timestamp,
                         context: context,
                       ),
-                      formattedDate:
-                          formatDateFromTimestamp(timestamp, context),
+                      formattedDate: FromatHelpers.formatDateFromTimestamp(
+                          timestamp, context),
                       duration: duration,
                       callType: details[2],
                       sim: logDetails.simDisplayName ??
@@ -132,7 +133,7 @@ class ContactLog extends StatelessWidget {
               ),
             ),
             trailing: Text(
-              prettifyDuration(
+              FromatHelpers.prettifyDuration(
                 Duration(seconds: logDetails.duration ?? 0),
                 context,
                 tersity: DurationTersity.minute,
