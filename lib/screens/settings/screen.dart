@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
+import 'package:logger/components/common/lined_text.dart';
+import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/linear_loader_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/call_log_count_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/import_type_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
+import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/snackbar.dart';
@@ -9,63 +22,15 @@ import 'dart:async';
 import 'fragments/export_filename_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SettingsScreen extends StatefulWidget {
-  final void Function({String waitingMessage}) showLinearProgressLoader;
-  final void Function() hideLinearProgressLoader;
-  final Future<void> Function()? refresher;
-
-  final bool initialDurationFilteringState;
-  final bool initialConfirmBeforeDownloadState;
-  final bool intialCallLogCountVisibility;
-  final bool initialSharingState;
-  final String initialImportTypeState;
-  final String initialExportedFilenameFormatState;
-  final bool initialShowTotalCallDuration;
-  final bool initialPhoneAccountIdFilteringState;
-  final Function showLoader, hideLoader;
-  final Future<bool?> Function(bool) setCallLogCountVisibility;
-  final Future<bool?> Function(bool) setShowTotalCallDuration;
-  final Future<bool?> Function(bool) setDurationFilteringState;
-  final Future<bool?> Function(bool) setPhoneAccountIdFilteringState;
-  final Future<bool?> Function(bool) setConfirmBeforeDownloadingState;
-  final Future<bool?> Function(bool) setShareButtonState;
-  final Future<bool?> Function(String) setCurrentImportType;
-  final Future<bool?> Function(String) setCurrentExportedFilenameFormatType;
-
-  const SettingsScreen({
-    super.key,
-    required this.initialPhoneAccountIdFilteringState,
-    required this.setPhoneAccountIdFilteringState,
-    required this.setShowTotalCallDuration,
-    required this.initialShowTotalCallDuration,
-    required this.hideLinearProgressLoader,
-    required this.showLinearProgressLoader,
-    required this.initialDurationFilteringState,
-    required this.initialConfirmBeforeDownloadState,
-    required this.initialSharingState,
-    required this.setDurationFilteringState,
-    required this.setConfirmBeforeDownloadingState,
-    required this.setShareButtonState,
-    required this.initialImportTypeState,
-    required this.setCurrentImportType,
-    required this.initialExportedFilenameFormatState,
-    required this.setCurrentExportedFilenameFormatType,
-    required this.setCallLogCountVisibility,
-    required this.intialCallLogCountVisibility,
-    required this.hideLoader,
-    required this.showLoader,
-    this.refresher,
-  });
+class SettingsScreen extends ConsumerStatefulWidget {
+  const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  bool isDone = false;
 
   void openFileNameSettingsSheet() {
     showModalBottomSheet(
@@ -74,19 +39,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         builder: (_) {
           return ExportFilenameDialog(
-            context: context,
-            setCurrentExportedFilenameFormatType:
-                widget.setCurrentExportedFilenameFormatType,
-            initialExportedFilenameFormatState:
-                widget.initialExportedFilenameFormatState,
-            showLoader: widget.showLoader,
-            hideLoader: widget.hideLoader,
+            exportFileNameFormat: ref.read(exportFileNameFormatProvider),
           );
         });
   }
 
   void handleCallLogImport() async {
-    bool isDone = false;
+    var linearProgressLoader = ref.read(linearLoaderProvider.notifier);
     try {
       var uris = await openDocument(mimeType: 'text/comma-separated-values');
       if (uris != null) {
@@ -94,45 +53,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
         var fileContents = await getDocumentContent(uri);
         if (fileContents == null) return;
         if (mounted) {
-          widget.showLinearProgressLoader(
-            waitingMessage: AppLocalizations.of(context).processingFileText,
+          linearProgressLoader.showLoading(
+            AppLocalizations.of(context).processingFileText,
           );
         }
 
         var callLogs = await CsvToMapConverter.generateCsvMap(fileContents);
 
         if (mounted) {
-          widget.showLinearProgressLoader(
-            waitingMessage: AppLocalizations.of(context).insertingLogsText,
+          linearProgressLoader.showLoading(
+            AppLocalizations.of(context).insertingLogsText,
           );
         }
+
         Future.delayed(const Duration(seconds: 12), () {
           if (!isDone && mounted) {
-            widget.showLinearProgressLoader(
-              waitingMessage: AppLocalizations.of(context).takingMoreTimeText,
+            linearProgressLoader.showLoading(
+              AppLocalizations.of(context).takingMoreTimeText,
             );
           }
         });
+
         Future.delayed(const Duration(seconds: 20), () {
           if (!isDone && mounted) {
-            widget.showLinearProgressLoader(
-              waitingMessage: AppLocalizations.of(context).pleaseWaitText,
+            linearProgressLoader.showLoading(
+              AppLocalizations.of(context).pleaseWaitText,
             );
           }
         });
 
         var x = await CallLogWriter.batchInsertCallLogs(callLogs);
 
+        // Refresh call logs in background automatically
+        await ref.read(callLogsNotifierProvider.notifier).hardRefresh();
+
         if (mounted) {
           if (x) {
             AppSnackBar.show(
               context,
               content: AppLocalizations.of(context).importSuccessMessageText,
-              useAction: true,
-              buttonOnPressed: () {
-                widget.refresher?.call();
-              },
-              buttonText: AppLocalizations.of(context).refreshText,
             );
           } else {
             AppSnackBar.show(
@@ -141,13 +100,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             );
           }
           isDone = true;
-          widget.hideLinearProgressLoader();
+          linearProgressLoader.hideLoading();
         }
       }
     } catch (e) {
-      // debugPrint(e.toString());
+      debugPrint(e.toString());
+
       isDone = true;
-      widget.hideLinearProgressLoader();
+      linearProgressLoader.hideLoading();
       if (mounted) {
         AppSnackBar.show(
           context,
@@ -231,42 +191,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .disableLogsSharingText,
                         ),
                         Switch(
-                          value: widget.initialSharingState,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r =
-                                  await widget.setShareButtonState(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .failedToUpdateSettingsText,
-                                  );
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .shareSettingUpdateSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(logsSharingProvider),
+                          onChanged: (_) =>
+                              ref.read(logsSharingProvider.notifier).toggle(),
                         ),
                       ],
                     ),
@@ -279,42 +206,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .enableDownloadConfirmationText,
                         ),
                         Switch(
-                          value: widget.initialConfirmBeforeDownloadState,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r = await widget
-                                  .setConfirmBeforeDownloadingState(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .failedToUpdateSettingsText,
-                                  );
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .downloadSettingUpdatedSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(downloadConfirmationProvider),
+                          onChanged: (bool newState) => ref
+                              .read(downloadConfirmationProvider.notifier)
+                              .toggle(),
                         ),
                       ],
                     ),
@@ -323,43 +218,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         LinedText(
-                            text: AppLocalizations.of(context)
-                                .enableCallLogCountVisibilityText),
+                          text: AppLocalizations.of(context)
+                              .enableCallLogCountVisibilityText,
+                        ),
                         Switch(
-                          value: widget.intialCallLogCountVisibility,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r = await widget
-                                  .setCallLogCountVisibility(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content: AppLocalizations.of(context)
-                                          .failedToUpdateSettingsText);
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .settingUpdateSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(callLogCountProvider),
+                          onChanged: (_) =>
+                              ref.read(callLogCountProvider.notifier).toggle(),
                         ),
                       ],
                     ),
@@ -372,40 +237,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .enableCallDurationFilteringText,
                         ),
                         Switch(
-                          value: widget.initialDurationFilteringState,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r = await widget
-                                  .setDurationFilteringState(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(context,
-                                      content: AppLocalizations.of(context)
-                                          .failedToUpdateSettingsText);
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .durationFilterSettingUpdatedSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(durationFilteringProvider),
+                          onChanged: (_) => ref
+                              .read(durationFilteringProvider.notifier)
+                              .toggle(),
                         ),
                       ],
                     ),
@@ -418,42 +253,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .enableFilterByAccountIdText,
                         ),
                         Switch(
-                          value: widget.initialPhoneAccountIdFilteringState,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r = await widget
-                                  .setPhoneAccountIdFilteringState(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .failedToUpdateSettingsText,
-                                  );
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .filterByPhoneAccountIdSettingUpdatedSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(phoneAccountFilteringProvider),
+                          onChanged: (_) => ref
+                              .read(phoneAccountFilteringProvider.notifier)
+                              .toggle(),
                         ),
                       ],
                     ),
@@ -466,42 +269,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .showTotalCallDurationText,
                         ),
                         Switch(
-                          value: widget.initialShowTotalCallDuration,
-                          onChanged: (bool newState) async {
-                            widget.showLoader();
-                            try {
-                              await Future.delayed(const Duration(seconds: 2));
-                              var r = await widget
-                                  .setShowTotalCallDuration(newState);
-                              if (r == null || !r) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .failedToUpdateSettingsText,
-                                  );
-                                }
-                              } else {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .generalSettingUpdatedSuccessMsgText,
-                                  );
-                                }
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                AppSnackBar.show(
-                                  context,
-                                  content: AppLocalizations.of(context)
-                                      .failedToUpdateSettingsText,
-                                );
-                              }
-                            } finally {
-                              widget.hideLoader();
-                            }
-                          },
+                          value: ref.watch(totalCallDurationProvider),
+                          onChanged: (_) => ref
+                              .read(totalCallDurationProvider.notifier)
+                              .toggle(),
                         ),
                       ],
                     ),
@@ -553,57 +324,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             isDense: true,
                             underline: Container(),
                             enableFeedback: true,
-                            value: widget.initialImportTypeState,
+                            value: ref.watch(importTypeProvider).name,
                             items: [
-                              ...[
-                                "csv",
-                                "json",
-                              ].map(
+                              ...ImportFileType.values.map(
                                 (item) => DropdownMenuItem(
-                                  value: item,
+                                  value: item.name,
                                   child: Text(
-                                    item.toUpperCase(),
+                                    item.name.toUpperCase(),
                                   ),
                                 ),
                               )
                             ],
-                            onChanged: (String? newValue) async {
+                            onChanged: (String? newValue) {
                               if (newValue == null) return;
+                              late ImportFileType t;
 
-                              widget.showLoader();
-                              try {
-                                await Future.delayed(
-                                    const Duration(seconds: 2));
-                                var r =
-                                    await widget.setCurrentImportType(newValue);
-                                if (r == null || !r) {
-                                  if (context.mounted) {
-                                    AppSnackBar.show(
-                                      context,
-                                      content: AppLocalizations.of(context)
-                                          .failedToUpdateSettingsText,
-                                    );
-                                  }
-                                } else {
-                                  if (context.mounted) {
-                                    AppSnackBar.show(
-                                      context,
-                                      content: AppLocalizations.of(context)
-                                          .importSettingUpdatedSuccessMsgText,
-                                    );
-                                  }
-                                }
-                              } catch (_) {
-                                if (context.mounted) {
-                                  AppSnackBar.show(
-                                    context,
-                                    content: AppLocalizations.of(context)
-                                        .failedToUpdateSettingsText,
-                                  );
-                                }
-                              } finally {
-                                widget.hideLoader();
+                              if (newValue == ImportFileType.json.name) {
+                                t = ImportFileType.json;
+                              } else {
+                                t = ImportFileType.csv;
                               }
+
+                              ref
+                                  .read(importTypeProvider.notifier)
+                                  .setImportType(t);
                             },
                           ),
                         ),
@@ -680,28 +424,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class LinedText extends StatelessWidget {
-  final String text;
-  final double fontSize;
-  const LinedText({
-    required this.text,
-    this.fontSize = 16.0,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: fontSize,
         ),
       ),
     );

@@ -1,30 +1,24 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
 import 'package:logger/screens/settings/fragments/datetime_table.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
-import 'package:logger/utils/snackbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ExportFilenameDialog extends StatefulWidget {
-  final Future<bool?> Function(String) setCurrentExportedFilenameFormatType;
-  final String initialExportedFilenameFormatState;
-  final Function showLoader, hideLoader;
-  final BuildContext context;
+class ExportFilenameDialog extends ConsumerStatefulWidget {
+  final String exportFileNameFormat;
 
   const ExportFilenameDialog({
     super.key,
-    required this.setCurrentExportedFilenameFormatType,
-    required this.initialExportedFilenameFormatState,
-    required this.hideLoader,
-    required this.showLoader,
-    required this.context,
+    required this.exportFileNameFormat,
   });
 
   @override
-  State<ExportFilenameDialog> createState() => _ExportFilenameDialogState();
+  ConsumerState<ExportFilenameDialog> createState() =>
+      _ExportFilenameDialogState();
 }
 
-class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
+class _ExportFilenameDialogState extends ConsumerState<ExportFilenameDialog> {
   late final TextEditingController _exportedFilenameController;
   bool _isExportedFilenameValid = true;
 
@@ -32,7 +26,7 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
   void initState() {
     super.initState();
     _exportedFilenameController = TextEditingController(
-      text: widget.initialExportedFilenameFormatState,
+      text: widget.exportFileNameFormat,
     );
   }
 
@@ -55,31 +49,12 @@ class _ExportFilenameDialogState extends State<ExportFilenameDialog> {
     });
   }
 
-  void validateAndSave() async {
+  void validateAndSave() {
     String value = _exportedFilenameController.text;
     bool isValid = ExportedFilenameFormatHelper.validateExportedFormat(value);
     if (isValid) {
-      widget.showLoader();
-      try {
-        Navigator.pop(context);
-        await Future.delayed(const Duration(seconds: 2));
-        await widget.setCurrentExportedFilenameFormatType(value);
-        if (widget.context.mounted) {
-          AppSnackBar.show(
-            widget.context,
-            content: "Export filename updated successfully",
-          );
-        }
-      } catch (_) {
-        if (widget.context.mounted) {
-          AppSnackBar.show(
-            widget.context,
-            content: "Unable to save filename setting",
-          );
-        }
-      } finally {
-        widget.hideLoader();
-      }
+      Navigator.pop(context);
+      ref.read(exportFileNameFormatProvider.notifier).setFormat(value);
     }
   }
 

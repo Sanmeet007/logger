@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/core/app_core.dart';
-import 'package:logger/providers/shared_utility_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/onboarding_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,8 +18,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _controller = PageController(viewportFraction: 1, keepPage: true);
   int currentIndex = 0;
 
-  void finishOnboarding(context) async {
-    await ref.read(sharedUtilityProvider).markOnboardingComplete();
+  void finishOnboarding(context) {
+    ref.read(onboardingProvider.notifier).markComplete();
 
     Navigator.pushReplacement(
       context,
