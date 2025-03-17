@@ -1,6 +1,16 @@
-import 'package:call_log/call_log.dart';
+// TODO : Translate strings !
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/providers/current_call_logs_provider.dart';
+import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/import_type_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
 import 'package:logger/utils/app_information.dart';
@@ -33,45 +43,21 @@ class Screen {
   });
 }
 
-class ScreenManager extends StatefulWidget {
-  final Iterable<CallLogEntry>? logs;
+class ScreenManager extends ConsumerStatefulWidget {
   final List<Screen> items;
   final int initialIndex;
-  final Function() removeLogFilters;
-  final Function(Map) filterLogs;
-  final Map currentFilters;
-  final bool areFiltersApplied;
-
-  final bool askForDownloadConfirmation, showSharingButton;
-  final String currentImportType;
-  final String currentExportedFilenameFormatType;
-  final bool canFilterUsingDuration;
-  final bool canFilterUsingPhoneAccountId;
-  final List<String> availablePhoneAccountIds;
 
   const ScreenManager({
     super.key,
-    required this.availablePhoneAccountIds,
-    required this.logs,
-    required this.currentFilters,
-    required this.filterLogs,
-    required this.removeLogFilters,
     required this.items,
-    required this.areFiltersApplied,
-    required this.askForDownloadConfirmation,
-    required this.currentImportType,
-    required this.currentExportedFilenameFormatType,
-    required this.canFilterUsingDuration,
-    required this.showSharingButton,
-    required this.canFilterUsingPhoneAccountId,
     this.initialIndex = 0,
   });
 
   @override
-  State<ScreenManager> createState() => _ScreenManagerState();
+  ConsumerState<ScreenManager> createState() => _ScreenManagerState();
 }
 
-class _ScreenManagerState extends State<ScreenManager> {
+class _ScreenManagerState extends ConsumerState<ScreenManager> {
   static const fileName = "output";
 
   late int _selectedIndex;
@@ -94,16 +80,16 @@ class _ScreenManagerState extends State<ScreenManager> {
     return CallLogsFileGenerator.generateLogsFile(
       parentUri: parentUri,
       filename: filename,
-      fileType: widget.currentImportType,
-      callLogs: widget.logs,
+      fileType: ref.read(importTypeProvider),
+      callLogs: ref.read(currentCallLogsNotifierProvider),
     );
   }
 
   Future<bool> addLogsToFile(File file) async {
     return CallLogsFileGenerator.addLogsToFile(
       file: file,
-      callLogs: widget.logs,
-      fileType: widget.currentImportType,
+      fileType: ref.read(importTypeProvider),
+      callLogs: ref.read(currentCallLogsNotifierProvider),
     );
   }
 
@@ -132,7 +118,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         );
         break;
       default:
-      // Silenece is golden
+      // DO NOTHING EAT FIVE STAR ¯\_(ツ)_/¯
     }
   }
 
@@ -150,7 +136,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                 children: [
                   Text(
                     AppLocalizations.of(context).downloadConfirmationText(
-                      widget.currentImportType.toUpperCase(),
+                      ref.read(importTypeProvider).name,
                     ),
                   )
                 ],
@@ -183,9 +169,15 @@ class _ScreenManagerState extends State<ScreenManager> {
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
+      ImportFileType currentImportType = ref.read(importTypeProvider);
+
+      String currentExportedFilenameFormatType =
+          ref.read(exportFileNameFormatProvider);
+
       String filename = ExportedFilenameFormatHelper.createFileFormat(
-          widget.currentExportedFilenameFormatType);
-      String filenameWithExtension = "$filename.${widget.currentImportType}";
+          currentExportedFilenameFormatType);
+
+      String filenameWithExtension = "$filename.${currentImportType.name}";
 
       final fileUri = await generateLogsFile(grantedUri, filenameWithExtension);
 
@@ -212,6 +204,8 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void shareFile() async {
+    ImportFileType currentImportType = ref.read(importTypeProvider);
+
     setState(() {
       isTaskRunning = true;
     });
@@ -220,7 +214,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
     File file = File(
-        "${tempDir.path}/logger_${suffix}_$fileName.${widget.currentImportType}");
+      "${tempDir.path}/logger_${suffix}_$fileName.${currentImportType.name}",
+    );
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 
@@ -232,9 +227,11 @@ class _ScreenManagerState extends State<ScreenManager> {
       );
     } else {
       if (mounted) {
-        AppSnackBar.show(context,
-            content:
-                "An error occured while generating file. Please try again later");
+        AppSnackBar.show(
+          context,
+          content:
+              "An error occured while generating file. Please try again later",
+        );
       }
     }
 
@@ -244,6 +241,8 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void generateAndOpenFile() async {
+    ImportFileType currentImportType = ref.read(importTypeProvider);
+
     setState(() {
       isTaskRunning = true;
     });
@@ -252,7 +251,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
     File file = File(
-        "${tempDir.path}/logger_${suffix}_$fileName.${widget.currentImportType}");
+      "${tempDir.path}/logger_${suffix}_$fileName.${currentImportType.name}",
+    );
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 
@@ -280,17 +280,20 @@ class _ScreenManagerState extends State<ScreenManager> {
       showDragHandle: true,
       isScrollControlled: true,
       builder: (context) => LogFilters(
-        availablePhoneAccountIds: widget.availablePhoneAccountIds,
-        currentFilters: widget.currentFilters,
-        filterLogs: widget.filterLogs,
-        removeFilters: widget.removeLogFilters,
-        canFilterUsingDuration: widget.canFilterUsingDuration,
-        canFilterUsingPhoneAccountId: widget.canFilterUsingPhoneAccountId,
+        parentRef: ref,
+        availablePhoneAccountIds: ref
+            .read(currentCallLogsNotifierProvider.notifier)
+            .getAvailablePhoneAccountIds(),
+        currentFilters: ref.read(logsFilterProvider).filters,
+        canFilterUsingDuration: ref.read(durationFilteringProvider),
+        canFilterUsingPhoneAccountId: ref.read(phoneAccountFilteringProvider),
       ),
     );
   }
 
   void openDetailedView() {
+    final currentImportType = ref.read(importTypeProvider);
+
     showModalBottomSheet(
         isDismissible: true,
         isScrollControlled: true,
@@ -302,7 +305,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             expand: false,
             builder: (context, controller) => SingleChildScrollView(
               controller: controller,
-              child: widget.currentImportType == "csv"
+              child: currentImportType == ImportFileType.csv
                   ? const CsvFieldsInformation()
                   : const JsonFieldsInformation(),
             ),
@@ -347,7 +350,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                               size: 30.0,
                             ),
                             onPressed: !isTaskRunning
-                                ? () => widget.askForDownloadConfirmation
+                                ? () => ref.watch(downloadConfirmationProvider)
                                     ? confirmAndDownload()
                                     : downloadFile(showStatus: true)
                                 : null,
@@ -361,7 +364,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                                 ? () => generateAndOpenFile()
                                 : null,
                           ),
-                          if (widget.showSharingButton)
+                          if (ref.watch(logsSharingProvider))
                             IconButton(
                               tooltip: AppLocalizations.of(context).shareText,
                               splashRadius: 22.0,
@@ -375,7 +378,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                     IconButton(
                       tooltip: AppLocalizations.of(context).filterText,
                       onPressed: showFiltersModal,
-                      icon: widget.areFiltersApplied
+                      icon: ref.watch(logsFilterProvider).areFiltersApplied
                           ? Badge(
                               backgroundColor: Theme.of(context).brightness ==
                                       Brightness.dark
