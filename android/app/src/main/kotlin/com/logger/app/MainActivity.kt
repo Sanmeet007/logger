@@ -23,6 +23,21 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor, CHANNEL).setMethodCallHandler { call, result ->
             try {
                 when (call.method) {
+                    "openContact" -> {
+                        val phoneNumber = call.argument<String>("phoneNumber")
+                        if (phoneNumber != null) {
+                            val contactId = getContactIdFromPhoneNumber(phoneNumber)
+            
+                            if (contactId != null) {
+                                openContact(contactId)
+                                result.success(true)
+                            } else {
+                                result.error("CONTACT_NOT_FOUND", "No contact found for this number", null)
+                            }
+                        } else {
+                            result.error("INVALID_ARGUMENT", "Phone number is required", null)
+                        }
+                    }
                     "insertCallLogs" -> {
                         val callLogs = call.arguments as? List<Map<String, Any>>
 
@@ -165,6 +180,29 @@ class MainActivity : FlutterActivity() {
         }
     }       
 
+    private fun getContactIdFromPhoneNumber(phoneNumber: String): String? {
+        val uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+        val projection = arrayOf(ContactsContract.PhoneLookup._ID)
+    
+        val cursor: Cursor? = context.contentResolver.query(uri, projection, null, null, null)
+        var contactId: String? = null
+    
+        cursor?.use {
+            if (it.moveToFirst()) {
+                contactId = it.getString(it.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID))
+            }
+        }
+        return contactId
+    }
+
+    private fun openContact(contactId: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        context.startActivity(intent)
+    }
+    
     private fun lookupContactName(phoneNumber: String): String? {
         val uri: Uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
         val cursor: Cursor? = context.contentResolver.query(uri, arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME), null, null, null)

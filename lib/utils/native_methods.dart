@@ -60,6 +60,16 @@ class NativeMethods {
       return false;
     }
   }
+
+  static Future<bool> openContact(String phoneNumber) async {
+    try {
+      bool success = await _methodChannelPlatform
+          .invokeMethod('openContact', {'phoneNumber': phoneNumber});
+      return success;
+    } on PlatformException catch (_) {
+      return false;
+    }
+  }
 }
 
 class CallLogWriter {
