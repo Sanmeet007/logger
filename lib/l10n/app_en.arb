@@ -760,5 +760,11 @@
   "addToContactsErrorText": "Unable to add new contact",
   "appPermissionsDeniedError": "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
   "appFatalError": "Ah snap! Something unexpected happened!",
-  "appPreferencesError": "Ah! Snap error loading preferences"
+  "appPreferencesError": "Ah! Snap error loading preferences",
+  "uriPermissionError": "Unable to get permissions",
+  "fileGenerationError": "An error occured while generating file. Please try again later",
+  "fileShareMessage": "Share call logs file via gmail , whatsapp etc...",
+  "fileShareSubject": "Call Logs",
+  "fileOpenError": "Unable to open file please try again later",
+  "openingFileLabel": "Opening file"
 }

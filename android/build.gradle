@@ -6,6 +6,7 @@ allprojects {
 }
 
 rootProject.buildDir = '../build'
+
 subprojects {
     afterEvaluate { project ->
         if (project.plugins.hasPlugin("com.android.application") ||
@@ -27,7 +28,6 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
     project.evaluationDependsOn(':app')
 }
-
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir

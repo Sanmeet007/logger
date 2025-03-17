@@ -1,5 +1,3 @@
-// TODO : Translate strings !
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/sized_text.dart';
@@ -18,10 +16,10 @@ import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:share_plus/share_plus.dart';
-import "package:shared_storage/shared_storage.dart";
+import 'package:shared_storage/shared_storage.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
-import 'package:open_file_plus/open_file_plus.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -194,8 +192,11 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     } else {
       if (showStatus) {
         if (mounted) {
-          AppSnackBar.show(context,
-              content: "Unable to get permissions", showCloseIcon: false);
+          AppSnackBar.show(
+            context,
+            content: AppLocalizations.of(context).uriPermissionError,
+            showCloseIcon: false,
+          );
         }
       }
       setState(() => isTaskRunning = false);
@@ -219,18 +220,17 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 
-    if (fileGenerationSuccess) {
+    if (fileGenerationSuccess && mounted) {
       await Share.shareXFiles(
         [XFile(filePath)],
-        subject: "Call Logs",
-        text: "Share call logs file via gmail , whatsapp etc...",
+        subject: AppLocalizations.of(context).fileShareMessage,
+        text: AppLocalizations.of(context).fileShareSubject,
       );
     } else {
       if (mounted) {
         AppSnackBar.show(
           context,
-          content:
-              "An error occured while generating file. Please try again later",
+          content: AppLocalizations.of(context).fileGenerationError,
         );
       }
     }
@@ -263,11 +263,12 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     if (mounted) {
       if (fileGenerationSuccess) {
         AppSnackBar.show(context,
-            content: "Opening file", showCloseIcon: false);
+            content: AppLocalizations.of(context).openingFileLabel,
+            showCloseIcon: false);
         OpenFile.open(filePath);
       } else {
         AppSnackBar.show(context,
-            content: "Unable to open file please try again later",
+            content: AppLocalizations.of(context).fileOpenError,
             showCloseIcon: false);
       }
     }
