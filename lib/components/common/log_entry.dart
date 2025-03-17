@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:logger/providers/whatsapp_availablity_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../logs/log_details.dart';
 
-class LogEntry extends StatelessWidget {
+class LogEntry extends ConsumerWidget {
   const LogEntry({
     super.key,
     required this.name,
@@ -33,14 +35,13 @@ class LogEntry extends StatelessWidget {
   final String phoneAccountId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Slidable(
       closeOnScroll: true,
       startActionPane: ActionPane(
         extentRatio: 0.6,
         // A motion is a widget used to control how the pane animates.
         motion: const StretchMotion(),
-
         // All actions are defined in the children parameter.
         children: [
           // A SlidableAction can have an icon and/or a label.
@@ -89,6 +90,31 @@ class LogEntry extends StatelessWidget {
               label: 'SMS',
             ),
           ),
+
+          if (ref.watch(whatsappAvailabilityProvider).hasValue &&
+              (ref.watch(whatsappAvailabilityProvider).valueOrNull ?? false) ==
+                  true)
+            Theme(
+              data: Theme.of(context).copyWith(
+                outlinedButtonTheme: const OutlinedButtonThemeData(
+                  style: ButtonStyle(
+                      iconColor: WidgetStatePropertyAll(Colors.white)),
+                ),
+              ),
+              child: SlidableAction(
+                autoClose: true,
+                // An action can be bigger than the others.
+                flex: 1,
+                onPressed: (context) async {
+                  var uri = Uri.parse("sms:$phoneNumber");
+                  await launchUrl(uri);
+                },
+                backgroundColor: const Color.fromARGB(255, 134, 53, 255),
+                foregroundColor: Colors.white,
+                icon: Icons.message,
+                label: 'SMS',
+              ),
+            ),
         ],
       ),
       child: ListTile(
