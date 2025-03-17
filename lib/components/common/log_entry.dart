@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/providers/whatsapp_availablity_provider.dart';
+import 'package:logger/utils/whatsapp_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../logs/log_details.dart';
@@ -73,7 +75,8 @@ class LogEntry extends ConsumerWidget {
             data: Theme.of(context).copyWith(
               outlinedButtonTheme: const OutlinedButtonThemeData(
                 style: ButtonStyle(
-                    iconColor: WidgetStatePropertyAll(Colors.white)),
+                  iconColor: WidgetStatePropertyAll(Colors.white),
+                ),
               ),
             ),
             child: SlidableAction(
@@ -98,7 +101,8 @@ class LogEntry extends ConsumerWidget {
               data: Theme.of(context).copyWith(
                 outlinedButtonTheme: const OutlinedButtonThemeData(
                   style: ButtonStyle(
-                      iconColor: WidgetStatePropertyAll(Colors.white)),
+                    iconColor: WidgetStatePropertyAll(Colors.white),
+                  ),
                 ),
               ),
               child: SlidableAction(
@@ -106,13 +110,12 @@ class LogEntry extends ConsumerWidget {
                 // An action can be bigger than the others.
                 flex: 1,
                 onPressed: (context) async {
-                  var uri = Uri.parse("sms:$phoneNumber");
-                  await launchUrl(uri);
+                  await openWhatsApp(context, phoneNumber);
                 },
-                backgroundColor: const Color.fromARGB(255, 134, 53, 255),
+                backgroundColor: const Color.fromARGB(255, 37, 211, 102),
                 foregroundColor: Colors.white,
-                icon: Icons.message,
-                label: 'SMS',
+                icon: FontAwesomeIcons.whatsapp,
+                label: 'WA',
               ),
             ),
         ],
