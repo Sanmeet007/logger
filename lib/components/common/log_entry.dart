@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/providers/whatsapp_availablity_provider.dart';
+import 'package:logger/utils/native_methods.dart';
+import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/whatsapp_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../logs/log_details.dart';
 
@@ -36,12 +39,24 @@ class LogEntry extends ConsumerWidget {
   final String sim;
   final String phoneAccountId;
 
+  void openContact(BuildContext context) async {
+    bool launchSuccess = await NativeMethods.openContact(phoneNumber);
+    if (!launchSuccess) {
+      if (context.mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).errorOpeningContact,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Slidable(
       closeOnScroll: true,
       startActionPane: ActionPane(
-        extentRatio: 0.6,
+        extentRatio: 1,
         // A motion is a widget used to control how the pane animates.
         motion: const StretchMotion(),
         // All actions are defined in the children parameter.
@@ -121,6 +136,7 @@ class LogEntry extends ConsumerWidget {
         ],
       ),
       child: ListTile(
+          onLongPress: () => openContact(context),
           tileColor: Theme.of(context).brightness == Brightness.dark
               ? const Color.fromARGB(249, 34, 34, 34)
               : const Color.fromARGB(255, 249, 245, 255),

@@ -1,11 +1,17 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:logger/providers/whatsapp_availablity_provider.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/native_methods.dart';
+import 'package:logger/utils/snackbar.dart';
+import 'package:logger/utils/whatsapp_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ContactLogFreq extends StatelessWidget {
+class ContactLogFreq extends ConsumerWidget {
   final CallLogEntry logDetails;
   final int count;
   const ContactLogFreq({
@@ -14,14 +20,28 @@ class ContactLogFreq extends StatelessWidget {
     required this.count,
   });
 
+  void openContact(BuildContext context) async {
+    if (logDetails.number == null) return;
+
+    bool launchSuccess = await NativeMethods.openContact(logDetails.number!);
+    if (!launchSuccess) {
+      if (context.mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).errorOpeningContact,
+        );
+      }
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       color: Colors.transparent,
       child: Slidable(
         closeOnScroll: true,
         startActionPane: ActionPane(
-          extentRatio: 0.6,
+          extentRatio: 1,
           motion: const StretchMotion(),
           children: [
             Theme(
@@ -68,9 +88,36 @@ class ContactLogFreq extends StatelessWidget {
                 label: AppLocalizations.of(context).smsText,
               ),
             ),
+            if (logDetails.number != null &&
+                ref.watch(whatsappAvailabilityProvider).hasValue &&
+                (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
+                        false) ==
+                    true)
+              Theme(
+                data: Theme.of(context).copyWith(
+                  outlinedButtonTheme: const OutlinedButtonThemeData(
+                    style: ButtonStyle(
+                      iconColor: WidgetStatePropertyAll(Colors.white),
+                    ),
+                  ),
+                ),
+                child: SlidableAction(
+                  autoClose: true,
+                  // An action can be bigger than the others.
+                  flex: 1,
+                  onPressed: (context) async {
+                    await openWhatsApp(context, logDetails.number!);
+                  },
+                  backgroundColor: const Color.fromARGB(255, 37, 211, 102),
+                  foregroundColor: Colors.white,
+                  icon: FontAwesomeIcons.whatsapp,
+                  label: 'WA',
+                ),
+              ),
           ],
         ),
         child: ListTile(
+            onLongPress: () => openContact(context),
             minVerticalPadding: 14.0,
             leading: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
