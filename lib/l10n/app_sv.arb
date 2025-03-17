@@ -195,5 +195,8 @@
     "fileShareMessage": "Dela samtalsloggfil via Gmail, WhatsApp, etc...",
     "fileShareSubject": "Samtalsloggar",
     "fileOpenError": "Kunde inte öppna filen, försök igen senare",
-    "openingFileLabel": "Öppnar fil"
+    "openingFileLabel": "Öppnar fil",
+    "viewContactLabel": "Visa kontakt",
+    "errorOpeningContact": "Fel vid öppning av kontakt",
+    "waLaunchError": "Kunde inte starta WhatsApp"
 }

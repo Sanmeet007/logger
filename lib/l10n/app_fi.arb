@@ -195,5 +195,8 @@
     "fileShareMessage": "Jaa puhelulokien tiedosto Gmailin, WhatsAppin jne. kautta...",
     "fileShareSubject": "Puhelulokit",
     "fileOpenError": "Tiedostoa ei voi avata, yritä myöhemmin uudelleen",
-    "openingFileLabel": "Avataan tiedostoa"
+    "openingFileLabel": "Avataan tiedostoa",
+    "viewContactLabel": "Näytä yhteystieto",
+    "errorOpeningContact": "Virhe avattaessa yhteystietoa",
+    "waLaunchError": "WhatsAppia ei voitu käynnistää"
 }

@@ -195,5 +195,8 @@
   "fileShareMessage": "통화 로그 파일을 Gmail, WhatsApp 등을 통해 공유하세요...",
   "fileShareSubject": "통화 기록",
   "fileOpenError": "파일을 열 수 없습니다. 나중에 다시 시도하세요",
-  "openingFileLabel": "파일 여는 중"
+  "openingFileLabel": "파일 여는 중",
+  "viewContactLabel": "연락처 보기",
+  "errorOpeningContact": "연락처를 여는 중 오류 발생",
+  "waLaunchError": "WhatsApp을 실행할 수 없습니다"
 }

@@ -195,5 +195,8 @@
   "fileShareMessage": "Comparta el archivo de registros de llamadas a través de Gmail, WhatsApp, etc...",
   "fileShareSubject": "Registros de llamadas",
   "fileOpenError": "No se pudo abrir el archivo, inténtelo de nuevo más tarde",
-  "openingFileLabel": "Abriendo archivo"
+  "openingFileLabel": "Abriendo archivo",
+  "viewContactLabel": "Ver contacto",
+  "errorOpeningContact": "Error al abrir el contacto",
+  "waLaunchError": "No se pudo abrir WhatsApp"
 }

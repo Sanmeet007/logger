@@ -195,5 +195,8 @@
   "fileShareMessage": "Поделитесь файлом журнала вызовов через Gmail, WhatsApp и др...",
   "fileShareSubject": "Журнал вызовов",
   "fileOpenError": "He удалось открыть файл, попробуйте позже",
-  "openingFileLabel": "Открытие файла"
+  "openingFileLabel": "Открытие файла",
+  "viewContactLabel": "Просмотреть контакт",
+  "errorOpeningContact": "Ошибка открытия контакта",
+  "waLaunchError": "He удалось запустить WhatsApp"
 }

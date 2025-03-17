@@ -195,5 +195,8 @@
   "fileShareMessage": "Udostępnij plik dziennika połączeń przez Gmail, WhatsApp itp...",
   "fileShareSubject": "Dzienniki połączeń",
   "fileOpenError": "Nie można otworzyć pliku, spróbuj ponownie później",
-  "openingFileLabel": "Otwieranie pliku"
+  "openingFileLabel": "Otwieranie pliku",
+  "viewContactLabel": "Zobacz kontakt",
+  "errorOpeningContact": "Błąd podczas otwierania kontaktu",
+  "waLaunchError": "Nie można uruchomić WhatsApp"
 }

@@ -195,5 +195,8 @@
   "fileShareMessage": "Deel het oproeplogbestand via Gmail, WhatsApp, etc...",
   "fileShareSubject": "Oproeplogboeken",
   "fileOpenError": "Kan bestand niet openen, probeer het later opnieuw",
-  "openingFileLabel": "Bestand openen"
+  "openingFileLabel": "Bestand openen",
+  "viewContactLabel": "Contact bekijken",
+  "errorOpeningContact": "Fout bij openen van contact",
+  "waLaunchError": "Kan WhatsApp niet starten"
 }

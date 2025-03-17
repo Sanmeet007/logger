@@ -195,5 +195,8 @@
     "fileShareMessage": "通过 Gmail、WhatsApp 等分享通话记录文件...",
     "fileShareSubject": "通话记录",
     "fileOpenError": "无法打开文件，请稍后重试",
-    "openingFileLabel": "正在打开文件"
+    "openingFileLabel": "正在打开文件",
+    "viewContactLabel": "查看联系人",
+    "errorOpeningContact": "打开联系人时出错",
+    "waLaunchError": "无法启动 WhatsApp"
 }

@@ -195,5 +195,8 @@
   "fileShareMessage": "通話履歴ファイルをGmail、WhatsAppなどで共有...",
   "fileShareSubject": "通話履歴",
   "fileOpenError": "ファイルを開けません。後でもう一度お試しください",
-  "openingFileLabel": "ファイルを開いています"
+  "openingFileLabel": "ファイルを開いています",
+  "viewContactLabel": "連絡先を表示",
+  "errorOpeningContact": "連絡先を開く際にエラーが発生しました",
+  "waLaunchError": "WhatsApp を起動できませんでした"
 }

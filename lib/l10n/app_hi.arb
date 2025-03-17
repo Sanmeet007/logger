@@ -204,5 +204,8 @@
   "fileShareMessage": "कॉल लॉग फ़ाइल को जीमेल, व्हाट्सएप आदि के माध्यम से साझा करें...",
   "fileShareSubject": "कॉल लॉग",
   "fileOpenError": "फ़ाइल खोलने में असमर्थ, कृपया बाद में पुनः प्रयास करें",
-  "openingFileLabel": "फ़ाइल खोल रहे हैं"
+  "openingFileLabel": "फ़ाइल खोल रहे हैं",
+  "viewContactLabel": "संपर्क देखें",
+  "errorOpeningContact": "संपर्क खोलने में त्रुटि",
+  "waLaunchError": "WhatsApp लॉन्च नहीं कर सका"
 }
