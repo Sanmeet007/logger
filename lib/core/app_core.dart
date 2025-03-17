@@ -1,56 +1,33 @@
-import 'package:call_log/call_log.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/app_error.dart';
 import 'package:logger/components/common/loader.dart';
+import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/onboarding_provider.dart';
 import 'package:logger/screens/onboarding/screen.dart';
-import 'package:logger/core/app_ui.dart';
+import 'package:logger/core/app_interface.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AppCore extends StatelessWidget {
+class AppCore extends ConsumerWidget {
   final WidgetsBinding widgetsBinding;
   const AppCore({super.key, required this.widgetsBinding});
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      initialData: null,
-      future: SharedPreferences.getInstance(),
-      builder: (context, prefsSnapShot) {
-        switch (prefsSnapShot.connectionState) {
-          case ConnectionState.waiting:
-            return const SizedBox();
-          case ConnectionState.done:
-          default:
-            FlutterNativeSplash.remove();
-            if (prefsSnapShot.hasData) {
-              bool showOnboarding =
-                  prefsSnapShot.data?.getBool("show-onboarding") ?? true;
-              if (showOnboarding) {
-                return OnboardingUI(prefs: prefsSnapShot.data);
-              } else {
-                return BaseAppCore(prefs: prefsSnapShot.data);
-              }
-            } else {
-              return AppError(
-                displayIcon: Icons.error,
-                errorMessage: AppLocalizations.of(context).appPreferencesError,
-              );
-            }
-        }
-      },
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isOnboardingComplete = ref.watch(onboardingProvider);
+
+    if (!isOnboardingComplete) {
+      return OnboardingScreen();
+    } else {
+      return AppInitializer();
+    }
   }
 }
 
-class BaseAppCore extends StatelessWidget {
-  final SharedPreferences? prefs;
-
-  const BaseAppCore({
+class AppInitializer extends StatelessWidget {
+  const AppInitializer({
     super.key,
-    required this.prefs,
   });
 
   @override
@@ -72,9 +49,7 @@ class BaseAppCore extends StatelessWidget {
                       PermissionStatus.granted &&
                   snapshot.data![Permission.contacts] ==
                       PermissionStatus.granted) {
-                return RefreshableBuilder(
-                  preferences: prefs,
-                );
+                return RefreshableBuilder();
               } else {
                 return AppError(
                   displayIcon: Icons.warning,
@@ -99,61 +74,20 @@ class BaseAppCore extends StatelessWidget {
   }
 }
 
-class RefreshableBuilder extends StatefulWidget {
-  final SharedPreferences? preferences;
-  const RefreshableBuilder({super.key, required this.preferences});
+class RefreshableBuilder extends ConsumerWidget {
+  const RefreshableBuilder({super.key});
 
   @override
-  State<RefreshableBuilder> createState() => RefreshableBuilderState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final callLogState = ref.watch(callLogsNotifierProvider);
 
-class RefreshableBuilderState extends State<RefreshableBuilder> {
-  late Future<Iterable<CallLogEntry>> _futureData;
-
-  @override
-  void initState() {
-    super.initState();
-    _futureData = CallLog.get();
-  }
-
-  Future<void> refresh() async {
-    await Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _futureData = CallLog.get();
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      initialData: null,
-      future: _futureData,
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return const Loader();
-          default:
-            if (snapshot.hasData) {
-              final entries = snapshot.data;
-              return ApplicationUi(
-                entries: entries,
-                refresher: refresh,
-                preferences: widget.preferences,
-              );
-            } else if (snapshot.hasError) {
-              return AppError(
-                displayIcon: Icons.error,
-                errorMessage: AppLocalizations.of(context).appError,
-              );
-            } else {
-              return AppError(
-                displayIcon: Icons.info,
-                errorMessage: AppLocalizations.of(context).appFatalError,
-              );
-            }
-        }
-      },
+    return callLogState.when(
+      loading: () => const Loader(),
+      data: (_) => AppInterface(),
+      error: (err, _) => AppError(
+        displayIcon: Icons.error,
+        errorMessage: AppLocalizations.of(context).appError,
+      ),
     );
   }
 }
