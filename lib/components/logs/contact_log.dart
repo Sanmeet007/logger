@@ -35,6 +35,20 @@ class ContactLog extends ConsumerWidget {
     }
   }
 
+  void addToContact(BuildContext context) async {
+    if (logDetails.number == null) return;
+
+    bool launchSuccess = await NativeMethods.addToContacts(logDetails.number!);
+    if (!launchSuccess) {
+      if (context.mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).addToContactsErrorText,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
@@ -118,16 +132,15 @@ class ContactLog extends ConsumerWidget {
           ],
         ),
         child: ListTile(
-            onLongPress: () => openContact(context),
+            onLongPress: () => CallDisplayHelper.isUnknownContact(logDetails)
+                ? addToContact(context)
+                : openContact(context),
             onTap: () {
-              bool isUnknown = true;
+              bool isUnknown = CallDisplayHelper.isUnknownContact(logDetails);
 
               String name = logDetails.name ?? "";
-              if (name.isEmpty) {
-                isUnknown = true;
+              if (isUnknown) {
                 name = AppLocalizations.of(context).unknownText;
-              } else {
-                isUnknown = false;
               }
 
               int duration = logDetails.duration ?? 0;

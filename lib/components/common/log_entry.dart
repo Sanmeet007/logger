@@ -51,6 +51,18 @@ class LogEntry extends ConsumerWidget {
     }
   }
 
+  void addToContact(BuildContext context) async {
+    bool launchSuccess = await NativeMethods.addToContacts(phoneNumber);
+    if (!launchSuccess) {
+      if (context.mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).addToContactsErrorText,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Slidable(
@@ -136,7 +148,8 @@ class LogEntry extends ConsumerWidget {
         ],
       ),
       child: ListTile(
-          onLongPress: () => openContact(context),
+          onLongPress: () =>
+              isUnknown ? addToContact(context) : openContact(context),
           tileColor: Theme.of(context).brightness == Brightness.dark
               ? const Color.fromARGB(249, 34, 34, 34)
               : const Color.fromARGB(255, 249, 245, 255),

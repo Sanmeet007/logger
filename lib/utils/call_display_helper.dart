@@ -45,4 +45,18 @@ class CallDisplayHelper {
     }
     return [callColor, callIcon, rCallType];
   }
+
+  static bool isUnknownContact(CallLogEntry entry) {
+    bool isUnknown = true;
+
+    String name = entry.name ?? "";
+
+    if (name.isEmpty) {
+      isUnknown = true;
+    } else {
+      isUnknown = false;
+    }
+
+    return isUnknown;
+  }
 }
