@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  appcheck:
+    dependency: "direct main"
+    description:
+      name: appcheck
+      sha256: "6971b1ae5833b15b1abc29f7d03d08db79577b2934ceb34fe39ab937b53c2f17"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.4+1"
   archive:
     dependency: transitive
     description:

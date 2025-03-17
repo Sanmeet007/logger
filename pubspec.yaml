@@ -52,6 +52,7 @@ dependencies:
   duration: ^4.0.3
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
+  appcheck: ^1.5.4+1
 
   call_log:
     git:
