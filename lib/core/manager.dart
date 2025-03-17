@@ -422,7 +422,10 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                   .map(
                     (item) => NavigationDestination(
                       icon: Icon(item.icon),
-                      selectedIcon: Icon(item.selectedIcon),
+                      selectedIcon: Icon(
+                        item.selectedIcon,
+                        color: Colors.black,
+                      ),
                       label: item.label,
                     ),
                   )
