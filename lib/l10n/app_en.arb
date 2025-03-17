@@ -766,5 +766,8 @@
   "fileShareMessage": "Share call logs file via gmail , whatsapp etc...",
   "fileShareSubject": "Call Logs",
   "fileOpenError": "Unable to open file please try again later",
-  "openingFileLabel": "Opening file"
+  "openingFileLabel": "Opening file",
+  "viewContactLabel": "View Contact",
+  "errorOpeningContact": "Error opening contact",
+  "waLaunchError": "Could not launch WhatsApp"
 }

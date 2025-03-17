@@ -50,6 +50,18 @@ class LogDetails extends StatelessWidget {
     }
   }
 
+  void handleOpenContact(BuildContext context) async {
+    bool launchSuccess = await NativeMethods.openContact(phoneNumber);
+    if (!launchSuccess) {
+      if (parentContext.mounted) {
+        AppSnackBar.show(
+          parentContext,
+          content: AppLocalizations.of(context).errorOpeningContact,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -182,6 +194,22 @@ class LogDetails extends StatelessWidget {
                         onPressed: () => handleAddToContacts(context),
                         child: Text(
                           AppLocalizations.of(context).addToContactsText,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (!isUnknown)
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => handleOpenContact(context),
+                        child: Text(
+                          AppLocalizations.of(context).viewContactLabel,
                         ),
                       ),
                     ],
