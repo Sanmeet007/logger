@@ -1,15 +1,17 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/components/common/date_picker.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/common/toggle_button.dart';
+import 'package:logger/providers/loader_provider.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LogFilters extends StatefulWidget {
-  final Function() removeFilters;
-  final Function(Map) filterLogs;
+class LogFilters extends ConsumerStatefulWidget {
+  final WidgetRef parentRef;
   final Map currentFilters;
   final bool canFilterUsingDuration;
   final bool canFilterUsingPhoneAccountId;
@@ -19,18 +21,19 @@ class LogFilters extends StatefulWidget {
     super.key,
     required this.currentFilters,
     required this.availablePhoneAccountIds,
-    required this.filterLogs,
-    required this.removeFilters,
     required this.canFilterUsingDuration,
     required this.canFilterUsingPhoneAccountId,
+    required this.parentRef,
   });
 
   @override
-  State<LogFilters> createState() => _LogFiltersState();
+  ConsumerState<LogFilters> createState() => _LogFiltersState();
 }
 
-class _LogFiltersState extends State<LogFilters> {
+class _LogFiltersState extends ConsumerState<LogFilters> {
   final formatter = DateFormat("yyyy-MM-dd");
+
+  // Creating new mutable List
   List<CallType> callTypes = [...CallType.values];
 
   late bool isNumberSearchEnabled;
@@ -117,14 +120,17 @@ class _LogFiltersState extends State<LogFilters> {
     checkFiltersState();
   }
 
-  void applyFilters() {
+  void applyFilters() async {
+    final ref = widget.parentRef;
     Navigator.pop(context, true);
 
     if (shouldApplyFilters()) {
-      widget.filterLogs({
+      ref.read(loaderProvider.notifier).showLoading();
+
+      await ref.read(logsFilterProvider.notifier).applyFilters({
         "specific_ph": isNumberSearchEnabled,
         "phone_to_match": _phoneNumberInputController.text,
-        "selected_call_types": selectedCallTypes, // \_(^_^)_/
+        "selected_call_types": selectedCallTypes,
         "date_range_op": dateRangeOption,
         "start_date": _startDateController.text.isEmpty
             ? DateTime.now()
@@ -137,12 +143,14 @@ class _LogFiltersState extends State<LogFilters> {
         "duration_filtering": isDurationFilteringOn,
         "phone_acc_id": selectedPhoneAccountId,
       });
+
+      ref.read(loaderProvider.notifier).hideLoading();
     }
   }
 
   void clearFilters() {
     Navigator.pop(context, true);
-    widget.removeFilters();
+    ref.read(logsFilterProvider.notifier).resetFilters();
   }
 
   bool shouldApplyFilters() {
