@@ -90,6 +90,11 @@ List<Map<String, dynamic>> _processBatch(
   List<Map<String, dynamic>> maps = [];
 
   for (var l in batch) {
+    if (l.every(
+        (element) => element == null || element.toString().trim().isEmpty)) {
+      continue; // Skip empty rows
+    }
+
     Map<String, dynamic> map = {};
     for (int i = 0; i < legends.length; i++) {
       final legend = (legends[i] as String).trim();
