@@ -5,6 +5,8 @@ final whatsappAvailabilityProvider = FutureProvider<bool>((ref) async {
   final appCheck = AppCheck();
   try {
     final isAvailable = await appCheck.checkAvailability("com.whatsapp");
+    print("WHATS AVAIL : $isAvailable");
+
     if (isAvailable != null) return true;
     return false;
   } catch (e) {

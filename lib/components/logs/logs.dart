@@ -1,7 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:logger/components/logs/logs_builder.dart';
+import 'package:logger/components/logs/grouped_logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/utils/call_log_grouper.dart';
