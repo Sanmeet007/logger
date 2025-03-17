@@ -365,7 +365,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                                 ? () => generateAndOpenFile()
                                 : null,
                           ),
-                          if (ref.watch(logsSharingProvider))
+                          if (!ref.watch(logsSharingProvider))
                             IconButton(
                               tooltip: AppLocalizations.of(context).shareText,
                               splashRadius: 22.0,
