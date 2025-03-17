@@ -189,5 +189,11 @@
   "addToContactsErrorText": "No se pudo agregar un nuevo contacto",
   "appPermissionsDeniedError": "¡Vaya! Parece que se ha denegado el acceso a los registros de llamadas. Para que Logger funcione correctamente, concede permiso.",
   "appFatalError": "¡Vaya! Algo inesperado sucedió.",
-  "appPreferencesError": "¡Vaya! Error al cargar las preferencias."
+  "appPreferencesError": "¡Vaya! Error al cargar las preferencias.",
+  "uriPermissionError": "No se pudieron obtener permisos",
+  "fileGenerationError": "Ocurrió un error al generar el archivo. Inténtelo de nuevo más tarde",
+  "fileShareMessage": "Comparta el archivo de registros de llamadas a través de Gmail, WhatsApp, etc...",
+  "fileShareSubject": "Registros de llamadas",
+  "fileOpenError": "No se pudo abrir el archivo, inténtelo de nuevo más tarde",
+  "openingFileLabel": "Abriendo archivo"
 }

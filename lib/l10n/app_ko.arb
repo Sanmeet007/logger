@@ -189,5 +189,11 @@
   "addToContactsErrorText": "새 연락처를 추가할 수 없습니다",
   "appPermissionsDeniedError": "앗! 통화 기록에 대한 액세스가 거부된 것 같습니다. Logger가 원활하게 작동하려면 권한을 허용해 주세요.",
   "appFatalError": "앗! 예상치 못한 일이 발생했습니다!",
-  "appPreferencesError": "앗! 환경설정을 로드하는 중 오류가 발생했습니다."
+  "appPreferencesError": "앗! 환경설정을 로드하는 중 오류가 발생했습니다.",
+  "uriPermissionError": "권한을 가져올 수 없음",
+  "fileGenerationError": "파일 생성 중 오류가 발생했습니다. 나중에 다시 시도하세요",
+  "fileShareMessage": "통화 로그 파일을 Gmail, WhatsApp 등을 통해 공유하세요...",
+  "fileShareSubject": "통화 기록",
+  "fileOpenError": "파일을 열 수 없습니다. 나중에 다시 시도하세요",
+  "openingFileLabel": "파일 여는 중"
 }

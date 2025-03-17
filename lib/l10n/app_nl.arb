@@ -189,5 +189,11 @@
   "addToContactsErrorText": "Kan nieuw contact niet toevoegen",
   "appPermissionsDeniedError": "Oeps! Het lijkt erop dat toegang tot oproeplogboeken is geweigerd. Geef toestemming om ervoor te zorgen dat Logger soepel werkt.",
   "appFatalError": "Oeps! Er is iets onverwachts gebeurd!",
-  "appPreferencesError": "Oeps! Fout bij het laden van voorkeuren."
+  "appPreferencesError": "Oeps! Fout bij het laden van voorkeuren.",
+  "uriPermissionError": "Kan geen toestemming verkrijgen",
+  "fileGenerationError": "Er is een fout opgetreden bij het genereren van het bestand. Probeer het later opnieuw",
+  "fileShareMessage": "Deel het oproeplogbestand via Gmail, WhatsApp, etc...",
+  "fileShareSubject": "Oproeplogboeken",
+  "fileOpenError": "Kan bestand niet openen, probeer het later opnieuw",
+  "openingFileLabel": "Bestand openen"
 }

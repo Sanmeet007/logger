@@ -189,5 +189,11 @@
     "addToContactsErrorText": "Impossible d'ajouter un nouveau contact",
     "appPermissionsDeniedError": "Oups ! Il semble que l'accès aux journaux d'appels ait été refusé. Pour que Logger fonctionne correctement, veuillez accorder la permission.",
     "appFatalError": "Oh mince ! Quelque chose d'inattendu s'est produit !",
-    "appPreferencesError": "Oh mince ! Erreur lors du chargement des préférences."
+    "appPreferencesError": "Oh mince ! Erreur lors du chargement des préférences.",
+    "uriPermissionError": "Impossible d'obtenir les permissions",
+    "fileGenerationError": "Une erreur est survenue lors de la génération du fichier. Veuillez réessayer plus tard",
+    "fileShareMessage": "Partager le fichier des journaux d'appels via Gmail, WhatsApp, etc...",
+    "fileShareSubject": "Journaux d'appels",
+    "fileOpenError": "Impossible d'ouvrir le fichier, veuillez réessayer plus tard",
+    "openingFileLabel": "Ouverture du fichier"
 }

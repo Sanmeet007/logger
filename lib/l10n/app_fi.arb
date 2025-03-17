@@ -189,5 +189,11 @@
     "addToContactsErrorText": "Uuden yhteystiedon lisääminen epäonnistui",
     "appPermissionsDeniedError": "Hups! Näyttää siltä, että pääsy puhelulokeihin on evätty. Jotta Logger toimii sujuvasti, anna lupa.",
     "appFatalError": "Voi ei! Jotain odottamatonta tapahtui!",
-    "appPreferencesError": "Voi ei! Asetusten lataamisessa tapahtui virhe."
+    "appPreferencesError": "Voi ei! Asetusten lataamisessa tapahtui virhe.",
+    "uriPermissionError": "Ei voida saada lupia",
+    "fileGenerationError": "Tiedoston luomisen aikana tapahtui virhe. Yritä myöhemmin uudelleen",
+    "fileShareMessage": "Jaa puhelulokien tiedosto Gmailin, WhatsAppin jne. kautta...",
+    "fileShareSubject": "Puhelulokit",
+    "fileOpenError": "Tiedostoa ei voi avata, yritä myöhemmin uudelleen",
+    "openingFileLabel": "Avataan tiedostoa"
 }

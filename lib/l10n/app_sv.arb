@@ -189,5 +189,11 @@
     "addToContactsErrorText": "Kunde inte lägga till ny kontakt",
     "appPermissionsDeniedError": "Oj då! Det verkar som att åtkomst till samtalsloggar har nekats. För att Logger ska fungera smidigt, vänligen ge tillstånd.",
     "appFatalError": "Åh nej! Något oväntat hände!",
-    "appPreferencesError": "Åh nej! Fel vid inläsning av inställningar."
+    "appPreferencesError": "Åh nej! Fel vid inläsning av inställningar.",
+    "uriPermissionError": "Kunde inte få behörigheter",
+    "fileGenerationError": "Ett fel uppstod vid generering av filen. Försök igen senare",
+    "fileShareMessage": "Dela samtalsloggfil via Gmail, WhatsApp, etc...",
+    "fileShareSubject": "Samtalsloggar",
+    "fileOpenError": "Kunde inte öppna filen, försök igen senare",
+    "openingFileLabel": "Öppnar fil"
 }

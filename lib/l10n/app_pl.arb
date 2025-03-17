@@ -189,5 +189,11 @@
   "addToContactsErrorText": "Nie można dodać nowego kontaktu",
   "appPermissionsDeniedError": "Ups! Wygląda na to, że odmówiono dostępu do dzienników połączeń. Aby Logger działał poprawnie, udziel zgody.",
   "appFatalError": "Ups! Wystąpił nieoczekiwany błąd!",
-  "appPreferencesError": "Ups! Błąd podczas ładowania preferencji."
+  "appPreferencesError": "Ups! Błąd podczas ładowania preferencji.",
+  "uriPermissionError": "Nie można uzyskać uprawnień",
+  "fileGenerationError": "Wystąpił błąd podczas generowania pliku. Spróbuj ponownie później",
+  "fileShareMessage": "Udostępnij plik dziennika połączeń przez Gmail, WhatsApp itp...",
+  "fileShareSubject": "Dzienniki połączeń",
+  "fileOpenError": "Nie można otworzyć pliku, spróbuj ponownie później",
+  "openingFileLabel": "Otwieranie pliku"
 }

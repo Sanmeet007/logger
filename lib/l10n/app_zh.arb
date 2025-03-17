@@ -189,5 +189,11 @@
     "addToContactsErrorText": "无法添加新联系人",
     "appPermissionsDeniedError": "哎呀！似乎访问通话记录被拒绝了。为了确保 Logger 正常工作，请授予权限。",
     "appFatalError": "哎呀！发生了意想不到的事情！",
-    "appPreferencesError": "哎呀！加载偏好设置时出错。"
+    "appPreferencesError": "哎呀！加载偏好设置时出错。",
+    "uriPermissionError": "无法获取权限",
+    "fileGenerationError": "生成文件时发生错误，请稍后重试",
+    "fileShareMessage": "通过 Gmail、WhatsApp 等分享通话记录文件...",
+    "fileShareSubject": "通话记录",
+    "fileOpenError": "无法打开文件，请稍后重试",
+    "openingFileLabel": "正在打开文件"
 }

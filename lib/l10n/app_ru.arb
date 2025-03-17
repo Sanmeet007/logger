@@ -189,5 +189,11 @@
   "addToContactsErrorText": "He удалось добавить новый контакт",
   "appPermissionsDeniedError": "Ой! Похоже, доступ к журналам вызовов был запрещен. Чтобы Logger работал бесперебойно, пожалуйста, предоставьте разрешение.",
   "appFatalError": "Ой, нет! Произошло что-то неожиданное!",
-  "appPreferencesError": "Ой, нет! Ошибка загрузки настроек."
+  "appPreferencesError": "Ой, нет! Ошибка загрузки настроек.",
+  "uriPermissionError": "He удалось получить разрешения",
+  "fileGenerationError": "Ошибка при создании файла. Попробуйте позже",
+  "fileShareMessage": "Поделитесь файлом журнала вызовов через Gmail, WhatsApp и др...",
+  "fileShareSubject": "Журнал вызовов",
+  "fileOpenError": "He удалось открыть файл, попробуйте позже",
+  "openingFileLabel": "Открытие файла"
 }

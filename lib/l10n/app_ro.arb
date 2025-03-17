@@ -189,5 +189,11 @@
   "addToContactsErrorText": "Nu s-a putut adăuga un nou contact",
   "appPermissionsDeniedError": "Oh, nu! Se pare că accesul la jurnalele de apeluri a fost refuzat. Pentru a asigura funcționarea corectă a Logger, acordați permisiunea.",
   "appFatalError": "Ah, vai! S-a întâmplat ceva neașteptat!",
-  "appPreferencesError": "Ah, vai! Eroare la încărcarea preferințelor."
+  "appPreferencesError": "Ah, vai! Eroare la încărcarea preferințelor.",
+  "uriPermissionError": "Nu se pot obține permisiuni",
+  "fileGenerationError": "A apărut o eroare la generarea fișierului. Vă rugăm să încercați din nou mai târziu",
+  "fileShareMessage": "Partajați fișierul jurnalului de apeluri prin Gmail, WhatsApp etc...",
+  "fileShareSubject": "Jurnale de apeluri",
+  "fileOpenError": "Nu se poate deschide fișierul, încercați din nou mai târziu",
+  "openingFileLabel": "Se deschide fișierul"
 }
