@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/components/logs/logs.dart';
+import 'package:logger/components/logs/logs_page.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/call_log_count_provider.dart';
