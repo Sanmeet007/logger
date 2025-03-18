@@ -210,13 +210,12 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
         if (mounted) {
           AppSnackBar.show(
             context,
-            content: AppLocalizations.of(context).uriPermissionError,
+            content: AppLocalizations.of(context).ghostErrorMessage,
             showCloseIcon: false,
           );
         }
       }
       setState(() => isTaskRunning = false);
-      print(e);
       return false;
     }
   }
