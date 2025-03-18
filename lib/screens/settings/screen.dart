@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/components/common/lined_text.dart';
+import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/linear_loader_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/call_log_count_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
@@ -13,6 +15,10 @@ import 'package:logger/providers/shared_preferences_providers/total_call_duratio
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/screens/settings/fragments/export_filename_dialog.dart';
 import 'package:logger/screens/settings/fragments/export_format_dialog.dart';
+import 'package:logger/utils/csv_to_map.dart';
+import 'package:logger/utils/native_methods.dart';
+import 'package:logger/utils/snackbar.dart';
+import 'package:shared_storage/shared_storage.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -22,6 +28,119 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  bool isDoneImporting = false;
+
+  void handleCallLogImport() async {
+    var linearProgressLoader = ref.read(linearLoaderProvider.notifier);
+    try {
+      var uris = await openDocument(mimeType: 'text/comma-separated-values');
+      if (uris != null) {
+        var uri = uris.first;
+        var fileContents = await getDocumentContent(uri);
+        if (fileContents == null) return;
+        if (mounted) {
+          linearProgressLoader.showLoading(
+            AppLocalizations.of(context).processingFileText,
+          );
+        }
+
+        var callLogs = await CsvToMapConverter.generateCsvMap(fileContents);
+
+        if (mounted) {
+          linearProgressLoader.showLoading(
+            AppLocalizations.of(context).insertingLogsText,
+          );
+        }
+
+        Future.delayed(const Duration(seconds: 12), () {
+          if (!isDoneImporting && mounted) {
+            linearProgressLoader.showLoading(
+              AppLocalizations.of(context).takingMoreTimeText,
+            );
+          }
+        });
+
+        Future.delayed(const Duration(seconds: 20), () {
+          if (!isDoneImporting && mounted) {
+            linearProgressLoader.showLoading(
+              AppLocalizations.of(context).pleaseWaitText,
+            );
+          }
+        });
+
+        var x = await CallLogWriter.batchInsertCallLogs(callLogs);
+
+        // Refresh call logs in background automatically
+        await ref.read(callLogsNotifierProvider.notifier).hardRefresh();
+
+        if (mounted) {
+          if (x) {
+            AppSnackBar.show(
+              context,
+              content: AppLocalizations.of(context).importSuccessMessageText,
+            );
+          } else {
+            AppSnackBar.show(
+              context,
+              content: AppLocalizations.of(context).baseGhostErrorMessage,
+            );
+          }
+          isDoneImporting = true;
+          linearProgressLoader.hideLoading();
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+
+      isDoneImporting = true;
+      linearProgressLoader.hideLoading();
+      if (mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).baseGhostErrorMessage,
+        );
+      }
+    }
+  }
+
+  void confirmImport() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalizations.of(context).confirmImportLabelText,
+            ),
+            content: SingleChildScrollView(
+              child: Text(
+                AppLocalizations.of(context).confirmImportText,
+              ),
+            ),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  AppLocalizations.of(context).cancelText,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                  handleCallLogImport();
+                },
+                child: Text(
+                  AppLocalizations.of(context).continueText,
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> advancedSettingsListItems = <Widget>[
@@ -67,7 +186,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(
-        onTap: () {},
+        onTap: confirmImport,
         title: Text(AppLocalizations.of(context).importCallLogsText),
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
@@ -228,6 +347,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               const SizedBox(
                 height: 15.0,
               ),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(249, 34, 34, 34)
+                      : const Color.fromARGB(255, 249, 245, 255),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Text(
+                  AppLocalizations.of(context).supportedFormatInformation,
+                  style: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              )
             ],
           ),
         ),
