@@ -25,9 +25,7 @@ class AboutScreen extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 34, 34, 34)
-                      : const Color.fromARGB(255, 249, 245, 255),
+                  color: Theme.of(context).colorScheme.surface,
                   border: Border.all(
                     width: 1,
                     color: Theme.of(context).brightness == Brightness.dark
@@ -97,10 +95,14 @@ class AboutScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 34, 34, 34)
-                      : const Color.fromARGB(255, 249, 245, 255),
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(115, 53, 52, 52)
+                        : const Color.fromARGB(255, 249, 245, 255),
+                  ),
                 ),
                 child: Text(
                   AppLocalizations.of(context).storagePolicyText,
@@ -117,9 +119,13 @@ class AboutScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 34, 34, 34)
-                      : const Color.fromARGB(255, 249, 245, 255),
+                  color: Theme.of(context).colorScheme.surface,
+                  border: Border.all(
+                    width: 1,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color.fromARGB(115, 53, 52, 52)
+                        : const Color.fromARGB(255, 249, 245, 255),
+                  ),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
