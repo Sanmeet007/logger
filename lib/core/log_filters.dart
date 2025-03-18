@@ -239,7 +239,6 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
       child: Container(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          color: Theme.of(context).canvasColor,
           child: Container(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
@@ -250,9 +249,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15.0),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color.fromARGB(249, 34, 34, 34)
-                        : const Color.fromARGB(155, 240, 230, 255),
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
@@ -303,9 +300,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 15.0),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(249, 34, 34, 34)
-                          : const Color.fromARGB(155, 240, 230, 255),
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
@@ -372,9 +367,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                       horizontal: 15.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color.fromARGB(249, 34, 34, 34)
-                          : const Color.fromARGB(155, 240, 230, 255),
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
@@ -456,9 +449,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                 Container(
                   padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color.fromARGB(249, 34, 34, 34)
-                        : const Color.fromARGB(155, 240, 230, 255),
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
@@ -485,9 +476,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                     horizontal: 15.0,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color.fromARGB(249, 34, 34, 34)
-                        : const Color.fromARGB(155, 240, 230, 255),
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
