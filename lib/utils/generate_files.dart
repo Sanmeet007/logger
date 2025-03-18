@@ -3,9 +3,8 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:call_log/call_log.dart';
+import 'package:logger/utils/file_types.dart';
 import 'package:shared_storage/shared_storage.dart';
-
-enum FileType { csv, json }
 
 String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
   // Legends -> Snake case -> Py ?!

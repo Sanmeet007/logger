@@ -12,6 +12,7 @@ import 'package:logger/providers/shared_preferences_providers/phone_account_filt
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
 import 'package:logger/utils/app_information.dart';
+import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';

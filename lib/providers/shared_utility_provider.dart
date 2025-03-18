@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
+import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logger/utils/constants.dart' as constants;

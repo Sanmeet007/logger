@@ -769,5 +769,6 @@
   "openingFileLabel": "Opening file",
   "viewContactLabel": "View Contact",
   "errorOpeningContact": "Error opening contact",
-  "waLaunchError": "Could not launch WhatsApp"
+  "waLaunchError": "Could not launch WhatsApp",
+  "closeText": "Close"
 }
