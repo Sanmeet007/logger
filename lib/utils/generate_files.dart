@@ -125,6 +125,7 @@ class CallLogsFileGenerator {
       file.writeAsStringSync(contents);
       return true;
     } catch (e) {
+      print(e);
       return false;
     }
   }

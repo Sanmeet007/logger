@@ -163,34 +163,49 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   Future<bool> downloadFile({bool showStatus = false}) async {
-    setState(() => isTaskRunning = true);
+    try {
+      setState(() => isTaskRunning = true);
 
-    final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
+      final Uri? grantedUri =
+          await openDocumentTree(grantWritePermission: true);
 
-    if (grantedUri != null) {
-      FileType currentImportType = ref.read(exportTypeProvider);
+      if (grantedUri != null) {
+        FileType currentExportType = ref.read(exportTypeProvider);
 
-      String currentExportedFilenameFormatType =
-          ref.read(exportFileNameFormatProvider);
+        String currentExportedFilenameFormatType =
+            ref.read(exportFileNameFormatProvider);
 
-      String filename = ExportedFilenameFormatHelper.createFileFormat(
-          currentExportedFilenameFormatType);
+        String filename = ExportedFilenameFormatHelper.createFileFormat(
+            currentExportedFilenameFormatType);
 
-      String filenameWithExtension = "$filename.${currentImportType.name}";
+        String filenameWithExtension = "$filename.${currentExportType.name}";
+        final fileUri =
+            await generateLogsFile(grantedUri, filenameWithExtension);
 
-      final fileUri = await generateLogsFile(grantedUri, filenameWithExtension);
-
-      if (fileUri != null) {
-        currentFilePath = fileUri;
-        if (showStatus) downloadStatusSnackbar(status: "success");
-        if (showStatus) setState(() => isTaskRunning = false);
-        return true;
+        if (fileUri != null) {
+          currentFilePath = fileUri;
+          if (showStatus) downloadStatusSnackbar(status: "success");
+          if (showStatus) setState(() => isTaskRunning = false);
+          return true;
+        } else {
+          if (showStatus) downloadStatusSnackbar(status: "error");
+          if (showStatus) setState(() => isTaskRunning = false);
+          return false;
+        }
       } else {
-        if (showStatus) downloadStatusSnackbar(status: "error");
-        if (showStatus) setState(() => isTaskRunning = false);
+        if (showStatus) {
+          if (mounted) {
+            AppSnackBar.show(
+              context,
+              content: AppLocalizations.of(context).uriPermissionError,
+              showCloseIcon: false,
+            );
+          }
+        }
+        setState(() => isTaskRunning = false);
         return false;
       }
-    } else {
+    } catch (e) {
       if (showStatus) {
         if (mounted) {
           AppSnackBar.show(
@@ -201,12 +216,13 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
         }
       }
       setState(() => isTaskRunning = false);
+      print(e);
       return false;
     }
   }
 
   void shareFile() async {
-    FileType currentImportType = ref.read(exportTypeProvider);
+    FileType currentExportType = ref.read(exportTypeProvider);
 
     setState(() {
       isTaskRunning = true;
@@ -216,7 +232,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
     File file = File(
-      "${tempDir.path}/logger_${suffix}_$fileName.${currentImportType.name}",
+      "${tempDir.path}/logger_${suffix}_$fileName.${currentExportType.name}",
     );
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
@@ -242,7 +258,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void generateAndOpenFile() async {
-    FileType currentImportType = ref.read(exportTypeProvider);
+    FileType currentExportType = ref.read(exportTypeProvider);
 
     setState(() {
       isTaskRunning = true;
@@ -252,7 +268,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     DateTime now = DateTime.now();
     String suffix = DateFormat('yyyyMMdd').format(now);
     File file = File(
-      "${tempDir.path}/logger_${suffix}_$fileName.${currentImportType.name}",
+      "${tempDir.path}/logger_${suffix}_$fileName.${currentExportType.name}",
     );
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
@@ -294,7 +310,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void openDetailedView() {
-    final currentImportType = ref.read(exportTypeProvider);
+    final currentExportType = ref.read(exportTypeProvider);
 
     showModalBottomSheet(
         isDismissible: true,
@@ -307,7 +323,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
             expand: false,
             builder: (context, controller) => SingleChildScrollView(
               controller: controller,
-              child: currentImportType == FileType.csv
+              child: currentExportType == FileType.csv
                   ? const CsvFieldsInformation()
                   : const JsonFieldsInformation(),
             ),
