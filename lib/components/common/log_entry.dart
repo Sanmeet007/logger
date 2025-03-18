@@ -150,9 +150,7 @@ class LogEntry extends ConsumerWidget {
       child: ListTile(
           onLongPress: () =>
               isUnknown ? addToContact(context) : openContact(context),
-          tileColor: Theme.of(context).brightness == Brightness.dark
-              ? const Color.fromARGB(249, 34, 34, 34)
-              : const Color.fromARGB(255, 249, 245, 255),
+          tileColor: Theme.of(context).colorScheme.surface,
           onTap: () {
             showModalBottomSheet(
                 showDragHandle: true,

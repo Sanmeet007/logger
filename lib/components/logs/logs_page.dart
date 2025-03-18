@@ -129,14 +129,11 @@ class _LogsPageState extends State<LogsPage> {
                     ),
                   ),
                   Container(
-                    clipBehavior: Clip.antiAlias,
+                    clipBehavior: Clip.hardEdge,
                     margin: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.black45
-                          : const Color.fromARGB(255, 249, 245, 255),
                     ),
                     child: Material(
                       child: GroupedLogsBuilder(
