@@ -20,14 +20,6 @@ class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
     state = entries;
   }
 
-  List<String> getAvailablePhoneAccountIds() {
-    final uniquePhoneAccountIds = <String>{"Any"};
-    for (var entry in state) {
-      uniquePhoneAccountIds.add(entry.phoneAccountId ?? "Unknown");
-    }
-    return uniquePhoneAccountIds.toList();
-  }
-
   void reset() {
     final asyncCallLogs = ref.read(callLogsNotifierProvider);
     if (asyncCallLogs.hasValue) {

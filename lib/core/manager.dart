@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
@@ -299,7 +300,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
       builder: (context) => LogFilters(
         parentRef: ref,
         availablePhoneAccountIds: ref
-            .read(currentCallLogsNotifierProvider.notifier)
+            .read(callLogsNotifierProvider.notifier)
             .getAvailablePhoneAccountIds(),
         currentFilters: ref.read(logsFilterProvider).filters,
         canFilterUsingDuration: ref.read(durationFilteringProvider),

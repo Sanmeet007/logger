@@ -12,6 +12,18 @@ class CallLogsNotifier extends AsyncNotifier<Iterable<CallLogEntry>> {
       return await CallLog.get();
     });
   }
+
+  List<String> getAvailablePhoneAccountIds() {
+    if (state.value != null) {
+      final uniquePhoneAccountIds = <String>{"Any"};
+      for (var entry in state.value!) {
+        uniquePhoneAccountIds.add(entry.phoneAccountId ?? "Unknown");
+      }
+      return uniquePhoneAccountIds.toList();
+    } else {
+      return List.empty();
+    }
+  }
 }
 
 final callLogsNotifierProvider =
