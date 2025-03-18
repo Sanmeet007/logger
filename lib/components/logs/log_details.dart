@@ -67,7 +67,6 @@ class LogDetails extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
           padding: const EdgeInsets.all(12),
-          color: Theme.of(context).canvasColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -106,9 +105,7 @@ class LogDetails extends StatelessWidget {
                     vertical: 10.0, horizontal: 10.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black45
-                      : const Color.fromARGB(255, 249, 245, 255),
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 child: Column(
                   children: [

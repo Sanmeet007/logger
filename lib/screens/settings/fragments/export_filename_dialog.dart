@@ -69,7 +69,6 @@ class _ExportFilenameDialogState extends ConsumerState<ExportFilenameDialog> {
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      color: Theme.of(context).canvasColor,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

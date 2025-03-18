@@ -17,10 +17,14 @@ class _DateTimeTableState extends State<DateTimeTable> {
         Container(
           padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? const Color.fromARGB(249, 34, 34, 34)
-                : const Color.fromARGB(155, 240, 230, 255),
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(
+              width: 1,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(115, 53, 52, 52)
+                  : const Color.fromARGB(255, 249, 245, 255),
+            ),
           ),
           child: Text(
             AppLocalizations.of(context).tokensInfoText,
@@ -63,9 +67,7 @@ class _DateTimeTableState extends State<DateTimeTable> {
             margin: const EdgeInsets.only(bottom: 10.0),
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(249, 34, 34, 34)
-                  : const Color.fromARGB(255, 249, 245, 255),
+              color: Theme.of(context).colorScheme.surface,
               border: Border.all(
                 width: 1,
                 color: Theme.of(context).brightness == Brightness.dark
