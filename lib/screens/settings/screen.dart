@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
-import 'package:logger/components/common/lined_text.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/linear_loader_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/call_log_count_provider.dart';
@@ -208,110 +207,79 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 height: 15.0,
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 34, 34, 34)
-                      : const Color.fromARGB(255, 249, 245, 255),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
-                              .disableLogsSharingText,
+                child: Material(
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      SwitchListTile(
+                        value: ref.watch(logsSharingProvider),
+                        onChanged: (_) =>
+                            ref.read(logsSharingProvider.notifier).toggle(),
+                        title: Text(
+                          AppLocalizations.of(context).disableLogsSharingText,
                         ),
-                        Switch(
-                          value: ref.watch(logsSharingProvider),
-                          onChanged: (_) =>
-                              ref.read(logsSharingProvider.notifier).toggle(),
-                        ),
-                      ],
-                    ),
-                    const LogDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
+                      ),
+                      const LogDivider(),
+                      SwitchListTile(
+                        title: Text(
+                          AppLocalizations.of(context)
                               .enableDownloadConfirmationText,
                         ),
-                        Switch(
-                          value: ref.watch(downloadConfirmationProvider),
-                          onChanged: (bool newState) => ref
-                              .read(downloadConfirmationProvider.notifier)
-                              .toggle(),
-                        ),
-                      ],
-                    ),
-                    const LogDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
+                        value: ref.watch(downloadConfirmationProvider),
+                        onChanged: (bool newState) => ref
+                            .read(downloadConfirmationProvider.notifier)
+                            .toggle(),
+                      ),
+                      const LogDivider(),
+                      SwitchListTile(
+                        title: Text(
+                          AppLocalizations.of(context)
                               .enableCallLogCountVisibilityText,
                         ),
-                        Switch(
-                          value: ref.watch(callLogCountProvider),
-                          onChanged: (_) =>
-                              ref.read(callLogCountProvider.notifier).toggle(),
-                        ),
-                      ],
-                    ),
-                    const LogDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
+                        value: ref.watch(callLogCountProvider),
+                        onChanged: (_) =>
+                            ref.read(callLogCountProvider.notifier).toggle(),
+                      ),
+                      const LogDivider(),
+                      SwitchListTile(
+                        title: Text(
+                          AppLocalizations.of(context)
                               .enableCallDurationFilteringText,
                         ),
-                        Switch(
-                          value: ref.watch(durationFilteringProvider),
-                          onChanged: (_) => ref
-                              .read(durationFilteringProvider.notifier)
-                              .toggle(),
-                        ),
-                      ],
-                    ),
-                    const LogDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
+                        value: ref.watch(durationFilteringProvider),
+                        onChanged: (_) => ref
+                            .read(durationFilteringProvider.notifier)
+                            .toggle(),
+                      ),
+                      const LogDivider(),
+                      SwitchListTile(
+                        title: Text(
+                          AppLocalizations.of(context)
                               .enableFilterByAccountIdText,
                         ),
-                        Switch(
-                          value: ref.watch(phoneAccountFilteringProvider),
-                          onChanged: (_) => ref
-                              .read(phoneAccountFilteringProvider.notifier)
-                              .toggle(),
-                        ),
-                      ],
-                    ),
-                    const LogDivider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        LinedText(
-                          text: AppLocalizations.of(context)
+                        value: ref.watch(phoneAccountFilteringProvider),
+                        onChanged: (_) => ref
+                            .read(phoneAccountFilteringProvider.notifier)
+                            .toggle(),
+                      ),
+                      const LogDivider(),
+                      SwitchListTile(
+                        title: Text(
+                          AppLocalizations.of(context)
                               .showTotalCallDurationText,
                         ),
-                        Switch(
-                          value: ref.watch(totalCallDurationProvider),
-                          onChanged: (_) => ref
-                              .read(totalCallDurationProvider.notifier)
-                              .toggle(),
-                        ),
-                      ],
-                    ),
-                  ],
+                        value: ref.watch(totalCallDurationProvider),
+                        onChanged: (_) => ref
+                            .read(totalCallDurationProvider.notifier)
+                            .toggle(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -350,9 +318,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? const Color.fromARGB(249, 34, 34, 34)
-                      : const Color.fromARGB(255, 249, 245, 255),
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Text(
