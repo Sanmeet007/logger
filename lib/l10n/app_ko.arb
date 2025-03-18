@@ -198,5 +198,6 @@
   "openingFileLabel": "파일 여는 중",
   "viewContactLabel": "연락처 보기",
   "errorOpeningContact": "연락처를 여는 중 오류 발생",
-  "waLaunchError": "WhatsApp을 실행할 수 없습니다"
+  "waLaunchError": "WhatsApp을 실행할 수 없습니다",
+  "closeText": "닫기"
 }

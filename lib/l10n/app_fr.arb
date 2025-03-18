@@ -198,5 +198,6 @@
     "openingFileLabel": "Ouverture du fichier",
     "viewContactLabel": "Voir le contact",
     "errorOpeningContact": "Erreur lors de l'ouverture du contact",
-    "waLaunchError": "Impossible de lancer WhatsApp"
+    "waLaunchError": "Impossible de lancer WhatsApp",
+    "closeText": "Fermer"
 }

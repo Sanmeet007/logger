@@ -198,5 +198,6 @@
     "openingFileLabel": "Avataan tiedostoa",
     "viewContactLabel": "Näytä yhteystieto",
     "errorOpeningContact": "Virhe avattaessa yhteystietoa",
-    "waLaunchError": "WhatsAppia ei voitu käynnistää"
+    "waLaunchError": "WhatsAppia ei voitu käynnistää",
+    "closeText": "Sulje"
 }

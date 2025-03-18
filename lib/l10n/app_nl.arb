@@ -198,5 +198,6 @@
   "openingFileLabel": "Bestand openen",
   "viewContactLabel": "Contact bekijken",
   "errorOpeningContact": "Fout bij openen van contact",
-  "waLaunchError": "Kan WhatsApp niet starten"
+  "waLaunchError": "Kan WhatsApp niet starten",
+  "closeText": "Sluiten"
 }

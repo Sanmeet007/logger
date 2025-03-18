@@ -198,5 +198,6 @@
     "openingFileLabel": "Datei wird geöffnet",
     "viewContactLabel": "Kontakt anzeigen",
     "errorOpeningContact": "Fehler beim Öffnen des Kontakts",
-    "waLaunchError": "WhatsApp konnte nicht gestartet werden"
+    "waLaunchError": "WhatsApp konnte nicht gestartet werden",
+    "closeText": "Schließen"
 }

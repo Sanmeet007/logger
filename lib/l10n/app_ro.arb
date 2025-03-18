@@ -198,5 +198,6 @@
   "openingFileLabel": "Se deschide fișierul",
   "viewContactLabel": "Vezi contact",
   "errorOpeningContact": "Eroare la deschiderea contactului",
-  "waLaunchError": "Nu s-a putut lansa WhatsApp"
+  "waLaunchError": "Nu s-a putut lansa WhatsApp",
+  "closeText": "Închide"
 }

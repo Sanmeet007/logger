@@ -198,5 +198,6 @@
     "openingFileLabel": "Öppnar fil",
     "viewContactLabel": "Visa kontakt",
     "errorOpeningContact": "Fel vid öppning av kontakt",
-    "waLaunchError": "Kunde inte starta WhatsApp"
+    "waLaunchError": "Kunde inte starta WhatsApp",
+    "closeText": "Stäng"
 }

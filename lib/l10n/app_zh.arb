@@ -198,5 +198,6 @@
     "openingFileLabel": "正在打开文件",
     "viewContactLabel": "查看联系人",
     "errorOpeningContact": "打开联系人时出错",
-    "waLaunchError": "无法启动 WhatsApp"
+    "waLaunchError": "无法启动 WhatsApp",
+    "closeText": "关闭"
 }

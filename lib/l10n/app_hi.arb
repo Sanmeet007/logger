@@ -207,5 +207,6 @@
   "openingFileLabel": "फ़ाइल खोल रहे हैं",
   "viewContactLabel": "संपर्क देखें",
   "errorOpeningContact": "संपर्क खोलने में त्रुटि",
-  "waLaunchError": "WhatsApp लॉन्च नहीं कर सका"
+  "waLaunchError": "WhatsApp लॉन्च नहीं कर सका",
+  "closeText": "बंद करें"
 }
