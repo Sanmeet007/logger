@@ -39,7 +39,6 @@ class _ExportFormatDialogState extends ConsumerState<ExportFormatDialog> {
     return Container(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      color: Theme.of(context).canvasColor,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -47,9 +46,7 @@ class _ExportFormatDialogState extends ConsumerState<ExportFormatDialog> {
             Container(
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? const Color.fromARGB(249, 34, 34, 34)
-                    : const Color.fromARGB(255, 249, 245, 255),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Material(
