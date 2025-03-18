@@ -85,18 +85,18 @@ class SharedUtility {
     sharedPreferences.setBool(constants.sharedLogsSharingKey, newState);
   }
 
-  ImportFileType getCurrentSelectedImportType() {
-    String s = sharedPreferences.getString(constants.sharedImportTypeKey) ??
+  FileType getCurrentSelectedExportType() {
+    String s = sharedPreferences.getString(constants.sharedExportTypeKey) ??
         CallLogsFileGenerator.defaultImportType.name;
 
-    return ImportFileType.values.firstWhere(
+    return FileType.values.firstWhere(
       (e) => e.name == s,
-      orElse: () => ImportFileType.csv,
+      orElse: () => FileType.csv,
     );
   }
 
-  void setImportType(ImportFileType t) {
-    sharedPreferences.setString(constants.sharedImportTypeKey, t.name);
+  void setExportType(FileType t) {
+    sharedPreferences.setString(constants.sharedExportTypeKey, t.name);
   }
 
   String getExportFileNameFormat() {

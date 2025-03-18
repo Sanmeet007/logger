@@ -6,7 +6,7 @@ import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
-import 'package:logger/providers/shared_preferences_providers/import_type_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/export_type_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
@@ -78,7 +78,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     return CallLogsFileGenerator.generateLogsFile(
       parentUri: parentUri,
       filename: filename,
-      fileType: ref.read(importTypeProvider),
+      fileType: ref.read(exportTypeProvider),
       callLogs: ref.read(currentCallLogsNotifierProvider),
     );
   }
@@ -86,7 +86,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   Future<bool> addLogsToFile(File file) async {
     return CallLogsFileGenerator.addLogsToFile(
       file: file,
-      fileType: ref.read(importTypeProvider),
+      fileType: ref.read(exportTypeProvider),
       callLogs: ref.read(currentCallLogsNotifierProvider),
     );
   }
@@ -134,7 +134,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                 children: [
                   Text(
                     AppLocalizations.of(context).downloadConfirmationText(
-                      ref.read(importTypeProvider).name,
+                      ref.read(exportTypeProvider).name,
                     ),
                   )
                 ],
@@ -167,7 +167,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     final Uri? grantedUri = await openDocumentTree(grantWritePermission: true);
 
     if (grantedUri != null) {
-      ImportFileType currentImportType = ref.read(importTypeProvider);
+      FileType currentImportType = ref.read(exportTypeProvider);
 
       String currentExportedFilenameFormatType =
           ref.read(exportFileNameFormatProvider);
@@ -205,7 +205,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void shareFile() async {
-    ImportFileType currentImportType = ref.read(importTypeProvider);
+    FileType currentImportType = ref.read(exportTypeProvider);
 
     setState(() {
       isTaskRunning = true;
@@ -241,7 +241,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void generateAndOpenFile() async {
-    ImportFileType currentImportType = ref.read(importTypeProvider);
+    FileType currentImportType = ref.read(exportTypeProvider);
 
     setState(() {
       isTaskRunning = true;
@@ -293,7 +293,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void openDetailedView() {
-    final currentImportType = ref.read(importTypeProvider);
+    final currentImportType = ref.read(exportTypeProvider);
 
     showModalBottomSheet(
         isDismissible: true,
@@ -306,7 +306,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
             expand: false,
             builder: (context, controller) => SingleChildScrollView(
               controller: controller,
-              child: currentImportType == ImportFileType.csv
+              child: currentImportType == FileType.csv
                   ? const CsvFieldsInformation()
                   : const JsonFieldsInformation(),
             ),

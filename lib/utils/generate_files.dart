@@ -5,7 +5,7 @@ import 'dart:isolate';
 import 'package:call_log/call_log.dart';
 import 'package:shared_storage/shared_storage.dart';
 
-enum ImportFileType { csv, json }
+enum FileType { csv, json }
 
 String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
   // Legends -> Snake case -> Py ?!
@@ -58,13 +58,13 @@ String _toJsonString(final Iterable<CallLogEntry>? callLogs) {
 }
 
 class CallLogsFileGenerator {
-  static const ImportFileType defaultImportType = ImportFileType.csv;
+  static const FileType defaultImportType = FileType.csv;
 
-  static String getMimeTypeFromImportType(ImportFileType t) {
+  static String getMimeTypeFromImportType(FileType t) {
     switch (t) {
-      case ImportFileType.csv:
+      case FileType.csv:
         return "text/comma-separated-values";
-      case ImportFileType.json:
+      case FileType.json:
         return "application/json";
       default:
         throw ArgumentError("Unknown ImportFileType: $t");
@@ -84,15 +84,15 @@ class CallLogsFileGenerator {
   static Future<Uri?> generateLogsFile({
     required Uri parentUri,
     required String filename,
-    required ImportFileType fileType,
+    required FileType fileType,
     Iterable<CallLogEntry>? callLogs,
   }) async {
     String contents = "";
     try {
       if (callLogs == null) return null;
-      if (fileType == ImportFileType.csv) {
+      if (fileType == FileType.csv) {
         contents = await toCsvString(callLogs);
-      } else if (fileType == ImportFileType.json) {
+      } else if (fileType == FileType.json) {
         contents = await toJsonString(callLogs);
       }
       DocumentFile? file = await createFileAsBytes(
@@ -112,15 +112,15 @@ class CallLogsFileGenerator {
 
   static Future<bool> addLogsToFile({
     required File file,
-    required ImportFileType fileType,
+    required FileType fileType,
     Iterable<CallLogEntry>? callLogs,
   }) async {
     String contents = "";
     try {
       if (callLogs == null) return false;
-      if (fileType == ImportFileType.csv) {
+      if (fileType == FileType.csv) {
         contents = await toCsvString(callLogs);
-      } else if (fileType == ImportFileType.json) {
+      } else if (fileType == FileType.json) {
         contents = await toJsonString(callLogs);
       }
       file.writeAsStringSync(contents);
