@@ -17,7 +17,7 @@ class HomeScreen extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.read(callLogsNotifierProvider.notifier).hardRefresh();
+        await ref.read(callLogsNotifierProvider.notifier).hardRefresh();
       },
       child: LogsPage(
         entries: entries,
