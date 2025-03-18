@@ -217,6 +217,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       SwitchListTile(
+                        enableFeedback: true,
                         value: ref.watch(logsSharingProvider),
                         onChanged: (_) =>
                             ref.read(logsSharingProvider.notifier).toggle(),
@@ -226,6 +227,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        enableFeedback: true,
                         title: Text(
                           AppLocalizations.of(context)
                               .enableDownloadConfirmationText,
@@ -237,6 +239,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        enableFeedback: true,
                         title: Text(
                           AppLocalizations.of(context)
                               .enableCallLogCountVisibilityText,
@@ -247,6 +250,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        enableFeedback: true,
                         title: Text(
                           AppLocalizations.of(context)
                               .enableCallDurationFilteringText,
@@ -258,6 +262,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        enableFeedback: true,
                         title: Text(
                           AppLocalizations.of(context)
                               .enableFilterByAccountIdText,
@@ -269,6 +274,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        enableFeedback: true,
                         title: Text(
                           AppLocalizations.of(context)
                               .showTotalCallDurationText,
