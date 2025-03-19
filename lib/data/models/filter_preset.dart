@@ -1,4 +1,5 @@
 import 'package:call_log/call_log.dart';
+import 'package:logger/utils/filter_date_ranges.dart';
 
 class FilterPreset {
   final int? id;
@@ -11,7 +12,7 @@ class FilterPreset {
   final Duration? callMinDuration;
   final Duration? callMaxDuration;
   final List<CallType>? selectedCallTypes;
-  final String? dateRangeType;
+  final DateRange? dateRangeType;
   final DateTime? startDate;
   final DateTime? endDate;
 
