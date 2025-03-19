@@ -4,6 +4,7 @@ import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/constants.dart' as constants;
 
 final defaultFilters = {
   "specific_ph": false,
@@ -15,7 +16,7 @@ final defaultFilters = {
   "min_duration": "0",
   "max_duration": null,
   "duration_filtering": false,
-  "phone_acc_id": "Any",
+  "phone_acc_id": constants.defaultPhoneAccountId,
 };
 
 class LogsFilterState {
