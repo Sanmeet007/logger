@@ -7,6 +7,7 @@ import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/common/toggle_button.dart';
 import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -38,7 +39,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
   late bool isNumberSearchEnabled;
   late bool isDurationFilteringOn;
-  late String dateRangeOption;
+  late DateRange dateRangeOption;
   late List<CallType> selectedCallTypes;
   late String selectedPhoneAccountId;
   late TextEditingController _phoneNumberInputController,
@@ -89,9 +90,9 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     checkFiltersState();
   }
 
-  void handleDateRangeOptionChange(String? v) {
+  void handleDateRangeOptionChange(DateRange? v) {
     setState(() {
-      dateRangeOption = v ?? "All Time";
+      dateRangeOption = v ?? DateRange.allTime;
     });
     checkFiltersState();
   }
@@ -500,7 +501,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                               ),
                               borderRadius: BorderRadius.circular(100.0),
                             ),
-                            child: DropdownButton<String>(
+                            child: DropdownButton<DateRange>(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20.0,
                                   vertical: 10.0,
@@ -510,48 +511,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                                 enableFeedback: true,
                                 value: dateRangeOption,
                                 items: [
-                                  ...[
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .todayText,
-                                      "key": "Today"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .yesterdayText,
-                                      "key": "Yesterday"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .thisMonthText,
-                                      "key": "This Month"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .pastMonthText,
-                                      "key": "Past Month"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .thisYearText,
-                                      "key": "This Year"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .pastYearText,
-                                      "key": "Past Year"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .allTimeText,
-                                      "key": "All Time"
-                                    },
-                                    {
-                                      "value": AppLocalizations.of(context)
-                                          .customText,
-                                      "key": "Custom"
-                                    }
-                                  ].map(
+                                  ...DateRangeHelper.getRanges(context).map(
                                     (item) => DropdownMenuItem(
                                       value: item["key"],
                                       child: Text(
@@ -564,7 +524,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                           ),
                         ],
                       ),
-                      if (dateRangeOption == "Custom")
+                      if (dateRangeOption == DateRange.custom)
                         Column(
                           children: [
                             const SizedBox(

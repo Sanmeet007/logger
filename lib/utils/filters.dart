@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/utils/filter_date_ranges.dart';
 
 class Filters {
   static Iterable<CallLogEntry> _getFilteredLogs(Map params) {
@@ -17,7 +18,7 @@ class Filters {
     var callTypes = filters["selected_call_types"] as List<CallType>;
     var phoneToMatch = filters["phone_to_match"] as String;
     var shouldUseSpecificPhoneNumber = filters["specific_ph"] as bool;
-    var dateRangeOption = filters["date_range_op"] as String;
+    var dateRangeOption = filters["date_range_op"] as DateRange;
     var startDate = filters["start_date"] as DateTime;
     var endDate = filters["end_date"] as DateTime;
     var minDuration = filters["min_duration"] as String?;
@@ -36,7 +37,7 @@ class Filters {
         firstDayOfCurrentMonth.year, firstDayOfCurrentMonth.month - 1, 1);
 
     switch (dateRangeOption) {
-      case "Today":
+      case DateRange.today:
         logs = logs?.where((e) {
           return (shouldUseSpecificPhoneNumber
                   ? e.number?.contains(phoneToMatch) ?? false
@@ -46,7 +47,7 @@ class Filters {
                   today, DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
         });
         break;
-      case "Yesterday":
+      case DateRange.yesterday:
         logs = logs?.where((e) {
           return (shouldUseSpecificPhoneNumber
                   ? e.number?.contains(phoneToMatch) ?? false
@@ -56,7 +57,7 @@ class Filters {
                   DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
         });
         break;
-      case "This Month":
+      case DateRange.thisMonth:
         logs = logs?.where((e) {
           return (shouldUseSpecificPhoneNumber
                   ? e.number?.contains(phoneToMatch) ?? false
@@ -66,7 +67,7 @@ class Filters {
                   now, DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1));
         });
         break;
-      case "Past Month":
+      case DateRange.pastMonth:
         logs = logs?.where((e) {
           DateTime entryDate =
               DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
@@ -79,7 +80,7 @@ class Filters {
               entryDate.isBefore(firstDayOfCurrentMonth);
         });
         break;
-      case "This Year":
+      case DateRange.thisYear:
         logs = logs?.where((e) {
           DateTime entryDate =
               DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
@@ -91,7 +92,7 @@ class Filters {
               entryDate.isBefore(firstDayOfNextYear);
         });
         break;
-      case "Past Year":
+      case DateRange.pastYear:
         logs = logs?.where((e) {
           DateTime entryDate =
               DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
@@ -103,7 +104,7 @@ class Filters {
               entryDate.isBefore(firstDayOfCurrentYear);
         });
         break;
-      case "Custom":
+      case DateRange.custom:
         logs = logs?.where((e) {
           DateTime entryDate =
               DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
@@ -119,7 +120,7 @@ class Filters {
         });
         break;
 
-      case "All Time":
+      case DateRange.allTime:
         logs = logs?.where((e) =>
             (shouldUseSpecificPhoneNumber
                 ? e.number?.contains(phoneToMatch) ?? false
