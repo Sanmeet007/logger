@@ -248,31 +248,29 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 15.0),
+                  clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Column(
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedText(
+                      Material(
+                        child: SwitchListTile(
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 5.0),
+                          title: SizedText(
                             AppLocalizations.of(context).searchByNumberText,
                             size: 18.0,
                           ),
-                          Switch(
-                            value: isNumberSearchEnabled,
-                            onChanged: toggleNumberSearch,
-                          ),
-                        ],
+                          value: isNumberSearchEnabled,
+                          onChanged: toggleNumberSearch,
+                        ),
                       ),
                       if (isNumberSearchEnabled)
                         Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 15.0, right: 15.0, left: 15.0),
                           child: TextField(
                             onChanged: handlePhoneNumberValueChange,
                             controller: _phoneNumberInputController,
@@ -364,32 +362,32 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                   const SizedBox(height: 10.0),
                 if (widget.canFilterUsingDuration)
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 15.0,
-                    ),
+                    clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedText(
+                        Material(
+                          child: SwitchListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 5.0),
+                            title: SizedText(
                               AppLocalizations.of(context).filterByDurationText,
                               size: 18.0,
                             ),
-                            Switch(
-                              value: isDurationFilteringOn,
-                              onChanged: setFilterByDurationState,
-                            ),
-                          ],
+                            value: isDurationFilteringOn,
+                            onChanged: setFilterByDurationState,
+                          ),
                         ),
                         if (isDurationFilteringOn)
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            padding: const EdgeInsets.only(
+                                top: 10.0,
+                                bottom: 15.0,
+                                right: 15.0,
+                                left: 15.0),
                             child: Row(
                               children: [
                                 Flexible(
