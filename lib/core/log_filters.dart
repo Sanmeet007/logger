@@ -10,6 +10,7 @@ import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/utils/constants.dart' as constants;
 
 class LogFilters extends ConsumerStatefulWidget {
   final WidgetRef parentRef;
@@ -343,7 +344,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                                     (item) => DropdownMenuItem(
                                       value: item,
                                       child: Text(
-                                        item == "Any"
+                                        item == constants.defaultPhoneAccountId
                                             ? AppLocalizations.of(context)
                                                 .anyText
                                             : item,
