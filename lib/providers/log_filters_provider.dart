@@ -2,13 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:call_log/call_log.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
+import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 
 final defaultFilters = {
   "specific_ph": false,
   "phone_to_match": "",
   "selected_call_types": [...CallType.values], // Creating new mutable List
-  "date_range_op": "All Time",
+  "date_range_op": DateRange.allTime,
   "start_date": DateTime.now(),
   "end_date": DateTime.now(),
   "min_duration": "0",
@@ -55,7 +56,14 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
         state = state.copyWith(areFiltersApplied: false);
       } else {
         var filteredLogs = await Filters.filterLogs(allLogs, newFilters);
-        state = state.copyWith(areFiltersApplied: true, filters: newFilters);
+
+        if (Filters.compareFilterMasks(newFilters, defaultFilters)) {
+          state =
+              state.copyWith(areFiltersApplied: false, filters: defaultFilters);
+        } else {
+          state = state.copyWith(areFiltersApplied: true, filters: newFilters);
+        }
+
         ref.read(currentCallLogsNotifierProvider.notifier).update(filteredLogs);
       }
     } catch (_) {
