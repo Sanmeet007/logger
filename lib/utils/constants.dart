@@ -7,3 +7,5 @@ const String sharedDisplayCallLogCountKey = "call_log_count";
 const String sharedExportTypeKey = "export_type";
 const String sharedExportFileNameFormatKey = "exported_filename_format";
 const String sharedDisplayTotalCallDurationKey = "show_total_call_duration";
+
+const String defaultPhoneAccountId = "Any";

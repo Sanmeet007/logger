@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
+import 'package:logger/utils/constants.dart' as constants;
 
 class Filters {
   static Iterable<CallLogEntry> _getFilteredLogs(Map params) {
@@ -151,7 +152,7 @@ class Filters {
       }
     }
 
-    if (phoneAccountId != "Any") {
+    if (phoneAccountId != constants.defaultPhoneAccountId) {
       logs = (logs as Iterable<CallLogEntry>?)
           ?.where((e) => ((e.phoneAccountId ?? "Unknown") == phoneAccountId));
     }
