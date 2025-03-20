@@ -4,8 +4,6 @@ import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/utils/filters.dart';
 
-final defaultFilter = Filter();
-
 class LogsFilterState {
   final Filter filter;
   final bool areFiltersApplied;
@@ -27,7 +25,7 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
   LogsFilterNotifier(this.ref)
       : super(
           LogsFilterState(
-            filter: defaultFilter,
+            filter: Filter.defaultFilterConfig,
             areFiltersApplied: false,
           ),
         );
@@ -44,9 +42,10 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
       } else {
         var filteredLogs = await FilterUtils.filterLogs(allLogs, newFilter);
 
-        if (FilterUtils.compareFilterMasks(newFilter, defaultFilter)) {
-          state =
-              state.copyWith(areFiltersApplied: false, filter: defaultFilter);
+        if (FilterUtils.compareFilterMasks(
+            newFilter, Filter.defaultFilterConfig)) {
+          state = state.copyWith(
+              areFiltersApplied: false, filter: Filter.defaultFilterConfig);
         } else {
           state = state.copyWith(areFiltersApplied: true, filter: newFilter);
         }
@@ -61,7 +60,7 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
 
   void resetFilters() {
     state = state.copyWith(
-      filter: defaultFilter,
+      filter: Filter.defaultFilterConfig,
       areFiltersApplied: false,
     );
 
