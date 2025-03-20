@@ -69,15 +69,45 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
     await ref.read(filterPresetsProvider.notifier).purge();
   }
 
+  void Function()? getDeleteAllPresetsAction(bool canUsePresets,
+      AsyncValue<List<FilterPreset>> filterPresetsProviderInstance) {
+    return filterPresetsProviderInstance.isLoading ||
+            filterPresetsProviderInstance.isRefreshing ||
+            filterPresetsProviderInstance.isReloading
+        ? null
+        : canUsePresets
+            ? (ref.watch(filterPresetsProvider).value?.length ?? 0) != 0
+                ? deleteAllPresets
+                : null
+            : null;
+  }
+
+  void Function()? getAddPresetAction(bool canUsePresets,
+      AsyncValue<List<FilterPreset>> filterPresetsProviderInstance) {
+    return filterPresetsProviderInstance.isLoading ||
+            filterPresetsProviderInstance.isRefreshing ||
+            filterPresetsProviderInstance.isReloading
+        ? null
+        : canUsePresets
+            ? (ref.watch(filterPresetsProvider).value?.length ?? 0) <
+                    constants.maxAllowedPresets
+                ? addNewPresetDialog
+                : null
+            : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final canUsePresets = ref.watch(filterPresetsUsageProvider);
+    final filterPresetsProviderInstance = ref.watch(filterPresetsProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Filter presets"),
         actions: [
           IconButton(
+            tooltip: "Refresh",
             onPressed: canUsePresets
                 ? () async {
                     await ref
@@ -127,35 +157,39 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                     deletePreset: deletePresetById,
                     enabled: canUsePresets,
                   ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: canUsePresets
-                        ? (ref.watch(filterPresetsProvider).value?.length ??
-                                    0) <=
-                                constants.maxAllowedPresets
-                            ? addNewPresetDialog
-                            : null
-                        : null,
-                    child: Wrap(spacing: 10.0, children: [
-                      Icon(
-                        Icons.add,
-                        color: Colors.black,
+                  if (!filterPresetsProviderInstance.hasError)
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                  if (!filterPresetsProviderInstance.hasError)
+                    ElevatedButton(
+                      onPressed: getAddPresetAction(
+                        canUsePresets,
+                        filterPresetsProviderInstance,
                       ),
-                      Text("ADD MORE"),
-                    ]),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  OutlinedButton(
-                    onPressed: canUsePresets ? deleteAllPresets : null,
-                    child: Wrap(spacing: 10.0, children: [
-                      Icon(Icons.delete),
-                      Text("DELETE ALL"),
-                    ]),
-                  )
+                      child: Wrap(spacing: 10.0, children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        Text("ADD MORE"),
+                      ]),
+                    ),
+                  if (!filterPresetsProviderInstance.hasError)
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                  if (!filterPresetsProviderInstance.hasError)
+                    OutlinedButton(
+                      onPressed: getDeleteAllPresetsAction(
+                        canUsePresets,
+                        filterPresetsProviderInstance,
+                      ),
+                      child: Wrap(spacing: 10.0, children: [
+                        Icon(Icons.delete),
+                        Text("DELETE ALL"),
+                      ]),
+                    )
                 ],
               ),
             ),
@@ -187,7 +221,7 @@ class FilterPresetsList extends ConsumerWidget {
     final filterPresetsState = ref.watch(filterPresetsProvider);
 
     return filterPresetsState.when(
-      loading: () => Text("Loading"),
+      loading: () => Container(),
       data: (presets) {
         if (presets.isEmpty) {
           return FilterPresetsPlaceholder(
@@ -227,8 +261,8 @@ class FilterPresetsList extends ConsumerWidget {
           );
         }
       },
-      error: (err, _) => Container(
-        child: Text("error $err"),
+      error: (err, _) => FilterPresetsPlaceholder(
+        message: "Ah! Snap something went wrong",
       ),
     );
   }
