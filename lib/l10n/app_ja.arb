@@ -199,5 +199,15 @@
   "viewContactLabel": "連絡先を表示",
   "errorOpeningContact": "連絡先を開く際にエラーが発生しました",
   "waLaunchError": "WhatsApp を起動できませんでした",
-  "closeText": "閉じる" 
+  "closeText": "閉じる",
+  "defaultPresetName": "スーパークールプリセット",
+  "onLabel": "オン",
+  "offLabel": "オフ",
+  "filterPresetTitle": "フィルタープリセット",
+  "addMorePresetsLabel": "追加",
+  "deleteAllPresetsLabel": "すべて削除",
+  "enablePresetsPlaceholderText": "プリセットを有効にすると、複数のフィルターを簡単に作成・切り替えでき、通話履歴のカスタマイズが素早くできます。",
+  "noPresetsPlaceholderText": "クイックフィルタリング用に独自のカスタムプリセットを作成し始めましょう",
+  "presetNameInputLabelText": "プリセット名",
+  "presetNameInputHintText": "プリセットの名前を入力してください"
 }

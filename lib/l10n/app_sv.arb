@@ -199,5 +199,15 @@
     "viewContactLabel": "Visa kontakt",
     "errorOpeningContact": "Fel vid öppning av kontakt",
     "waLaunchError": "Kunde inte starta WhatsApp",
-    "closeText": "Stäng"
+    "closeText": "Stäng",
+    "defaultPresetName": "SuperCoolPreset",
+    "onLabel": "På",
+    "offLabel": "Av",
+    "filterPresetTitle": "Filterförinställningar",
+    "addMorePresetsLabel": "lägg till fler",
+    "deleteAllPresetsLabel": "radera alla",
+    "enablePresetsPlaceholderText": "Aktivera förinställningar för att enkelt skapa och växla mellan flera filter för snabb anpassning av samtalsloggen.",
+    "noPresetsPlaceholderText": "Börja skapa dina egna anpassade förinställningar för snabb filtrering",
+    "presetNameInputLabelText": "Förinställningsnamn",
+    "presetNameInputHintText": "Ange ett namn för förinställningen"
 }

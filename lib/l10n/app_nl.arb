@@ -199,5 +199,15 @@
   "viewContactLabel": "Contact bekijken",
   "errorOpeningContact": "Fout bij openen van contact",
   "waLaunchError": "Kan WhatsApp niet starten",
-  "closeText": "Sluiten"
+  "closeText": "Sluiten",
+  "defaultPresetName": "SuperCoolPreset",
+  "onLabel": "Ein",
+  "offLabel": "Aus",
+  "filterPresetTitle": "Filtervoreinstellungen",
+  "addMorePresetsLabel": "mehr hinzufügen",
+  "deleteAllPresetsLabel": "alle löschen",
+  "enablePresetsPlaceholderText": "Aktivieren Sie Voreinstellungen, um mehrere Filter einfach zu erstellen und zwischen ihnen zu wechseln, um das Anrufprotokoll schnell anzupassen.",
+  "noPresetsPlaceholderText": "Beginnen Sie mit der Erstellung Ihrer eigenen benutzerdefinierten Voreinstellungen für schnelles Filtern",
+  "presetNameInputLabelText": "Voreinstellungsname",
+  "presetNameInputHintText": "Geben Sie einen Namen für die Voreinstellung ein"
 }

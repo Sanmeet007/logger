@@ -199,5 +199,15 @@
   "viewContactLabel": "Zobacz kontakt",
   "errorOpeningContact": "Błąd podczas otwierania kontaktu",
   "waLaunchError": "Nie można uruchomić WhatsApp",
-  "closeText": "Zamknij"
+  "closeText": "Zamknij",
+  "defaultPresetName": "SuperCoolPreset",
+  "onLabel": "Włączone",
+  "offLabel": "Wyłączone",
+  "filterPresetTitle": "Presety filtrów",
+  "addMorePresetsLabel": "dodaj więcej",
+  "deleteAllPresetsLabel": "usuń wszystko",
+  "enablePresetsPlaceholderText": "Włącz presety, aby łatwo tworzyć i przełączać się między wieloma filtrami dla szybkiej personalizacji dziennika połączeń.",
+  "noPresetsPlaceholderText": "Zacznij tworzyć własne presety dla szybkiego filtrowania",
+  "presetNameInputLabelText": "Nazwa presetu",
+  "presetNameInputHintText": "Wpisz nazwę dla presetu"
 }

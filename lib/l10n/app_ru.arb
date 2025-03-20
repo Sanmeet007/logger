@@ -199,5 +199,15 @@
   "viewContactLabel": "Просмотреть контакт",
   "errorOpeningContact": "Ошибка открытия контакта",
   "waLaunchError": "He удалось запустить WhatsApp",
-  "closeText": "Закрыть"
+  "closeText": "Закрыть",
+  "defaultPresetName": "СуперКрутойПресет",
+  "onLabel": "Включено",
+  "offLabel": "Выключено",
+  "filterPresetTitle": "Предустановки фильтров",
+  "addMorePresetsLabel": "добавить ещё",
+  "deleteAllPresetsLabel": "удалить всё",
+  "enablePresetsPlaceholderText": "Включите предустановки, чтобы легко создавать и переключаться между несколькими фильтрами для быстрой настройки журнала вызовов.",
+  "noPresetsPlaceholderText": "Начните создавать свои собственные предустановки для быстрого фильтрования",
+  "presetNameInputLabelText": "Название предустановки",
+  "presetNameInputHintText": "Введите название предустановки"
 }

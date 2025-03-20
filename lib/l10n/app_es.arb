@@ -199,5 +199,15 @@
   "viewContactLabel": "Ver contacto",
   "errorOpeningContact": "Error al abrir el contacto",
   "waLaunchError": "No se pudo abrir WhatsApp",
-  "closeText": "Cerrar"
+  "closeText": "Cerrar",
+  "defaultPresetName": "SuperCoolPreset",
+  "onLabel": "Encendido",
+  "offLabel": "Apagado",
+  "filterPresetTitle": "Preajustes de filtro",
+  "addMorePresetsLabel": "agregar más",
+  "deleteAllPresetsLabel": "eliminar todo",
+  "enablePresetsPlaceholderText": "Habilite los preajustes para crear y cambiar fácilmente entre múltiples filtros para una personalización rápida del registro de llamadas.",
+  "noPresetsPlaceholderText": "Empieza a crear tus propios preajustes personalizados para filtrado rápido",
+  "presetNameInputLabelText": "Nombre del preajuste",
+  "presetNameInputHintText": "Ingrese un nombre para el preajuste"
 }

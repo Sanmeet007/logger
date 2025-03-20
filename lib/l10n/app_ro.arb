@@ -199,5 +199,15 @@
   "viewContactLabel": "Vezi contact",
   "errorOpeningContact": "Eroare la deschiderea contactului",
   "waLaunchError": "Nu s-a putut lansa WhatsApp",
-  "closeText": "Închide"
+  "closeText": "Închide",
+  "defaultPresetName": "SuperCoolPreset",
+  "onLabel": "Pornit",
+  "offLabel": "Oprit",
+  "filterPresetTitle": "Presetări filtru",
+  "addMorePresetsLabel": "adaugă mai multe",
+  "deleteAllPresetsLabel": "șterge tot",
+  "enablePresetsPlaceholderText": "Activează presetările pentru a crea și comuta ușor între mai multe filtre pentru personalizarea rapidă a jurnalului de apeluri.",
+  "noPresetsPlaceholderText": "Începeți să creați propriile presetări personalizate pentru filtrare rapidă",
+  "presetNameInputLabelText": "Numele presetării",
+  "presetNameInputHintText": "Introduceți un nume pentru presetare"
 }

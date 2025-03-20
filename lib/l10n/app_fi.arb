@@ -199,5 +199,15 @@
     "viewContactLabel": "Näytä yhteystieto",
     "errorOpeningContact": "Virhe avattaessa yhteystietoa",
     "waLaunchError": "WhatsAppia ei voitu käynnistää",
-    "closeText": "Sulje"
+    "closeText": "Sulje",
+    "defaultPresetName": "SuperCoolPreset",
+    "onLabel": "Päällä",
+    "offLabel": "Pois",
+    "filterPresetTitle": "Suodatinasetukset",
+    "addMorePresetsLabel": "lisää lisää",
+    "deleteAllPresetsLabel": "poista kaikki",
+    "enablePresetsPlaceholderText": "Ota esiasetukset käyttöön, jotta voit helposti luoda ja vaihtaa useiden suodattimien välillä nopeaa puhelulokien mukauttamista varten.",
+    "noPresetsPlaceholderText": "Aloita omien mukautettujen esiasetusten luominen nopeaan suodattamiseen",
+    "presetNameInputLabelText": "Esiasetuksen nimi",
+    "presetNameInputHintText": "Syötä esiasetuksen nimi"
 }
