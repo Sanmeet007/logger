@@ -302,7 +302,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
         availablePhoneAccountIds: ref
             .read(callLogsNotifierProvider.notifier)
             .getAvailablePhoneAccountIds(),
-        currentFilters: ref.read(logsFilterProvider).filters,
+        currentFilter: ref.read(logsFilterProvider).filter,
         canFilterUsingDuration: ref.read(durationFilteringProvider),
         canFilterUsingPhoneAccountId: ref.read(phoneAccountFilteringProvider),
       ),

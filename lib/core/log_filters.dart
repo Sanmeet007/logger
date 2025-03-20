@@ -14,14 +14,14 @@ import 'package:logger/utils/constants.dart' as constants;
 
 class LogFilters extends ConsumerStatefulWidget {
   final WidgetRef parentRef;
-  final Map currentFilters;
+  final Filter currentFilter;
   final bool canFilterUsingDuration;
   final bool canFilterUsingPhoneAccountId;
   final List<String> availablePhoneAccountIds;
 
   const LogFilters({
     super.key,
-    required this.currentFilters,
+    required this.currentFilter,
     required this.availablePhoneAccountIds,
     required this.canFilterUsingDuration,
     required this.canFilterUsingPhoneAccountId,
@@ -56,22 +56,30 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     super.initState();
 
     _phoneNumberInputController =
-        TextEditingController(text: widget.currentFilters["phone_to_match"]);
+        TextEditingController(text: widget.currentFilter.phoneToMatch);
 
     _minDurationInputController = TextEditingController(
-        text: widget.currentFilters["min_duration"] ?? "0");
+      text: widget.currentFilter.minDuration.inSeconds.toString(),
+    );
     _maxDurationInputController = TextEditingController(
-        text: widget.currentFilters["max_duration"] ?? "");
+      text: widget.currentFilter.maxDuration?.inSeconds.toString() ?? "",
+    );
     _endDateController = TextEditingController(
-        text: formatter.format(widget.currentFilters["end_date"]));
+      text: formatter.format(
+        widget.currentFilter.endDate,
+      ),
+    );
     _startDateController = TextEditingController(
-        text: formatter.format(widget.currentFilters["start_date"]));
+      text: formatter.format(
+        widget.currentFilter.startDate,
+      ),
+    );
 
-    isNumberSearchEnabled = widget.currentFilters["specific_ph"];
-    dateRangeOption = widget.currentFilters["date_range_op"];
-    selectedCallTypes = widget.currentFilters["selected_call_types"];
-    isDurationFilteringOn = widget.currentFilters["duration_filtering"];
-    selectedPhoneAccountId = widget.currentFilters["phone_acc_id"];
+    isNumberSearchEnabled = widget.currentFilter.usesSpecificPhoneNumber;
+    dateRangeOption = widget.currentFilter.dateRangeOption;
+    selectedCallTypes = widget.currentFilter.selectedCallTypes;
+    isDurationFilteringOn = widget.currentFilter.usesDurationFiltering;
+    selectedPhoneAccountId = widget.currentFilter.phoneAccountId;
   }
 
   @override
@@ -129,22 +137,31 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     if (shouldApplyFilters()) {
       ref.read(loaderProvider.notifier).showLoading();
 
-      await ref.read(logsFilterProvider.notifier).applyFilters({
-        "specific_ph": isNumberSearchEnabled,
-        "phone_to_match": _phoneNumberInputController.text,
-        "selected_call_types": selectedCallTypes,
-        "date_range_op": dateRangeOption,
-        "start_date": _startDateController.text.isEmpty
-            ? DateTime.now()
-            : DateTime.parse(_startDateController.text),
-        "end_date": _endDateController.text.isEmpty
-            ? DateTime.now()
-            : DateTime.parse(_endDateController.text),
-        "min_duration": _minDurationInputController.text,
-        "max_duration": _maxDurationInputController.text,
-        "duration_filtering": isDurationFilteringOn,
-        "phone_acc_id": selectedPhoneAccountId,
-      });
+      await ref.read(logsFilterProvider.notifier).applyFilters(
+            Filter(
+              usesSpecificPhoneNumber: isNumberSearchEnabled,
+              phoneToMatch: _phoneNumberInputController.text,
+              selectedCallTypes: selectedCallTypes,
+              dateRangeOption: dateRangeOption,
+              startDate: _startDateController.text.isEmpty
+                  ? DateTime.now()
+                  : DateTime.parse(_startDateController.text),
+              endDate: _endDateController.text.isEmpty
+                  ? DateTime.now()
+                  : DateTime.parse(_endDateController.text),
+              minDuration: Duration(
+                seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+              ),
+              maxDuration: _maxDurationInputController.text.isEmpty
+                  ? null
+                  : Duration(
+                      seconds:
+                          int.tryParse(_maxDurationInputController.text) ?? 0,
+                    ),
+              usesDurationFiltering: isDurationFilteringOn,
+              phoneAccountId: selectedPhoneAccountId,
+            ),
+          );
 
       ref.read(loaderProvider.notifier).hideLoading();
     }
@@ -156,22 +173,31 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
   }
 
   bool shouldApplyFilters() {
-    return !Filters.compareFilterMasks({
-      "specific_ph": isNumberSearchEnabled,
-      "phone_to_match": _phoneNumberInputController.text,
-      "selected_call_types": selectedCallTypes, // \_(^_^)_/
-      "date_range_op": dateRangeOption,
-      "start_date": _startDateController.text.isEmpty
-          ? DateTime.now()
-          : DateTime.parse(_startDateController.text),
-      "end_date": _endDateController.text.isEmpty
-          ? DateTime.now()
-          : DateTime.parse(_endDateController.text),
-      "duration_filtering": isDurationFilteringOn,
-      "min_duration": _minDurationInputController.text,
-      "max_duration": _maxDurationInputController.text,
-      "phone_acc_id": selectedPhoneAccountId,
-    }, widget.currentFilters);
+    return !FilterUtils.compareFilterMasks(
+      Filter(
+        usesSpecificPhoneNumber: isNumberSearchEnabled,
+        phoneToMatch: _phoneNumberInputController.text,
+        selectedCallTypes: selectedCallTypes,
+        dateRangeOption: dateRangeOption,
+        startDate: _startDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_startDateController.text),
+        endDate: _endDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_endDateController.text),
+        usesDurationFiltering: isDurationFilteringOn,
+        minDuration: Duration(
+          seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+        ),
+        maxDuration: _maxDurationInputController.text.isEmpty
+            ? null
+            : Duration(
+                seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
+              ),
+        phoneAccountId: selectedPhoneAccountId,
+      ),
+      widget.currentFilter,
+    );
   }
 
   void checkFiltersState() {
@@ -196,7 +222,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
   void handlePhoneNumberValueChange(String? v) {
     if (v == null) return;
-    if (widget.currentFilters["phone_to_match"] != v) {
+    if (widget.currentFilter.phoneToMatch != v) {
       checkFiltersState();
     }
   }
@@ -205,7 +231,8 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     if (v == null) return;
     var k = int.tryParse(v);
     if (k != null && k > 0) {
-      if (widget.currentFilters["min_duration"] != v) {
+      if (widget.currentFilter.minDuration.inSeconds !=
+          (int.tryParse(v) ?? 0)) {
         checkFiltersState();
       }
     }
@@ -215,7 +242,8 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     if (v == null) return;
     var k = int.tryParse(v);
     if (k != null && k > 0) {
-      if (widget.currentFilters["max_duration"] != v) {
+      if ((widget.currentFilter.maxDuration?.inSeconds ?? 0) !=
+          (int.tryParse(v) ?? 0)) {
         checkFiltersState();
       }
     }
@@ -223,14 +251,14 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
   void handleStartDateChanges(String? v) {
     if (v == null) return;
-    if (formatter.format(widget.currentFilters["start_date"]) != v) {
+    if (formatter.format(widget.currentFilter.startDate) != v) {
       checkFiltersState();
     }
   }
 
   void handleEndDateChanges(String? v) {
     if (v == null) return;
-    if (formatter.format(widget.currentFilters["end_date"]) != v) {
+    if (formatter.format(widget.currentFilter.endDate) != v) {
       checkFiltersState();
     }
   }
