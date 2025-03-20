@@ -157,7 +157,6 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                       child: Wrap(spacing: 10.0, children: [
                         Icon(
                           Icons.add,
-                          color: Colors.black,
                         ),
                         Text("ADD MORE"),
                       ]),

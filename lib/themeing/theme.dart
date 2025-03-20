@@ -14,6 +14,7 @@ class ThemeClass {
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 203, 169, 255),
         foregroundColor: const Color.fromARGB(255, 11, 1, 26),
+        iconColor: const Color.fromARGB(255, 11, 1, 26),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -47,6 +48,7 @@ class ThemeClass {
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 203, 169, 255),
         foregroundColor: const Color.fromARGB(255, 11, 1, 26),
+        iconColor: const Color.fromARGB(255, 11, 1, 26),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
