@@ -13,6 +13,12 @@ class FilterPreset {
     required this.filterDetails,
   });
 
+  static final FilterPreset defaultPreset = FilterPreset(
+    id: -1,
+    name: "default",
+    filterDetails: Filter.defaultFilterConfig,
+  );
+
   Map<String, dynamic> toJSON() {
     return {
       "id": id == -1 ? null : id,

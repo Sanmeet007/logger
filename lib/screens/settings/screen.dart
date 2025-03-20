@@ -12,6 +12,7 @@ import 'package:logger/providers/shared_preferences_providers/logs_sharing_provi
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/screens/settings/filter_presets_activity.dart';
 import 'package:logger/screens/settings/fragments/export_filename_dialog.dart';
 import 'package:logger/screens/settings/fragments/export_format_dialog.dart';
 import 'package:logger/utils/csv_to_map.dart';
@@ -143,6 +144,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> advancedSettingsListItems = <Widget>[
+      ListTile(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => FilterPresetsActivity()));
+        },
+        title: Text("Filter presets"),
+        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+      ),
       ListTile(
         onTap: () {
           showModalBottomSheet(

@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/components/common/date_picker.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/common/toggle_button.dart';
+import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
@@ -18,6 +19,9 @@ class LogFilters extends ConsumerStatefulWidget {
   final bool canFilterUsingDuration;
   final bool canFilterUsingPhoneAccountId;
   final List<String> availablePhoneAccountIds;
+  final List<FilterPreset> availablePresets;
+  final bool canUsePresets;
+  final int initialPresetId;
 
   const LogFilters({
     super.key,
@@ -25,7 +29,10 @@ class LogFilters extends ConsumerStatefulWidget {
     required this.availablePhoneAccountIds,
     required this.canFilterUsingDuration,
     required this.canFilterUsingPhoneAccountId,
+    required this.availablePresets,
+    required this.canUsePresets,
     required this.parentRef,
+    this.initialPresetId = -1,
   });
 
   @override
@@ -38,6 +45,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
   // Creating new mutable List
   List<CallType> callTypes = [...CallType.values];
 
+  late int currentPresetId;
   late bool isNumberSearchEnabled;
   late bool isDurationFilteringOn;
   late DateRange dateRangeOption;
@@ -54,6 +62,8 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
   @override
   void initState() {
     super.initState();
+
+    currentPresetId = widget.initialPresetId;
 
     _phoneNumberInputController =
         TextEditingController(text: widget.currentFilter.phoneToMatch);
@@ -136,33 +146,37 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
     if (shouldApplyFilters()) {
       ref.read(loaderProvider.notifier).showLoading();
-
-      await ref.read(logsFilterProvider.notifier).applyFilters(
-            Filter(
-              usesSpecificPhoneNumber: isNumberSearchEnabled,
-              phoneToMatch: _phoneNumberInputController.text,
-              selectedCallTypes: selectedCallTypes,
-              dateRangeOption: dateRangeOption,
-              startDate: _startDateController.text.isEmpty
-                  ? DateTime.now()
-                  : DateTime.parse(_startDateController.text),
-              endDate: _endDateController.text.isEmpty
-                  ? DateTime.now()
-                  : DateTime.parse(_endDateController.text),
-              minDuration: Duration(
-                seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+      if (currentPresetId != widget.initialPresetId) {
+        await ref
+            .read(logsFilterProvider.notifier)
+            .changeActiveFilterById(currentPresetId);
+      } else {
+        await ref.read(logsFilterProvider.notifier).applyFilters(
+              Filter(
+                usesSpecificPhoneNumber: isNumberSearchEnabled,
+                phoneToMatch: _phoneNumberInputController.text,
+                selectedCallTypes: selectedCallTypes,
+                dateRangeOption: dateRangeOption,
+                startDate: _startDateController.text.isEmpty
+                    ? DateTime.now()
+                    : DateTime.parse(_startDateController.text),
+                endDate: _endDateController.text.isEmpty
+                    ? DateTime.now()
+                    : DateTime.parse(_endDateController.text),
+                minDuration: Duration(
+                  seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+                ),
+                maxDuration: _maxDurationInputController.text.isEmpty
+                    ? null
+                    : Duration(
+                        seconds:
+                            int.tryParse(_maxDurationInputController.text) ?? 0,
+                      ),
+                usesDurationFiltering: isDurationFilteringOn,
+                phoneAccountId: selectedPhoneAccountId,
               ),
-              maxDuration: _maxDurationInputController.text.isEmpty
-                  ? null
-                  : Duration(
-                      seconds:
-                          int.tryParse(_maxDurationInputController.text) ?? 0,
-                    ),
-              usesDurationFiltering: isDurationFilteringOn,
-              phoneAccountId: selectedPhoneAccountId,
-            ),
-          );
-
+            );
+      }
       ref.read(loaderProvider.notifier).hideLoading();
     }
   }
@@ -173,6 +187,10 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
   }
 
   bool shouldApplyFilters() {
+    if (currentPresetId != widget.initialPresetId) {
+      return true;
+    }
+
     return !FilterUtils.compareFilterMasks(
       Filter(
         usesSpecificPhoneNumber: isNumberSearchEnabled,
@@ -263,6 +281,17 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     }
   }
 
+  void handlePresetChange(int? v) {
+    if (v == null) return;
+
+    final items = widget.availablePresets.where((e) => e.id == v);
+    if (items.isEmpty) return;
+    setState(() {
+      currentPresetId = items.first.id;
+    });
+    checkFiltersState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -275,55 +304,99 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Column(
-                    children: [
-                      Material(
-                        child: SwitchListTile(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 5.0),
-                          title: SizedText(
-                            AppLocalizations.of(context).searchByNumberText,
-                            size: 18.0,
-                          ),
-                          value: isNumberSearchEnabled,
-                          onChanged: toggleNumberSearch,
-                        ),
+                if (widget.canUsePresets)
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1.0,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color.fromARGB(255, 65, 65, 65)
+                            : Colors.black87,
                       ),
-                      if (isNumberSearchEnabled)
-                        Container(
-                          padding: const EdgeInsets.only(
-                              top: 10.0, bottom: 15.0, right: 15.0, left: 15.0),
-                          child: TextField(
-                            onChanged: handlePhoneNumberValueChange,
-                            controller: _phoneNumberInputController,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 66, 66, 66),
-                                ),
-                              ),
-                              label: Text(
-                                AppLocalizations.of(context).mobileNumberText,
-                              ),
-                              hintText: AppLocalizations.of(context)
-                                  .hintMobileNumberText,
+                      borderRadius: BorderRadius.circular(100.0),
+                    ),
+                    child: DropdownButton<int>(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                        vertical: 15.0,
+                      ),
+                      // isDense: true,
+                      underline: Container(),
+                      isExpanded: true,
+                      isDense: true,
+                      enableFeedback: true,
+                      value: currentPresetId,
+                      items: [
+                        ...widget.availablePresets.map(
+                          (item) => DropdownMenuItem(
+                            value: item.id,
+                            child: Text(
+                              item.name,
                             ),
-                            keyboardType:
-                                const TextInputType.numberWithOptions(),
+                          ),
+                        )
+                      ],
+                      onChanged: handlePresetChange,
+                    ),
+                  ),
+                if (widget.canUsePresets && currentPresetId == -1)
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                if (currentPresetId == -1)
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Material(
+                          child: SwitchListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 5.0),
+                            title: SizedText(
+                              AppLocalizations.of(context).searchByNumberText,
+                              size: 18.0,
+                            ),
+                            value: isNumberSearchEnabled,
+                            onChanged: toggleNumberSearch,
                           ),
                         ),
-                    ],
+                        if (isNumberSearchEnabled)
+                          Container(
+                            padding: const EdgeInsets.only(
+                                top: 10.0,
+                                bottom: 15.0,
+                                right: 15.0,
+                                left: 15.0),
+                            child: TextField(
+                              onChanged: handlePhoneNumberValueChange,
+                              controller: _phoneNumberInputController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 66, 66, 66),
+                                  ),
+                                ),
+                                label: Text(
+                                  AppLocalizations.of(context).mobileNumberText,
+                                ),
+                                hintText: AppLocalizations.of(context)
+                                    .hintMobileNumberText,
+                              ),
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
                 const SizedBox(height: 10.0),
-                if (widget.canFilterUsingPhoneAccountId)
+                if (widget.canFilterUsingPhoneAccountId &&
+                    currentPresetId == -1)
                   Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 15.0),
@@ -386,9 +459,10 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                       ],
                     ),
                   ),
-                if (widget.canFilterUsingPhoneAccountId)
+                if (widget.canFilterUsingPhoneAccountId &&
+                    currentPresetId == -1)
                   const SizedBox(height: 10.0),
-                if (widget.canFilterUsingDuration)
+                if (widget.canFilterUsingDuration && currentPresetId == -1)
                   Container(
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
@@ -473,122 +547,129 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                       ],
                     ),
                   ),
-                if (widget.canFilterUsingDuration) const SizedBox(height: 10.0),
-                Container(
-                  padding: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20.0),
+                if (widget.canFilterUsingDuration && currentPresetId == -1)
+                  const SizedBox(height: 10.0),
+                if (currentPresetId == -1)
+                  Container(
+                    padding: const EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedText(
+                          AppLocalizations.of(context).filterByCallTypeText,
+                          size: 18.0,
+                        ),
+                        const SizedBox(
+                          height: 12.0,
+                        ),
+                        CustomToggleButtons(
+                          selectedCallTypes: selectedCallTypes,
+                          onChange: handleCallTypeChange,
+                        )
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedText(
-                        AppLocalizations.of(context).filterByCallTypeText,
-                        size: 18.0,
-                      ),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
-                      CustomToggleButtons(
-                        selectedCallTypes: selectedCallTypes,
-                        onChange: handleCallTypeChange,
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 15.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedText(
-                            AppLocalizations.of(context).dateRangeText,
-                            size: 18.0,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 1.0,
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? const Color.fromARGB(255, 65, 65, 65)
-                                    : Colors.black87,
-                              ),
-                              borderRadius: BorderRadius.circular(100.0),
-                            ),
-                            child: DropdownButton<DateRange>(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                  vertical: 10.0,
-                                ),
-                                isDense: true,
-                                underline: Container(),
-                                enableFeedback: true,
-                                value: dateRangeOption,
-                                items: [
-                                  ...DateRangeHelper.getRanges(context).map(
-                                    (item) => DropdownMenuItem(
-                                      value: item["key"],
-                                      child: Text(
-                                        item["value"]!,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                                onChanged: handleDateRangeOptionChange),
-                          ),
-                        ],
-                      ),
-                      if (dateRangeOption == DateRange.custom)
-                        Column(
+                if (currentPresetId == -1) const SizedBox(height: 10.0),
+                if (currentPresetId == -1)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 15.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(
-                              height: 15.0,
+                            SizedText(
+                              AppLocalizations.of(context).dateRangeText,
+                              size: 18.0,
                             ),
-                            LoggerDatePicker(
-                              languageCode:
-                                  Localizations.localeOf(context).languageCode,
-                              controller: _startDateController,
-                              onChanged: handleStartDateChanges,
-                              fieldTitle:
-                                  AppLocalizations.of(context).startDateText,
-                              firstDate: DateTime(1995),
-                              lastDate:
-                                  DateTime.now().add(const Duration(days: 0)),
-                            ),
-                            const SizedBox(
-                              height: 15.0,
-                            ),
-                            LoggerDatePicker(
-                              languageCode:
-                                  Localizations.localeOf(context).languageCode,
-                              controller: _endDateController,
-                              onChanged: handleEndDateChanges,
-                              fieldTitle:
-                                  AppLocalizations.of(context).endDateText,
-                              firstDate: DateTime(1995),
-                              lastDate: DateTime.now(),
-                            ),
-                            const SizedBox(
-                              height: 10.0,
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1.0,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color.fromARGB(255, 65, 65, 65)
+                                      : Colors.black87,
+                                ),
+                                borderRadius: BorderRadius.circular(100.0),
+                              ),
+                              child: DropdownButton<DateRange>(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0,
+                                    vertical: 10.0,
+                                  ),
+                                  isDense: true,
+                                  underline: Container(),
+                                  enableFeedback: true,
+                                  value: dateRangeOption,
+                                  items: [
+                                    ...DateRangeHelper.getRanges(context).map(
+                                      (item) => DropdownMenuItem(
+                                        value: item["key"],
+                                        child: Text(
+                                          item["value"]!,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                  onChanged: handleDateRangeOptionChange),
                             ),
                           ],
                         ),
-                    ],
+                        if (dateRangeOption == DateRange.custom)
+                          Column(
+                            children: [
+                              const SizedBox(
+                                height: 15.0,
+                              ),
+                              LoggerDatePicker(
+                                languageCode: Localizations.localeOf(context)
+                                    .languageCode,
+                                controller: _startDateController,
+                                onChanged: handleStartDateChanges,
+                                fieldTitle:
+                                    AppLocalizations.of(context).startDateText,
+                                firstDate: DateTime(1995),
+                                lastDate:
+                                    DateTime.now().add(const Duration(days: 0)),
+                              ),
+                              const SizedBox(
+                                height: 15.0,
+                              ),
+                              LoggerDatePicker(
+                                languageCode: Localizations.localeOf(context)
+                                    .languageCode,
+                                controller: _endDateController,
+                                onChanged: handleEndDateChanges,
+                                fieldTitle:
+                                    AppLocalizations.of(context).endDateText,
+                                firstDate: DateTime(1995),
+                                lastDate: DateTime.now(),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
                   ),
-                ),
+                if (currentPresetId == -1)
+                  SizedBox(
+                    height: 10.0,
+                  ),
                 const SizedBox(height: 15.0),
                 Row(
                   children: [

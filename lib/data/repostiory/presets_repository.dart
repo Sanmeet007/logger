@@ -30,6 +30,14 @@ class PresetsRepository {
     }
   }
 
+  Future<FilterPreset> getPresetById(int id) async {
+    try {
+      return await _datasource.getPresetById(id);
+    } catch (e) {
+      throw '$e';
+    }
+  }
+
   Future<void> updateFilterPreset(FilterPreset preset) async {
     try {
       await _datasource.updateFilterPreset(preset);

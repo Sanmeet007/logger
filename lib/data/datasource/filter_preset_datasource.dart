@@ -60,6 +60,18 @@ class FilterPresetDatasource {
     });
   }
 
+  Future<FilterPreset> getPresetById(int id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      _tableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (maps.isEmpty) return FilterPreset.defaultPreset;
+    return FilterPreset.fromJson(maps[0]);
+  }
+
   Future<List<FilterPreset>> getAllFilterPresets() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(

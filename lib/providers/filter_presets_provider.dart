@@ -14,6 +14,10 @@ class FilterPresetsNotifier extends AsyncNotifier<List<FilterPreset>> {
     await _updateState();
   }
 
+  Future<FilterPreset> getPresetById(int id) async {
+    return ref.read(filterPresetsRepositoryProvider).getPresetById(id);
+  }
+
   Future<void> addFilterPreset(Filter filter, String name) async {
     await ref
         .read(filterPresetsRepositoryProvider)

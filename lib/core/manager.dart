@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/sized_text.dart';
+import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
+import 'package:logger/providers/filter_presets_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
@@ -10,6 +12,7 @@ import 'package:logger/providers/shared_preferences_providers/export_file_name_f
 import 'package:logger/providers/shared_preferences_providers/export_type_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/uses_filter_presets_provider.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
 import 'package:logger/utils/app_information.dart';
@@ -291,22 +294,59 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     }
   }
 
-  void showFiltersModal() {
-    showModalBottomSheet(
-      isDismissible: true,
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      builder: (context) => LogFilters(
-        parentRef: ref,
-        availablePhoneAccountIds: ref
-            .read(callLogsNotifierProvider.notifier)
-            .getAvailablePhoneAccountIds(),
-        currentFilter: ref.read(logsFilterProvider).filter,
-        canFilterUsingDuration: ref.read(durationFilteringProvider),
-        canFilterUsingPhoneAccountId: ref.read(phoneAccountFilteringProvider),
-      ),
-    );
+  void showFiltersModal() async {
+    final usesPrests = ref.read(filterPresetsUsageProvider);
+
+    final availableAccountIds = ref
+        .read(callLogsNotifierProvider.notifier)
+        .getAvailablePhoneAccountIds();
+    final logFiltersState = ref.read(logsFilterProvider);
+    final currentFilter = logFiltersState.filter;
+    final currentPresetId = logFiltersState.activeFilterId;
+    final canFilterUsingDuration = ref.read(durationFilteringProvider);
+    final canFilterUsingPhoneAccountId =
+        ref.read(phoneAccountFilteringProvider);
+
+    if (usesPrests) {
+      final availablePresets = await ref.read(filterPresetsProvider.future);
+
+      if (mounted) {
+        showModalBottomSheet(
+          isDismissible: true,
+          context: context,
+          showDragHandle: true,
+          isScrollControlled: true,
+          builder: (context) => LogFilters(
+            parentRef: ref,
+            canUsePresets: true,
+            initialPresetId: currentPresetId,
+            availablePresets: [FilterPreset.defaultPreset, ...availablePresets],
+            availablePhoneAccountIds: availableAccountIds,
+            currentFilter: currentFilter,
+            canFilterUsingDuration: canFilterUsingDuration,
+            canFilterUsingPhoneAccountId: canFilterUsingPhoneAccountId,
+          ),
+        );
+      }
+    } else {
+      if (mounted) {
+        showModalBottomSheet(
+          isDismissible: true,
+          context: context,
+          showDragHandle: true,
+          isScrollControlled: true,
+          builder: (context) => LogFilters(
+            parentRef: ref,
+            canUsePresets: false,
+            availablePresets: [],
+            availablePhoneAccountIds: availableAccountIds,
+            currentFilter: currentFilter,
+            canFilterUsingDuration: canFilterUsingDuration,
+            canFilterUsingPhoneAccountId: canFilterUsingPhoneAccountId,
+          ),
+        );
+      }
+    }
   }
 
   void openDetailedView() {
