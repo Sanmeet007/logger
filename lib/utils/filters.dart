@@ -18,6 +18,8 @@ class Filter {
   bool usesDurationFiltering;
   String phoneAccountId;
 
+  static final Filter defaultFilterConfig = Filter();
+
   Filter({
     this.usesSpecificPhoneNumber = false,
     this.phoneToMatch = "",
