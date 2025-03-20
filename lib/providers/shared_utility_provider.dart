@@ -21,6 +21,14 @@ class SharedUtility {
 
   final SharedPreferences sharedPreferences;
 
+  bool isFilterPresetsEnabled() {
+    return sharedPreferences.getBool(constants.sharedFilterPresetsKey) ?? false;
+  }
+
+  void toggleFilterPresetsUsage(bool newState) {
+    sharedPreferences.setBool(constants.sharedFilterPresetsKey, newState);
+  }
+
   bool isOnboardingComplete() {
     return sharedPreferences.getBool(constants.sharedOnboardingKey) ?? false;
   }
