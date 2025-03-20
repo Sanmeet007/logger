@@ -1,21 +1,22 @@
 import 'package:logger/data/datasource/filter_preset_datasource.dart';
 import 'package:logger/data/models/filter_preset.dart';
+import 'package:logger/utils/filters.dart';
 
 class PresetsRepository {
   final FilterPresetDatasource _datasource;
   PresetsRepository(this._datasource);
 
-  Future<void> addFilterPreset(FilterPreset preset) async {
+  Future<void> addFilterPreset(Filter filter, String name) async {
     try {
-      await _datasource.addFilterPreset(preset);
+      await _datasource.addFilterPreset(filter, name);
     } catch (e) {
       throw '$e';
     }
   }
 
-  Future<void> deleteFilterPreset(FilterPreset preset) async {
+  Future<void> deleteFilterPresetById(int id) async {
     try {
-      await _datasource.deleteFilterPreset(preset);
+      await _datasource.deleteFilterPresetById(id);
     } catch (e) {
       throw '$e';
     }
@@ -32,6 +33,14 @@ class PresetsRepository {
   Future<void> updateFilterPreset(FilterPreset preset) async {
     try {
       await _datasource.updateFilterPreset(preset);
+    } catch (e) {
+      throw '$e';
+    }
+  }
+
+  Future<void> deleteAllPresets() async {
+    try {
+      await _datasource.dropTable();
     } catch (e) {
       throw '$e';
     }

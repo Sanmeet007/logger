@@ -1,4 +1,5 @@
 import 'package:logger/data/models/filter_preset.dart';
+import 'package:logger/utils/filters.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FilterPresetDatasource {
@@ -32,15 +33,14 @@ class FilterPresetDatasource {
       CREATE TABLE $_tableName (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        uses_phone_account_id INTEGER,
         phone_account_id TEXT,
-        uses_specific_phone_number INTEGER,
-        specific_phone_number INTEGER,
-        uses_filter_by_call_duration INTEGER,
+        uses_specific_phone_number INTEGER DEFAULT 0,
+        specific_phone_number TEXT,
+        uses_filter_by_call_duration INTEGER DEFAULT 0,
         call_min_duration INTEGER,
         call_max_duration INTEGER,
         selected_call_types TEXT,
-        date_range_option TEXT,
+        date_range_option INTEGER,
         start_date TEXT,
         end_date TEXT,
         creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -48,12 +48,13 @@ class FilterPresetDatasource {
     ''');
   }
 
-  Future<int> addFilterPreset(FilterPreset preset) async {
+  Future<int> addFilterPreset(Filter filter, String name) async {
     final db = await database;
+
     return db.transaction((txn) async {
       return await txn.insert(
         _tableName,
-        preset.toJSON(),
+        FilterPreset.fromFilter(filter, name).toJSON(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
@@ -85,16 +86,25 @@ class FilterPresetDatasource {
     });
   }
 
-  Future<int> deleteFilterPreset(FilterPreset preset) async {
+  Future<int> deleteFilterPresetById(int id) async {
     final db = await database;
     return db.transaction(
       (txn) async {
         return await txn.delete(
           _tableName,
           where: 'id = ?',
-          whereArgs: [preset.id],
+          whereArgs: [id],
         );
       },
     );
+  }
+
+  Future<void> dropTable() async {
+    final db = await database;
+    db.delete(_tableName);
+  }
+
+  Future<void> drop() async {
+    await databaseFactory.deleteDatabase(_dbName);
   }
 }
