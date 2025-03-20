@@ -204,7 +204,7 @@
   "onLabel": "Включено",
   "offLabel": "Выключено",
   "filterPresetTitle": "Предустановки фильтров",
-  "addMorePresetsLabel": "добавить ещё",
+  "addMorePresetsLabel": "Добавить пресет",
   "deleteAllPresetsLabel": "удалить всё",
   "enablePresetsPlaceholderText": "Включите предустановки, чтобы легко создавать и переключаться между несколькими фильтрами для быстрой настройки журнала вызовов.",
   "noPresetsPlaceholderText": "Начните создавать свои собственные предустановки для быстрого фильтрования",

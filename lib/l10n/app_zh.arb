@@ -204,7 +204,7 @@
     "onLabel": "开启",
     "offLabel": "关闭",
     "filterPresetTitle": "过滤器预设",
-    "addMorePresetsLabel": "添加更多",
+    "addMorePresetsLabel": "添加预设",
     "deleteAllPresetsLabel": "删除所有",
     "enablePresetsPlaceholderText": "启用预设，以便轻松创建和切换多个过滤器，快速自定义通话记录。",
     "noPresetsPlaceholderText": "开始创建您自己的自定义预设，以实现快速过滤",

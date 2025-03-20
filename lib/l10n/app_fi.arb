@@ -204,7 +204,7 @@
     "onLabel": "Päällä",
     "offLabel": "Pois",
     "filterPresetTitle": "Suodatinasetukset",
-    "addMorePresetsLabel": "lisää lisää",
+    "addMorePresetsLabel": "Lisää esiasetus",
     "deleteAllPresetsLabel": "poista kaikki",
     "enablePresetsPlaceholderText": "Ota esiasetukset käyttöön, jotta voit helposti luoda ja vaihtaa useiden suodattimien välillä nopeaa puhelulokien mukauttamista varten.",
     "noPresetsPlaceholderText": "Aloita omien mukautettujen esiasetusten luominen nopeaan suodattamiseen",

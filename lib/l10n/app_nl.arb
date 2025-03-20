@@ -204,7 +204,7 @@
   "onLabel": "Ein",
   "offLabel": "Aus",
   "filterPresetTitle": "Filtervoreinstellungen",
-  "addMorePresetsLabel": "mehr hinzufügen",
+  "addMorePresetsLabel": "Voorinstelling toevoegen",
   "deleteAllPresetsLabel": "alle löschen",
   "enablePresetsPlaceholderText": "Aktivieren Sie Voreinstellungen, um mehrere Filter einfach zu erstellen und zwischen ihnen zu wechseln, um das Anrufprotokoll schnell anzupassen.",
   "noPresetsPlaceholderText": "Beginnen Sie mit der Erstellung Ihrer eigenen benutzerdefinierten Voreinstellungen für schnelles Filtern",

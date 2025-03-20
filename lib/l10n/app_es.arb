@@ -204,7 +204,7 @@
   "onLabel": "Encendido",
   "offLabel": "Apagado",
   "filterPresetTitle": "Preajustes de filtro",
-  "addMorePresetsLabel": "agregar más",
+  "addMorePresetsLabel": "Agregar preajuste",
   "deleteAllPresetsLabel": "eliminar todo",
   "enablePresetsPlaceholderText": "Habilite los preajustes para crear y cambiar fácilmente entre múltiples filtros para una personalización rápida del registro de llamadas.",
   "noPresetsPlaceholderText": "Empieza a crear tus propios preajustes personalizados para filtrado rápido",

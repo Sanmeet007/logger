@@ -204,7 +204,7 @@
     "onLabel": "På",
     "offLabel": "Av",
     "filterPresetTitle": "Filterförinställningar",
-    "addMorePresetsLabel": "lägg till fler",
+    "addMorePresetsLabel": "Lägg till förinställning",
     "deleteAllPresetsLabel": "radera alla",
     "enablePresetsPlaceholderText": "Aktivera förinställningar för att enkelt skapa och växla mellan flera filter för snabb anpassning av samtalsloggen.",
     "noPresetsPlaceholderText": "Börja skapa dina egna anpassade förinställningar för snabb filtrering",

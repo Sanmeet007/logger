@@ -204,7 +204,7 @@
   "onLabel": "켜짐",
   "offLabel": "꺼짐",
   "filterPresetTitle": "필터 프리셋",
-  "addMorePresetsLabel": "추가",
+  "addMorePresetsLabel": "프리셋 추가",
   "deleteAllPresetsLabel": "모두 삭제",
   "enablePresetsPlaceholderText": "프리셋을 활성화하여 여러 필터를 손쉽게 생성하고 전환하여 통화 기록을 빠르게 맞춤 설정하세요.",
   "noPresetsPlaceholderText": "빠른 필터링을 위해 사용자 지정 프리셋을 만들어보세요",

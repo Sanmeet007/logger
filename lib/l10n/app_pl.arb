@@ -204,7 +204,7 @@
   "onLabel": "Włączone",
   "offLabel": "Wyłączone",
   "filterPresetTitle": "Presety filtrów",
-  "addMorePresetsLabel": "dodaj więcej",
+  "addMorePresetsLabel": "Dodaj preset",
   "deleteAllPresetsLabel": "usuń wszystko",
   "enablePresetsPlaceholderText": "Włącz presety, aby łatwo tworzyć i przełączać się między wieloma filtrami dla szybkiej personalizacji dziennika połączeń.",
   "noPresetsPlaceholderText": "Zacznij tworzyć własne presety dla szybkiego filtrowania",

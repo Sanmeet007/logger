@@ -204,7 +204,7 @@
   "onLabel": "オン",
   "offLabel": "オフ",
   "filterPresetTitle": "フィルタープリセット",
-  "addMorePresetsLabel": "追加",
+  "addMorePresetsLabel": "プリセットを追加",
   "deleteAllPresetsLabel": "すべて削除",
   "enablePresetsPlaceholderText": "プリセットを有効にすると、複数のフィルターを簡単に作成・切り替えでき、通話履歴のカスタマイズが素早くできます。",
   "noPresetsPlaceholderText": "クイックフィルタリング用に独自のカスタムプリセットを作成し始めましょう",

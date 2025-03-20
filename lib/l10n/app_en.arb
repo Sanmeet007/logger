@@ -775,7 +775,7 @@
   "onLabel": "On",
   "offLabel": "Off",
   "filterPresetTitle": "Filter presets",
-  "addMorePresetsLabel": "add more",
+  "addMorePresetsLabel": "add preset",
   "deleteAllPresetsLabel": "delete all",
   "enablePresetsPlaceholderText": "Enable presets to effortlessly create and switch between multiple filters for quick call log customization.",
   "noPresetsPlaceholderText": "Start creating your own custom presets for quick filtering",
