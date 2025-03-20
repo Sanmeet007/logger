@@ -2,36 +2,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:call_log/call_log.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
-import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
-import 'package:logger/utils/constants.dart' as constants;
 
-final defaultFilters = {
-  "specific_ph": false,
-  "phone_to_match": "",
-  "selected_call_types": [...CallType.values], // Creating new mutable List
-  "date_range_op": DateRange.allTime,
-  "start_date": DateTime.now(),
-  "end_date": DateTime.now(),
-  "min_duration": "0",
-  "max_duration": null,
-  "duration_filtering": false,
-  "phone_acc_id": constants.defaultPhoneAccountId,
-};
+final defaultFilter = Filter();
 
 class LogsFilterState {
-  final Map<String, dynamic> filters;
+  final Filter filter;
   final bool areFiltersApplied;
 
   LogsFilterState({
-    required this.filters,
+    required this.filter,
     required this.areFiltersApplied,
   });
 
-  LogsFilterState copyWith(
-      {Map<String, dynamic>? filters, bool? areFiltersApplied}) {
+  LogsFilterState copyWith({Filter? filter, bool? areFiltersApplied}) {
     return LogsFilterState(
-      filters: filters ?? this.filters,
+      filter: filter ?? this.filter,
       areFiltersApplied: areFiltersApplied ?? this.areFiltersApplied,
     );
   }
@@ -41,28 +27,28 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
   LogsFilterNotifier(this.ref)
       : super(
           LogsFilterState(
-            filters: defaultFilters,
+            filter: defaultFilter,
             areFiltersApplied: false,
           ),
         );
 
   final Ref ref;
 
-  Future<void> applyFilters(Map<String, dynamic> newFilters) async {
+  Future<void> applyFilters(Filter newFilter) async {
     try {
       final allLogs =
           ref.read(callLogsNotifierProvider).value ?? Iterable.empty();
 
-      if (_arePreviousFilters(newFilters)) {
+      if (_arePreviousFilters(newFilter)) {
         state = state.copyWith(areFiltersApplied: false);
       } else {
-        var filteredLogs = await Filters.filterLogs(allLogs, newFilters);
+        var filteredLogs = await FilterUtils.filterLogs(allLogs, newFilter);
 
-        if (Filters.compareFilterMasks(newFilters, defaultFilters)) {
+        if (FilterUtils.compareFilterMasks(newFilter, defaultFilter)) {
           state =
-              state.copyWith(areFiltersApplied: false, filters: defaultFilters);
+              state.copyWith(areFiltersApplied: false, filter: defaultFilter);
         } else {
-          state = state.copyWith(areFiltersApplied: true, filters: newFilters);
+          state = state.copyWith(areFiltersApplied: true, filter: newFilter);
         }
 
         ref.read(currentCallLogsNotifierProvider.notifier).update(filteredLogs);
@@ -75,19 +61,19 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
 
   void resetFilters() {
     state = state.copyWith(
-      filters: defaultFilters,
+      filter: defaultFilter,
       areFiltersApplied: false,
     );
 
     ref.read(currentCallLogsNotifierProvider.notifier).reset();
   }
 
-  bool _arePreviousFilters(Map<String, dynamic> newFilters) {
-    return Filters.compareFilterMasks(state.filters, newFilters);
+  bool _arePreviousFilters(Filter newFilters) {
+    return FilterUtils.compareFilterMasks(state.filter, newFilters);
   }
 
   bool containsAnyMatchingCallTypes(List<CallType> types) {
-    for (var t in state.filters["selected_call_types"]) {
+    for (var t in state.filter.selectedCallTypes) {
       if (types.contains(t)) {
         return true;
       }
