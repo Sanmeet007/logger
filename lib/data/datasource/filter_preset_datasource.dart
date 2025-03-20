@@ -40,7 +40,7 @@ class FilterPresetDatasource {
         call_min_duration INTEGER,
         call_max_duration INTEGER,
         selected_call_types TEXT,
-        date_range_type TEXT,
+        date_range_option TEXT,
         start_date TEXT,
         end_date TEXT,
         creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
