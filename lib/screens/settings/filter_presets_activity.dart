@@ -24,6 +24,20 @@ class FilterPresetsActivity extends ConsumerStatefulWidget {
 }
 
 class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
+  bool isProcessing = false;
+
+  void showLoading() {
+    setState(() {
+      isProcessing = true;
+    });
+  }
+
+  void hideLoading() {
+    setState(() {
+      isProcessing = false;
+    });
+  }
+
   void addNewPresetDialog() {
     showModalBottomSheet(
         context: context,
@@ -57,15 +71,20 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
 
   @override
   Widget build(BuildContext context) {
+    final canUsePresets = ref.watch(filterPresetsUsageProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Filter presets"),
         actions: [
           IconButton(
-            onPressed: () async {
-              await ref.read(filterPresetsProvider.notifier).refreshPresets();
-            },
+            onPressed: canUsePresets
+                ? () async {
+                    await ref
+                        .read(filterPresetsProvider.notifier)
+                        .refreshPresets();
+                  }
+                : null,
             icon: Icon(Icons.refresh),
           ),
         ],
@@ -86,7 +105,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                   fontSize: 20.0,
                 ),
               ),
-              value: ref.watch(filterPresetsUsageProvider),
+              value: canUsePresets,
               onChanged: (v) {
                 ref.read(filterPresetsUsageProvider.notifier).toggle();
               },
@@ -106,16 +125,19 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                   ),
                   FilterPresetsList(
                     deletePreset: deletePresetById,
+                    enabled: canUsePresets,
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
                   ElevatedButton(
-                    onPressed:
-                        (ref.watch(filterPresetsProvider).value?.length ?? 0) <=
+                    onPressed: canUsePresets
+                        ? (ref.watch(filterPresetsProvider).value?.length ??
+                                    0) <=
                                 constants.maxAllowedPresets
                             ? addNewPresetDialog
-                            : null,
+                            : null
+                        : null,
                     child: Wrap(spacing: 10.0, children: [
                       Icon(
                         Icons.add,
@@ -128,7 +150,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                     height: 10.0,
                   ),
                   OutlinedButton(
-                    onPressed: deleteAllPresets,
+                    onPressed: canUsePresets ? deleteAllPresets : null,
                     child: Wrap(spacing: 10.0, children: [
                       Icon(Icons.delete),
                       Text("DELETE ALL"),
@@ -146,32 +168,31 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
 
 class FilterPresetsList extends ConsumerWidget {
   final Future<void> Function(int) deletePreset;
-  const FilterPresetsList({super.key, required this.deletePreset});
+  final bool enabled;
+  const FilterPresetsList({
+    super.key,
+    required this.deletePreset,
+    required this.enabled,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (!enabled) {
+      return FilterPresetsPlaceholder(
+        message:
+            "Enable presets to effortlessly create and switch between multiple filters for quick call log customization.",
+      );
+    }
+
     final filterPresetsState = ref.watch(filterPresetsProvider);
 
     return filterPresetsState.when(
       loading: () => Text("Loading"),
       data: (presets) {
         if (presets.isEmpty) {
-          return Container(
-            padding: EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Center(
-              child: Text(
+          return FilterPresetsPlaceholder(
+            message:
                 "Start creating your own custom presets for quick filtering",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Theme.of(context).hintColor,
-                ),
-              ),
-            ),
           );
         } else {
           return Container(
@@ -208,6 +229,36 @@ class FilterPresetsList extends ConsumerWidget {
       },
       error: (err, _) => Container(
         child: Text("error $err"),
+      ),
+    );
+  }
+}
+
+class FilterPresetsPlaceholder extends StatelessWidget {
+  final String message;
+
+  const FilterPresetsPlaceholder({
+    super.key,
+    required this.message,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Center(
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Theme.of(context).hintColor,
+          ),
+        ),
       ),
     );
   }

@@ -75,7 +75,6 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
   void handleEndDateChanges(String v) {}
 
   void saveFilterPreset() async {
-    print("ADDING PRESET !");
     await ref.read(filterPresetsProvider.notifier).addFilterPreset(
           Filter(
             usesSpecificPhoneNumber: isNumberSearchEnabled,
@@ -102,7 +101,6 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
           ),
           _presetInputNameContoller.text,
         );
-    print("ADDED PRESET");
     if (mounted) {
       Navigator.pop(context);
     }
