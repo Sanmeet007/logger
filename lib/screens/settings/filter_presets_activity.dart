@@ -105,19 +105,6 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text("Filter presets"),
-        actions: [
-          IconButton(
-            tooltip: "Refresh",
-            onPressed: canUsePresets
-                ? () async {
-                    await ref
-                        .read(filterPresetsProvider.notifier)
-                        .refreshPresets();
-                  }
-                : null,
-            icon: Icon(Icons.refresh),
-          ),
-        ],
       ),
       body: Column(children: [
         Container(
