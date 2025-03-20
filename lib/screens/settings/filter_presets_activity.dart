@@ -12,8 +12,7 @@ import 'package:logger/providers/shared_preferences_providers/uses_filter_preset
 import 'package:logger/screens/settings/preset_editor.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/constants.dart' as constants;
-
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FilterPresetsActivity extends ConsumerStatefulWidget {
   const FilterPresetsActivity({super.key});
@@ -52,7 +51,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                 .read(callLogsNotifierProvider.notifier)
                 .getAvailablePhoneAccountIds(),
             preset: FilterPreset(
-              name: "SuperCoolPreset",
+              name: AppLocalizations.of(context).defaultPresetName,
               filterDetails: Filter.defaultFilterConfig,
             ),
           );
@@ -104,7 +103,9 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text("Filter presets"),
+        title: Text(
+          AppLocalizations.of(context).filterPresetTitle,
+        ),
       ),
       body: Column(children: [
         Container(
@@ -117,7 +118,9 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
           child: Material(
             child: SwitchListTile(
               title: Text(
-                ref.watch(filterPresetsUsageProvider) ? "On" : "Off",
+                ref.watch(filterPresetsUsageProvider)
+                    ? AppLocalizations.of(context).onLabel
+                    : AppLocalizations.of(context).offLabel,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
@@ -158,7 +161,11 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                         Icon(
                           Icons.add,
                         ),
-                        Text("ADD MORE"),
+                        Text(
+                          AppLocalizations.of(context)
+                              .addMorePresetsLabel
+                              .toUpperCase(),
+                        ),
                       ]),
                     ),
                   if (!filterPresetsProviderInstance.hasError)
@@ -173,7 +180,11 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                       ),
                       child: Wrap(spacing: 10.0, children: [
                         Icon(Icons.delete),
-                        Text("DELETE ALL"),
+                        Text(
+                          AppLocalizations.of(context)
+                              .deleteAllPresetsLabel
+                              .toUpperCase(),
+                        ),
                       ]),
                     )
                 ],
@@ -199,8 +210,7 @@ class FilterPresetsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (!enabled) {
       return FilterPresetsPlaceholder(
-        message:
-            "Enable presets to effortlessly create and switch between multiple filters for quick call log customization.",
+        message: AppLocalizations.of(context).enablePresetsPlaceholderText,
       );
     }
 
@@ -211,8 +221,7 @@ class FilterPresetsList extends ConsumerWidget {
       data: (presets) {
         if (presets.isEmpty) {
           return FilterPresetsPlaceholder(
-            message:
-                "Start creating your own custom presets for quick filtering",
+            message: AppLocalizations.of(context).noPresetsPlaceholderText,
           );
         } else {
           return Container(
@@ -248,7 +257,7 @@ class FilterPresetsList extends ConsumerWidget {
         }
       },
       error: (err, _) => FilterPresetsPlaceholder(
-        message: "Ah! Snap something went wrong",
+        message: AppLocalizations.of(context).appFatalError,
       ),
     );
   }

@@ -149,7 +149,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => FilterPresetsActivity()));
         },
-        title: Text("Filter presets"),
+        title: Text(
+          AppLocalizations.of(context).filterPresetTitle,
+        ),
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(

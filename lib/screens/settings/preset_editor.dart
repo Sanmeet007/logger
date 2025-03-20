@@ -167,8 +167,10 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                         color: Color.fromARGB(255, 66, 66, 66),
                       ),
                     ),
-                    label: Text("Preset Name"),
-                    hintText: "Enter a name for preset",
+                    label: Text(
+                        AppLocalizations.of(context).presetNameInputLabelText),
+                    hintText:
+                        AppLocalizations.of(context).presetNameInputHintText,
                   ),
                   keyboardType: TextInputType.text,
                 ),
@@ -496,7 +498,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        "Cancel",
+                        AppLocalizations.of(context).cancelText,
                       ),
                     ),
                   ),
@@ -512,7 +514,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                       ),
                       onPressed: canApplyFilters ? saveFilterPreset : null,
                       child: Text(
-                        "Save",
+                        AppLocalizations.of(context).saveText,
                       ),
                     ),
                   ),
