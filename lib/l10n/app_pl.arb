@@ -64,7 +64,7 @@
   "incomingText": "Przychodzące",
   "logsScreenLabelText": "Dzienniki",
   "maximumDurationHintText": "np: 60",
-  "maximumDurationLabelText": "Min (w sek)",
+  "maximumDurationLabelText": "Max (w sek)",
   "minimumDurationHintText": "np: 0",
   "minimumDurationLabelText": "Min (w sek)",
   "missedText": "Nieodebrane",

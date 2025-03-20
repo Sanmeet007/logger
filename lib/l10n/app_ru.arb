@@ -64,7 +64,7 @@
   "incomingText": "Входящий",
   "logsScreenLabelText": "Журналы",
   "maximumDurationHintText": "например: 60",
-  "maximumDurationLabelText": "Мин (в сек)",
+  "maximumDurationLabelText": "Макс (в сек)",
   "minimumDurationHintText": "например: 0",
   "minimumDurationLabelText": "Мин (в сек)",
   "missedText": "Пропущенные",

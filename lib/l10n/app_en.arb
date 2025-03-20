@@ -635,7 +635,7 @@
   "incomingText": "Incoming",
   "logsScreenLabelText": "Logs",
   "maximumDurationHintText": "eg: 60",
-  "maximumDurationLabelText": "Min (in secs)",
+  "maximumDurationLabelText": "Max (in secs)",
   "minimumDurationHintText": "eg: 0",
   "minimumDurationLabelText": "Min (in secs)",
   "missedText": "Missed",

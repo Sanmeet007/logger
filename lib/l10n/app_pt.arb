@@ -64,7 +64,7 @@
   "incomingText": "Recebida",
   "logsScreenLabelText": "Registos",
   "maximumDurationHintText": "ex: 60",
-  "maximumDurationLabelText": "Min (em seg)",
+  "maximumDurationLabelText": "Máx (em segs)",
   "minimumDurationHintText": "ex: 0",
   "minimumDurationLabelText": "Min (em seg)",
   "missedText": "Perdida",

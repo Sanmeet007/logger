@@ -64,7 +64,7 @@
     "incomingText": "来电",
     "logsScreenLabelText": "记录",
     "maximumDurationHintText": "例如: 60",
-    "maximumDurationLabelText": "分钟（秒）",
+    "maximumDurationLabelText": "最大（秒）",
     "minimumDurationHintText": "例如: 0",
     "minimumDurationLabelText": "分钟（秒）",
     "missedText": "未接",

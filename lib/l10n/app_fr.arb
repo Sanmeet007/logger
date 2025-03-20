@@ -64,7 +64,7 @@
     "incomingText": "Entrant",
     "logsScreenLabelText": "Journaux",
     "maximumDurationHintText": "ex : 60",
-    "maximumDurationLabelText": "Min (en secondes)",
+    "maximumDurationLabelText": "Max (en secondes)",
     "minimumDurationHintText": "ex : 0",
     "minimumDurationLabelText": "Min (en secondes)",
     "missedText": "Manqué",

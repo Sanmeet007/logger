@@ -64,7 +64,7 @@
     "incomingText": "Inkommande",
     "logsScreenLabelText": "Loggar",
     "maximumDurationHintText": "t.ex.: 60",
-    "maximumDurationLabelText": "Min (i sek)",
+    "maximumDurationLabelText": "Max (i sek)",
     "minimumDurationHintText": "t.ex.: 0",
     "minimumDurationLabelText": "Min (i sek)",
     "missedText": "Missat",
