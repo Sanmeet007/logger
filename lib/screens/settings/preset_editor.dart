@@ -1,3 +1,4 @@
+// TODO : edit or update ... write all fns
 // TextFields look alike in all ui comp
 
 import 'package:call_log/call_log.dart';
@@ -54,7 +55,14 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
   }
 
   void handlePhoneNumberValueChange(String v) {}
-  void handlePhoneAccountIdValueChange(String? v) {}
+
+  void handlePhoneAccountIdValueChange(String? v) {
+    if (v == null) return;
+    setState(() {
+      selectedPhoneAccountId = v;
+    });
+  }
+
   void setFilterByDurationState(bool v) {
     setState(() {
       isDurationFilteringOn = v;

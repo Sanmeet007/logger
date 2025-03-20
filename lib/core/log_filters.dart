@@ -146,7 +146,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
     if (shouldApplyFilters()) {
       ref.read(loaderProvider.notifier).showLoading();
-      if (currentPresetId != widget.initialPresetId) {
+      if (currentPresetId != widget.initialPresetId && currentPresetId != -1) {
         await ref
             .read(logsFilterProvider.notifier)
             .changeActiveFilterById(currentPresetId);
@@ -175,6 +175,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                 usesDurationFiltering: isDurationFilteringOn,
                 phoneAccountId: selectedPhoneAccountId,
               ),
+              currentPresetId,
             );
       }
       ref.read(loaderProvider.notifier).hideLoading();
@@ -286,9 +287,33 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
 
     final items = widget.availablePresets.where((e) => e.id == v);
     if (items.isEmpty) return;
-    setState(() {
-      currentPresetId = items.first.id;
-    });
+
+    if (items.first.id == -1) {
+      setState(() {
+        currentPresetId = items.first.id;
+        _phoneNumberInputController = TextEditingController(
+          text: Filter.defaultFilterConfig.phoneToMatch,
+        );
+
+        _minDurationInputController = TextEditingController(
+          text: Filter.defaultFilterConfig.minDuration.inSeconds.toString(),
+        );
+        _maxDurationInputController = TextEditingController();
+        _endDateController = TextEditingController();
+        _startDateController = TextEditingController();
+        isNumberSearchEnabled =
+            Filter.defaultFilterConfig.usesSpecificPhoneNumber;
+        dateRangeOption = Filter.defaultFilterConfig.dateRangeOption;
+        selectedCallTypes = Filter.defaultFilterConfig.selectedCallTypes;
+        isDurationFilteringOn =
+            Filter.defaultFilterConfig.usesDurationFiltering;
+        selectedPhoneAccountId = Filter.defaultFilterConfig.phoneAccountId;
+      });
+    } else {
+      setState(() {
+        currentPresetId = items.first.id;
+      });
+    }
     checkFiltersState();
   }
 
