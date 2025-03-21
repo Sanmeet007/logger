@@ -200,7 +200,7 @@
     "errorOpeningContact": "Virhe avattaessa yhteystietoa",
     "waLaunchError": "WhatsAppia ei voitu käynnistää",
     "closeText": "Sulje",
-    "defaultPresetName": "SuperCoolPreset",
+    "defaultPresetName": "Oletusasetukset",
     "onLabel": "Päällä",
     "offLabel": "Pois",
     "filterPresetTitle": "Suodatinasetukset",

@@ -771,7 +771,7 @@
   "errorOpeningContact": "Error opening contact",
   "waLaunchError": "Could not launch WhatsApp",
   "closeText": "Close",
-  "defaultPresetName": "SuperCoolPreset",
+  "defaultPresetName": "DefaultPreset",
   "onLabel": "On",
   "offLabel": "Off",
   "filterPresetTitle": "Filter presets",

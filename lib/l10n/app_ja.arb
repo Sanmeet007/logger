@@ -200,7 +200,7 @@
   "errorOpeningContact": "連絡先を開く際にエラーが発生しました",
   "waLaunchError": "WhatsApp を起動できませんでした",
   "closeText": "閉じる",
-  "defaultPresetName": "スーパークールプリセット",
+  "defaultPresetName": "デフォルトプリセット",
   "onLabel": "オン",
   "offLabel": "オフ",
   "filterPresetTitle": "フィルタープリセット",

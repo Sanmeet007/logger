@@ -200,7 +200,7 @@
   "errorOpeningContact": "연락처를 여는 중 오류 발생",
   "waLaunchError": "WhatsApp을 실행할 수 없습니다",
   "closeText": "닫기",
-  "defaultPresetName": "슈퍼쿨프리셋",
+  "defaultPresetName": "기본 프리셋",
   "onLabel": "켜짐",
   "offLabel": "꺼짐",
   "filterPresetTitle": "필터 프리셋",

@@ -200,7 +200,7 @@
   "errorOpeningContact": "Błąd podczas otwierania kontaktu",
   "waLaunchError": "Nie można uruchomić WhatsApp",
   "closeText": "Zamknij",
-  "defaultPresetName": "SuperCoolPreset",
+  "defaultPresetName": "Domyślny preset",
   "onLabel": "Włączone",
   "offLabel": "Wyłączone",
   "filterPresetTitle": "Presety filtrów",

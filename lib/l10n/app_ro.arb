@@ -200,7 +200,7 @@
   "errorOpeningContact": "Eroare la deschiderea contactului",
   "waLaunchError": "Nu s-a putut lansa WhatsApp",
   "closeText": "Închide",
-  "defaultPresetName": "SuperCoolPreset",
+  "defaultPresetName": "Presetare implicită",
   "onLabel": "Pornit",
   "offLabel": "Oprit",
   "filterPresetTitle": "Presetări filtru",

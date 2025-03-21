@@ -200,7 +200,7 @@
   "errorOpeningContact": "Ошибка открытия контакта",
   "waLaunchError": "He удалось запустить WhatsApp",
   "closeText": "Закрыть",
-  "defaultPresetName": "СуперКрутойПресет",
+  "defaultPresetName": "Предустановка по умолчанию",
   "onLabel": "Включено",
   "offLabel": "Выключено",
   "filterPresetTitle": "Предустановки фильтров",
