@@ -1,6 +1,3 @@
-// TODO : edit or update ... write all fns
-// TextFields look alike in all ui comp
-
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
