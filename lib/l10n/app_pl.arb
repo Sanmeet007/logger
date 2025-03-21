@@ -209,5 +209,6 @@
   "enablePresetsPlaceholderText": "Włącz presety, aby łatwo tworzyć i przełączać się między wieloma filtrami dla szybkiej personalizacji dziennika połączeń.",
   "noPresetsPlaceholderText": "Zacznij tworzyć własne presety dla szybkiego filtrowania",
   "presetNameInputLabelText": "Nazwa presetu",
-  "presetNameInputHintText": "Wpisz nazwę dla presetu"
+  "presetNameInputHintText": "Wpisz nazwę dla presetu",
+  "defaultLabelText": "Domyślny"
 }

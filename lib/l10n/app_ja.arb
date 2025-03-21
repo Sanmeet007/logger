@@ -209,5 +209,6 @@
   "enablePresetsPlaceholderText": "プリセットを有効にすると、複数のフィルターを簡単に作成・切り替えでき、通話履歴のカスタマイズが素早くできます。",
   "noPresetsPlaceholderText": "クイックフィルタリング用に独自のカスタムプリセットを作成し始めましょう",
   "presetNameInputLabelText": "プリセット名",
-  "presetNameInputHintText": "プリセットの名前を入力してください"
+  "presetNameInputHintText": "プリセットの名前を入力してください",
+  "defaultLabelText": "デフォルト"
 }

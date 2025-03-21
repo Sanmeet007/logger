@@ -209,5 +209,6 @@
   "enablePresetsPlaceholderText": "Aktivieren Sie Voreinstellungen, um mehrere Filter einfach zu erstellen und zwischen ihnen zu wechseln, um das Anrufprotokoll schnell anzupassen.",
   "noPresetsPlaceholderText": "Beginnen Sie mit der Erstellung Ihrer eigenen benutzerdefinierten Voreinstellungen für schnelles Filtern",
   "presetNameInputLabelText": "Voreinstellungsname",
-  "presetNameInputHintText": "Geben Sie einen Namen für die Voreinstellung ein"
+  "presetNameInputHintText": "Geben Sie einen Namen für die Voreinstellung ein",
+  "defaultLabelText": "Standaard"
 }

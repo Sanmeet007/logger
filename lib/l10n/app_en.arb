@@ -780,5 +780,6 @@
   "enablePresetsPlaceholderText": "Enable presets to effortlessly create and switch between multiple filters for quick call log customization.",
   "noPresetsPlaceholderText": "Start creating your own custom presets for quick filtering",
   "presetNameInputLabelText": "Preset Name",
-  "presetNameInputHintText": "Enter a name for preset"
+  "presetNameInputHintText": "Enter a name for preset",
+  "defaultLabelText": "default"
 }

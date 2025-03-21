@@ -209,5 +209,6 @@
     "enablePresetsPlaceholderText": "Aktivera förinställningar för att enkelt skapa och växla mellan flera filter för snabb anpassning av samtalsloggen.",
     "noPresetsPlaceholderText": "Börja skapa dina egna anpassade förinställningar för snabb filtrering",
     "presetNameInputLabelText": "Förinställningsnamn",
-    "presetNameInputHintText": "Ange ett namn för förinställningen"
+    "presetNameInputHintText": "Ange ett namn för förinställningen",
+    "defaultLabelText": "Standard"
 }

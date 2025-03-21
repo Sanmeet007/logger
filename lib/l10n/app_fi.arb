@@ -209,5 +209,6 @@
     "enablePresetsPlaceholderText": "Ota esiasetukset käyttöön, jotta voit helposti luoda ja vaihtaa useiden suodattimien välillä nopeaa puhelulokien mukauttamista varten.",
     "noPresetsPlaceholderText": "Aloita omien mukautettujen esiasetusten luominen nopeaan suodattamiseen",
     "presetNameInputLabelText": "Esiasetuksen nimi",
-    "presetNameInputHintText": "Syötä esiasetuksen nimi"
+    "presetNameInputHintText": "Syötä esiasetuksen nimi",
+    "defaultLabelText": "Oletus"
 }

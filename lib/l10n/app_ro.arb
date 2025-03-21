@@ -209,5 +209,6 @@
   "enablePresetsPlaceholderText": "Activează presetările pentru a crea și comuta ușor între mai multe filtre pentru personalizarea rapidă a jurnalului de apeluri.",
   "noPresetsPlaceholderText": "Începeți să creați propriile presetări personalizate pentru filtrare rapidă",
   "presetNameInputLabelText": "Numele presetării",
-  "presetNameInputHintText": "Introduceți un nume pentru presetare"
+  "presetNameInputHintText": "Introduceți un nume pentru presetare",
+  "defaultLabelText": "Implicit"
 }

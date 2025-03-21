@@ -356,7 +356,10 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                           (item) => DropdownMenuItem(
                             value: item.id,
                             child: Text(
-                              item.name,
+                              item.id == -1
+                                  ? AppLocalizations.of(context)
+                                      .defaultLabelText
+                                  : item.name,
                             ),
                           ),
                         )

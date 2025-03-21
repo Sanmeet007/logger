@@ -209,5 +209,6 @@
     "enablePresetsPlaceholderText": "Activez les préréglages pour créer et basculer facilement entre plusieurs filtres pour une personnalisation rapide du journal d'appels.",
     "noPresetsPlaceholderText": "Commencez à créer vos propres préréglages personnalisés pour un filtrage rapide",
     "presetNameInputLabelText": "Nom du préréglage",
-    "presetNameInputHintText": "Entrez un nom pour le préréglage"
+    "presetNameInputHintText": "Entrez un nom pour le préréglage",
+    "defaultLabelText": "Par défaut"
 }

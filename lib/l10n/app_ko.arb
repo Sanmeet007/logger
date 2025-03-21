@@ -209,5 +209,6 @@
   "enablePresetsPlaceholderText": "프리셋을 활성화하여 여러 필터를 손쉽게 생성하고 전환하여 통화 기록을 빠르게 맞춤 설정하세요.",
   "noPresetsPlaceholderText": "빠른 필터링을 위해 사용자 지정 프리셋을 만들어보세요",
   "presetNameInputLabelText": "프리셋 이름",
-  "presetNameInputHintText": "프리셋 이름을 입력하세요"
+  "presetNameInputHintText": "프리셋 이름을 입력하세요",
+  "defaultLabelText": "기본값"
 }
