@@ -19,6 +19,7 @@ import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:shared_storage/shared_storage.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -31,6 +32,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool isDoneImporting = false;
 
   void handleCallLogImport() async {
+    WakelockPlus.enable();
+
     var linearProgressLoader = ref.read(linearLoaderProvider.notifier);
     try {
       var uris = await openDocument(mimeType: 'text/comma-separated-values');
@@ -100,6 +103,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           content: AppLocalizations.of(context).baseGhostErrorMessage,
         );
       }
+    } finally {
+      WakelockPlus.disable();
     }
   }
 
