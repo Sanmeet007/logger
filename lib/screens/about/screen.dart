@@ -142,15 +142,14 @@ class AboutScreen extends StatelessWidget {
                     onPressed: () {
                       url_launcher.launchUrl(AppInformation.getRepoLink());
                     },
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        runAlignment: WrapAlignment.center,
+                        spacing: 5.0,
                         children: [
                           Text(
                             AppLocalizations.of(context)
                                 .exploreProjectButtonText,
-                          ),
-                          const SizedBox(
-                            width: 5.0,
                           ),
                           const Icon(
                             Icons.launch,

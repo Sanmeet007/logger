@@ -182,16 +182,20 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                         canUsePresets,
                         filterPresetsProviderInstance,
                       ),
-                      child: Wrap(spacing: 10.0, children: [
-                        Icon(
-                          Icons.add,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)
-                              .addMorePresetsLabel
-                              .toUpperCase(),
-                        ),
-                      ]),
+                      child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          runAlignment: WrapAlignment.center,
+                          spacing: 10.0,
+                          children: [
+                            Icon(
+                              Icons.add,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)
+                                  .addMorePresetsLabel
+                                  .toUpperCase(),
+                            ),
+                          ]),
                     ),
                   if (!filterPresetsProviderInstance.hasError)
                     SizedBox(
@@ -203,14 +207,18 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                         canUsePresets,
                         filterPresetsProviderInstance,
                       ),
-                      child: Wrap(spacing: 10.0, children: [
-                        Icon(Icons.delete),
-                        Text(
-                          AppLocalizations.of(context)
-                              .deleteAllPresetsLabel
-                              .toUpperCase(),
-                        ),
-                      ]),
+                      child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          runAlignment: WrapAlignment.center,
+                          spacing: 10.0,
+                          children: [
+                            Icon(Icons.delete),
+                            Text(
+                              AppLocalizations.of(context)
+                                  .deleteAllPresetsLabel
+                                  .toUpperCase(),
+                            ),
+                          ]),
                     )
                 ],
               ),
