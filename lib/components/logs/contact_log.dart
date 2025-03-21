@@ -56,7 +56,7 @@ class ContactLog extends ConsumerWidget {
       child: Slidable(
         closeOnScroll: true,
         startActionPane: ActionPane(
-            extentRatio: 1,
+            extentRatio: 0.3,
             motion: const StretchMotion(),
             children: [
               Theme(
