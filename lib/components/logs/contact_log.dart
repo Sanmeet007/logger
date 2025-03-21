@@ -56,33 +56,46 @@ class ContactLog extends ConsumerWidget {
       child: Slidable(
         closeOnScroll: true,
         startActionPane: ActionPane(
-          extentRatio: 1,
-          motion: const StretchMotion(),
-          children: [
-            Theme(
-              data: Theme.of(context).copyWith(
-                outlinedButtonTheme: OutlinedButtonThemeData(
-                  style: ButtonStyle(
-                      iconColor: Theme.of(context).brightness == Brightness.dark
-                          ? WidgetStatePropertyAll(
-                              Color.fromARGB(255, 235, 235, 235))
-                          : WidgetStatePropertyAll(Colors.white)),
+            extentRatio: 1,
+            motion: const StretchMotion(),
+            children: [
+              Theme(
+                data: Theme.of(context).copyWith(
+                  outlinedButtonTheme: OutlinedButtonThemeData(
+                    style: ButtonStyle(
+                        iconColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? WidgetStatePropertyAll(
+                                    Color.fromARGB(255, 235, 235, 235))
+                                : WidgetStatePropertyAll(Colors.white)),
+                  ),
+                ),
+                child: SlidableAction(
+                  autoClose: true,
+                  flex: 1,
+                  onPressed: (context) async {
+                    var uri = Uri.parse("tel:${logDetails.number}");
+                    await launchUrl(uri);
+                  },
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(255, 60, 60, 60)
+                          : Colors.black,
+                  icon: Icons.call,
+                  label: AppLocalizations.of(context).callText,
                 ),
               ),
-              child: SlidableAction(
-                autoClose: true,
-                flex: 1,
-                onPressed: (context) async {
-                  var uri = Uri.parse("tel:${logDetails.number}");
-                  await launchUrl(uri);
-                },
-                backgroundColor: Theme.of(context).brightness == Brightness.dark
-                    ? const Color.fromARGB(255, 60, 60, 60)
-                    : Colors.black,
-                icon: Icons.call,
-                label: AppLocalizations.of(context).callText,
-              ),
-            ),
+            ]),
+        endActionPane: ActionPane(
+          extentRatio: (logDetails.number != null &&
+                  ref.watch(whatsappAvailabilityProvider).hasValue &&
+                  (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
+                          false) ==
+                      true)
+              ? 0.6
+              : 0.3,
+          motion: const StretchMotion(),
+          children: [
             Theme(
               data: Theme.of(context).copyWith(
                 outlinedButtonTheme: OutlinedButtonThemeData(

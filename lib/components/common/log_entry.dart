@@ -68,7 +68,7 @@ class LogEntry extends ConsumerWidget {
     return Slidable(
       closeOnScroll: true,
       startActionPane: ActionPane(
-        extentRatio: 1,
+        extentRatio: 0.3,
         // A motion is a widget used to control how the pane animates.
         motion: const StretchMotion(),
         // All actions are defined in the children parameter.
@@ -98,6 +98,17 @@ class LogEntry extends ConsumerWidget {
               label: 'Call',
             ),
           ),
+        ],
+      ),
+      endActionPane: ActionPane(
+        extentRatio: (ref.watch(whatsappAvailabilityProvider).hasValue &&
+                (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
+                        false) ==
+                    true)
+            ? 0.6
+            : 0.3,
+        motion: const StretchMotion(),
+        children: [
           Theme(
             data: Theme.of(context).copyWith(
               outlinedButtonTheme: const OutlinedButtonThemeData(
@@ -120,7 +131,6 @@ class LogEntry extends ConsumerWidget {
               label: 'SMS',
             ),
           ),
-
           if (ref.watch(whatsappAvailabilityProvider).hasValue &&
               (ref.watch(whatsappAvailabilityProvider).valueOrNull ?? false) ==
                   true)
