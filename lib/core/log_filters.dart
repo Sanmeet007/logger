@@ -1,13 +1,13 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/components/common/date_picker.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/common/toggle_button.dart';
 import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
-import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,7 +40,7 @@ class LogFilters extends ConsumerStatefulWidget {
 }
 
 class _LogFiltersState extends ConsumerState<LogFilters> {
-  final formatter = CallDisplayHelper.defaultDateFormatter;
+  final formatter = DateFormat("yyyy-MM-dd");
 
   // Mutable List
   List<CallType> callTypes = [...CallType.values];
@@ -606,12 +606,11 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                       children: [
                         ListTile(
                           contentPadding: EdgeInsets.all(0),
-                          leading: SizedText(
+                          title: SizedText(
                             AppLocalizations.of(context).dateRangeText,
                             size: 18.0,
                           ),
                           trailing: Container(
-                            width: 100.0,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20.0,
                               vertical: 10.0,
@@ -627,7 +626,6 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: DropdownButton<DateRange>(
-                                isExpanded: true,
                                 isDense: true,
                                 underline: Container(),
                                 enableFeedback: true,
