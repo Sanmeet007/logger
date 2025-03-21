@@ -424,64 +424,57 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                     currentPresetId == -1)
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 15.0),
+                      vertical: 10.0,
+                      horizontal: 15.0,
+                    ),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedText(
-                              AppLocalizations.of(context)
-                                  .phoneAccountIdFilterText,
-                              size: 18.0,
-                            ),
-                            Container(
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1.0,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? const Color.fromARGB(255, 65, 65, 65)
-                                      : Colors.black87,
-                                ),
-                                borderRadius: BorderRadius.circular(100.0),
-                              ),
-                              child: DropdownButton<String>(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                  vertical: 10.0,
-                                ),
-                                // isDense: true,
-                                underline: Container(),
-                                isExpanded: true,
-                                isDense: true,
-                                enableFeedback: true,
-                                value: selectedPhoneAccountId,
-                                items: [
-                                  ...widget.availablePhoneAccountIds.map(
-                                    (item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(
-                                        item == constants.defaultPhoneAccountId
-                                            ? AppLocalizations.of(context)
-                                                .anyText
-                                            : item,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                                onChanged: handlePhoneAccountIdValueChange,
-                              ),
-                            ),
-                          ],
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(0),
+                      trailing: Container(
+                        width: 100.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1.0,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color.fromARGB(255, 65, 65, 65)
+                                    : Colors.black87,
+                          ),
+                          borderRadius: BorderRadius.circular(100.0),
                         ),
-                      ],
+                        child: DropdownButton<String>(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                            vertical: 10.0,
+                          ),
+                          // isDense: true,
+                          underline: Container(),
+                          isExpanded: true,
+                          isDense: true,
+                          enableFeedback: true,
+                          value: selectedPhoneAccountId,
+                          items: [
+                            ...widget.availablePhoneAccountIds.map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  item == constants.defaultPhoneAccountId
+                                      ? AppLocalizations.of(context).anyText
+                                      : item,
+                                ),
+                              ),
+                            )
+                          ],
+                          onChanged: handlePhoneAccountIdValueChange,
+                        ),
+                      ),
+                      title: SizedText(
+                        AppLocalizations.of(context).phoneAccountIdFilterText,
+                        size: 18.0,
+                      ),
                     ),
                   ),
                 if (widget.canFilterUsingPhoneAccountId &&
@@ -611,47 +604,44 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedText(
-                              AppLocalizations.of(context).dateRangeText,
-                              size: 18.0,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1.0,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? const Color.fromARGB(255, 65, 65, 65)
-                                      : Colors.black87,
-                                ),
-                                borderRadius: BorderRadius.circular(100.0),
+                        ListTile(
+                          contentPadding: EdgeInsets.all(0),
+                          leading: SizedText(
+                            AppLocalizations.of(context).dateRangeText,
+                            size: 18.0,
+                          ),
+                          trailing: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1.0,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color.fromARGB(255, 65, 65, 65)
+                                    : Colors.black87,
                               ),
-                              child: DropdownButton<DateRange>(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0,
-                                    vertical: 10.0,
-                                  ),
-                                  isDense: true,
-                                  underline: Container(),
-                                  enableFeedback: true,
-                                  value: dateRangeOption,
-                                  items: [
-                                    ...DateRangeHelper.getRanges(context).map(
-                                      (item) => DropdownMenuItem(
-                                        value: item["key"],
-                                        child: Text(
-                                          item["value"]!,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                  onChanged: handleDateRangeOptionChange),
+                              borderRadius: BorderRadius.circular(100.0),
                             ),
-                          ],
+                            child: DropdownButton<DateRange>(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 10.0,
+                                ),
+                                isDense: true,
+                                underline: Container(),
+                                enableFeedback: true,
+                                value: dateRangeOption,
+                                items: [
+                                  ...DateRangeHelper.getRanges(context).map(
+                                    (item) => DropdownMenuItem(
+                                      value: item["key"],
+                                      child: Text(
+                                        item["value"]!,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                                onChanged: handleDateRangeOptionChange),
+                          ),
                         ),
                         if (dateRangeOption == DateRange.custom)
                           Column(
