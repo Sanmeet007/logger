@@ -32,9 +32,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool isDoneImporting = false;
 
   void handleCallLogImport() async {
-    WakelockPlus.enable();
-
     var linearProgressLoader = ref.read(linearLoaderProvider.notifier);
+
+    await WakelockPlus.enable().catchError((_) {});
+
     try {
       var uris = await openDocument(mimeType: 'text/comma-separated-values');
       if (uris != null) {
@@ -104,7 +105,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         );
       }
     } finally {
-      WakelockPlus.disable();
+      await WakelockPlus.disable().catchError((_) {});
     }
   }
 
@@ -144,6 +145,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ],
           );
         });
+  }
+
+  @override
+  void dispose() {
+    WakelockPlus.disable().catchError((_) {});
+    super.dispose();
   }
 
   @override
