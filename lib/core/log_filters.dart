@@ -611,6 +611,10 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                             size: 18.0,
                           ),
                           trailing: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                              vertical: 10.0,
+                            ),
                             decoration: BoxDecoration(
                               border: Border.all(
                                 width: 1.0,
@@ -622,10 +626,6 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: DropdownButton<DateRange>(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                  vertical: 10.0,
-                                ),
                                 isDense: true,
                                 underline: Container(),
                                 enableFeedback: true,
@@ -636,6 +636,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                                       value: item["key"],
                                       child: Text(
                                         item["value"]!,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
                                   )
@@ -693,6 +694,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                         onPressed: clearFilters,
                         child: Text(
                           AppLocalizations.of(context).resetToDefaultText,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
@@ -709,6 +711,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                         onPressed: canApplyFilters ? applyFilters : null,
                         child: Text(
                           AppLocalizations.of(context).applyFiltersText,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
