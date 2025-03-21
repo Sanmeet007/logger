@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> openWhatsApp(BuildContext context, String phoneNumber) async {
   try {
-    final url = "https://wa.me/$phoneNumber";
+    final url = "whatsapp://send?phone=$phoneNumber";
 
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
