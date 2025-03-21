@@ -1,8 +1,11 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class CallDisplayHelper {
+  static final defaultDateFormatter = DateFormat("yyyy-MM-dd");
+
   static List getCallDisplayFields(CallType callType, BuildContext context) {
     String rCallType;
     late Color callColor;

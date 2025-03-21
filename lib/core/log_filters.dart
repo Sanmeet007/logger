@@ -1,13 +1,13 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:logger/components/common/date_picker.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/common/toggle_button.dart';
 import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,9 +40,9 @@ class LogFilters extends ConsumerStatefulWidget {
 }
 
 class _LogFiltersState extends ConsumerState<LogFilters> {
-  final formatter = DateFormat("yyyy-MM-dd");
+  final formatter = CallDisplayHelper.defaultDateFormatter;
 
-  // Creating new mutable List
+  // Mutable List
   List<CallType> callTypes = [...CallType.values];
 
   late int currentPresetId;
