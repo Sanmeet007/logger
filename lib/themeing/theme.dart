@@ -18,11 +18,19 @@ class ThemeClass {
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        elevation: 0,
-        foregroundColor: const Color.fromARGB(255, 95, 61, 148),
-        side: const BorderSide(
-          color: Color.fromARGB(255, 215, 189, 255),
+      style: ButtonStyle(
+        elevation: WidgetStateProperty.all(0),
+        side: WidgetStateBorderSide.resolveWith(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return const BorderSide(
+                color: Color.fromARGB(78, 81, 81, 81),
+              );
+            }
+            return const BorderSide(
+              color: Color.fromARGB(255, 151, 133, 192),
+            );
+          },
         ),
       ),
     ),
@@ -52,11 +60,19 @@ class ThemeClass {
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        elevation: 0,
-        foregroundColor: const Color.fromARGB(255, 202, 169, 255),
-        side: const BorderSide(
-          color: Color.fromARGB(255, 69, 59, 84),
+      style: ButtonStyle(
+        elevation: WidgetStateProperty.all(0),
+        side: WidgetStateBorderSide.resolveWith(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return const BorderSide(
+                color: Color.fromARGB(255, 44, 44, 44),
+              );
+            }
+            return const BorderSide(
+              color: Color.fromARGB(159, 175, 157, 201),
+            );
+          },
         ),
       ),
     ),
