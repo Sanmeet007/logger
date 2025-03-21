@@ -58,6 +58,29 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
         });
   }
 
+  Future<void> editPresetDialog(int id) async {
+    final preset =
+        await ref.read(filterPresetsProvider.notifier).getPresetById(id);
+
+    if (mounted) {
+      showModalBottomSheet(
+          context: context,
+          showDragHandle: true,
+          isScrollControlled: true,
+          builder: (context) {
+            return PresetEditor(
+              canFilterUsingDuration: ref.read(durationFilteringProvider),
+              canFilterUsingPhoneAccountId:
+                  ref.read(phoneAccountFilteringProvider),
+              availablePhoneAccountIds: ref
+                  .read(callLogsNotifierProvider.notifier)
+                  .getAvailablePhoneAccountIds(),
+              preset: preset,
+            );
+          });
+    }
+  }
+
   Future<void> deletePresetById(int id) async {
     ref.read(logsFilterProvider.notifier).resetFilters();
     await ref.read(filterPresetsProvider.notifier).deleteFilterPresetById(id);
@@ -144,6 +167,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
                     height: 10.0,
                   ),
                   FilterPresetsList(
+                    editPreset: editPresetDialog,
                     deletePreset: deletePresetById,
                     enabled: canUsePresets,
                   ),
@@ -199,10 +223,13 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
 
 class FilterPresetsList extends ConsumerWidget {
   final Future<void> Function(int) deletePreset;
+  final Future<void> Function(int) editPreset;
+
   final bool enabled;
   const FilterPresetsList({
     super.key,
     required this.deletePreset,
+    required this.editPreset,
     required this.enabled,
   });
 
@@ -243,7 +270,9 @@ class FilterPresetsList extends ConsumerWidget {
                       onPressed: () => deletePreset(presets[i].id),
                       icon: Icon(Icons.delete),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      editPreset(presets[i].id);
+                    },
                     title: Text(presets[i].name),
                   ),
                 );

@@ -34,97 +34,221 @@ class PresetEditor extends ConsumerStatefulWidget {
 
 class _PresetEditorState extends ConsumerState<PresetEditor> {
   final formatter = DateFormat("yyyy-MM-dd");
-  bool canApplyFilters = true;
-
+  bool canSaveFilters = false;
   late bool isNumberSearchEnabled;
   late bool isDurationFilteringOn;
   late String selectedPhoneAccountId;
   late DateRange dateRangeOption;
+  late List<CallType> selectedCallTypes;
 
   late final TextEditingController _presetInputNameContoller;
   late final TextEditingController _phoneNumberInputController;
   late final TextEditingController _minDurationInputController;
   late final TextEditingController _maxDurationInputController;
   late final TextEditingController _startDateController, _endDateController;
-  late final List<CallType> selectedCallTypes;
 
   void toggleNumberSearch(bool v) {
     setState(() {
       isNumberSearchEnabled = v;
     });
+    checkFiltersState();
   }
-
-  void handlePhoneNumberValueChange(String v) {}
 
   void handlePhoneAccountIdValueChange(String? v) {
     if (v == null) return;
     setState(() {
       selectedPhoneAccountId = v;
     });
+    checkFiltersState();
   }
 
   void setFilterByDurationState(bool v) {
     setState(() {
       isDurationFilteringOn = v;
     });
+    checkFiltersState();
   }
 
-  void handleMinDurationValueChange(String? v) {}
-  void handleMaxDurationValueChange(String? v) {}
-  void handleCallTypeChange(CallType t, bool v) {}
+  void handleCallTypeChange(CallType t, bool selected) {
+    setState(() {
+      if (selected) {
+        if (!selectedCallTypes.contains(t)) {
+          selectedCallTypes = [...selectedCallTypes, t];
+        }
+      } else {
+        if (selectedCallTypes.contains(t)) {
+          selectedCallTypes = [...selectedCallTypes];
+          selectedCallTypes.remove(t);
+        }
+      }
+    });
+
+    checkFiltersState();
+  }
+
   void handleDateRangeOptionChange(DateRange? op) {
     if (op == null) return;
     setState(() {
       dateRangeOption = op;
     });
+    checkFiltersState();
   }
 
-  void handleStartDateChanges(String v) {}
-  void handleEndDateChanges(String v) {}
+  void handlePhoneNumberValueChange(String? v) {
+    if (v == null) return;
+    if (widget.preset.filterDetails.phoneToMatch != v) {
+      checkFiltersState();
+    }
+  }
+
+  void handleMinDurationValueChange(String? v) {
+    if (v == null) return;
+    var k = int.tryParse(v);
+    if (k != null && k > 0) {
+      if (widget.preset.filterDetails.minDuration.inSeconds !=
+          (int.tryParse(v) ?? 0)) {
+        checkFiltersState();
+      }
+    }
+  }
+
+  void handleMaxDurationValueChange(String? v) {
+    if (v == null) return;
+    var k = int.tryParse(v);
+    if (k != null && k > 0) {
+      if ((widget.preset.filterDetails.maxDuration?.inSeconds ?? 0) !=
+          (int.tryParse(v) ?? 0)) {
+        checkFiltersState();
+      }
+    }
+  }
+
+  void handleStartDateChanges(String? v) {
+    if (v == null) return;
+    if (formatter.format(widget.preset.filterDetails.startDate) != v) {
+      checkFiltersState();
+    }
+  }
+
+  void handleEndDateChanges(String? v) {
+    if (v == null) return;
+    if (formatter.format(widget.preset.filterDetails.endDate) != v) {
+      checkFiltersState();
+    }
+  }
+
+  void checkFiltersState() {
+    if (shouldApplyFilters()) {
+      setState(() {
+        canSaveFilters = true;
+      });
+    } else {
+      setState(() {
+        canSaveFilters = false;
+      });
+    }
+  }
+
+  bool shouldApplyFilters() {
+    return !FilterUtils.compareFilterMasks(
+      Filter(
+        usesSpecificPhoneNumber: isNumberSearchEnabled,
+        phoneToMatch: _phoneNumberInputController.text,
+        selectedCallTypes: selectedCallTypes,
+        dateRangeOption: dateRangeOption,
+        startDate: _startDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_startDateController.text),
+        endDate: _endDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_endDateController.text),
+        usesDurationFiltering: isDurationFilteringOn,
+        minDuration: Duration(
+          seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+        ),
+        maxDuration: _maxDurationInputController.text.isEmpty
+            ? null
+            : Duration(
+                seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
+              ),
+        phoneAccountId: selectedPhoneAccountId,
+      ),
+      widget.preset.filterDetails,
+    );
+  }
 
   void saveFilterPreset() async {
-    await ref.read(filterPresetsProvider.notifier).addFilterPreset(
-          Filter(
-            usesSpecificPhoneNumber: isNumberSearchEnabled,
-            phoneToMatch: _phoneNumberInputController.text,
-            selectedCallTypes: selectedCallTypes,
-            dateRangeOption: dateRangeOption,
-            startDate: _startDateController.text.isEmpty
-                ? DateTime.now()
-                : DateTime.parse(_startDateController.text),
-            endDate: _endDateController.text.isEmpty
-                ? DateTime.now()
-                : DateTime.parse(_endDateController.text),
-            usesDurationFiltering: isDurationFilteringOn,
-            minDuration: Duration(
-              seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+    final presetId = widget.preset.id;
+    final filterDetails = Filter(
+      usesSpecificPhoneNumber: isNumberSearchEnabled,
+      phoneToMatch: _phoneNumberInputController.text,
+      selectedCallTypes: selectedCallTypes,
+      dateRangeOption: dateRangeOption,
+      startDate: _startDateController.text.isEmpty
+          ? DateTime.now()
+          : DateTime.parse(_startDateController.text),
+      endDate: _endDateController.text.isEmpty
+          ? DateTime.now()
+          : DateTime.parse(_endDateController.text),
+      usesDurationFiltering: isDurationFilteringOn,
+      minDuration: Duration(
+        seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+      ),
+      maxDuration: _maxDurationInputController.text.isEmpty
+          ? null
+          : Duration(
+              seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
             ),
-            maxDuration: _maxDurationInputController.text.isEmpty
-                ? null
-                : Duration(
-                    seconds:
-                        int.tryParse(_maxDurationInputController.text) ?? 0,
-                  ),
-            phoneAccountId: selectedPhoneAccountId,
-          ),
-          _presetInputNameContoller.text,
-        );
+      phoneAccountId: selectedPhoneAccountId,
+    );
+
+    if (presetId == -1) {
+      await ref.read(filterPresetsProvider.notifier).addFilterPreset(
+            filterDetails,
+            _presetInputNameContoller.text,
+          );
+    } else {
+      await ref.read(filterPresetsProvider.notifier).updateFilterPreset(
+            FilterPreset(
+              name: _presetInputNameContoller.text,
+              filterDetails: filterDetails,
+              id: presetId,
+            ),
+          );
+    }
+
     if (mounted) {
       Navigator.pop(context);
     }
   }
 
-  void clearFilters() {}
-
   @override
   void initState() {
     super.initState();
-    _phoneNumberInputController = TextEditingController();
-    _presetInputNameContoller = TextEditingController()..text = "SpeedyPick#1";
-    _startDateController = TextEditingController();
-    _endDateController = TextEditingController();
-    _minDurationInputController = TextEditingController();
-    _maxDurationInputController = TextEditingController();
+
+    _presetInputNameContoller = TextEditingController(
+      text: widget.preset.name,
+    );
+
+    _phoneNumberInputController =
+        TextEditingController(text: widget.preset.filterDetails.phoneToMatch);
+
+    _minDurationInputController = TextEditingController(
+      text: widget.preset.filterDetails.minDuration.inSeconds.toString(),
+    );
+    _maxDurationInputController = TextEditingController(
+      text: widget.preset.filterDetails.maxDuration?.inSeconds.toString() ?? "",
+    );
+    _endDateController = TextEditingController(
+      text: formatter.format(
+        widget.preset.filterDetails.endDate,
+      ),
+    );
+    _startDateController = TextEditingController(
+      text: formatter.format(
+        widget.preset.filterDetails.startDate,
+      ),
+    );
 
     selectedPhoneAccountId = widget.preset.filterDetails.phoneAccountId;
     dateRangeOption = widget.preset.filterDetails.dateRangeOption;
@@ -520,7 +644,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                         backgroundColor:
                             const Color.fromARGB(255, 222, 200, 255),
                       ),
-                      onPressed: canApplyFilters ? saveFilterPreset : null,
+                      onPressed: canSaveFilters ? saveFilterPreset : null,
                       child: Text(
                         AppLocalizations.of(context).saveText,
                       ),
