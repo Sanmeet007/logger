@@ -61,8 +61,8 @@ Logger is a user-friendly Android application built with Flutter that empowers y
 
 ## 🚀 Screenshots
 
-![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-7.png)
-![Screenshot-2](https://sanmeet007.github.io/public/logger/screenshot-13.png)
+![Screenshot-1](https://sanmeet007.github.io/public/logger/screenshot-14.png)
+![Screenshot-2](https://sanmeet007.github.io/public/logger/screenshot-15.png)
 
 ## Built With
 
@@ -85,7 +85,7 @@ For inquiries or feedback, feel free to reach out via:
 This section provides options to download the Logger app, both the official release and the build available on the F-Droid repository. Choose the method that best suits your needs.
 
 <p>
-<a href="https://github.com/Sanmeet007/logger/releases/tag/v2.8.3">
+<a href="https://github.com/Sanmeet007/logger/releases/tag/v3.0.8">
 <img src="https://img.shields.io/badge/download%20now-%236a1ae3.svg?&style=for-the-badge&logoColor=white" alt="Download link button" width="160" height="40"/>
 </a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/com.logger.app/">
