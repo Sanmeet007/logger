@@ -109,7 +109,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         builder: (context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context).confirmImportLabelText,
+              AppLocalizations.of(context).startImportText,
             ),
             content: SingleChildScrollView(
               child: Text(
