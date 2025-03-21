@@ -1,6 +1,6 @@
 class AppInformation {
   static String getVersion() {
-    return "3.0.0";
+    return "3.0.4";
   }
 
   static String supportURL() {
@@ -8,7 +8,7 @@ class AppInformation {
   }
 
   static String supportEmail() {
-    return "ssanmeet123@gmail.com";
+    return "ssanmeet007@gmail.com";
   }
 
   static Uri getReportLink() {
