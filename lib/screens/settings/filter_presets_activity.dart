@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
+import 'package:logger/components/common/loader.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/call_logs_provider.dart';
@@ -244,7 +245,9 @@ class FilterPresetsList extends ConsumerWidget {
     final filterPresetsState = ref.watch(filterPresetsProvider);
 
     return filterPresetsState.when(
-      loading: () => Container(),
+      loading: () => FilterPresetsPlaceholderWidget(
+        child: Loader(),
+      ),
       data: (presets) {
         if (presets.isEmpty) {
           return FilterPresetsPlaceholder(
@@ -317,6 +320,32 @@ class FilterPresetsPlaceholder extends StatelessWidget {
             color: Theme.of(context).hintColor,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FilterPresetsPlaceholderWidget extends StatelessWidget {
+  final Widget child;
+  final double height;
+
+  const FilterPresetsPlaceholderWidget({
+    super.key,
+    required this.child,
+    this.height = 100,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      padding: EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Center(
+        child: child,
       ),
     );
   }
