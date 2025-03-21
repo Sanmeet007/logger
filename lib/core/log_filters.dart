@@ -611,6 +611,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                             size: 18.0,
                           ),
                           trailing: Container(
+                            width: 100.0,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20.0,
                               vertical: 10.0,
@@ -626,6 +627,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: DropdownButton<DateRange>(
+                                isExpanded: true,
                                 isDense: true,
                                 underline: Container(),
                                 enableFeedback: true,
