@@ -10,6 +10,7 @@ import 'package:logger/providers/filter_presets_provider.dart';
 import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/snackbar.dart';
 
 class PresetEditor extends ConsumerStatefulWidget {
   final FilterPreset preset;
@@ -176,47 +177,56 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
   }
 
   void saveFilterPreset() async {
-    final presetId = widget.preset.id;
-    final filterDetails = Filter(
-      usesSpecificPhoneNumber: isNumberSearchEnabled,
-      phoneToMatch: _phoneNumberInputController.text,
-      selectedCallTypes: selectedCallTypes,
-      dateRangeOption: dateRangeOption,
-      startDate: _startDateController.text.isEmpty
-          ? DateTime.now()
-          : DateTime.parse(_startDateController.text),
-      endDate: _endDateController.text.isEmpty
-          ? DateTime.now()
-          : DateTime.parse(_endDateController.text),
-      usesDurationFiltering: isDurationFilteringOn,
-      minDuration: Duration(
-        seconds: int.tryParse(_minDurationInputController.text) ?? 0,
-      ),
-      maxDuration: _maxDurationInputController.text.isEmpty
-          ? null
-          : Duration(
-              seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
-            ),
-      phoneAccountId: selectedPhoneAccountId,
-    );
+    try {
+      final presetId = widget.preset.id;
+      final filterDetails = Filter(
+        usesSpecificPhoneNumber: isNumberSearchEnabled,
+        phoneToMatch: _phoneNumberInputController.text,
+        selectedCallTypes: selectedCallTypes,
+        dateRangeOption: dateRangeOption,
+        startDate: _startDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_startDateController.text),
+        endDate: _endDateController.text.isEmpty
+            ? DateTime.now()
+            : DateTime.parse(_endDateController.text),
+        usesDurationFiltering: isDurationFilteringOn,
+        minDuration: Duration(
+          seconds: int.tryParse(_minDurationInputController.text) ?? 0,
+        ),
+        maxDuration: _maxDurationInputController.text.isEmpty
+            ? null
+            : Duration(
+                seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
+              ),
+        phoneAccountId: selectedPhoneAccountId,
+      );
 
-    if (presetId == -1) {
-      await ref.read(filterPresetsProvider.notifier).addFilterPreset(
-            filterDetails,
-            _presetInputNameContoller.text,
-          );
-    } else {
-      await ref.read(filterPresetsProvider.notifier).updateFilterPreset(
-            FilterPreset(
-              name: _presetInputNameContoller.text,
-              filterDetails: filterDetails,
-              id: presetId,
-            ),
-          );
-    }
+      if (presetId == -1) {
+        await ref.read(filterPresetsProvider.notifier).addFilterPreset(
+              filterDetails,
+              _presetInputNameContoller.text,
+            );
+      } else {
+        await ref.read(filterPresetsProvider.notifier).updateFilterPreset(
+              FilterPreset(
+                name: _presetInputNameContoller.text,
+                filterDetails: filterDetails,
+                id: presetId,
+              ),
+            );
+      }
 
-    if (mounted) {
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    } catch (_) {
+      if (mounted) {
+        AppSnackBar.show(
+          context,
+          content: AppLocalizations.of(context).appFatalError,
+        );
+      }
     }
   }
 
