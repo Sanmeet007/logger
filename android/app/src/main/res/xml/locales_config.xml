@@ -15,4 +15,5 @@
     <locale android:name="ko"/> <!-- Korean -->
     <locale android:name="fi"/> <!-- Finnish -->
     <locale android:name="ja"/> <!-- Japanese -->
+    <locale android:name="tr"/> <!-- Turkish -->
 </locale-config>
