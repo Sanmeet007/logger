@@ -5,76 +5,100 @@ import 'package:logger/components/common/log_entry.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/grouper.dart';
 
 class GroupedLogsBuilder extends StatelessWidget {
   final List<CallLogEntry> entries;
   final String formattedDate;
-  const GroupedLogsBuilder(
-      {super.key, required this.entries, required this.formattedDate});
+  final bool groupByContactAndTypes;
+
+  const GroupedLogsBuilder({
+    super.key,
+    required this.entries,
+    required this.formattedDate,
+    this.groupByContactAndTypes = false,
+  });
 
   @override
   Widget build(BuildContext context) {
+    if (groupByContactAndTypes) {
+      final groupedEntries = LogsGrouper.groupByContactAndType(entries);
+      return _buildList(context, groupedEntries, formattedDate,
+          isGrouped: true);
+    } else {
+      return _buildList(context, entries, formattedDate, isGrouped: false);
+    }
+  }
+
+  static Widget _buildList(
+    BuildContext context,
+    dynamic entries,
+    String formattedDate, {
+    required bool isGrouped,
+  }) {
     return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: entries.length,
-        itemBuilder: (context, entryIndex) {
-          var entry = entries.elementAt(entryIndex);
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: entries.length,
+      itemBuilder: (context, entryIndex) {
+        final group =
+            isGrouped ? entries[entryIndex] as List<CallLogEntry> : null;
+        final entry =
+            isGrouped ? group!.first : entries[entryIndex] as CallLogEntry;
 
-          bool isUnknown = true;
+        final isUnknown = (entry.name ?? "").isEmpty;
+        String name = entry.name?.isNotEmpty == true
+            ? entry.name!
+            : AppLocalizations.of(context).unknownText;
 
-          String name = entry.name ?? "";
-          if (name.isEmpty) {
-            isUnknown = true;
-            name = AppLocalizations.of(context).unknownText;
-          } else {
-            isUnknown = false;
-          }
+        if (isGrouped) {
+          name = LogsGrouper.addEntryCountToName(name, group!.length);
+        }
 
-          String phoneAccountId =
-              entry.phoneAccountId ?? AppLocalizations.of(context).unknownText;
+        final phoneAccountId =
+            entry.phoneAccountId ?? AppLocalizations.of(context).unknownText;
 
-          String sim =
-              entry.simDisplayName ?? AppLocalizations.of(context).unknownText;
-          int duration = entry.duration ?? 0;
-          int timestamp = entry.timestamp ?? 1;
+        final sim =
+            entry.simDisplayName ?? AppLocalizations.of(context).unknownText;
 
-          String timeString = FromatHelpers.formatTimeFromTimeStamp(
-            context: context,
-            timestamp: timestamp,
-          );
+        final duration = entry.duration ?? 0;
+        final timestamp = entry.timestamp ?? 1;
 
-          String phoneNumber =
-              entry.number ?? AppLocalizations.of(context).naText;
+        final timeString = FromatHelpers.formatTimeFromTimeStamp(
+          context: context,
+          timestamp: timestamp,
+        );
 
-          var details = CallDisplayHelper.getCallDisplayFields(
-            entry.callType ?? CallType.unknown,
-            context,
-          );
-          Color callColor = details[0];
-          IconData callIcon = details[1];
-          String callType = details[2];
+        final phoneNumber = entry.number ?? AppLocalizations.of(context).naText;
 
-          int index = entries.indexOf(entry);
+        final details = CallDisplayHelper.getCallDisplayFields(
+          entry.callType ?? CallType.unknown,
+          context,
+        );
 
-          return Column(
-            children: [
-              if (index != 0) const LogDivider(),
-              LogEntry(
-                isUnknown: isUnknown,
-                name: name,
-                phoneNumber: phoneNumber,
-                callIcon: callIcon,
-                callColor: callColor,
-                timeString: timeString,
-                formattedDate: formattedDate,
-                duration: duration,
-                callType: callType,
-                sim: sim,
-                phoneAccountId: phoneAccountId,
-              ),
-            ],
-          );
-        });
+        final Color callColor = details[0];
+        final IconData callIcon = details[1];
+        final String callType = details[2];
+
+        return Column(
+          children: [
+            if (entryIndex != 0) const LogDivider(),
+            LogEntry(
+              isUnknown: isUnknown,
+              name: name,
+              phoneNumber: phoneNumber,
+              callIcon: callIcon,
+              callColor: callColor,
+              timeString: timeString,
+              formattedDate: formattedDate,
+              duration: duration,
+              callType: callType,
+              sim: sim,
+              phoneAccountId: phoneAccountId,
+            ),
+          ],
+        );
+      },
+    );
   }
 }

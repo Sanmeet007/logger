@@ -1,13 +1,17 @@
+// TODO: Implement toggle fn for grouping also fix the summary page for each call log for new grouping
+
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/logs/grouped_logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/call_log_grouper.dart';
 import 'package:logger/utils/format_helpers.dart';
 
-class LogsPage extends StatefulWidget {
+class LogsPage extends ConsumerStatefulWidget {
   final Iterable<CallLogEntry>? entries;
   final bool callLogCountVisibility;
   const LogsPage({
@@ -17,10 +21,10 @@ class LogsPage extends StatefulWidget {
   });
 
   @override
-  State<LogsPage> createState() => _LogsPageState();
+  ConsumerState<LogsPage> createState() => _LogsPageState();
 }
 
-class _LogsPageState extends State<LogsPage> {
+class _LogsPageState extends ConsumerState<LogsPage> {
   final ScrollController _scrollController = ScrollController();
   bool _isVisible = false;
 
@@ -139,6 +143,10 @@ class _LogsPageState extends State<LogsPage> {
                       child: GroupedLogsBuilder(
                         entries: mapEntry.value,
                         formattedDate: mapEntry.key,
+                        groupByContactAndTypes:
+                            ref.watch(logsFilterProvider).areFiltersApplied
+                                ? false
+                                : true,
                       ),
                     ),
                   )
