@@ -13,6 +13,7 @@ import 'package:logger/providers/shared_preferences_providers/logs_sharing_provi
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/providers/shared_preferences_providers/use_grouping_with_filters.dart';
 import 'package:logger/screens/settings/filter_presets_activity.dart';
 import 'package:logger/screens/settings/fragments/export_filename_dialog.dart';
 import 'package:logger/screens/settings/fragments/export_format_dialog.dart';
@@ -169,6 +170,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 children: [
                   GroupCallsDialog(
                     groupBy: ref.read(groupedCallsTypeProvider),
+                    isFilterGroupingEnabled: ref.read(filterGroupingProvider),
                   ),
                 ],
               );

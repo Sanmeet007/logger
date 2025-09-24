@@ -133,4 +133,12 @@ class SharedUtility {
   void setGroupedCallsType(GroupBy v) {
     sharedPreferences.setInt(constants.sharedGroupedCallsType, v.index);
   }
+
+  bool isFilterGroupingEnabled() {
+    return sharedPreferences.getBool(constants.sharedfilterGrouping) ?? false;
+  }
+
+  void toggleFilterGrouping(bool newState) {
+    sharedPreferences.setBool(constants.sharedfilterGrouping, newState);
+  }
 }

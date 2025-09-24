@@ -61,6 +61,31 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
     }
   }
 
+  Future<void> reapply() async {
+    try {
+      final allLogs =
+          ref.read(callLogsNotifierProvider).value ?? Iterable.empty();
+
+      if (!state.areFiltersApplied ||
+          FilterUtils.compareFilterMasks(
+              state.filter, Filter.defaultFilterConfig)) {
+        state = state.copyWith(
+          areFiltersApplied: false,
+          filter: Filter.defaultFilterConfig,
+          activeFilterId: -1,
+        );
+        ref.read(currentCallLogsNotifierProvider.notifier).update(allLogs);
+        return;
+      }
+
+      final filteredLogs = await FilterUtils.filterLogs(allLogs, state.filter);
+      ref.read(currentCallLogsNotifierProvider.notifier).update(filteredLogs);
+    } catch (_) {
+      state = state.copyWith(areFiltersApplied: false);
+      ref.read(currentCallLogsNotifierProvider.notifier).reset();
+    }
+  }
+
   Future<void> applyFilters(Filter newFilter, [int? id]) async {
     try {
       final allLogs =

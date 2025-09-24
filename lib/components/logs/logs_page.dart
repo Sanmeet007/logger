@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/logs/grouped_logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/grouped_calls_type_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/use_grouping_with_filters.dart';
 import 'package:logger/utils/call_log_grouper.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/grouper.dart';
 
 class LogsPage extends ConsumerStatefulWidget {
   final Iterable<CallLogEntry>? entries;
@@ -141,10 +144,11 @@ class _LogsPageState extends ConsumerState<LogsPage> {
                       child: GroupedLogsBuilder(
                         entries: mapEntry.value,
                         formattedDate: mapEntry.key,
-                        groupBy: ref.watch(groupedCallsTypeProvider),
-                        // ref.watch(logsFilterProvider).areFiltersApplied
-                        //     ? false
-                        //     : true,
+                        groupBy: ref.watch(logsFilterProvider).areFiltersApplied
+                            ? (ref.watch(filterGroupingProvider)
+                                ? ref.watch(groupedCallsTypeProvider)
+                                : GroupBy.none)
+                            : ref.watch(groupedCallsTypeProvider),
                       ),
                     ),
                   )
