@@ -218,5 +218,7 @@
     "groupByContactOnlyConsecutiveDescription": "Yhdistää saman yhteystiedon peräkkäiset puhelut yhdeksi ryhmäksi",
     "groupByContactOnlyTitle": "Ryhmittele yhteystiedon mukaan",
     "groupByContactOnlyDescription": "Ryhmittelee kaikki saman yhteystiedon puhelut",
-    "groupByNoneDescription": "Ei ryhmittelyä – jokainen puhelu näytetään erikseen"
+    "groupByNoneDescription": "Ei ryhmittelyä – jokainen puhelu näytetään erikseen",
+    "callGroupingText": "Puhelujen ryhmittely",
+    "useGroupingSwitchText": "Käytä ryhmittelyä suodattimien kanssa"
 }

@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Объединяет последовательные звонки от одного контакта в одну группу",
   "groupByContactOnlyTitle": "Группировать по контакту",
   "groupByContactOnlyDescription": "Группирует все звонки от одного контакта",
-  "groupByNoneDescription": "Без группировки — каждый звонок отображается отдельно"
+  "groupByNoneDescription": "Без группировки — каждый звонок отображается отдельно",
+  "callGroupingText": "Группировка звонков",
+  "useGroupingSwitchText": "Использовать группировку с фильтрами"
 }

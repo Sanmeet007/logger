@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Combină apelurile consecutive de la același contact într-un singur grup",
   "groupByContactOnlyTitle": "Grupare după contact",
   "groupByContactOnlyDescription": "Grupează toate apelurile de la același contact",
-  "groupByNoneDescription": "Fără grupare — fiecare apel este afișat separat"
+  "groupByNoneDescription": "Fără grupare — fiecare apel este afișat separat",
+  "callGroupingText": "Gruparea apelurilor",
+  "useGroupingSwitchText": "Folosește gruparea cu filtre"
 }

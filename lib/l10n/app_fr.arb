@@ -218,5 +218,7 @@
     "groupByContactOnlyConsecutiveDescription": "Regroupe les appels consécutifs du même contact en un seul groupe",
     "groupByContactOnlyTitle": "Regrouper par contact",
     "groupByContactOnlyDescription": "Regroupe tous les appels du même contact",
-    "groupByNoneDescription": "Aucun regroupement — chaque appel est affiché séparément"
+    "groupByNoneDescription": "Aucun regroupement — chaque appel est affiché séparément",
+    "callGroupingText": "Puhelujen ryhmittely",
+    "useGroupingSwitchText": "Käytä ryhmittelyä suodattimien kanssa"
 }

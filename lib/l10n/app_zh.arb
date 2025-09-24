@@ -218,5 +218,7 @@
     "groupByContactOnlyConsecutiveDescription": "将同一联系人的连续通话合并为一个组",
     "groupByContactOnlyTitle": "按联系人分组",
     "groupByContactOnlyDescription": "将同一联系人的所有通话分组",
-    "groupByNoneDescription": "不分组 — 每个通话单独显示"
+    "groupByNoneDescription": "不分组 — 每个通话单独显示",
+    "callGroupingText": "通话分组",
+    "useGroupingSwitchText": "与过滤器一起使用分组"
 }

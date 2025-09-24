@@ -218,5 +218,7 @@
     "groupByContactOnlyConsecutiveDescription": "Fasst aufeinanderfolgende Anrufe desselben Kontakts zu einer Gruppe zusammen",
     "groupByContactOnlyTitle": "Nach Kontakt gruppieren",
     "groupByContactOnlyDescription": "Fasst alle Anrufe desselben Kontakts zusammen",
-    "groupByNoneDescription": "Keine Gruppierung – jeder Anruf wird einzeln angezeigt"
+    "groupByNoneDescription": "Keine Gruppierung – jeder Anruf wird einzeln angezeigt",
+    "callGroupingText": "Anrufgruppierung",
+    "useGroupingSwitchText": "Gruppierung mit Filtern verwenden"
 }

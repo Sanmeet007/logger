@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Aynı kişiden gelen ardışık aramaları tek bir grup halinde birleştirir",
   "groupByContactOnlyTitle": "Kişiye Göre Grupla",
   "groupByContactOnlyDescription": "Aynı kişiden gelen tüm aramaları grupla",
-  "groupByNoneDescription": "Gruplama yok — her arama ayrı gösterilir"
+  "groupByNoneDescription": "Gruplama yok — her arama ayrı gösterilir",
+  "callGroupingText": "Çağrı Gruplama",
+  "useGroupingSwitchText": "Filtrelerle Gruplamayı Kullan"
 }

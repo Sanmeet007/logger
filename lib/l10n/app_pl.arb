@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Łączy kolejne połączenia od tego samego kontaktu w jedną grupę",
   "groupByContactOnlyTitle": "Grupuj według kontaktu",
   "groupByContactOnlyDescription": "Grupuje wszystkie połączenia od tego samego kontaktu",
-  "groupByNoneDescription": "Brak grupowania — każde połączenie wyświetlane jest osobno"
+  "groupByNoneDescription": "Brak grupowania — każde połączenie wyświetlane jest osobno",
+  "callGroupingText": "Grupowanie połączeń",
+  "useGroupingSwitchText": "Użyj grupowania z filtrami"
 }

@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Voegt opeenvolgende oproepen van hetzelfde contact samen in één groep",
   "groupByContactOnlyTitle": "Groepeer op contact",
   "groupByContactOnlyDescription": "Groepeert alle oproepen van hetzelfde contact",
-  "groupByNoneDescription": "Geen groepering — elke oproep wordt afzonderlijk weergegeven"
+  "groupByNoneDescription": "Geen groepering — elke oproep wordt afzonderlijk weergegeven",
+   "callGroupingText": "Oproepgroepering",
+  "useGroupingSwitchText": "Groepering met filters gebruiken"
 }

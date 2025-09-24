@@ -218,5 +218,7 @@
     "groupByContactOnlyConsecutiveDescription": "Slår ihop på varandra följande samtal från samma kontakt till en grupp",
     "groupByContactOnlyTitle": "Gruppera efter kontakt",
     "groupByContactOnlyDescription": "Grupperar alla samtal från samma kontakt",
-    "groupByNoneDescription": "Ingen gruppering — varje samtal visas separat"
+    "groupByNoneDescription": "Ingen gruppering — varje samtal visas separat",
+    "callGroupingText": "Samtalsgruppering",
+    "useGroupingSwitchText": "Använd gruppering med filter"
 }

@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "Combina llamadas consecutivas del mismo contacto en un solo grupo",
   "groupByContactOnlyTitle": "Agrupar por contacto",
   "groupByContactOnlyDescription": "Agrupa todas las llamadas del mismo contacto",
-  "groupByNoneDescription": "Sin agrupación: cada llamada se muestra por separado"
+  "groupByNoneDescription": "Sin agrupación: cada llamada se muestra por separado",
+  "callGroupingText": "Agrupación de llamadas",
+  "useGroupingSwitchText": "Usar agrupación con filtros"
 }

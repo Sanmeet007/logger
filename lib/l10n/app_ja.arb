@@ -218,5 +218,7 @@
   "groupByContactOnlyConsecutiveDescription": "同じ連絡先からの連続する通話を1つのグループにまとめます",
   "groupByContactOnlyTitle": "連絡先でグループ化",
   "groupByContactOnlyDescription": "同じ連絡先からのすべての通話をグループ化します",
-  "groupByNoneDescription": "グループ化なし — 各通話が個別に表示されます"
+  "groupByNoneDescription": "グループ化なし — 各通話が個別に表示されます",
+  "callGroupingText": "通話のグループ化",
+  "useGroupingSwitchText": "フィルターでグループ化を使用"
 }

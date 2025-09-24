@@ -227,5 +227,7 @@
   "groupByContactOnlyConsecutiveDescription": "एक ही संपर्क की लगातार कॉल को एक समूह में मिलाता है",
   "groupByContactOnlyTitle": "संपर्क के अनुसार समूहबद्ध करें",
   "groupByContactOnlyDescription": "एक ही संपर्क की सभी कॉल को समूहबद्ध करता है",
-  "groupByNoneDescription": "कोई समूहबद्ध नहीं — प्रत्येक कॉल अलग-अलग दिखाई जाएगी"
+  "groupByNoneDescription": "कोई समूहबद्ध नहीं — प्रत्येक कॉल अलग-अलग दिखाई जाएगी",
+  "callGroupingText": "कॉल समूहबद्ध करना",
+  "useGroupingSwitchText": "फ़िल्टर के साथ समूहबद्ध करना उपयोग करें"
 }
