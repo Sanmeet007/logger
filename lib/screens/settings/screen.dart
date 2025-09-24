@@ -176,8 +176,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           );
         },
         title: Text(
-          // AppLocalizations.of(context).filterPresetTitle,
-          "Call Grouping",
+          AppLocalizations.of(context).callGroupingText,
         ),
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
