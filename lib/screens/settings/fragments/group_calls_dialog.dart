@@ -69,7 +69,7 @@ class _GroupCallsDialogState extends ConsumerState<GroupCallsDialog> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                   title: SizedText(
-                    "Use Grouping with Filters",
+                    AppLocalizations.of(context).useGroupingSwitchText,
                     size: 18.0,
                   ),
                   value: currentGroupingState,

@@ -790,5 +790,6 @@
   "groupByContactOnlyTitle": "Group by Contact",
   "groupByContactOnlyDescription": "Groups all calls from the same contact together",
   "groupByNoneDescription": "No grouping applied — each call is shown separately",
-  "callGroupingText": "Call Grouping"
+  "callGroupingText": "Call Grouping",
+  "useGroupingSwitchText": "Use Grouping with Filters"
 }
