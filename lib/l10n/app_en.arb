@@ -789,5 +789,6 @@
   "groupByContactOnlyConsecutiveDescription": "Merges consecutive calls from the same contact into a single group",
   "groupByContactOnlyTitle": "Group by Contact",
   "groupByContactOnlyDescription": "Groups all calls from the same contact together",
-  "groupByNoneDescription": "No grouping applied — each call is shown separately"
+  "groupByNoneDescription": "No grouping applied — each call is shown separately",
+  "callGroupingText": "Call Grouping"
 }
