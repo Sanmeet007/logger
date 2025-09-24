@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Zacznij tworzyć własne presety dla szybkiego filtrowania",
   "presetNameInputLabelText": "Nazwa presetu",
   "presetNameInputHintText": "Wpisz nazwę dla presetu",
-  "defaultLabelText": "Domyślny"
+  "defaultLabelText": "Domyślny",
+  "lastCallText": "Ostatnie połączenie",
+  "groupByContactAndTypeTitle": "Grupuj według kontaktu i rodzaju",
+  "groupByContactAndTypeDescription": "Połączenia są grupowane według kontaktu i rodzaju połączenia",
+  "groupByContactOnlyConsecutiveTitle": "Grupuj według kolejnych kontaktów",
+  "groupByContactOnlyConsecutiveDescription": "Łączy kolejne połączenia od tego samego kontaktu w jedną grupę",
+  "groupByContactOnlyTitle": "Grupuj według kontaktu",
+  "groupByContactOnlyDescription": "Grupuje wszystkie połączenia od tego samego kontaktu",
+  "groupByNoneDescription": "Brak grupowania — każde połączenie wyświetlane jest osobno"
 }

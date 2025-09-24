@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "빠른 필터링을 위해 사용자 지정 프리셋을 만들어보세요",
   "presetNameInputLabelText": "프리셋 이름",
   "presetNameInputHintText": "프리셋 이름을 입력하세요",
-  "defaultLabelText": "기본값"
+  "defaultLabelText": "기본값",
+  "lastCallText": "마지막 통화",
+  "groupByContactAndTypeTitle": "연락처 및 유형별 그룹화",
+  "groupByContactAndTypeDescription": "통화를 연락처와 통화 유형별로 그룹화합니다",
+  "groupByContactOnlyConsecutiveTitle": "연속된 연락처별 그룹화",
+  "groupByContactOnlyConsecutiveDescription": "같은 연락처에서의 연속된 통화를 하나의 그룹으로 합칩니다",
+  "groupByContactOnlyTitle": "연락처별 그룹화",
+  "groupByContactOnlyDescription": "같은 연락처에서의 모든 통화를 그룹화합니다",
+  "groupByNoneDescription": "그룹화 없음 — 각 통화가 개별적으로 표시됩니다"
 }

@@ -8,6 +8,7 @@ import 'package:logger/providers/shared_preferences_providers/download_confirmat
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_type_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/grouped_calls_type_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/screens/settings/filter_presets_activity.dart';
 import 'package:logger/screens/settings/fragments/export_filename_dialog.dart';
 import 'package:logger/screens/settings/fragments/export_format_dialog.dart';
+import 'package:logger/screens/settings/fragments/group_calls_dialog.dart';
 import 'package:logger/utils/csv_to_map.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/snackbar.dart';
@@ -156,6 +158,29 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> advancedSettingsListItems = <Widget>[
+      ListTile(
+        onTap: () {
+          showModalBottomSheet(
+            showDragHandle: true,
+            isScrollControlled: true,
+            context: context,
+            builder: (_) {
+              return Wrap(
+                children: [
+                  GroupCallsDialog(
+                    groupBy: ref.read(groupedCallsTypeProvider),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        title: Text(
+          // AppLocalizations.of(context).filterPresetTitle,
+          "Call Grouping",
+        ),
+        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+      ),
       ListTile(
         onTap: () {
           Navigator.push(context,

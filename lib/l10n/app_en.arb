@@ -781,5 +781,13 @@
   "noPresetsPlaceholderText": "Start creating your own custom presets for quick filtering",
   "presetNameInputLabelText": "Preset Name",
   "presetNameInputHintText": "Enter a name for preset",
-  "defaultLabelText": "default"
+  "defaultLabelText": "default",
+  "lastCallText": "Last call",
+  "groupByContactAndTypeTitle": "Group by Contact and Type",
+  "groupByContactAndTypeDescription": "Calls are grouped by both the contact and the call type",
+  "groupByContactOnlyConsecutiveTitle": "Group by Consecutive Contacts",
+  "groupByContactOnlyConsecutiveDescription": "Merges consecutive calls from the same contact into a single group",
+  "groupByContactOnlyTitle": "Group by Contact",
+  "groupByContactOnlyDescription": "Groups all calls from the same contact together",
+  "groupByNoneDescription": "No grouping applied — each call is shown separately"
 }

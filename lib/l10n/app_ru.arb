@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Начните создавать свои собственные предустановки для быстрого фильтрования",
   "presetNameInputLabelText": "Название предустановки",
   "presetNameInputHintText": "Введите название предустановки",
-  "defaultLabelText": "По умолчанию"
+  "defaultLabelText": "По умолчанию",
+  "lastCallText": "Последний звонок",
+  "groupByContactAndTypeTitle": "Группировать по контакту и типу",
+  "groupByContactAndTypeDescription": "Звонки группируются по контакту и типу звонка",
+  "groupByContactOnlyConsecutiveTitle": "Группировать по последовательным контактам",
+  "groupByContactOnlyConsecutiveDescription": "Объединяет последовательные звонки от одного контакта в одну группу",
+  "groupByContactOnlyTitle": "Группировать по контакту",
+  "groupByContactOnlyDescription": "Группирует все звонки от одного контакта",
+  "groupByNoneDescription": "Без группировки — каждый звонок отображается отдельно"
 }

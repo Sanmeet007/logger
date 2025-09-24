@@ -3,12 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/providers/whatsapp_availablity_provider.dart';
-import 'package:logger/utils/native_methods.dart';
-import 'package:logger/utils/snackbar.dart';
+import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/whatsapp_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../logs/log_details.dart';
 
 class LogEntry extends ConsumerWidget {
@@ -38,30 +35,6 @@ class LogEntry extends ConsumerWidget {
   final String callType;
   final String sim;
   final String phoneAccountId;
-
-  void openContact(BuildContext context) async {
-    bool launchSuccess = await NativeMethods.openContact(phoneNumber);
-    if (!launchSuccess) {
-      if (context.mounted) {
-        AppSnackBar.show(
-          context,
-          content: AppLocalizations.of(context).errorOpeningContact,
-        );
-      }
-    }
-  }
-
-  void addToContact(BuildContext context) async {
-    bool launchSuccess = await NativeMethods.addToContacts(phoneNumber);
-    if (!launchSuccess) {
-      if (context.mounted) {
-        AppSnackBar.show(
-          context,
-          content: AppLocalizations.of(context).addToContactsErrorText,
-        );
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -158,8 +131,9 @@ class LogEntry extends ConsumerWidget {
         ],
       ),
       child: ListTile(
-          onLongPress: () =>
-              isUnknown ? addToContact(context) : openContact(context),
+          onLongPress: () => isUnknown
+              ? ContactHandler.handleAddToContacts(context, phoneNumber)
+              : ContactHandler.handleOpenContact(context, phoneNumber),
           tileColor: Theme.of(context).colorScheme.surface,
           onTap: () {
             showModalBottomSheet(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/common/divider.dart';
+import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
-import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
-import 'package:logger/utils/snackbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogDetails extends StatelessWidget {
@@ -39,27 +38,11 @@ class LogDetails extends StatelessWidget {
   void handleAddToContacts(BuildContext context) async {
     Navigator.pop(context);
 
-    bool launchSuccess = await NativeMethods.addToContacts(phoneNumber);
-    if (!launchSuccess) {
-      if (parentContext.mounted) {
-        AppSnackBar.show(
-          parentContext,
-          content: AppLocalizations.of(context).addToContactsErrorText,
-        );
-      }
-    }
+    ContactHandler.handleAddToContacts(parentContext, phoneNumber);
   }
 
   void handleOpenContact(BuildContext context) async {
-    bool launchSuccess = await NativeMethods.openContact(phoneNumber);
-    if (!launchSuccess) {
-      if (parentContext.mounted) {
-        AppSnackBar.show(
-          parentContext,
-          content: AppLocalizations.of(context).errorOpeningContact,
-        );
-      }
-    }
+    ContactHandler.handleOpenContact(parentContext, phoneNumber);
   }
 
   @override

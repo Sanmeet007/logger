@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "クイックフィルタリング用に独自のカスタムプリセットを作成し始めましょう",
   "presetNameInputLabelText": "プリセット名",
   "presetNameInputHintText": "プリセットの名前を入力してください",
-  "defaultLabelText": "デフォルト"
+  "defaultLabelText": "デフォルト",
+  "lastCallText": "最終通話",
+  "groupByContactAndTypeTitle": "連絡先と種類でグループ化",
+  "groupByContactAndTypeDescription": "通話を連絡先と通話の種類でグループ化します",
+  "groupByContactOnlyConsecutiveTitle": "連続する連絡先でグループ化",
+  "groupByContactOnlyConsecutiveDescription": "同じ連絡先からの連続する通話を1つのグループにまとめます",
+  "groupByContactOnlyTitle": "連絡先でグループ化",
+  "groupByContactOnlyDescription": "同じ連絡先からのすべての通話をグループ化します",
+  "groupByNoneDescription": "グループ化なし — 各通話が個別に表示されます"
 }

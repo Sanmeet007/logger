@@ -65,8 +65,6 @@ class CallLogsFileGenerator {
         return "text/comma-separated-values";
       case FileType.json:
         return "application/json";
-      default:
-        throw ArgumentError("Unknown ImportFileType: $t");
     }
   }
 

@@ -219,5 +219,13 @@
   "noPresetsPlaceholderText": "त्वरित फ़िल्टरिंग के लिए अपने कस्टम प्रीसेट बनाना शुरू करें",
   "presetNameInputLabelText": "प्रीसेट नाम",
   "presetNameInputHintText": "प्रीसेट का नाम दर्ज करें",
-  "defaultLabelText": "डिफ़ॉल्ट"
+  "defaultLabelText": "डिफ़ॉल्ट",
+  "lastCallText": "अंतिम कॉल",
+  "groupByContactAndTypeTitle": "संपर्क और प्रकार के अनुसार समूहबद्ध करें",
+  "groupByContactAndTypeDescription": "कॉल को संपर्क और कॉल प्रकार के अनुसार समूहबद्ध किया जाता है",
+  "groupByContactOnlyConsecutiveTitle": "लगातार कॉल वाले संपर्क के अनुसार समूहबद्ध करें",
+  "groupByContactOnlyConsecutiveDescription": "एक ही संपर्क की लगातार कॉल को एक समूह में मिलाता है",
+  "groupByContactOnlyTitle": "संपर्क के अनुसार समूहबद्ध करें",
+  "groupByContactOnlyDescription": "एक ही संपर्क की सभी कॉल को समूहबद्ध करता है",
+  "groupByNoneDescription": "कोई समूहबद्ध नहीं — प्रत्येक कॉल अलग-अलग दिखाई जाएगी"
 }

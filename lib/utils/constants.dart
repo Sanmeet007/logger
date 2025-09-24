@@ -8,6 +8,7 @@ const String sharedExportTypeKey = "export_type";
 const String sharedExportFileNameFormatKey = "exported_filename_format";
 const String sharedDisplayTotalCallDurationKey = "show_total_call_duration";
 const String sharedFilterPresetsKey = "use_filter_presets";
+const String sharedGroupedCallsType = "grouped_calls_type";
 
 const String defaultPhoneAccountId = "Any";
 const int maxAllowedPresets = 5;

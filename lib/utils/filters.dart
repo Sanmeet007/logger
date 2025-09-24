@@ -121,7 +121,6 @@ class FilterUtils {
           return entryDate.isAfter(startDate) &&
               entryDate.isBefore(endDate.add(const Duration(days: 1)));
         case DateRange.allTime:
-        default:
           return true;
       }
     }

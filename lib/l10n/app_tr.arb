@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Hızlı filtreleme için kendi özel ön ayarlarınızı oluşturmaya başlayın",
   "presetNameInputLabelText": "Ön Ayar Adı",
   "presetNameInputHintText": "Ön ayar için bir isim girin",
-  "defaultLabelText": "varsayılan"
+  "defaultLabelText": "varsayılan",
+  "lastCallText": "Son arama",
+  "groupByContactAndTypeTitle": "Kişi ve Türüne Göre Grupla",
+  "groupByContactAndTypeDescription": "Aramalar, kişi ve arama türüne göre gruplanır",
+  "groupByContactOnlyConsecutiveTitle": "Ardışık Kişilere Göre Grupla",
+  "groupByContactOnlyConsecutiveDescription": "Aynı kişiden gelen ardışık aramaları tek bir grup halinde birleştirir",
+  "groupByContactOnlyTitle": "Kişiye Göre Grupla",
+  "groupByContactOnlyDescription": "Aynı kişiden gelen tüm aramaları grupla",
+  "groupByNoneDescription": "Gruplama yok — her arama ayrı gösterilir"
 }

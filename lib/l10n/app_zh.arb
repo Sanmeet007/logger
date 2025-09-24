@@ -210,5 +210,13 @@
     "noPresetsPlaceholderText": "开始创建您自己的自定义预设，以实现快速过滤",
     "presetNameInputLabelText": "预设名称",
     "presetNameInputHintText": "输入预设名称",
-    "defaultLabelText": "默认"
+    "defaultLabelText": "默认",
+    "lastCallText": "最后通话",
+    "groupByContactAndTypeTitle": "按联系人和类型分组",
+    "groupByContactAndTypeDescription": "通话按联系人和通话类型分组",
+    "groupByContactOnlyConsecutiveTitle": "按连续联系人分组",
+    "groupByContactOnlyConsecutiveDescription": "将同一联系人的连续通话合并为一个组",
+    "groupByContactOnlyTitle": "按联系人分组",
+    "groupByContactOnlyDescription": "将同一联系人的所有通话分组",
+    "groupByNoneDescription": "不分组 — 每个通话单独显示"
 }

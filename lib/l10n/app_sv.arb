@@ -210,5 +210,13 @@
     "noPresetsPlaceholderText": "Börja skapa dina egna anpassade förinställningar för snabb filtrering",
     "presetNameInputLabelText": "Förinställningsnamn",
     "presetNameInputHintText": "Ange ett namn för förinställningen",
-    "defaultLabelText": "Standard"
+    "defaultLabelText": "Standard",
+    "lastCallText": "Senaste samtal",
+    "groupByContactAndTypeTitle": "Gruppera efter kontakt och typ",
+    "groupByContactAndTypeDescription": "Samtal grupperas efter kontakt och samtalstyp",
+    "groupByContactOnlyConsecutiveTitle": "Gruppera efter på varandra följande kontakter",
+    "groupByContactOnlyConsecutiveDescription": "Slår ihop på varandra följande samtal från samma kontakt till en grupp",
+    "groupByContactOnlyTitle": "Gruppera efter kontakt",
+    "groupByContactOnlyDescription": "Grupperar alla samtal från samma kontakt",
+    "groupByNoneDescription": "Ingen gruppering — varje samtal visas separat"
 }

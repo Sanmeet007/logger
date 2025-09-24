@@ -7,8 +7,5 @@ String getFileTypeDetails(FileType t) {
 
     case FileType.json:
       return "Javascript Object notation";
-
-    default:
-      throw UnimplementedError("File type not implemented");
   }
 }

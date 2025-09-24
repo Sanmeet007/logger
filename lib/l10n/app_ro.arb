@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Începeți să creați propriile presetări personalizate pentru filtrare rapidă",
   "presetNameInputLabelText": "Numele presetării",
   "presetNameInputHintText": "Introduceți un nume pentru presetare",
-  "defaultLabelText": "Implicit"
+  "defaultLabelText": "Implicit",
+  "lastCallText": "Ultimul apel",
+  "groupByContactAndTypeTitle": "Grupare după contact și tip",
+  "groupByContactAndTypeDescription": "Apelurile sunt grupate după contact și tipul apelului",
+  "groupByContactOnlyConsecutiveTitle": "Grupare după contacte consecutive",
+  "groupByContactOnlyConsecutiveDescription": "Combină apelurile consecutive de la același contact într-un singur grup",
+  "groupByContactOnlyTitle": "Grupare după contact",
+  "groupByContactOnlyDescription": "Grupează toate apelurile de la același contact",
+  "groupByNoneDescription": "Fără grupare — fiecare apel este afișat separat"
 }

@@ -1,5 +1,3 @@
-// TODO: Implement toggle fn for grouping also fix the summary page for each call log for new grouping
-
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/logs/grouped_logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/grouped_calls_type_provider.dart';
 import 'package:logger/utils/call_log_grouper.dart';
 import 'package:logger/utils/format_helpers.dart';
 
@@ -143,10 +141,10 @@ class _LogsPageState extends ConsumerState<LogsPage> {
                       child: GroupedLogsBuilder(
                         entries: mapEntry.value,
                         formattedDate: mapEntry.key,
-                        groupByContactAndTypes:
-                            ref.watch(logsFilterProvider).areFiltersApplied
-                                ? false
-                                : true,
+                        groupBy: ref.watch(groupedCallsTypeProvider),
+                        // ref.watch(logsFilterProvider).areFiltersApplied
+                        //     ? false
+                        //     : true,
                       ),
                     ),
                   )

@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Beginnen Sie mit der Erstellung Ihrer eigenen benutzerdefinierten Voreinstellungen für schnelles Filtern",
   "presetNameInputLabelText": "Voreinstellungsname",
   "presetNameInputHintText": "Geben Sie einen Namen für die Voreinstellung ein",
-  "defaultLabelText": "Standaard"
+  "defaultLabelText": "Standaard",
+  "lastCallText": "Laatste oproep",
+  "groupByContactAndTypeTitle": "Groepeer op contact en type",
+  "groupByContactAndTypeDescription": "Oproepen worden gegroepeerd op contact en type oproep",
+  "groupByContactOnlyConsecutiveTitle": "Groepeer opeenvolgende contacten",
+  "groupByContactOnlyConsecutiveDescription": "Voegt opeenvolgende oproepen van hetzelfde contact samen in één groep",
+  "groupByContactOnlyTitle": "Groepeer op contact",
+  "groupByContactOnlyDescription": "Groepeert alle oproepen van hetzelfde contact",
+  "groupByNoneDescription": "Geen groepering — elke oproep wordt afzonderlijk weergegeven"
 }

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
+import 'package:logger/utils/grouper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logger/utils/constants.dart' as constants;
 
@@ -116,5 +117,20 @@ class SharedUtility {
 
   void setExportFileNameFormat(String s) {
     sharedPreferences.setString(constants.sharedExportFileNameFormatKey, s);
+  }
+
+  GroupBy getGroupedCallsType() {
+    var v = sharedPreferences.getInt(constants.sharedGroupedCallsType);
+    if (v != null) {
+      return (v >= 0 && v < GroupBy.values.length)
+          ? GroupBy.values[v]
+          : GroupBy.none;
+    } else {
+      return GroupBy.none;
+    }
+  }
+
+  void setGroupedCallsType(GroupBy v) {
+    sharedPreferences.setInt(constants.sharedGroupedCallsType, v.index);
   }
 }

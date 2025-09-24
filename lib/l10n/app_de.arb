@@ -210,5 +210,13 @@
     "noPresetsPlaceholderText": "Beginnen Sie mit der Erstellung Ihrer eigenen benutzerdefinierten Voreinstellungen für schnelles Filtern",
     "presetNameInputLabelText": "Voreinstellungsname",
     "presetNameInputHintText": "Geben Sie einen Namen für die Voreinstellung ein",
-    "defaultLabelText": "Standard"
+    "defaultLabelText": "Standard",
+    "lastCallText": "Letzter Anruf",
+    "groupByContactAndTypeTitle": "Nach Kontakt und Typ gruppieren",
+    "groupByContactAndTypeDescription": "Anrufe werden nach Kontakt und Anrufart gruppiert",
+    "groupByContactOnlyConsecutiveTitle": "Nach aufeinanderfolgenden Kontakten gruppieren",
+    "groupByContactOnlyConsecutiveDescription": "Fasst aufeinanderfolgende Anrufe desselben Kontakts zu einer Gruppe zusammen",
+    "groupByContactOnlyTitle": "Nach Kontakt gruppieren",
+    "groupByContactOnlyDescription": "Fasst alle Anrufe desselben Kontakts zusammen",
+    "groupByNoneDescription": "Keine Gruppierung – jeder Anruf wird einzeln angezeigt"
 }

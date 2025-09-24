@@ -210,5 +210,13 @@
     "noPresetsPlaceholderText": "Aloita omien mukautettujen esiasetusten luominen nopeaan suodattamiseen",
     "presetNameInputLabelText": "Esiasetuksen nimi",
     "presetNameInputHintText": "Syötä esiasetuksen nimi",
-    "defaultLabelText": "Oletus"
+    "defaultLabelText": "Oletus",
+    "lastCallText": "Viimeinen puhelu",
+    "groupByContactAndTypeTitle": "Ryhmittele yhteystiedon ja tyypin mukaan",
+    "groupByContactAndTypeDescription": "Puhelut ryhmitellään yhteystiedon ja puhelutyypin mukaan",
+    "groupByContactOnlyConsecutiveTitle": "Ryhmittele peräkkäisten yhteystietojen mukaan",
+    "groupByContactOnlyConsecutiveDescription": "Yhdistää saman yhteystiedon peräkkäiset puhelut yhdeksi ryhmäksi",
+    "groupByContactOnlyTitle": "Ryhmittele yhteystiedon mukaan",
+    "groupByContactOnlyDescription": "Ryhmittelee kaikki saman yhteystiedon puhelut",
+    "groupByNoneDescription": "Ei ryhmittelyä – jokainen puhelu näytetään erikseen"
 }

@@ -29,6 +29,11 @@ class FromatHelpers {
     return formatter.format(n);
   }
 
+  static String capitalizeString(String s) {
+    if (s.isEmpty) return s;
+    return s[0].toUpperCase() + s.substring(1);
+  }
+
   static String prettifyDuration(
     Duration duration,
     BuildContext context, {

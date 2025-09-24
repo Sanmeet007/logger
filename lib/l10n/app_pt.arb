@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Comece a criar suas próprias predefinições personalizadas para filtragem rápida",
   "presetNameInputLabelText": "Nome da predefinição",
   "presetNameInputHintText": "Digite um nome para a predefinição",
-  "defaultLabelText": "Padrão"
+  "defaultLabelText": "Padrão",
+  "lastCallText": "Última chamada",
+  "groupByContactAndTypeTitle": "Agrupar por contato e tipo",
+  "groupByContactAndTypeDescription": "As chamadas são agrupadas por contato e tipo de chamada",
+  "groupByContactOnlyConsecutiveTitle": "Agrupar por contatos consecutivos",
+  "groupByContactOnlyConsecutiveDescription": "Combina chamadas consecutivas do mesmo contato em um único grupo",
+  "groupByContactOnlyTitle": "Agrupar por contato",
+  "groupByContactOnlyDescription": "Agrupa todas as chamadas do mesmo contato",
+  "groupByNoneDescription": "Sem agrupamento — cada chamada é exibida separadamente"
 }

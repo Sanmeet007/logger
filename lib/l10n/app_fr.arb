@@ -210,5 +210,13 @@
     "noPresetsPlaceholderText": "Commencez à créer vos propres préréglages personnalisés pour un filtrage rapide",
     "presetNameInputLabelText": "Nom du préréglage",
     "presetNameInputHintText": "Entrez un nom pour le préréglage",
-    "defaultLabelText": "Par défaut"
+    "defaultLabelText": "Par défaut",
+    "lastCallText": "Dernier appel",
+    "groupByContactAndTypeTitle": "Regrouper par contact et type",
+    "groupByContactAndTypeDescription": "Les appels sont regroupés par contact et type d'appel",
+    "groupByContactOnlyConsecutiveTitle": "Regrouper par contacts consécutifs",
+    "groupByContactOnlyConsecutiveDescription": "Regroupe les appels consécutifs du même contact en un seul groupe",
+    "groupByContactOnlyTitle": "Regrouper par contact",
+    "groupByContactOnlyDescription": "Regroupe tous les appels du même contact",
+    "groupByNoneDescription": "Aucun regroupement — chaque appel est affiché séparément"
 }

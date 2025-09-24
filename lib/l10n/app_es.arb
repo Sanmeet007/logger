@@ -210,5 +210,13 @@
   "noPresetsPlaceholderText": "Empieza a crear tus propios preajustes personalizados para filtrado rápido",
   "presetNameInputLabelText": "Nombre del preajuste",
   "presetNameInputHintText": "Ingrese un nombre para el preajuste",
-  "defaultLabelText": "Predeterminado"
+  "defaultLabelText": "Predeterminado",
+  "lastCallText": "Última llamada",
+  "groupByContactAndTypeTitle": "Agrupar por contacto y tipo",
+  "groupByContactAndTypeDescription": "Las llamadas se agrupan por contacto y tipo de llamada",
+  "groupByContactOnlyConsecutiveTitle": "Agrupar por contactos consecutivos",
+  "groupByContactOnlyConsecutiveDescription": "Combina llamadas consecutivas del mismo contacto en un solo grupo",
+  "groupByContactOnlyTitle": "Agrupar por contacto",
+  "groupByContactOnlyDescription": "Agrupa todas las llamadas del mismo contacto",
+  "groupByNoneDescription": "Sin agrupación: cada llamada se muestra por separado"
 }
