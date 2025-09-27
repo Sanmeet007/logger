@@ -46,7 +46,7 @@ class ExportedFilenameFormatHelper {
     List<TimeFormatItem> timeFormatItems = [];
 
     String prevChars = "";
-    for (int i = 0; i < formatString.length - 1; i++) {
+    for (int i = 0; i < formatString.length; i++) {
       String char = formatString[i];
 
       if (char == "%") {

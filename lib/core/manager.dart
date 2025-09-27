@@ -225,39 +225,56 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   }
 
   void shareFile() async {
-    FileType currentExportType = ref.read(exportTypeProvider);
+    try {
+      FileType currentExportType = ref.read(exportTypeProvider);
 
-    setState(() {
-      isTaskRunning = true;
-    });
-    var tempDir = await getTemporaryDirectory();
+      setState(() {
+        isTaskRunning = true;
+      });
+      var tempDir = await getTemporaryDirectory();
 
-    DateTime now = DateTime.now();
-    String suffix = DateFormat('yyyyMMdd').format(now);
-    File file = File(
-      "${tempDir.path}/logger_${suffix}_$fileName.${currentExportType.name}",
-    );
-    bool fileGenerationSuccess = await addLogsToFile(file);
-    String filePath = file.path;
+      String currentExportedFilenameFormatType =
+          ref.read(exportFileNameFormatProvider);
+      String filename = ExportedFilenameFormatHelper.createFileFormat(
+          currentExportedFilenameFormatType);
+      String filenameWithExtension = "$filename.${currentExportType.name}";
+      filenameWithExtension;
 
-    if (fileGenerationSuccess && mounted) {
-      await Share.shareXFiles(
-        [XFile(filePath)],
-        subject: AppLocalizations.of(context).fileShareMessage,
-        text: AppLocalizations.of(context).fileShareSubject,
+      File file = File(
+        "${tempDir.path}/$filenameWithExtension",
       );
-    } else {
+
+      bool fileGenerationSuccess = await addLogsToFile(file);
+      final XFile shareFile = XFile(file.path);
+
+      if (fileGenerationSuccess && mounted) {
+        await Share.shareXFiles(
+          [shareFile],
+          text: AppLocalizations.of(context).fileShareSubject,
+        );
+      } else {
+        if (mounted) {
+          AppSnackBar.show(
+            context,
+            content: AppLocalizations.of(context).fileGenerationError,
+          );
+        }
+      }
+
+      setState(() {
+        isTaskRunning = false;
+      });
+    } catch (E) {
       if (mounted) {
         AppSnackBar.show(
           context,
           content: AppLocalizations.of(context).fileGenerationError,
         );
       }
+      setState(() {
+        isTaskRunning = false;
+      });
     }
-
-    setState(() {
-      isTaskRunning = false;
-    });
   }
 
   void generateAndOpenFile() async {
