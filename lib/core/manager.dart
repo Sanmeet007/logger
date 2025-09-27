@@ -23,7 +23,6 @@ import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_storage/shared_storage.dart';
 import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
@@ -61,8 +60,6 @@ class ScreenManager extends ConsumerStatefulWidget {
 }
 
 class _ScreenManagerState extends ConsumerState<ScreenManager> {
-  static const fileName = "output";
-
   late int _selectedIndex;
   Uri? currentFilePath;
   bool isTaskRunning = false;
@@ -285,11 +282,18 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     });
 
     var tempDir = await getTemporaryDirectory();
-    DateTime now = DateTime.now();
-    String suffix = DateFormat('yyyyMMdd').format(now);
+
+    String currentExportedFilenameFormatType =
+        ref.read(exportFileNameFormatProvider);
+    String filename = ExportedFilenameFormatHelper.createFileFormat(
+        currentExportedFilenameFormatType);
+    String filenameWithExtension = "$filename.${currentExportType.name}";
+    filenameWithExtension;
+
     File file = File(
-      "${tempDir.path}/logger_${suffix}_$fileName.${currentExportType.name}",
+      "${tempDir.path}/$filenameWithExtension",
     );
+
     bool fileGenerationSuccess = await addLogsToFile(file);
     String filePath = file.path;
 
