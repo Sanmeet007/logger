@@ -790,8 +790,16 @@
   "groupByContactOnlyTitle": "Group by Contact",
   "groupByContactOnlyDescription": "Groups all calls from the same contact together",
   "groupByNoneDescription": "No grouping applied — each call is shown separately",
-  "callGroupingText": "Call Grouping",
-  "useGroupingSwitchText": "Use Grouping with Filters",
-  "clearFiltersTooltip": "Clear Filters",
-  "scrollToTopTooltip": "Scroll to top"
+  "callGroupingText": "Call grouping",
+  "useGroupingSwitchText": "Use grouping with filters",
+  "clearFiltersTooltip": "Clear filters",
+  "scrollToTopTooltip": "Scroll to top",
+  "watchListText": "Watch list",
+  "roundDurationText": "Round calls to minutes",
+  "roundDurationTextSubtitle": "Round calls up to the nearest minute for billing",
+  "groupedCallSettingSubtitle": "Choose how to group calls for easier tracking and overview",
+  "filterPresetsSettingSubtitle": "Create, save, and reuse filters to find calls easily",
+  "exportFilenameSettingSubtitle": "Customize how your exported files are named",
+  "exportFormatSettingSubtitle": "Choose the format for exported call logs",
+  "importCallLogsSettingSubtitle": "Import call history from other sources or backups"
 }

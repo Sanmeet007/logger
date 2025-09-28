@@ -141,4 +141,12 @@ class SharedUtility {
   void toggleFilterGrouping(bool newState) {
     sharedPreferences.setBool(constants.sharedfilterGrouping, newState);
   }
+
+  bool isCallRoundingEnabled() {
+    return sharedPreferences.getBool(constants.sharedCallRounding) ?? false;
+  }
+
+  void toggleCallRounding(bool newState) {
+    sharedPreferences.setBool(constants.sharedCallRounding, newState);
+  }
 }

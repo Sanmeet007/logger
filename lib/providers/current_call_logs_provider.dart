@@ -1,6 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/call_rounding_provider.dart';
 
 class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
   final Ref ref;
@@ -12,7 +13,17 @@ class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
   void _initialize() {
     final asyncCallLogs = ref.watch(callLogsNotifierProvider);
     if (asyncCallLogs.hasValue) {
-      state = asyncCallLogs.value ?? Iterable.empty();
+      bool shouldRoundDuration = ref.watch(callRoundingProvider);
+      var logs = asyncCallLogs.value ?? Iterable.empty();
+
+      state = shouldRoundDuration
+          ? logs.map((log) {
+              final durationSec = log.duration ?? 0;
+              final roundedDurationSec = ((durationSec / 60).ceil()) * 60;
+              log.duration = roundedDurationSec;
+              return log;
+            })
+          : logs;
     }
   }
 
@@ -23,7 +34,16 @@ class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
   void reset() {
     final asyncCallLogs = ref.read(callLogsNotifierProvider);
     if (asyncCallLogs.hasValue) {
-      state = asyncCallLogs.value ?? Iterable.empty();
+      bool shouldRoundDuration = ref.watch(callRoundingProvider);
+      var logs = asyncCallLogs.value ?? Iterable.empty();
+      state = shouldRoundDuration
+          ? logs.map((log) {
+              final durationSec = log.duration ?? 0;
+              final roundedDurationSec = ((durationSec / 60).ceil()) * 60;
+              log.duration = roundedDurationSec;
+              return log;
+            })
+          : logs;
     }
   }
 }

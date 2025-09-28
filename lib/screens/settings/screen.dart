@@ -4,6 +4,7 @@ import 'package:logger/components/common/divider.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/linear_loader_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/call_log_count_provider.dart';
+import 'package:logger/providers/shared_preferences_providers/call_rounding_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
@@ -159,7 +160,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> advancedSettingsListItems = <Widget>[
+      SwitchListTile(
+        subtitle: Text(AppLocalizations.of(context).roundDurationTextSubtitle),
+        enableFeedback: true,
+        title: Text(
+          AppLocalizations.of(context).roundDurationText,
+        ),
+        value: ref.watch(callRoundingProvider),
+        onChanged: (_) => ref.read(callRoundingProvider.notifier).toggle(),
+      ),
       ListTile(
+        subtitle: Text(AppLocalizations.of(context).groupedCallSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
             showDragHandle: true,
@@ -183,6 +194,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(
+        subtitle:
+            Text(AppLocalizations.of(context).filterPresetsSettingSubtitle),
         onTap: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => FilterPresetsActivity()));
@@ -193,6 +206,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(
+        subtitle:
+            Text(AppLocalizations.of(context).exportFilenameSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
             showDragHandle: true,
@@ -214,6 +229,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(
+        subtitle:
+            Text(AppLocalizations.of(context).exportFormatSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
             showDragHandle: true,
@@ -234,6 +251,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
       ),
       ListTile(
+        subtitle:
+            Text(AppLocalizations.of(context).importCallLogsSettingSubtitle),
         onTap: confirmImport,
         title: Text(AppLocalizations.of(context).importCallLogsText),
         trailing: Icon(Icons.keyboard_arrow_right_rounded),
