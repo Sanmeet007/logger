@@ -70,23 +70,51 @@ class _LogsPageState extends ConsumerState<LogsPage> {
     if (widget.entries != null && widget.entries!.isNotEmpty) {
       var logs = CallLogGrouper.groupCallLogsByDate(widget.entries!, context);
       return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
-        floatingActionButton: AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          opacity: _isVisible ? 1.0 : 0.0,
-          child: _isVisible
-              ? FloatingActionButton.small(
-                  shape: const CircleBorder(),
-                  foregroundColor: Colors.black,
-                  backgroundColor: const Color.fromARGB(255, 203, 169, 255),
-                  enableFeedback: true,
-                  onPressed: scrollToTop,
-                  child: const Icon(
-                    Icons.keyboard_arrow_up_rounded,
-                    size: 40.0,
-                  ),
-                )
-              : Container(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity:
+                  ref.watch(logsFilterProvider).areFiltersApplied ? 1.0 : 0.0,
+              child: ref.watch(logsFilterProvider).areFiltersApplied
+                  ? FloatingActionButton.small(
+                      tooltip: AppLocalizations.of(context).clearFiltersTooltip,
+                      shape: const CircleBorder(),
+                      foregroundColor: Colors.black,
+                      backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+                      enableFeedback: true,
+                      onPressed: () {
+                        ref.read(logsFilterProvider.notifier).resetFilters();
+                      },
+                      child: const Icon(
+                        Icons.filter_alt_off,
+                        size: 25.0,
+                      ),
+                    )
+                  : Container(),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: _isVisible ? 1.0 : 0.0,
+              child: _isVisible
+                  ? FloatingActionButton.small(
+                      tooltip: AppLocalizations.of(context).scrollToTopTooltip,
+                      shape: const CircleBorder(),
+                      foregroundColor: Colors.black,
+                      backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+                      enableFeedback: true,
+                      onPressed: scrollToTop,
+                      child: const Icon(
+                        Icons.keyboard_arrow_up_rounded,
+                        size: 40.0,
+                      ),
+                    )
+                  : Container(),
+            ),
+          ],
         ),
         body: RawScrollbar(
           controller: _scrollController,
@@ -160,12 +188,42 @@ class _LogsPageState extends ConsumerState<LogsPage> {
       );
     }
 
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Center(
-          child: Text(
-        AppLocalizations.of(context).nothingToDisplayText,
-      )),
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity:
+                ref.watch(logsFilterProvider).areFiltersApplied ? 1.0 : 0.0,
+            child: ref.watch(logsFilterProvider).areFiltersApplied
+                ? FloatingActionButton.small(
+                    tooltip: AppLocalizations.of(context).clearFiltersTooltip,
+                    shape: const CircleBorder(),
+                    foregroundColor: Colors.black,
+                    backgroundColor: const Color.fromARGB(255, 203, 169, 255),
+                    enableFeedback: true,
+                    onPressed: () {
+                      ref.read(logsFilterProvider.notifier).resetFilters();
+                    },
+                    child: const Icon(
+                      Icons.filter_alt_off,
+                      size: 25.0,
+                    ),
+                  )
+                : Container(),
+          ),
+        ],
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
+            child: Text(
+          AppLocalizations.of(context).nothingToDisplayText,
+        )),
+      ),
     );
   }
 }
