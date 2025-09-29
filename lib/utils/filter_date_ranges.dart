@@ -10,7 +10,6 @@ enum DateRange {
   pastYear,
   allTime,
   custom,
-  // cycle,
 }
 
 class DateRangeHelper {
@@ -47,11 +46,7 @@ class DateRangeHelper {
       {
         "value": AppLocalizations.of(context).customText,
         "key": DateRange.custom,
-      },
-      // {
-      //   "value": "Cycle",
-      //   "key": DateRange.cycle,
-      // }
+      }
     ];
   }
 }
