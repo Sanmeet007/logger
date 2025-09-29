@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/data/models/filter_preset.dart';
 import 'package:logger/providers/call_logs_provider.dart';
@@ -454,12 +453,14 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                             ),
                         ]
                       : []),
-                  if (_selectedIndex == 1)
+                  if (_selectedIndex == 1 &&
+                      ref.watch(logsFilterProvider).areFiltersApplied)
                     IconButton(
-                      tooltip: AppLocalizations.of(context).watchListText,
-                      onPressed: () {},
-                      icon: const Icon(FontAwesomeIcons.vrCardboard),
-                      iconSize: 17.0,
+                      tooltip: AppLocalizations.of(context).clearFiltersTooltip,
+                      onPressed: () {
+                        ref.read(logsFilterProvider.notifier).resetFilters();
+                      },
+                      icon: const Icon(Icons.filter_alt_off),
                     ),
                   if (_selectedIndex == 1 || _selectedIndex == 0)
                     IconButton(
