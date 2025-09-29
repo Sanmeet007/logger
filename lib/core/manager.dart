@@ -15,7 +15,6 @@ import 'package:logger/providers/shared_preferences_providers/phone_account_filt
 import 'package:logger/providers/shared_preferences_providers/uses_filter_presets_provider.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
-import 'package:logger/utils/app_information.dart';
 import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
 import 'package:logger/utils/snackbar.dart';
@@ -26,7 +25,6 @@ import 'dart:io';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Screen {
@@ -483,16 +481,17 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                       onPressed: openDetailedView,
                       icon: const Icon(Icons.file_present_outlined),
                     ),
-                  if (_selectedIndex == 3)
-                    IconButton(
-                        tooltip: AppLocalizations.of(context).donateText,
-                        onPressed: () {
-                          url_launcher
-                              .launchUrl(AppInformation.getDonationLink());
-                        },
-                        icon: const Icon(
-                          Icons.handshake,
-                        )),
+                  // if (_selectedIndex == 3)
+                  //   IconButton(
+                  //       tooltip: AppLocalizations.of(context).donateText,
+                  //       onPressed: () {
+                  //         url_launcher
+                  //             .launchUrl(AppInformation.getDonationLink());
+                  //       },
+                  //       icon: const Icon(
+                  //         Icons.handshake,
+                  //       ),
+                  // ),
                   const SizedBox(
                     width: 10.0,
                   )

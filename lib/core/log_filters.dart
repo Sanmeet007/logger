@@ -647,6 +647,42 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                                 onChanged: handleDateRangeOptionChange),
                           ),
                         ),
+                        // if (dateRangeOption == DateRange.cycle)
+                        //   Column(
+                        //     children: [
+                        //       const SizedBox(
+                        //         height: 15.0,
+                        //       ),
+                        //       LoggerDatePicker(
+                        //         languageCode: Localizations.localeOf(context)
+                        //             .languageCode,
+                        //         controller: _startDateController,
+                        //         onChanged: handleStartDateChanges,
+                        //         fieldTitle:
+                        //             AppLocalizations.of(context).startDateText,
+                        //         firstDate: DateTime(1995),
+                        //         lastDate:
+                        //             DateTime.now().add(const Duration(days: 0)),
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 15.0,
+                        //       ),
+                        //       LoggerDatePicker(
+                        //         languageCode: Localizations.localeOf(context)
+                        //             .languageCode,
+                        //         controller: _endDateController,
+                        //         onChanged: handleEndDateChanges,
+                        //         fieldTitle:
+                        //             AppLocalizations.of(context).endDateText,
+                        //         firstDate: DateTime(1995),
+                        //         lastDate: DateTime.now(),
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 10.0,
+                        //       ),
+                        //     ],
+                        //   ),
+
                         if (dateRangeOption == DateRange.custom)
                           Column(
                             children: [

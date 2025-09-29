@@ -15,6 +15,7 @@ import 'package:logger/providers/shared_preferences_providers/phone_account_filt
 import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/providers/shared_preferences_providers/use_grouping_with_filters.dart';
+import 'package:logger/screens/about/screen.dart';
 import 'package:logger/screens/settings/filter_presets_activity.dart';
 import 'package:logger/screens/settings/fragments/export_filename_dialog.dart';
 import 'package:logger/screens/settings/fragments/export_format_dialog.dart';
@@ -161,6 +162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final List<Widget> advancedSettingsListItems = <Widget>[
       SwitchListTile(
+        secondary: Icon(Icons.av_timer),
         subtitle: Text(AppLocalizations.of(context).roundDurationTextSubtitle),
         enableFeedback: true,
         title: Text(
@@ -191,7 +193,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: Text(
           AppLocalizations.of(context).callGroupingText,
         ),
-        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+        leading: Icon(Icons.view_list),
       ),
       ListTile(
         subtitle:
@@ -203,7 +205,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: Text(
           AppLocalizations.of(context).filterPresetTitle,
         ),
-        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+        leading: Icon(Icons.filter_list),
       ),
       ListTile(
         subtitle:
@@ -226,7 +228,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           );
         },
         title: Text(AppLocalizations.of(context).exportFileNameFormatLabelText),
-        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+        leading: Icon(Icons.drive_file_rename_outline),
       ),
       ListTile(
         subtitle:
@@ -248,14 +250,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           );
         },
         title: Text(AppLocalizations.of(context).callLogsExportFormatLabelText),
-        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+        leading: Icon(Icons.insert_drive_file),
       ),
       ListTile(
         subtitle:
             Text(AppLocalizations.of(context).importCallLogsSettingSubtitle),
         onTap: confirmImport,
         title: Text(AppLocalizations.of(context).importCallLogsText),
-        trailing: Icon(Icons.keyboard_arrow_right_rounded),
+        leading: Icon(Icons.file_upload),
       ),
     ];
 
@@ -267,6 +269,47 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                AppLocalizations.of(context).aboutText,
+                style: const TextStyle(fontSize: 20.0),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Material(
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.perm_device_information),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AboutActivityScreen(),
+                            ),
+                          );
+                        },
+                        title: Text(
+                          AppLocalizations.of(context).appDetailsText,
+                        ),
+                        subtitle: Text(
+                          AppLocalizations.of(context).appDetailsSubText,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15.0,
+              ),
               Text(
                 AppLocalizations.of(context).baseSettingsLabelText,
                 style: const TextStyle(fontSize: 20.0),
@@ -285,6 +328,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       SwitchListTile(
+                        secondary: Icon(Icons.do_not_disturb_on),
                         enableFeedback: true,
                         value: ref.watch(logsSharingProvider),
                         onChanged: (_) =>
@@ -292,14 +336,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         title: Text(
                           AppLocalizations.of(context).disableLogsSharingText,
                         ),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .disableLogsSharingSubText),
                       ),
                       const LogDivider(),
                       SwitchListTile(
                         enableFeedback: true,
+                        secondary: Icon(Icons.download_done),
                         title: Text(
                           AppLocalizations.of(context)
                               .enableDownloadConfirmationText,
                         ),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .enableDownloadConfirmationSubText),
                         value: ref.watch(downloadConfirmationProvider),
                         onChanged: (bool newState) => ref
                             .read(downloadConfirmationProvider.notifier)
@@ -307,22 +356,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
-                        enableFeedback: true,
+                        secondary: Icon(Icons.format_list_numbered),
                         title: Text(
                           AppLocalizations.of(context)
                               .enableCallLogCountVisibilityText,
                         ),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .enableCallLogCountVisibilitySubText),
+                        enableFeedback: true,
                         value: ref.watch(callLogCountProvider),
                         onChanged: (_) =>
                             ref.read(callLogCountProvider.notifier).toggle(),
                       ),
                       const LogDivider(),
                       SwitchListTile(
-                        enableFeedback: true,
+                        secondary: Icon(Icons.timer),
                         title: Text(
                           AppLocalizations.of(context)
                               .enableCallDurationFilteringText,
                         ),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .enableCallDurationFilteringSubText),
+                        enableFeedback: true,
                         value: ref.watch(durationFilteringProvider),
                         onChanged: (_) => ref
                             .read(durationFilteringProvider.notifier)
@@ -330,11 +385,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        secondary: Icon(Icons.sim_card),
+                        title: Text(AppLocalizations.of(context)
+                            .enableFilterByAccountIdText),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .enableFilterByAccountIdSubText),
                         enableFeedback: true,
-                        title: Text(
-                          AppLocalizations.of(context)
-                              .enableFilterByAccountIdText,
-                        ),
                         value: ref.watch(phoneAccountFilteringProvider),
                         onChanged: (_) => ref
                             .read(phoneAccountFilteringProvider.notifier)
@@ -342,11 +398,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                       const LogDivider(),
                       SwitchListTile(
+                        secondary: Icon(Icons.access_time),
+                        title: Text(AppLocalizations.of(context)
+                            .showTotalCallDurationText),
+                        subtitle: Text(AppLocalizations.of(context)
+                            .showTotalCallDurationSubText),
                         enableFeedback: true,
-                        title: Text(
-                          AppLocalizations.of(context)
-                              .showTotalCallDurationText,
-                        ),
                         value: ref.watch(totalCallDurationProvider),
                         onChanged: (_) => ref
                             .read(totalCallDurationProvider.notifier)
@@ -390,24 +447,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 height: 15.0,
               ),
               Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  border: Border.all(
-                    width: 1,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color.fromARGB(115, 53, 52, 52)
-                        : const Color.fromARGB(255, 249, 245, 255),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    border: Border.all(
+                      width: 1,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(115, 53, 52, 52)
+                          : const Color.fromARGB(255, 249, 245, 255),
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Text(
-                  AppLocalizations.of(context).supportedFormatInformation,
-                  style: const TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              )
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.warning,
+                      size: 20,
+                      color: Colors.orange,
+                    ),
+                    title: Text(
+                      AppLocalizations.of(context).supportedFormatInformation,
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  )),
             ],
           ),
         ),
