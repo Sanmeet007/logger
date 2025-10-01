@@ -7,10 +7,13 @@ class CallDurationTile extends StatelessWidget {
   final double spacing;
   final List<String> labels;
   final List<String> values;
+  final List<Icon> icons;
+
   const CallDurationTile({
     super.key,
     required this.labels,
     required this.values,
+    required this.icons,
     this.spacing = 20.0,
   });
 
@@ -45,14 +48,18 @@ class CallDurationTile extends StatelessWidget {
                       horizontal: 5.0,
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        icons[idx],
+                        SizedBox(
+                          width: 10.0,
+                        ),
                         Text(
                           label,
                           style: const TextStyle(
                             fontSize: 16.0,
                           ),
                         ),
+                        Spacer(),
                         Text(
                           values[idx],
                           style: const TextStyle(

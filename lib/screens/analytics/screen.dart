@@ -274,6 +274,16 @@ class CallDurationTileBuilder extends StatelessWidget {
             default:
               if (snapshot.hasData) {
                 return CallDurationTile(
+                  icons: showTotalCallDuration
+                      ? [
+                          Icon(Icons.access_time, color: Colors.blue),
+                          Icon(Icons.timeline, color: Colors.orange),
+                          Icon(Icons.calculate, color: Colors.green),
+                        ]
+                      : [
+                          Icon(Icons.access_time, color: Colors.blue),
+                          Icon(Icons.timeline, color: Colors.orange),
+                        ],
                   labels: showTotalCallDuration
                       ? [
                           AppLocalizations.of(context).averageText,
