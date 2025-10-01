@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppSnackBar {
   static void show(
-    context, {
+    BuildContext context, {
     required String content,
     String? buttonText,
     Function? buttonOnPressed,
