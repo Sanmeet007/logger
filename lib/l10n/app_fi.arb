@@ -20,6 +20,7 @@
     "confirmImportText": "Puhelulokien tuonti on merkittävä tehtävä, joka voi peruuttamattomasti vioittaa nykyisiä lokiasi, korvata tietoja ja aiheuttaa epäjohdonmukaisuuksia historiassasi. Huomioithan, että tämä prosessi voi kestää jonkin aikaa ja saattaa johtaa yllä mainittuihin ongelmiin. Toimi varoen.",
     "continueText": "Jatka",
     "dateText": "Päivämäärä",
+    "donateText": "Lahjoita",
     "downloadConfirmationText": "Haluatko varmasti ladata puhelulokisi {currentImportType}-muodossa? Tämä toiminto tallentaa puheluhistoriasi {currentImportType}-tiedostoon laitteellasi.",
     "downloadText": "Lataa",
     "dtAAcronymExapandedText": "Koko viikonpäivän nimi",
