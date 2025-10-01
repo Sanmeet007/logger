@@ -821,7 +821,7 @@
   "avgCallsMonthText":"Average Calls / Month",
   "avgCallDurationText": "Average Call Duration",
   "peakCallDurationText": "Peak Call Duration",
-  "callsPerWeekText": "Calls / Week",
+  "callsPerWeekText": "Average Calls / Week",
   "callDistByWeekDay": "Call Distribution by Weekday (%)",
   "addToTrackList": "Add up to {maxItems} contacts to your tracklist for easy tracking.",
   "addText":"Add",
