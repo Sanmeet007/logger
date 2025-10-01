@@ -46,7 +46,7 @@ class TrackingMetrics {
 
   factory TrackingMetrics.fromEntries(
     Iterable<CallLogEntry> entries, {
-    double minStrengthFloor = 20.0,
+    double minStrengthFloor = 0.0,
   }) {
     if (entries.isEmpty) {
       return TrackingMetrics._(
