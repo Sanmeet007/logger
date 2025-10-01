@@ -9,6 +9,7 @@ import 'package:logger/screens/home/screen.dart';
 import 'package:logger/screens/settings/screen.dart';
 import 'package:logger/core/manager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/screens/tracklist/screen.dart';
 
 class AppInterface extends ConsumerWidget {
   const AppInterface({
@@ -37,19 +38,19 @@ class AppInterface extends ConsumerWidget {
               screen: AnalyticsScreen(),
             ),
             Screen(
-              label: AppLocalizations.of(context).settingsScreenLabelText,
+              label: AppLocalizations.of(context).trackListLabelText,
               index: 2,
+              icon: Icons.view_list,
+              selectedIcon: Icons.view_list,
+              screen: TrackListScreen(),
+            ),
+            Screen(
+              label: AppLocalizations.of(context).settingsScreenLabelText,
+              index: 3,
               icon: Icons.settings_outlined,
               selectedIcon: Icons.settings,
               screen: SettingsScreen(),
             ),
-            // Screen(
-            //   label: AppLocalizations.of(context).aboutText,
-            //   index: 3,
-            //   icon: Icons.info_outline,
-            //   selectedIcon: Icons.info,
-            //   screen: const AboutScreen(),
-            // ),
           ],
         ),
         if (ref.watch(linearLoaderProvider).currentState)

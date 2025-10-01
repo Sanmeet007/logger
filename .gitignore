@@ -50,3 +50,4 @@ app.*.map.json
 /flask_server/
 
 .gradle
+untranslated_messages.txt

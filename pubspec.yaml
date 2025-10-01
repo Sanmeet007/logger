@@ -56,6 +56,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   sqflite: ^2.4.1
   wakelock_plus: ^1.2.10
+  timeago: ^3.7.1
 
   call_log:
     git:

@@ -13,10 +13,13 @@ import 'package:logger/providers/shared_preferences_providers/export_type_provid
 import 'package:logger/providers/shared_preferences_providers/logs_sharing_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/phone_account_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/uses_filter_presets_provider.dart';
+import 'package:logger/providers/tracklist_provider.dart';
 import 'package:logger/screens/settings/fragments/export_info/csv_fields.dart';
 import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
+import 'package:logger/screens/tracklist/fragments/add_new_number_to_track_list_dialog.dart';
 import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
+import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,6 +29,7 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'log_filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/utils/constants.dart' as constants;
 
 class Screen {
   final String label;
@@ -390,6 +394,34 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
         });
   }
 
+  void registerNewTrackListItem(currentContext) async {
+    try {
+      String? newNumber = await showAdaptiveDialog<String>(
+        context: currentContext,
+        builder: (context) {
+          return AddNewNumberToTrackListDialog(
+            currentNumbers: ref.read(trackListProvider).value ?? [],
+          );
+        },
+      );
+
+      if (newNumber != null) {
+        newNumber = PhoneFormatter.parsePhoneNumber(newNumber);
+
+        ref
+            .read(trackListProvider.notifier)
+            .registerNumberIfNotPresent(newNumber);
+      }
+    } catch (E) {
+      if (mounted) {
+        AppSnackBar.show(
+          currentContext,
+          content: AppLocalizations.of(context).trackNumberErrorText,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -476,22 +508,21 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                     ),
                   if (_selectedIndex == 2)
                     IconButton(
+                      tooltip: AppLocalizations.of(context).addText,
+                      onPressed:
+                          ((ref.watch(trackListProvider).value ?? []).length <
+                                  constants.maxAllowedTrackListItems)
+                              ? () => registerNewTrackListItem(context)
+                              : null,
+                      icon: const Icon(Icons.add),
+                    ),
+                  if (_selectedIndex == 3)
+                    IconButton(
                       tooltip:
                           AppLocalizations.of(context).exportFieldInfoHintText,
                       onPressed: openDetailedView,
                       icon: const Icon(Icons.file_present_outlined),
                     ),
-                  // if (_selectedIndex == 3)
-                  //   IconButton(
-                  //       tooltip: AppLocalizations.of(context).donateText,
-                  //       onPressed: () {
-                  //         url_launcher
-                  //             .launchUrl(AppInformation.getDonationLink());
-                  //       },
-                  //       icon: const Icon(
-                  //         Icons.handshake,
-                  //       ),
-                  // ),
                   const SizedBox(
                     width: 10.0,
                   )

@@ -809,5 +809,30 @@
   "showTotalCallDurationText": "Total call duration",
   "showTotalCallDurationSubText": "Display the total time spent on calls",
   "disableLogsSharingText": "Hide share button",
-  "disableLogsSharingSubText": "Conceal the share button in the call logs"
+  "disableLogsSharingSubText": "Conceal the share button in the call logs",
+  "trackListLabelText": "Tracklist",
+  "tracklistPlaceholderText": "Manage your track list efficiently. Tap + (top-right) to add a number, swipe left on a list item and tap Remove to untrack.",
+  "removeAllText": "remove all",
+  "trackContactLabelText": "Phone Number",
+  "trackContactText": "Track a Contact",
+  "removeText":"Remove",
+  "iteractionScoreText": "Interaction Score",
+  "lastCallSinceText": "Last call since",
+  "avgCallsMonthText":"Average Calls / Month",
+  "avgCallDurationText": "Average Call Duration",
+  "peakCallDurationText": "Peak Call Duration",
+  "callsPerWeekText": "Calls / Week",
+  "callDistByWeekDay": "Call Distribution by Weekday (%)",
+  "addToTrackList": "Add up to {maxItems} contacts to your tracklist for easy tracking.",
+  "addText":"Add",
+  "numberAlreadyAddedErrorText": "Number already added",
+  "invalidNumberErrorText": "Invalid phone number",
+  "emptyPhoneNumberErrorText": "Enter a phone number",
+  "trackNumberErrorText": "Something went wrong adding new track contact",
+  "@addToTrackList": {
+    "description": "Instruction text to tell the user they can add contacts to the tracklist",
+    "placeholders": {
+      "maxItems": {}
+    }
+  }
 }
