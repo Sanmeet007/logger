@@ -570,6 +570,12 @@
   "@naText": {
     "description": "Text for 'n/a' (Not Applicable)"
   },
+  "@addToTrackList": {
+    "description": "Instruction text to tell the user they can add contacts to the tracklist",
+    "placeholders": {
+      "maxItems": {}
+    }
+  },
   "aboutText": "About",
   "advancedSettingsLabelText": "Advanced Settings",
   "analyticsPolicyLabelText": "Analytics Policy",
@@ -815,24 +821,18 @@
   "removeAllText": "remove all",
   "trackContactLabelText": "Phone Number",
   "trackContactText": "Track a Contact",
-  "removeText":"Remove",
+  "removeText": "Remove",
   "iteractionScoreText": "Interaction Score",
   "lastCallSinceText": "Last call since",
-  "avgCallsMonthText":"Average Calls / Month",
+  "avgCallsMonthText": "Average Calls / Month",
   "avgCallDurationText": "Average Call Duration",
   "peakCallDurationText": "Peak Call Duration",
   "callsPerWeekText": "Average Calls / Week",
   "callDistByWeekDay": "Call Distribution by Weekday (%)",
   "addToTrackList": "Add up to {maxItems} contacts to your tracklist for easy tracking.",
-  "addText":"Add",
+  "addText": "Add",
   "numberAlreadyAddedErrorText": "Number already added",
   "invalidNumberErrorText": "Invalid phone number",
   "emptyPhoneNumberErrorText": "Enter a phone number",
-  "trackNumberErrorText": "Something went wrong adding new track contact",
-  "@addToTrackList": {
-    "description": "Instruction text to tell the user they can add contacts to the tracklist",
-    "placeholders": {
-      "maxItems": {}
-    }
-  }
+  "trackNumberErrorText": "Something went wrong adding new track contact"
 }
