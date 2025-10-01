@@ -14,3 +14,4 @@ const String sharedCallRounding = "call_rounding";
 
 const String defaultPhoneAccountId = "Any";
 const int maxAllowedPresets = 5;
+const int maxAllowedTrackListItems = 10;
