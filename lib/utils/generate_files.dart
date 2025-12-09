@@ -1,3 +1,4 @@
+// TODO ADD iCAL FORMAT !
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
@@ -47,6 +48,60 @@ Map<String, dynamic> _jsonifyCallEntry(CallLogEntry entry) {
   };
 }
 
+String _iCalifyCallEntry(CallLogEntry entry) {
+  final start =
+      DateTime.fromMillisecondsSinceEpoch(entry.timestamp ?? 0, isUtc: true);
+  final end = start.add(Duration(seconds: entry.duration ?? 0));
+
+  String format(DateTime dt) {
+    return "${dt.year.toString().padLeft(4, '0')}"
+        "${dt.month.toString().padLeft(2, '0')}"
+        "${dt.day.toString().padLeft(2, '0')}T"
+        "${dt.hour.toString().padLeft(2, '0')}"
+        "${dt.minute.toString().padLeft(2, '0')}"
+        "${dt.second.toString().padLeft(2, '0')}Z";
+  }
+
+  final uid = "${entry.timestamp}-${entry.number}@logger";
+
+  return """
+BEGIN:VEVENT
+UID:$uid
+DTSTAMP:${format(start)}
+DTSTART:${format(start)}
+DTEND:${format(end)}
+SUMMARY:${entry.name ?? entry.formattedNumber}
+DESCRIPTION:Number: ${entry.formattedNumber}\\nType: ${entry.callType?.index}
+CATEGORIES:${entry.callType?.name}
+${entry.simDisplayName != null ? "LOCATION:${entry.simDisplayName}" : ""}
+X-DURATION:PT${entry.duration}S
+X-PHONE-ACCOUNT-ID:${entry.phoneAccountId ?? ""}
+X-NUMBER-LABEL:${entry.cachedNumberLabel ?? ""}
+X-NUMBER-TYPE:${entry.cachedNumberType ?? ""}
+X-MATCHED-NUMBER:${entry.cachedMatchedNumber ?? ""}
+END:VEVENT""";
+}
+
+String _toICalString(final Iterable<CallLogEntry>? callLogs) {
+  if (callLogs == null) {
+    return "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Logger App//EN\nEND:VCALENDAR";
+  }
+
+  final buffer = StringBuffer();
+
+  buffer.writeln("BEGIN:VCALENDAR");
+  buffer.writeln("VERSION:2.0");
+  buffer.writeln("PRODID:-//Logger App//EN");
+
+  for (final entry in callLogs) {
+    buffer.writeln(_iCalifyCallEntry(entry));
+  }
+
+  buffer.writeln("END:VCALENDAR");
+
+  return buffer.toString();
+}
+
 String _toJsonString(final Iterable<CallLogEntry>? callLogs) {
   // Fields -> camelCase -> Js ?!
   if (callLogs == null) return '[]';
@@ -65,12 +120,19 @@ class CallLogsFileGenerator {
         return "text/comma-separated-values";
       case FileType.json:
         return "application/json";
+      case FileType.ical:
+        return "text/calendar";
     }
   }
 
   static Future<String> toCsvString(
       final Iterable<CallLogEntry> callLogs) async {
     return await Isolate.run(() => _toCsvString(callLogs));
+  }
+
+  static Future<String> toICalString(
+      final Iterable<CallLogEntry> callLogs) async {
+    return await Isolate.run(() => _toICalString(callLogs));
   }
 
   static Future<String> toJsonString(
@@ -91,7 +153,10 @@ class CallLogsFileGenerator {
         contents = await toCsvString(callLogs);
       } else if (fileType == FileType.json) {
         contents = await toJsonString(callLogs);
+      } else if (fileType == FileType.ical) {
+        contents = await toICalString(callLogs);
       }
+
       DocumentFile? file = await createFileAsBytes(
         parentUri,
         mimeType: getMimeTypeFromImportType(fileType),

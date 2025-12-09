@@ -1,4 +1,4 @@
-enum FileType { csv, json }
+enum FileType { csv, json, ical }
 
 String getFileTypeDetails(FileType t) {
   switch (t) {
@@ -6,6 +6,9 @@ String getFileTypeDetails(FileType t) {
       return "Comma separated values";
 
     case FileType.json:
-      return "Javascript Object notation";
+      return "Javascript object notation";
+
+    case FileType.ical:
+      return "Internet calendar format";
   }
 }
