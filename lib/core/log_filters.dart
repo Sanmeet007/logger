@@ -12,6 +12,7 @@ import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/utils/constants.dart' as constants;
+import 'package:logger/utils/format_helpers.dart';
 
 class LogFilters extends ConsumerStatefulWidget {
   final WidgetRef parentRef;
@@ -415,6 +416,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                                 hintText: AppLocalizations.of(context)
                                     .hintMobileNumberText,
                               ),
+                              inputFormatters: [NoSpaceFormatter()],
                               keyboardType:
                                   const TextInputType.numberWithOptions(),
                             ),

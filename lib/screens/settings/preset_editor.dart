@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/providers/filter_presets_provider.dart';
 import 'package:logger/utils/filter_date_ranges.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/snackbar.dart';
 
 class PresetEditor extends ConsumerStatefulWidget {
@@ -360,6 +361,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                             hintText: AppLocalizations.of(context)
                                 .hintMobileNumberText,
                           ),
+                          inputFormatters: [NoSpaceFormatter()],
                           keyboardType: const TextInputType.numberWithOptions(),
                         ),
                       ),
