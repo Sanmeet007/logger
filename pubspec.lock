@@ -142,7 +142,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "233b6ab42928eb79e32f9b909cc5b8a6248492c9"
+      resolved-ref: "0233dfad1504843030b0cad7e97564a1715d3f0c"
       url: "https://github.com/Sanmeet007/call_log"
     source: git
     version: "4.0.0"
