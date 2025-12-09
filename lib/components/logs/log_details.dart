@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
@@ -45,6 +46,10 @@ class LogDetails extends StatelessWidget {
     ContactHandler.handleOpenContact(parentContext, phoneNumber);
   }
 
+  void handleCopyPhoneNumberToClip() async {
+    await Clipboard.setData(ClipboardData(text: phoneNumber));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -63,11 +68,14 @@ class LogDetails extends StatelessWidget {
                         fontSize: 20.0,
                       ),
                     ),
-                    Text(
-                      phoneNumber,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
+                    InkWell(
+                      onLongPress: handleCopyPhoneNumberToClip,
+                      child: Text(
+                        phoneNumber,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                        ),
                       ),
                     )
                   ],
