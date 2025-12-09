@@ -122,6 +122,7 @@ class GroupedLogsBuilder extends StatelessWidget {
                 callType: callType,
                 sim: sim,
                 phoneAccountId: phoneAccountId,
+                photoUri: entry.photoUri,
               ),
           ],
         );
@@ -210,6 +211,7 @@ class _GroupedLogsExplorerState extends State<GroupedLogsExplorer> {
                       AppLocalizations.of(context).unknownText,
                   phoneAccountId: entry.phoneAccountId ??
                       AppLocalizations.of(context).unknownText,
+                  photoUri: entry.photoUri,
                 );
               }).toList(),
             ),

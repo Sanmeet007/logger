@@ -9,6 +9,7 @@ import 'package:logger/providers/whatsapp_availablity_provider.dart';
 import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/whatsapp_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -159,6 +160,7 @@ class ContactLog extends ConsumerWidget {
                           AppLocalizations.of(context).unknownText,
                       phoneAccountId: logDetails.phoneAccountId ??
                           AppLocalizations.of(context).unknownText,
+                      photoUri: logDetails.photoUri,
                     );
                   });
             },
@@ -166,14 +168,39 @@ class ContactLog extends ConsumerWidget {
             leading: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
               child: CircleAvatar(
-                child: logDetails.name != null
-                    ? Text(
-                        logDetails.name!.isEmpty ? "?" : logDetails.name![0],
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                        ),
+                child: logDetails.photoUri != null
+                    ? FutureBuilder(
+                        future: NativeMethods.getContactPhotoFromUri(
+                            logDetails.photoUri),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircleAvatar(
+                              child: Icon(Icons.person),
+                            );
+                          }
+
+                          if (!snapshot.hasData || snapshot.data == null) {
+                            return const CircleAvatar(
+                              child: Icon(Icons.person),
+                            );
+                          }
+
+                          return CircleAvatar(
+                            backgroundImage: MemoryImage(snapshot.data!),
+                          );
+                        },
                       )
-                    : const Icon(Icons.account_circle),
+                    : logDetails.name != null
+                        ? Text(
+                            logDetails.name!.isEmpty
+                                ? "?"
+                                : logDetails.name![0],
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          )
+                        : const Icon(Icons.account_circle),
               ),
             ),
             trailing: Text(

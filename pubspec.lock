@@ -142,7 +142,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "29efc1e81e1ef32b7ad091d3cba9dcd6503468cd"
+      resolved-ref: "233b6ab42928eb79e32f9b909cc5b8a6248492c9"
       url: "https://github.com/Sanmeet007/call_log"
     source: git
     version: "4.0.0"
@@ -1180,6 +1180,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  uri_content:
+    dependency: "direct main"
+    description:
+      name: uri_content
+      sha256: b1de935b89677192282f312188aa07e8f96df91daa735f19f6404aa781b5141e
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   url_launcher:
     dependency: "direct main"
     description:

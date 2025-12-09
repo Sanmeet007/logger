@@ -1,4 +1,5 @@
 import 'dart:isolate';
+import 'package:uri_content/uri_content.dart';
 import 'package:flutter/services.dart';
 
 const _methodChannelPlatform = MethodChannel("com.logger.app/imp_cl_fmc");
@@ -51,6 +52,17 @@ Future<bool> _fixCallLogCachedName(Map params) async {
 }
 
 class NativeMethods {
+  static Future<Uint8List?> getContactPhotoFromUri(String? uriString) async {
+    if (uriString == null || uriString.isEmpty) return null;
+
+    try {
+      final bytes = await UriContent().fromOrNull(Uri.parse(uriString));
+      return bytes;
+    } catch (e) {
+      return null;
+    }
+  }
+
   static Future<bool> addToContacts(String phoneNumber) async {
     try {
       bool success = await _methodChannelPlatform

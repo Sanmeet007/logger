@@ -22,8 +22,10 @@ class LogEntry extends ConsumerWidget {
     required this.phoneAccountId,
     required this.phoneNumber,
     required this.isUnknown,
+    required this.photoUri,
   });
 
+  final String? photoUri;
   final bool isUnknown;
   final String name;
   final String phoneNumber;
@@ -154,6 +156,7 @@ class LogEntry extends ConsumerWidget {
                     callType: callType,
                     sim: sim,
                     phoneAccountId: phoneAccountId,
+                    photoUri: photoUri,
                   );
                 });
           },

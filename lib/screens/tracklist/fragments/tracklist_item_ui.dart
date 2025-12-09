@@ -11,6 +11,7 @@ import 'package:logger/screens/tracklist/fragments/weekday_barchart.dart';
 import 'package:logger/utils/call_display_helper.dart';
 import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/tracking_metrics.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -116,10 +117,35 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                   },
                   child: ExpansionTile(
                     leading: CircleAvatar(
-                      child: Text(
-                        (snapshot.data!.lastCallEntry?.name ?? "?")[0],
-                        style: const TextStyle(fontSize: 25),
-                      ),
+                      child: snapshot.data!.lastCallEntry?.photoUri != null
+                          ? FutureBuilder(
+                              future: NativeMethods.getContactPhotoFromUri(
+                                  snapshot.data!.lastCallEntry?.photoUri),
+                              builder: (context, childSnapshot) {
+                                if (childSnapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircleAvatar(
+                                    child: Icon(Icons.person),
+                                  );
+                                }
+
+                                if (!childSnapshot.hasData ||
+                                    childSnapshot.data == null) {
+                                  return const CircleAvatar(
+                                    child: Icon(Icons.person),
+                                  );
+                                }
+
+                                return CircleAvatar(
+                                  backgroundImage:
+                                      MemoryImage(childSnapshot.data!),
+                                );
+                              },
+                            )
+                          : Text(
+                              (snapshot.data!.lastCallEntry?.name ?? "?")[0],
+                              style: const TextStyle(fontSize: 25),
+                            ),
                     ),
                     title: Text(
                       snapshot.data!.lastCallEntry?.name ??

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
+import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -21,8 +22,10 @@ class LogDetails extends StatelessWidget {
     required this.sim,
     required this.phoneAccountId,
     required this.isUnknown,
+    required this.photoUri,
   });
 
+  final String? photoUri;
   final BuildContext parentContext;
   final bool isUnknown;
   final String name;
@@ -85,10 +88,33 @@ class LogDetails extends StatelessWidget {
                   color: callColor,
                 ),
                 leading: CircleAvatar(
-                  child: Text(
-                    isUnknown ? '?' : name[0],
-                    style: const TextStyle(fontSize: 25),
-                  ),
+                  child: photoUri != null
+                      ? FutureBuilder(
+                          future:
+                              NativeMethods.getContactPhotoFromUri(photoUri),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircleAvatar(
+                                child: Icon(Icons.person),
+                              );
+                            }
+
+                            if (!snapshot.hasData || snapshot.data == null) {
+                              return const CircleAvatar(
+                                child: Icon(Icons.person),
+                              );
+                            }
+
+                            return CircleAvatar(
+                              backgroundImage: MemoryImage(snapshot.data!),
+                            );
+                          },
+                        )
+                      : Text(
+                          isUnknown ? '?' : name[0],
+                          style: const TextStyle(fontSize: 25),
+                        ),
                 ),
               ),
               Container(
