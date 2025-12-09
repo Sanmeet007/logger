@@ -1,4 +1,3 @@
-// TODO ADD iCAL FORMAT !
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
