@@ -140,11 +140,9 @@ packages:
   call_log:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "0233dfad1504843030b0cad7e97564a1715d3f0c"
-      url: "https://github.com/Sanmeet007/call_log"
-    source: git
+      path: "../flutter_packages/call_log"
+      relative: true
+    source: path
     version: "4.0.0"
   characters:
     dependency: transitive
