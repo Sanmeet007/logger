@@ -7,6 +7,7 @@ import 'package:logger/components/tracklist/tracklist_stats_tile.dart';
 import 'package:logger/data/models/tracklist_item.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/providers/screen_index.dart';
 import 'package:logger/providers/tracklist_provider.dart';
 import 'package:logger/screens/tracklist/fragments/weekday_barchart.dart';
 import 'package:logger/utils/call_display_helper.dart';
@@ -190,6 +191,9 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                             Expanded(
                               child: OutlinedButton.icon(
                                 onPressed: () async {
+                                  ref
+                                      .read(screenIndexProvider.notifier)
+                                      .setIndex(0);
                                   await ref
                                       .read(logsFilterProvider.notifier)
                                       .filterByPhoneNumber(
