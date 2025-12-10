@@ -161,6 +161,7 @@ class ContactLog extends ConsumerWidget {
                       phoneAccountId: logDetails.phoneAccountId ??
                           AppLocalizations.of(context).unknownText,
                       photoUri: logDetails.photoUri,
+                      parentRef: ref,
                     );
                   });
             },

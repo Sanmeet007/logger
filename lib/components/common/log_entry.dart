@@ -157,6 +157,7 @@ class LogEntry extends ConsumerWidget {
                     sim: sim,
                     phoneAccountId: phoneAccountId,
                     photoUri: photoUri,
+                    parentRef: ref,
                   );
                 });
           },

@@ -3,6 +3,7 @@ import 'package:call_log/call_log.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/providers/filter_presets_provider.dart';
+import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/utils/filters.dart';
 
 class LogsFilterState {
@@ -116,6 +117,24 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
     } catch (_) {
       state = state.copyWith(areFiltersApplied: false);
       ref.read(currentCallLogsNotifierProvider.notifier).reset();
+    }
+  }
+
+  Future<void> filterByPhoneNumber(String phoneNumber) async {
+    try {
+      ref.read(loaderProvider.notifier).showLoading();
+      ref.read(logsFilterProvider.notifier).resetFilters();
+
+      await ref.read(logsFilterProvider.notifier).applyFilters(
+            Filter(
+              usesSpecificPhoneNumber: true,
+              phoneToMatch: phoneNumber,
+            ),
+          );
+    } catch (e, _) {
+      // debugPrint("Filter error: $e");
+    } finally {
+      ref.read(loaderProvider.notifier).hideLoading();
     }
   }
 

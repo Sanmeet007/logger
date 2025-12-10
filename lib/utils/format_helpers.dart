@@ -11,10 +11,24 @@ class NoSpaceFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    final cleaned = newValue.text.replaceAll(" ", "");
-    return newValue.copyWith(
+    final newText = newValue.text;
+
+    final cleaned = newText.replaceAll(" ", "");
+    if (newText == cleaned) return newValue;
+
+    int cursorPosition = newValue.selection.end;
+
+    int removedBeforeCursor = 0;
+    for (int i = 0; i < cursorPosition && i < newText.length; i++) {
+      if (newText[i] == " ") removedBeforeCursor++;
+    }
+
+    final newCursor =
+        (cursorPosition - removedBeforeCursor).clamp(0, cleaned.length);
+
+    return TextEditingValue(
       text: cleaned,
-      selection: TextSelection.collapsed(offset: cleaned.length),
+      selection: TextSelection.collapsed(offset: newCursor),
     );
   }
 }

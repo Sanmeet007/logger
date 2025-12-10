@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LogDetails extends StatelessWidget {
+class LogDetails extends ConsumerWidget {
   const LogDetails({
     super.key,
     required this.parentContext,
@@ -23,6 +25,7 @@ class LogDetails extends StatelessWidget {
     required this.phoneAccountId,
     required this.isUnknown,
     required this.photoUri,
+    required this.parentRef,
   });
 
   final String? photoUri;
@@ -38,6 +41,7 @@ class LogDetails extends StatelessWidget {
   final String callType;
   final String sim;
   final String phoneAccountId;
+  final WidgetRef parentRef;
 
   void handleAddToContacts(BuildContext context) async {
     Navigator.pop(context);
@@ -53,8 +57,21 @@ class LogDetails extends StatelessWidget {
     await Clipboard.setData(ClipboardData(text: phoneNumber));
   }
 
+  void handleQuickFilterCallback(BuildContext context) {
+    Navigator.pop(context);
+    Future.microtask(() async {
+      try {
+        await parentRef.read(logsFilterProvider.notifier).filterByPhoneNumber(
+              PhoneFormatter.parsePhoneNumber(phoneNumber),
+            );
+      } catch (e, _) {
+        /// Silence is golden
+      }
+    });
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Container(
           padding: const EdgeInsets.all(12),
@@ -65,10 +82,13 @@ class LogDetails extends StatelessWidget {
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 20.0,
+                    InkWell(
+                      onLongPress: () => handleQuickFilterCallback(context),
+                      child: Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                        ),
                       ),
                     ),
                     InkWell(
