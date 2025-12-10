@@ -257,5 +257,6 @@
     "numberAlreadyAddedErrorText": "Nummer redan tillagt",
     "invalidNumberErrorText": "Ogiltigt telefonnummer",
     "emptyPhoneNumberErrorText": "Ange ett telefonnummer",
-    "trackNumberErrorText": "Ett fel uppstod vid tillägg av ny spårningskontakt"
+    "trackNumberErrorText": "Ett fel uppstod vid tillägg av ny spårningskontakt",
+    "quickFilterText": "Snabbfilter"
 }

@@ -257,5 +257,6 @@
     "numberAlreadyAddedErrorText": "号码已添加",
     "invalidNumberErrorText": "无效的电话号码",
     "emptyPhoneNumberErrorText": "请输入电话号码",
-    "trackNumberErrorText": "添加新追踪联系人时出错"
+    "trackNumberErrorText": "添加新追踪联系人时出错",
+    "quickFilterText": "快速筛选"
 }

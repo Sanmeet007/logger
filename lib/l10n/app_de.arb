@@ -257,5 +257,6 @@
     "numberAlreadyAddedErrorText": "Nummer bereits hinzugefügt",
     "invalidNumberErrorText": "Ungültige Telefonnummer",
     "emptyPhoneNumberErrorText": "Geben Sie eine Telefonnummer ein",
-    "trackNumberErrorText": "Beim Hinzufügen des neuen Track-Kontakts ist ein Fehler aufgetreten"
+    "trackNumberErrorText": "Beim Hinzufügen des neuen Track-Kontakts ist ein Fehler aufgetreten",
+    "quickFilterText": "Schnellfilter"
 }

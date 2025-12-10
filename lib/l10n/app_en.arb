@@ -834,5 +834,6 @@
   "numberAlreadyAddedErrorText": "Number already added",
   "invalidNumberErrorText": "Invalid phone number",
   "emptyPhoneNumberErrorText": "Enter a phone number",
-  "trackNumberErrorText": "Something went wrong adding new track contact"
+  "trackNumberErrorText": "Something went wrong adding new track contact",
+  "quickFilterText": "Quick Filter"
 }

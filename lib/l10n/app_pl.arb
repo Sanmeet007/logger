@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Numer już dodany",
   "invalidNumberErrorText": "Nieprawidłowy numer telefonu",
   "emptyPhoneNumberErrorText": "Wprowadź numer telefonu",
-  "trackNumberErrorText": "Wystąpił błąd podczas dodawania nowego kontaktu do śledzenia"
+  "trackNumberErrorText": "Wystąpił błąd podczas dodawania nowego kontaktu do śledzenia",
+  "quickFilterText": "Szybki filtr"
 }

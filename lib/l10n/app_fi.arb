@@ -257,5 +257,6 @@
     "numberAlreadyAddedErrorText": "Numero on jo lisätty",
     "invalidNumberErrorText": "Virheellinen puhelinnumero",
     "emptyPhoneNumberErrorText": "Anna puhelinnumero",
-    "trackNumberErrorText": "Uuden seurattavan kontaktin lisäämisessä tapahtui virhe"
+    "trackNumberErrorText": "Uuden seurattavan kontaktin lisäämisessä tapahtui virhe",
+    "quickFilterText": "Pikasuodatin"
 }

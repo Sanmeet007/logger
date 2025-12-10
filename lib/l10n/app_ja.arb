@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "番号は既に追加されています",
   "invalidNumberErrorText": "無効な電話番号",
   "emptyPhoneNumberErrorText": "電話番号を入力してください",
-  "trackNumberErrorText": "新しいトラック連絡先の追加中にエラーが発生しました"
+  "trackNumberErrorText": "新しいトラック連絡先の追加中にエラーが発生しました",
+  "quickFilterText": "クイックフィルター"
 }

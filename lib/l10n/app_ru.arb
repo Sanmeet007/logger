@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Номер уже добавлен",
   "invalidNumberErrorText": "Неверный номер телефона",
   "emptyPhoneNumberErrorText": "Введите номер телефона",
-  "trackNumberErrorText": "Произошла ошибка при добавлении нового контакта для отслеживания"
+  "trackNumberErrorText": "Произошла ошибка при добавлении нового контакта для отслеживания",
+  "quickFilterText": "Быстрый фильтр"
 }

@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Nummer al toegevoegd",
   "invalidNumberErrorText": "Ongeldig telefoonnummer",
   "emptyPhoneNumberErrorText": "Voer een telefoonnummer in",
-  "trackNumberErrorText": "Er is iets misgegaan bij het toevoegen van het nieuwe contact"
+  "trackNumberErrorText": "Er is iets misgegaan bij het toevoegen van het nieuwe contact",
+  "quickFilterText": "Snelfilter"
 }

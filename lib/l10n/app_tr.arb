@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Numara zaten eklendi",
   "invalidNumberErrorText": "Geçersiz telefon numarası",
   "emptyPhoneNumberErrorText": "Lütfen bir telefon numarası girin",
-  "trackNumberErrorText": "Yeni takip kişisi eklenirken bir hata oluştu"
+  "trackNumberErrorText": "Yeni takip kişisi eklenirken bir hata oluştu",
+  "quickFilterText": "Hızlı filtre"
 }

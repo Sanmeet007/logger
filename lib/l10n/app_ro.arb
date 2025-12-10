@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Numărul a fost deja adăugat",
   "invalidNumberErrorText": "Număr de telefon invalid",
   "emptyPhoneNumberErrorText": "Introduceți un număr de telefon",
-  "trackNumberErrorText": "A apărut o eroare la adăugarea noului contact de urmărire"
+  "trackNumberErrorText": "A apărut o eroare la adăugarea noului contact de urmărire",
+  "quickFilterText": "Filtru rapid"
 }

@@ -217,6 +217,22 @@ class LogDetails extends ConsumerWidget {
                   ],
                 ),
               ),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.electric_bolt),
+                      onPressed: () => handleQuickFilterCallback(context),
+                      label: Text(
+                        AppLocalizations.of(context).quickFilterText,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               if (isUnknown)
                 Container(
                   margin: const EdgeInsets.symmetric(
@@ -224,9 +240,10 @@ class LogDetails extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      ElevatedButton(
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.person_add),
                         onPressed: () => handleAddToContacts(context),
-                        child: Text(
+                        label: Text(
                           AppLocalizations.of(context).addToContactsText,
                         ),
                       ),
@@ -240,9 +257,10 @@ class LogDetails extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      ElevatedButton(
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.account_box),
                         onPressed: () => handleOpenContact(context),
-                        child: Text(
+                        label: Text(
                           AppLocalizations.of(context).viewContactLabel,
                         ),
                       ),

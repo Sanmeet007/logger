@@ -266,5 +266,6 @@
   "numberAlreadyAddedErrorText": "नंबर पहले से जोड़ा गया है",
   "invalidNumberErrorText": "अमान्य फ़ोन नंबर",
   "emptyPhoneNumberErrorText": "फ़ोन नंबर दर्ज करें",
-  "trackNumberErrorText": "नया ट्रैक संपर्क जोड़ते समय कुछ गलत हुआ"
+  "trackNumberErrorText": "नया ट्रैक संपर्क जोड़ते समय कुछ गलत हुआ",
+  "quickFilterText": "त्वरित फ़िल्टर"
 }

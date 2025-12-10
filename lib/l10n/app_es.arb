@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "Número ya agregado",
   "invalidNumberErrorText": "Número de teléfono inválido",
   "emptyPhoneNumberErrorText": "Ingrese un número de teléfono",
-  "trackNumberErrorText": "Ocurrió un error al agregar el nuevo contacto de seguimiento"
+  "trackNumberErrorText": "Ocurrió un error al agregar el nuevo contacto de seguimiento",
+  "quickFilterText": "Filtro rápido"
 }

@@ -257,5 +257,6 @@
   "numberAlreadyAddedErrorText": "번호가 이미 추가됨",
   "invalidNumberErrorText": "잘못된 전화번호",
   "emptyPhoneNumberErrorText": "전화번호를 입력하세요",
-  "trackNumberErrorText": "새 트랙 연락처를 추가하는 중 오류가 발생했습니다"
+  "trackNumberErrorText": "새 트랙 연락처를 추가하는 중 오류가 발생했습니다",
+  "quickFilterText": "빠른 필터"
 }
