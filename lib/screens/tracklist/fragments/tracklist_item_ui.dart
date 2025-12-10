@@ -6,6 +6,7 @@ import 'package:logger/components/common/skeleton.dart';
 import 'package:logger/components/tracklist/tracklist_stats_tile.dart';
 import 'package:logger/data/models/tracklist_item.dart';
 import 'package:logger/providers/call_logs_provider.dart';
+import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/tracklist_provider.dart';
 import 'package:logger/screens/tracklist/fragments/weekday_barchart.dart';
 import 'package:logger/utils/call_display_helper.dart';
@@ -162,6 +163,47 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                       ),
                     ),
                     children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 15.0,
+                          right: 15.0,
+                          top: 12.0,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: OutlinedButton.icon(
+                                onPressed: () async {
+                                  var uri = Uri.parse(
+                                      "sms:${widget.item.phoneNumber}");
+                                  await launchUrl(uri);
+                                },
+                                icon: Icon(Icons.sms),
+                                label: Text(
+                                  AppLocalizations.of(context).smsText,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Expanded(
+                              child: OutlinedButton.icon(
+                                onPressed: () async {
+                                  await ref
+                                      .read(logsFilterProvider.notifier)
+                                      .filterByPhoneNumber(
+                                        widget.item.phoneNumber,
+                                      );
+                                },
+                                icon: Icon(Icons.electric_bolt),
+                                label: Text(AppLocalizations.of(context)
+                                    .quickFilterText),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         padding: EdgeInsets.all(10.0),
                         child: Column(

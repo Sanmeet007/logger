@@ -62,7 +62,7 @@ class LogDetails extends ConsumerWidget {
     Future.microtask(() async {
       try {
         await parentRef.read(logsFilterProvider.notifier).filterByPhoneNumber(
-              PhoneFormatter.parsePhoneNumber(phoneNumber),
+              phoneNumber,
             );
       } catch (e, _) {
         /// Silence is golden

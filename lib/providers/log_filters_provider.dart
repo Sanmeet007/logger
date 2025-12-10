@@ -5,6 +5,7 @@ import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/providers/filter_presets_provider.dart';
 import 'package:logger/providers/loader_provider.dart';
 import 'package:logger/utils/filters.dart';
+import 'package:logger/utils/phone_formatter.dart';
 
 class LogsFilterState {
   final Filter filter;
@@ -128,7 +129,7 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
       await ref.read(logsFilterProvider.notifier).applyFilters(
             Filter(
               usesSpecificPhoneNumber: true,
-              phoneToMatch: phoneNumber,
+              phoneToMatch: PhoneFormatter.parsePhoneNumber(phoneNumber),
             ),
           );
     } catch (e, _) {
