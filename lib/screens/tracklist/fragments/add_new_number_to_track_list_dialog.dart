@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/data/models/tracklist_item.dart';
+import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/constants.dart' as constants;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,6 +22,14 @@ class AddNewNumberToTrackListDialogState
   String? _errorText;
   final _controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
 
   @override
   void dispose() {
@@ -48,7 +57,16 @@ class AddNewNumberToTrackListDialogState
                 autofocus: true,
                 controller: _controller,
                 keyboardType: TextInputType.phone,
+                inputFormatters: [NoSpaceFormatter()],
                 decoration: InputDecoration(
+                  suffixIcon: _controller.text.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _controller.clear();
+                          },
+                        )
+                      : null,
                   labelText: AppLocalizations.of(context).trackContactLabelText,
                   hintText: AppLocalizations.of(context).hintMobileNumberText,
                   border: OutlineInputBorder(),

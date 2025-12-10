@@ -404,6 +404,15 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                               onChanged: handlePhoneNumberValueChange,
                               controller: _phoneNumberInputController,
                               decoration: InputDecoration(
+                                suffixIcon: _phoneNumberInputController
+                                        .text.isNotEmpty
+                                    ? IconButton(
+                                        icon: const Icon(Icons.clear),
+                                        onPressed: () {
+                                          _phoneNumberInputController.clear();
+                                        },
+                                      )
+                                    : null,
                                 border: const OutlineInputBorder(),
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
