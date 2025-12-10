@@ -6,6 +6,7 @@ import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/current_call_logs_provider.dart';
 import 'package:logger/providers/filter_presets_provider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
+import 'package:logger/providers/screen_index.dart';
 import 'package:logger/providers/shared_preferences_providers/download_confirmation_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/duration_filtering_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
@@ -62,20 +63,16 @@ class ScreenManager extends ConsumerStatefulWidget {
 }
 
 class _ScreenManagerState extends ConsumerState<ScreenManager> {
-  late int _selectedIndex;
   Uri? currentFilePath;
   bool isTaskRunning = false;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.initialIndex;
   }
 
   void updateIndex(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    ref.read(screenIndexProvider.notifier).setIndex(index);
   }
 
   Future<Uri?> generateLogsFile(Uri parentUri, String filename) async {
@@ -425,12 +422,10 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: _selectedIndex == widget.initialIndex,
+      canPop: ref.watch(screenIndexProvider) == widget.initialIndex,
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop) {
-          setState(() {
-            _selectedIndex = widget.initialIndex;
-          });
+          updateIndex(widget.initialIndex);
         }
       },
       child: Stack(
@@ -449,7 +444,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                   ),
                 ),
                 actions: [
-                  ...(_selectedIndex == 0
+                  ...(ref.watch(screenIndexProvider) == 0
                       ? [
                           IconButton(
                             tooltip: AppLocalizations.of(context).downloadText,
@@ -483,7 +478,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                             ),
                         ]
                       : []),
-                  if (_selectedIndex == 1 &&
+                  if (ref.watch(screenIndexProvider) == 1 &&
                       ref.watch(logsFilterProvider).areFiltersApplied)
                     IconButton(
                       tooltip: AppLocalizations.of(context).clearFiltersTooltip,
@@ -492,7 +487,8 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                       },
                       icon: const Icon(Icons.filter_alt_off),
                     ),
-                  if (_selectedIndex == 1 || _selectedIndex == 0)
+                  if (ref.watch(screenIndexProvider) == 1 ||
+                      ref.watch(screenIndexProvider) == 0)
                     IconButton(
                       tooltip: AppLocalizations.of(context).filterText,
                       onPressed: showFiltersModal,
@@ -506,7 +502,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                             )
                           : const Icon(Icons.filter_alt_rounded),
                     ),
-                  if (_selectedIndex == 2)
+                  if (ref.watch(screenIndexProvider) == 2)
                     IconButton(
                       tooltip: AppLocalizations.of(context).addText,
                       onPressed:
@@ -516,7 +512,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                               : null,
                       icon: const Icon(Icons.add),
                     ),
-                  if (_selectedIndex == 3)
+                  if (ref.watch(screenIndexProvider) == 3)
                     IconButton(
                       tooltip:
                           AppLocalizations.of(context).exportFieldInfoHintText,
@@ -530,11 +526,9 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
             bottomNavigationBar: NavigationBar(
               indicatorColor: const Color.fromARGB(217, 223, 202, 255),
               onDestinationSelected: (int index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
+                updateIndex(index);
               },
-              selectedIndex: _selectedIndex,
+              selectedIndex: ref.watch(screenIndexProvider),
               destinations: widget.items
                   .map(
                     (item) => NavigationDestination(
@@ -549,7 +543,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                   .toList(),
             ),
             body: IndexedStack(
-              index: _selectedIndex,
+              index: ref.watch(screenIndexProvider),
               children: [...widget.items.map((e) => e.screen)],
             ),
           ),
