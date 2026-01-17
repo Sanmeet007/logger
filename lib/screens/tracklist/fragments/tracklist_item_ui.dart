@@ -102,12 +102,11 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                     ),
                   ],
                 ),
-                child: GestureDetector(
+                child: ListTile(
                   onLongPress: () async {
                     bool isUnknown = CallDisplayHelper.isUnknownContact(
                       snapshot.data!.lastCallEntry!,
                     );
-                    await HapticFeedback.vibrate();
 
                     if (context.mounted) {
                       isUnknown
@@ -117,233 +116,268 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                               context, snapshot.data!.lastCallEntry!.number);
                     }
                   },
-                  child: ExpansionTile(
-                    leading: CircleAvatar(
-                      child: snapshot.data!.lastCallEntry?.photoUri != null
-                          ? FutureBuilder(
-                              future: NativeMethods.getContactPhotoFromUri(
-                                  snapshot.data!.lastCallEntry?.photoUri),
-                              builder: (context, childSnapshot) {
-                                if (childSnapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return const CircleAvatar(
-                                    child: Icon(Icons.person),
-                                  );
-                                }
-
-                                if (!childSnapshot.hasData ||
-                                    childSnapshot.data == null) {
-                                  return const CircleAvatar(
-                                    child: Icon(Icons.person),
-                                  );
-                                }
-
-                                return CircleAvatar(
-                                  backgroundImage:
-                                      MemoryImage(childSnapshot.data!),
-                                );
-                              },
-                            )
-                          : Text(
-                              (snapshot.data!.lastCallEntry?.name ?? "?")[0],
-                              style: const TextStyle(fontSize: 25),
+                  trailing: IconButton(
+                    onPressed: () async {
+                      ref.read(screenIndexProvider.notifier).setIndex(0);
+                      await ref
+                          .read(logsFilterProvider.notifier)
+                          .filterByPhoneNumber(
+                            widget.item.phoneNumber,
+                          );
+                    },
+                    icon: Icon(Icons.electric_bolt),
+                    tooltip: AppLocalizations.of(context).quickFilterText,
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return Scaffold(
+                          appBar: AppBar(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  snapshot.data!.lastCallEntry?.name ??
+                                      AppLocalizations.of(context).unknownText,
+                                  style: const TextStyle(
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                Text(
+                                  widget.item.phoneNumber,
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                )
+                              ],
                             ),
-                    ),
-                    title: Text(
-                      snapshot.data!.lastCallEntry?.name ??
-                          AppLocalizations.of(context).unknownText,
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    subtitle: Text(
-                      widget.item.phoneNumber,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                    ),
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 15.0,
-                          right: 15.0,
-                          top: 12.0,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton.icon(
+                            actions: [
+                              IconButton(
+                                onPressed: () async {
+                                  var uri = Uri.parse(
+                                      "tel:${widget.item.phoneNumber}");
+                                  await launchUrl(uri);
+                                },
+                                icon: Icon(Icons.call),
+                                tooltip: AppLocalizations.of(context).callText,
+                              ),
+                              IconButton(
                                 onPressed: () async {
                                   var uri = Uri.parse(
                                       "sms:${widget.item.phoneNumber}");
                                   await launchUrl(uri);
                                 },
                                 icon: Icon(Icons.sms),
-                                label: Text(
-                                  AppLocalizations.of(context).smsText,
-                                ),
+                                tooltip: AppLocalizations.of(context).smsText,
                               ),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () async {
-                                  ref
-                                      .read(screenIndexProvider.notifier)
-                                      .setIndex(0);
-                                  await ref
-                                      .read(logsFilterProvider.notifier)
-                                      .filterByPhoneNumber(
-                                        widget.item.phoneNumber,
-                                      );
-                                },
-                                icon: Icon(Icons.electric_bolt),
-                                label: Text(AppLocalizations.of(context)
-                                    .quickFilterText),
+                              SizedBox(
+                                width: 10.0,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            Container(
+                            ],
+                          ),
+                          body: SingleChildScrollView(
+                            child: Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: 5.0,
                                 vertical: 10.0,
+                                horizontal: 20.0,
                               ),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(context)
-                                            .iteractionScoreText,
-                                        style: TextStyle(
-                                          fontSize:
-                                              16, // adjust for dark background
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 5.0,
+                                      vertical: 10.0,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              AppLocalizations.of(context)
+                                                  .iteractionScoreText,
+                                              style: TextStyle(
+                                                fontSize:
+                                                    16, // adjust for dark background
+                                              ),
+                                            ),
+                                            Text(
+                                              "${snapshot.data!.relationshipStrength.toStringAsFixed(0)}%",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
                                         ),
+                                        SizedBox(height: 5),
+                                        LinearProgressIndicator(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          value: snapshot
+                                                  .data!.relationshipStrength /
+                                              100,
+                                          backgroundColor: Colors.grey[800],
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          minHeight: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  TracklistStatsTile(
+                                    labels: [
+                                      AppLocalizations.of(context)
+                                          .lastCallSinceText,
+                                      AppLocalizations.of(context)
+                                          .avgCallsMonthText,
+                                      AppLocalizations.of(context)
+                                          .avgCallDurationText,
+                                      AppLocalizations.of(context)
+                                          .peakCallDurationText,
+                                      AppLocalizations.of(context)
+                                          .callsPerWeekText
+                                    ],
+                                    values: [
+                                      snapshot.data!.lastCallSince(context),
+                                      FromatHelpers.prettifyNumbers(
+                                        snapshot.data!.averageCallsPerMonth
+                                            .round(),
+                                        context,
                                       ),
-                                      Text(
-                                        "${snapshot.data!.relationshipStrength.toStringAsFixed(0)}%",
-                                        style: TextStyle(
-                                          fontSize: 16,
+                                      FromatHelpers.prettifyDuration(
+                                        Duration(
+                                          seconds: snapshot
+                                              .data!.averageCallDurationSeconds
+                                              .round(),
                                         ),
+                                        context,
+                                      ),
+                                      FromatHelpers.prettifyDuration(
+                                        Duration(
+                                          seconds: snapshot
+                                              .data!.longestCallSeconds
+                                              .round(),
+                                        ),
+                                        context,
+                                      ),
+                                      FromatHelpers.prettifyNumbers(
+                                        snapshot.data!.callsPerWeek.round(),
+                                        context,
                                       ),
                                     ],
+                                    icons: [
+                                      Icon(
+                                        Icons.history,
+                                        color: Colors.amberAccent,
+                                      ),
+                                      Icon(
+                                        Icons.date_range,
+                                        color: Colors.orangeAccent,
+                                      ),
+                                      Icon(
+                                        Icons.access_time,
+                                        color: Colors.blueAccent,
+                                      ),
+                                      Icon(
+                                        Icons.trending_up,
+                                        color: Colors.greenAccent,
+                                      ),
+                                      Icon(
+                                        Icons.view_week,
+                                        color: Colors.purpleAccent,
+                                      ),
+                                    ],
+                                    showTitle: false,
                                   ),
-                                  SizedBox(height: 5),
-                                  LinearProgressIndicator(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    value: snapshot.data!.relationshipStrength /
-                                        100,
-                                    backgroundColor: Colors.grey[800],
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    minHeight: 10,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: 20.0,
+                                      left: 5.0,
+                                      right: 5.0,
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)
+                                          .callDistByWeekDay,
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(15.0),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: WeekdayBarChart(
+                                      weekdayPercentages:
+                                          snapshot.data!.weekdayPercentages,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            TracklistStatsTile(
-                              labels: [
-                                AppLocalizations.of(context).lastCallSinceText,
-                                AppLocalizations.of(context).avgCallsMonthText,
-                                AppLocalizations.of(context)
-                                    .avgCallDurationText,
-                                AppLocalizations.of(context)
-                                    .peakCallDurationText,
-                                AppLocalizations.of(context).callsPerWeekText
-                              ],
-                              values: [
-                                snapshot.data!.lastCallSince(context),
-                                FromatHelpers.prettifyNumbers(
-                                  snapshot.data!.averageCallsPerMonth.round(),
-                                  context,
-                                ),
-                                FromatHelpers.prettifyDuration(
-                                  Duration(
-                                    seconds: snapshot
-                                        .data!.averageCallDurationSeconds
-                                        .round(),
-                                  ),
-                                  context,
-                                ),
-                                FromatHelpers.prettifyDuration(
-                                  Duration(
-                                    seconds: snapshot.data!.longestCallSeconds
-                                        .round(),
-                                  ),
-                                  context,
-                                ),
-                                FromatHelpers.prettifyNumbers(
-                                  snapshot.data!.callsPerWeek.round(),
-                                  context,
-                                ),
-                              ],
-                              icons: [
-                                Icon(
-                                  Icons.history,
-                                  color: Colors.amberAccent,
-                                ),
-                                Icon(
-                                  Icons.date_range,
-                                  color: Colors.orangeAccent,
-                                ),
-                                Icon(
-                                  Icons.access_time,
-                                  color: Colors.blueAccent,
-                                ),
-                                Icon(
-                                  Icons.trending_up,
-                                  color: Colors.greenAccent,
-                                ),
-                                Icon(
-                                  Icons.view_week,
-                                  color: Colors.purpleAccent,
-                                ),
-                              ],
-                              showTitle: false,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                bottom: 20.0,
-                                left: 5.0,
-                                right: 5.0,
-                              ),
-                              child: Text(
-                                AppLocalizations.of(context).callDistByWeekDay,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(15.0),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: WeekdayBarChart(
-                                weekdayPercentages:
-                                    snapshot.data!.weekdayPercentages,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                          ),
+                        );
+                      },
+                    ));
+                  },
+                  leading: CircleAvatar(
+                    child: snapshot.data!.lastCallEntry?.photoUri != null
+                        ? FutureBuilder(
+                            future: NativeMethods.getContactPhotoFromUri(
+                                snapshot.data!.lastCallEntry?.photoUri),
+                            builder: (context, childSnapshot) {
+                              if (childSnapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircleAvatar(
+                                  child: Icon(Icons.person),
+                                );
+                              }
+
+                              if (!childSnapshot.hasData ||
+                                  childSnapshot.data == null) {
+                                return const CircleAvatar(
+                                  child: Icon(Icons.person),
+                                );
+                              }
+
+                              return CircleAvatar(
+                                backgroundImage:
+                                    MemoryImage(childSnapshot.data!),
+                              );
+                            },
+                          )
+                        : Text(
+                            (snapshot.data!.lastCallEntry?.name ?? "?")[0],
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                  ),
+                  title: Text(
+                    snapshot.data!.lastCallEntry?.name ??
+                        AppLocalizations.of(context).unknownText,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  subtitle: Text(
+                    widget.item.phoneNumber,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
