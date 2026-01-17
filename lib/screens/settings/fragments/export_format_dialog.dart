@@ -36,78 +36,80 @@ class _ExportFormatDialogState extends ConsumerState<ExportFormatDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Container(
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const LogDivider();
-                  },
-                  itemCount: FileType.values.length,
-                  itemBuilder: (context, index) {
-                    final t = FileType.values[index];
-                    return RadioListTile(
-                      title: Text(t.name.toUpperCase()),
-                      subtitle: Text(getFileTypeDetails(t)),
-                      value: t,
-                      groupValue: currentFileType,
-                      onChanged: (FileType? value) {
-                        if (value == null) return;
-
-                        setState(() {
-                          currentFileType = value;
-                        });
-                      },
-                    );
-                  },
+    return SingleChildScrollView(
+      child: Container(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+                child: Material(
+                  color: Colors.transparent,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) {
+                      return const LogDivider();
                     },
-                    child: Text(
-                      AppLocalizations.of(context).cancelText,
-                    ),
+                    itemCount: FileType.values.length,
+                    itemBuilder: (context, index) {
+                      final t = FileType.values[index];
+                      return RadioListTile(
+                        title: Text(t.name.toUpperCase()),
+                        subtitle: Text(getFileTypeDetails(t)),
+                        value: t,
+                        groupValue: currentFileType,
+                        onChanged: (FileType? value) {
+                          if (value == null) return;
+
+                          setState(() {
+                            currentFileType = value;
+                          });
+                        },
+                      );
+                    },
                   ),
                 ),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: currentFileType == initialFileType
-                        ? null
-                        : updateFileTypeAndExit,
-                    child: Text(
-                      AppLocalizations.of(context).saveText,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).cancelText,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: currentFileType == initialFileType
+                          ? null
+                          : updateFileTypeAndExit,
+                      child: Text(
+                        AppLocalizations.of(context).saveText,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

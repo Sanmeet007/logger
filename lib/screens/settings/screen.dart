@@ -175,17 +175,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         subtitle: Text(AppLocalizations.of(context).groupedCallSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
+            useSafeArea: true,
             showDragHandle: true,
             isScrollControlled: true,
             context: context,
             builder: (_) {
-              return Wrap(
-                children: [
-                  GroupCallsDialog(
-                    groupBy: ref.read(groupedCallsTypeProvider),
-                    isFilterGroupingEnabled: ref.read(filterGroupingProvider),
-                  ),
-                ],
+              return GroupCallsDialog(
+                groupBy: ref.read(groupedCallsTypeProvider),
+                isFilterGroupingEnabled: ref.read(filterGroupingProvider),
               );
             },
           );
@@ -212,17 +209,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             Text(AppLocalizations.of(context).exportFilenameSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
+            useSafeArea: true,
             showDragHandle: true,
             isScrollControlled: true,
             context: context,
             builder: (_) {
-              return Wrap(
-                children: [
-                  ExportFilenameDialog(
-                    exportFileNameFormat:
-                        ref.read(exportFileNameFormatProvider),
-                  ),
-                ],
+              return ExportFilenameDialog(
+                exportFileNameFormat: ref.read(exportFileNameFormatProvider),
               );
             },
           );
@@ -235,16 +228,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             Text(AppLocalizations.of(context).exportFormatSettingSubtitle),
         onTap: () {
           showModalBottomSheet(
+            useSafeArea: true,
             showDragHandle: true,
             isScrollControlled: true,
             context: context,
             builder: (_) {
-              return Wrap(
-                children: [
-                  ExportFormatDialog(
-                    fileType: ref.read(exportTypeProvider),
-                  ),
-                ],
+              return ExportFormatDialog(
+                fileType: ref.read(exportTypeProvider),
               );
             },
           );

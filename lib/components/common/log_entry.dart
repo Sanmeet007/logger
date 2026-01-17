@@ -139,6 +139,7 @@ class LogEntry extends ConsumerWidget {
           tileColor: Theme.of(context).colorScheme.surface,
           onTap: () {
             showModalBottomSheet(
+                useSafeArea: true,
                 showDragHandle: true,
                 context: context,
                 isScrollControlled: true,

@@ -135,6 +135,7 @@ class _LogsPageState extends ConsumerState<LogsPage> {
                   InkWell(
                     onTap: () {
                       showModalBottomSheet(
+                        useSafeArea: true,
                         showDragHandle: true,
                         context: context,
                         isScrollControlled: true,

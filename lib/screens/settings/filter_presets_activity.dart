@@ -40,6 +40,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
 
   void addNewPresetDialog() {
     showModalBottomSheet(
+        useSafeArea: true,
         context: context,
         showDragHandle: true,
         isScrollControlled: true,
@@ -65,6 +66,7 @@ class _FilterPresetsActivityState extends ConsumerState<FilterPresetsActivity> {
 
     if (mounted) {
       showModalBottomSheet(
+          useSafeArea: true,
           context: context,
           showDragHandle: true,
           isScrollControlled: true,

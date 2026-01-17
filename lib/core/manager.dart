@@ -332,6 +332,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
 
       if (mounted) {
         showModalBottomSheet(
+          useSafeArea: true,
           isDismissible: true,
           context: context,
           showDragHandle: true,
@@ -351,6 +352,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     } else {
       if (mounted) {
         showModalBottomSheet(
+          useSafeArea: true,
           isDismissible: true,
           context: context,
           showDragHandle: true,
@@ -373,6 +375,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     final currentExportType = ref.read(exportTypeProvider);
 
     showModalBottomSheet(
+        useSafeArea: true,
         isDismissible: true,
         isScrollControlled: true,
         showDragHandle: true,

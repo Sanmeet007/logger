@@ -66,72 +66,74 @@ class _ExportFilenameDialogState extends ConsumerState<ExportFilenameDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _exportedFilenameController,
-              onChanged: validateInput,
-              decoration: InputDecoration(
-                label: Text(
-                  AppLocalizations.of(context).filenameFormatLabelText,
-                ),
-                hintText: AppLocalizations.of(context).filenameFormatHintText,
-                suffixIcon: IconButton(
-                  tooltip: AppLocalizations.of(context).resetText,
-                  icon: const Icon(Icons.restart_alt),
-                  onPressed: resetToDefault,
-                ),
-                border: const OutlineInputBorder(),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 66, 66, 66),
+    return SingleChildScrollView(
+      child: Container(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                controller: _exportedFilenameController,
+                onChanged: validateInput,
+                decoration: InputDecoration(
+                  label: Text(
+                    AppLocalizations.of(context).filenameFormatLabelText,
                   ),
+                  hintText: AppLocalizations.of(context).filenameFormatHintText,
+                  suffixIcon: IconButton(
+                    tooltip: AppLocalizations.of(context).resetText,
+                    icon: const Icon(Icons.restart_alt),
+                    onPressed: resetToDefault,
+                  ),
+                  border: const OutlineInputBorder(),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 66, 66, 66),
+                    ),
+                  ),
+                  errorText:
+                      _isExportedFilenameValid ? null : "Error invalid format",
                 ),
-                errorText:
-                    _isExportedFilenameValid ? null : "Error invalid format",
               ),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            const DateTimeTable(),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      AppLocalizations.of(context).cancelText,
+              const SizedBox(
+                height: 15.0,
+              ),
+              const DateTimeTable(),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        AppLocalizations.of(context).cancelText,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: initialExportFilenameFormat ==
-                            _exportedFilenameController.value.text
-                        ? null
-                        : _isExportedFilenameValid
-                            ? validateAndSave
-                            : null,
-                    child: Text(
-                      AppLocalizations.of(context).saveText,
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: initialExportFilenameFormat ==
+                              _exportedFilenameController.value.text
+                          ? null
+                          : _isExportedFilenameValid
+                              ? validateAndSave
+                              : null,
+                      child: Text(
+                        AppLocalizations.of(context).saveText,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -136,6 +136,7 @@ class ContactLog extends ConsumerWidget {
               );
 
               showModalBottomSheet(
+                  useSafeArea: true,
                   showDragHandle: true,
                   context: context,
                   isScrollControlled: true,
