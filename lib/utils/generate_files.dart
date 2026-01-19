@@ -6,6 +6,22 @@ import 'package:call_log/call_log.dart';
 import 'package:logger/utils/file_types.dart';
 import 'package:shared_storage/shared_storage.dart';
 
+String _csvEscape(dynamic value) {
+  if (value == null) return "";
+
+  final str = value.toString();
+
+  final escaped = str.replaceAll('"', '""');
+
+  if (escaped.contains(',') ||
+      escaped.contains('"') ||
+      escaped.contains('\n')) {
+    return '"$escaped"';
+  }
+
+  return escaped;
+}
+
 String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
   // Legends -> Snake case -> Py ?!
   String fileContent =
@@ -14,7 +30,7 @@ String _toCsvString(final Iterable<CallLogEntry>? callLogs) {
   if (callLogs != null) {
     fileContent += callLogs
         .map((entry) => [
-              entry.name ?? "",
+              _csvEscape(entry.name ?? ""),
               entry.duration ?? "",
               entry.number ?? "",
               entry.phoneAccountId ?? "",
