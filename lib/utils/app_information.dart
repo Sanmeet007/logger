@@ -1,6 +1,6 @@
 class AppInformation {
   static String getVersion() {
-    return "3.3.5";
+    return "3.4.0";
   }
 
   static String supportURL() {
