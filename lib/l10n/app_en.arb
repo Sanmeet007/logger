@@ -756,7 +756,7 @@
   "syncContactsLabelText": "Sync Call Log Contacts",
   "syncContactsCTAText": "Sync Now",
   "softwareInformationText": "Software Information",
-  "addToContactsText": "Add to contacts",
+  "addToContactsText": "Add Contact",
   "addToContactsErrorText": "Unable to add new contact",
   "appPermissionsDeniedError": "Uh-oh! It seems like access to call logs has been denied. To ensure Logger works smoothly, please grant permission. ",
   "appFatalError": "Ah snap! Something unexpected happened!",

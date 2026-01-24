@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/utils/contact_handler.dart';
+import 'package:logger/utils/device_info.dart';
 import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
@@ -73,7 +74,7 @@ class LogDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final endWidgets = [
-      ElevatedButton.icon(
+      OutlinedButton.icon(
         icon: Icon(Icons.electric_bolt),
         onPressed: () => handleQuickFilterCallback(context),
         label: Text(
@@ -81,7 +82,7 @@ class LogDetails extends ConsumerWidget {
         ),
       ),
       if (isUnknown)
-        ElevatedButton.icon(
+        OutlinedButton.icon(
           icon: Icon(Icons.person_add),
           onPressed: () => handleAddToContacts(context),
           label: Text(
@@ -89,7 +90,7 @@ class LogDetails extends ConsumerWidget {
           ),
         ),
       if (!isUnknown)
-        ElevatedButton.icon(
+        OutlinedButton.icon(
           icon: Icon(Icons.account_box),
           onPressed: () => handleOpenContact(context),
           label: Text(
@@ -243,21 +244,28 @@ class LogDetails extends ConsumerWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 10.0,
-                ),
-                child: Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: endWidgets.map((btn) {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width / 2 - 30,
-                      child: btn,
-                    );
-                  }).toList(),
-                ),
-              ),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 10.0,
+                  ),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isSmall = constraints.maxWidth < 315;
+
+                      return isSmall
+                          ? Column(
+                              spacing: 5,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: endWidgets,
+                            )
+                          : Row(
+                              spacing: 10,
+                              children: endWidgets
+                                  .map((w) => Expanded(child: w))
+                                  .toList(),
+                            );
+                    },
+                  )),
             ],
           )),
     );
