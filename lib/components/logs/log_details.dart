@@ -72,6 +72,31 @@ class LogDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final endWidgets = [
+      ElevatedButton.icon(
+        icon: Icon(Icons.electric_bolt),
+        onPressed: () => handleQuickFilterCallback(context),
+        label: Text(
+          AppLocalizations.of(context).quickFilterText,
+        ),
+      ),
+      if (isUnknown)
+        ElevatedButton.icon(
+          icon: Icon(Icons.person_add),
+          onPressed: () => handleAddToContacts(context),
+          label: Text(
+            AppLocalizations.of(context).addToContactsText,
+          ),
+        ),
+      if (!isUnknown)
+        ElevatedButton.icon(
+          icon: Icon(Icons.account_box),
+          onPressed: () => handleOpenContact(context),
+          label: Text(
+            AppLocalizations.of(context).viewContactLabel,
+          ),
+        ),
+    ];
     return SingleChildScrollView(
       child: Container(
           padding: const EdgeInsets.all(12),
@@ -218,55 +243,21 @@ class LogDetails extends ConsumerWidget {
                 ),
               ),
               Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ElevatedButton.icon(
-                      icon: Icon(Icons.electric_bolt),
-                      onPressed: () => handleQuickFilterCallback(context),
-                      label: Text(
-                        AppLocalizations.of(context).quickFilterText,
-                      ),
-                    ),
-                  ],
+                margin: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 10.0,
+                ),
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: endWidgets.map((btn) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width / 2 - 30,
+                      child: btn,
+                    );
+                  }).toList(),
                 ),
               ),
-              if (isUnknown)
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.person_add),
-                        onPressed: () => handleAddToContacts(context),
-                        label: Text(
-                          AppLocalizations.of(context).addToContactsText,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              if (!isUnknown)
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.account_box),
-                        onPressed: () => handleOpenContact(context),
-                        label: Text(
-                          AppLocalizations.of(context).viewContactLabel,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
             ],
           )),
     );
