@@ -7,9 +7,11 @@ class LinearLoaderState {
   const LinearLoaderState({required this.message, required this.currentState});
 }
 
-class LinearLoaderNotifier extends StateNotifier<LinearLoaderState> {
-  LinearLoaderNotifier()
-      : super(const LinearLoaderState(message: "", currentState: false));
+class LinearLoaderNotifier extends Notifier<LinearLoaderState> {
+  @override
+  LinearLoaderState build() {
+    return const LinearLoaderState(message: "", currentState: false);
+  }
 
   void showLoading(String message) {
     state = LinearLoaderState(message: message, currentState: true);
@@ -21,6 +23,6 @@ class LinearLoaderNotifier extends StateNotifier<LinearLoaderState> {
 }
 
 final linearLoaderProvider =
-    StateNotifierProvider<LinearLoaderNotifier, LinearLoaderState>(
-  (ref) => LinearLoaderNotifier(),
+    NotifierProvider<LinearLoaderNotifier, LinearLoaderState>(
+  LinearLoaderNotifier.new,
 );

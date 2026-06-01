@@ -1,22 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/shared_utility_provider.dart';
 
-final logsSharingProvider =
-    StateNotifierProvider<LogsSharingProvider, bool>((ref) {
-  return LogsSharingProvider(ref: ref);
-});
-
-class LogsSharingProvider extends StateNotifier<bool> {
-  LogsSharingProvider({required this.ref}) : super(true) {
-    state = ref.watch(sharedUtilityProvider).isLogsSharingEnabled();
+// 1. Extend Notifierbool> instead of StateNotifier
+class LogsSharingNotifier extends Notifier<bool> {
+  @override
+  bool build() {
+    return ref.watch(sharedUtilityProvider).isLogsSharingEnabled();
   }
-
-  Ref ref;
 
   void toggle() {
-    ref.watch(sharedUtilityProvider).toggleLogsSharing(
-          !ref.watch(sharedUtilityProvider).isLogsSharingEnabled(),
-        );
-    state = ref.watch(sharedUtilityProvider).isLogsSharingEnabled();
+    final utility = ref.read(sharedUtilityProvider);
+    final isEnabled = utility.isLogsSharingEnabled();
+
+    utility.toggleLogsSharing(!isEnabled);
+    state = utility.isLogsSharingEnabled();
   }
 }
+
+final logsSharingProvider = NotifierProvider<LogsSharingNotifier, bool>(
+  LogsSharingNotifier.new,
+);

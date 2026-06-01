@@ -1,22 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/shared_utility_provider.dart';
 
-final callRoundingProvider =
-    StateNotifierProvider<CallRoundingProvider, bool>((ref) {
-  return CallRoundingProvider(ref: ref);
-});
-
-class CallRoundingProvider extends StateNotifier<bool> {
-  CallRoundingProvider({required this.ref}) : super(false) {
-    state = ref.watch(sharedUtilityProvider).isCallRoundingEnabled();
+class CallRoundingNotifier extends Notifier<bool> {
+  @override
+  bool build() {
+    return ref.watch(sharedUtilityProvider).isCallRoundingEnabled();
   }
-
-  Ref ref;
 
   void toggle() {
-    ref.watch(sharedUtilityProvider).toggleCallRounding(
-          !ref.watch(sharedUtilityProvider).isCallRoundingEnabled(),
-        );
-    state = ref.watch(sharedUtilityProvider).isCallRoundingEnabled();
+    final utility = ref.read(sharedUtilityProvider);
+    final isEnabled = utility.isCallRoundingEnabled();
+
+    utility.toggleCallRounding(!isEnabled);
+    state = utility.isCallRoundingEnabled();
   }
 }
+
+final callRoundingProvider = NotifierProvider<CallRoundingNotifier, bool>(
+  CallRoundingNotifier.new,
+);

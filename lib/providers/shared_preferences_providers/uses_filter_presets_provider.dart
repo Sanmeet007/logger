@@ -1,22 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/shared_utility_provider.dart';
 
-final filterPresetsUsageProvider =
-    StateNotifierProvider<FilterPresetsUsageProvider, bool>((ref) {
-  return FilterPresetsUsageProvider(ref: ref);
-});
-
-class FilterPresetsUsageProvider extends StateNotifier<bool> {
-  FilterPresetsUsageProvider({required this.ref}) : super(false) {
-    state = ref.watch(sharedUtilityProvider).isFilterPresetsEnabled();
+class FilterPresetsUsageNotifier extends Notifier<bool> {
+  @override
+  bool build() {
+    return ref.watch(sharedUtilityProvider).isFilterPresetsEnabled();
   }
-
-  Ref ref;
 
   void toggle() {
-    ref.watch(sharedUtilityProvider).toggleFilterPresetsUsage(
-          !ref.watch(sharedUtilityProvider).isFilterPresetsEnabled(),
-        );
-    state = ref.watch(sharedUtilityProvider).isFilterPresetsEnabled();
+    final utility = ref.read(sharedUtilityProvider);
+    final isEnabled = utility.isFilterPresetsEnabled();
+
+    utility.toggleFilterPresetsUsage(!isEnabled);
+    state = utility.isFilterPresetsEnabled();
   }
 }
+
+final filterPresetsUsageProvider =
+    NotifierProvider<FilterPresetsUsageNotifier, bool>(
+  FilterPresetsUsageNotifier.new,
+);
