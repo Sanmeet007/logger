@@ -1,7 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoaderNotifier extends StateNotifier<bool> {
-  LoaderNotifier() : super(false);
+class LoaderNotifier extends Notifier<bool> {
+  @override
+  bool build() {
+    return false;
+  }
 
   void showLoading() {
     state = true;
@@ -12,6 +15,6 @@ class LoaderNotifier extends StateNotifier<bool> {
   }
 }
 
-final loaderProvider = StateNotifierProvider<LoaderNotifier, bool>(
-  (ref) => LoaderNotifier(),
+final loaderProvider = NotifierProvider<LoaderNotifier, bool>(
+  LoaderNotifier.new,
 );

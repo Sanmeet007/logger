@@ -3,28 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/call_rounding_provider.dart';
 
-class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
-  final Ref ref;
-
-  CurrentCallLogsNotifier(this.ref) : super(Iterable.empty()) {
-    _initialize();
-  }
-
-  void _initialize() {
+class CurrentCallLogsNotifier extends Notifier<Iterable<CallLogEntry>> {
+  @override
+  Iterable<CallLogEntry> build() {
     final asyncCallLogs = ref.watch(callLogsNotifierProvider);
-    if (asyncCallLogs.hasValue) {
-      bool shouldRoundDuration = ref.watch(callRoundingProvider);
-      var logs = asyncCallLogs.value ?? Iterable.empty();
+    final shouldRoundDuration = ref.watch(callRoundingProvider);
 
-      state = shouldRoundDuration
-          ? logs.map((log) {
-              final durationSec = log.duration ?? 0;
-              final roundedDurationSec = ((durationSec / 60).ceil()) * 60;
-              log.duration = roundedDurationSec;
-              return log;
-            })
-          : logs;
+    if (asyncCallLogs.hasValue) {
+      final logs = asyncCallLogs.value ?? Iterable.empty();
+      return shouldRoundDuration ? _roundLogs(logs) : logs;
     }
+
+    return Iterable.empty();
   }
 
   void update(Iterable<CallLogEntry> entries) {
@@ -32,23 +22,20 @@ class CurrentCallLogsNotifier extends StateNotifier<Iterable<CallLogEntry>> {
   }
 
   void reset() {
-    final asyncCallLogs = ref.read(callLogsNotifierProvider);
-    if (asyncCallLogs.hasValue) {
-      bool shouldRoundDuration = ref.watch(callRoundingProvider);
-      var logs = asyncCallLogs.value ?? Iterable.empty();
-      state = shouldRoundDuration
-          ? logs.map((log) {
-              final durationSec = log.duration ?? 0;
-              final roundedDurationSec = ((durationSec / 60).ceil()) * 60;
-              log.duration = roundedDurationSec;
-              return log;
-            })
-          : logs;
-    }
+    ref.invalidateSelf();
+  }
+
+  Iterable<CallLogEntry> _roundLogs(Iterable<CallLogEntry> logs) {
+    return logs.map((log) {
+      final durationSec = log.duration ?? 0;
+      final roundedDurationSec = ((durationSec / 60).ceil()) * 60;
+      log.duration = roundedDurationSec;
+      return log;
+    });
   }
 }
 
 final currentCallLogsNotifierProvider =
-    StateNotifierProvider<CurrentCallLogsNotifier, Iterable<CallLogEntry>>(
+    NotifierProvider<CurrentCallLogsNotifier, Iterable<CallLogEntry>>(
   CurrentCallLogsNotifier.new,
 );

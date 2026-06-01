@@ -18,8 +18,11 @@ class LogsFilterState {
     required this.activeFilterId,
   });
 
-  LogsFilterState copyWith(
-      {Filter? filter, bool? areFiltersApplied, int? activeFilterId}) {
+  LogsFilterState copyWith({
+    Filter? filter,
+    bool? areFiltersApplied,
+    int? activeFilterId,
+  }) {
     return LogsFilterState(
       filter: filter ?? this.filter,
       areFiltersApplied: areFiltersApplied ?? this.areFiltersApplied,
@@ -28,17 +31,15 @@ class LogsFilterState {
   }
 }
 
-class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
-  LogsFilterNotifier(this.ref)
-      : super(
-          LogsFilterState(
-            filter: Filter.defaultFilterConfig,
-            areFiltersApplied: false,
-            activeFilterId: -1,
-          ),
-        );
-
-  final Ref ref;
+class LogsFilterNotifier extends Notifier<LogsFilterState> {
+  @override
+  LogsFilterState build() {
+    return LogsFilterState(
+      filter: Filter.defaultFilterConfig,
+      areFiltersApplied: false,
+      activeFilterId: -1,
+    );
+  }
 
   Future<void> changeActiveFilterById(int id) async {
     try {
@@ -124,14 +125,15 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
   Future<void> filterByPhoneNumber(String phoneNumber) async {
     try {
       ref.read(loaderProvider.notifier).showLoading();
-      ref.read(logsFilterProvider.notifier).resetFilters();
 
-      await ref.read(logsFilterProvider.notifier).applyFilters(
-            Filter(
-              usesSpecificPhoneNumber: true,
-              phoneToMatch: PhoneFormatter.parsePhoneNumber(phoneNumber),
-            ),
-          );
+      resetFilters();
+
+      await applyFilters(
+        Filter(
+          usesSpecificPhoneNumber: true,
+          phoneToMatch: PhoneFormatter.parsePhoneNumber(phoneNumber),
+        ),
+      );
     } catch (e, _) {
       // debugPrint("Filter error: $e");
     } finally {
@@ -164,6 +166,6 @@ class LogsFilterNotifier extends StateNotifier<LogsFilterState> {
 }
 
 final logsFilterProvider =
-    StateNotifierProvider<LogsFilterNotifier, LogsFilterState>((ref) {
-  return LogsFilterNotifier(ref);
-});
+    NotifierProvider<LogsFilterNotifier, LogsFilterState>(
+  LogsFilterNotifier.new,
+);
