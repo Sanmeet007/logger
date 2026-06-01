@@ -4,7 +4,7 @@ import 'package:logger/data/models/tracklist_item.dart';
 import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/constants.dart' as constants;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class AddNewNumberToTrackListDialog extends ConsumerStatefulWidget {
   final List<TrackListItem> currentNumbers;

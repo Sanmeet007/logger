@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class ContactHandler {
   static Future<void> handleAddToContacts(

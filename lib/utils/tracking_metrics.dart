@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 TrackingMetrics _parseTrackingMetrics(Iterable<CallLogEntry> entries) {

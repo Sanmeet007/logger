@@ -3,7 +3,7 @@ import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/logs/contact_log_freq.dart';
 import 'package:logger/screens/analytics/screen.dart';
 import 'package:logger/utils/analytics_fns.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class CallFreqTile extends StatelessWidget {
   final double spacing;

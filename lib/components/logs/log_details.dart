@@ -7,7 +7,7 @@ import 'package:logger/utils/contact_handler.dart';
 import 'package:logger/utils/format_helpers.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/phone_formatter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class LogDetails extends ConsumerWidget {
   const LogDetails({

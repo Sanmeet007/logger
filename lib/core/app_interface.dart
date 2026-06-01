@@ -8,7 +8,7 @@ import 'package:logger/screens/analytics/screen.dart';
 import 'package:logger/screens/home/screen.dart';
 import 'package:logger/screens/settings/screen.dart';
 import 'package:logger/core/manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 import 'package:logger/screens/tracklist/screen.dart';
 
 class AppInterface extends ConsumerWidget {

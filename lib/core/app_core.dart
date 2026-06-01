@@ -7,7 +7,7 @@ import 'package:logger/screens/onboarding/screen.dart';
 import 'package:logger/core/app_interface.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class AppCore extends ConsumerWidget {
   final WidgetsBinding widgetsBinding;

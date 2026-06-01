@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
 import 'package:logger/screens/settings/fragments/datetime_table.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class ExportFilenameDialog extends ConsumerStatefulWidget {
   final String exportFileNameFormat;

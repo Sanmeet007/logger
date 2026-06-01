@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/logs/grouped_logs_builder.dart';
 import 'package:logger/components/logs/quick_summary.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/grouped_calls_type_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/use_grouping_with_filters.dart';

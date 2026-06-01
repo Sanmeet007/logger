@@ -1,7 +1,7 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/utils/phone_formatter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 enum GroupBy { none, contactAndType, contactOnly, contactOnlyConsecutive }
 
