@@ -51,3 +51,4 @@ app.*.map.json
 
 .gradle
 untranslated_messages.txt
+*.jks
