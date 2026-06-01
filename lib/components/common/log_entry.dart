@@ -40,15 +40,15 @@ class LogEntry extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isWaAvailable =
+        (ref.watch(whatsappAvailabilityProvider).value ?? false);
+
     return Slidable(
       closeOnScroll: true,
       startActionPane: ActionPane(
         extentRatio: 0.3,
-        // A motion is a widget used to control how the pane animates.
         motion: const StretchMotion(),
-        // All actions are defined in the children parameter.
         children: [
-          // A SlidableAction can have an icon and/or a label.
           Theme(
             data: Theme.of(context).copyWith(
               outlinedButtonTheme: OutlinedButtonThemeData(
@@ -76,12 +76,7 @@ class LogEntry extends ConsumerWidget {
         ],
       ),
       endActionPane: ActionPane(
-        extentRatio: (ref.watch(whatsappAvailabilityProvider).hasValue &&
-                (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
-                        false) ==
-                    true)
-            ? 0.6
-            : 0.3,
+        extentRatio: isWaAvailable ? 0.6 : 0.3,
         motion: const StretchMotion(),
         children: [
           Theme(
@@ -106,30 +101,27 @@ class LogEntry extends ConsumerWidget {
               label: 'SMS',
             ),
           ),
-          if (ref.watch(whatsappAvailabilityProvider).hasValue &&
-              (ref.watch(whatsappAvailabilityProvider).valueOrNull ?? false) ==
-                  true)
-            Theme(
-              data: Theme.of(context).copyWith(
-                outlinedButtonTheme: const OutlinedButtonThemeData(
-                  style: ButtonStyle(
-                    iconColor: WidgetStatePropertyAll(Colors.white),
-                  ),
+          Theme(
+            data: Theme.of(context).copyWith(
+              outlinedButtonTheme: const OutlinedButtonThemeData(
+                style: ButtonStyle(
+                  iconColor: WidgetStatePropertyAll(Colors.white),
                 ),
               ),
-              child: SlidableAction(
-                autoClose: true,
-                // An action can be bigger than the others.
-                flex: 1,
-                onPressed: (context) async {
-                  await openWhatsApp(context, phoneNumber);
-                },
-                backgroundColor: const Color.fromARGB(255, 37, 211, 102),
-                foregroundColor: Colors.white,
-                icon: FontAwesomeIcons.whatsapp,
-                label: 'WA',
-              ),
             ),
+            child: SlidableAction(
+              autoClose: true,
+              // An action can be bigger than the others.
+              flex: 1,
+              onPressed: (context) async {
+                await openWhatsApp(context, phoneNumber);
+              },
+              backgroundColor: const Color.fromARGB(255, 37, 211, 102),
+              foregroundColor: Colors.white,
+              icon: FontAwesomeIcons.whatsapp.data,
+              label: 'WA',
+            ),
+          ),
         ],
       ),
       child: ListTile(

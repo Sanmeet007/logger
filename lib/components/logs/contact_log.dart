@@ -23,6 +23,9 @@ class ContactLog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isWaAvailable =
+        (ref.watch(whatsappAvailabilityProvider).value ?? false);
+
     return Material(
       color: Colors.transparent,
       child: Slidable(
@@ -59,13 +62,7 @@ class ContactLog extends ConsumerWidget {
               ),
             ]),
         endActionPane: ActionPane(
-          extentRatio: (logDetails.number != null &&
-                  ref.watch(whatsappAvailabilityProvider).hasValue &&
-                  (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
-                          false) ==
-                      true)
-              ? 0.6
-              : 0.3,
+          extentRatio: (logDetails.number != null && isWaAvailable) ? 0.6 : 0.3,
           motion: const StretchMotion(),
           children: [
             Theme(
@@ -88,11 +85,7 @@ class ContactLog extends ConsumerWidget {
                 label: AppLocalizations.of(context).smsText,
               ),
             ),
-            if (logDetails.number != null &&
-                ref.watch(whatsappAvailabilityProvider).hasValue &&
-                (ref.watch(whatsappAvailabilityProvider).valueOrNull ??
-                        false) ==
-                    true)
+            if ((logDetails.number != null && isWaAvailable))
               Theme(
                 data: Theme.of(context).copyWith(
                   outlinedButtonTheme: const OutlinedButtonThemeData(
@@ -110,7 +103,7 @@ class ContactLog extends ConsumerWidget {
                   },
                   backgroundColor: const Color.fromARGB(255, 37, 211, 102),
                   foregroundColor: Colors.white,
-                  icon: FontAwesomeIcons.whatsapp,
+                  icon: FontAwesomeIcons.whatsapp.data,
                   label: 'WA',
                 ),
               ),
