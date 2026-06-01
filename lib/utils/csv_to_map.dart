@@ -47,7 +47,8 @@ final Map<String, int> _callTypeMap = {
   "CallType.wifiOutgoing": 10,
 };
 
-const _csvConverter = CsvToListConverter();
+const _csvConverter = CsvDecoder();
+
 Future<List<Map<String, dynamic>>> _generateCsvMap(Map params) async {
   final Uint8List fileContents = params["file_contents"];
   final RootIsolateToken rootIsolateToken = params["root_isolate_token"];
@@ -57,9 +58,6 @@ Future<List<Map<String, dynamic>>> _generateCsvMap(Map params) async {
   final csvString = utf8.decode(fileContents as List<int>);
   final list = _csvConverter.convert(
     csvString,
-    convertEmptyTo: EmptyValue.NULL,
-    eol: "\n",
-    shouldParseNumbers: false,
   );
 
   const int batchSize = 100; // batch size
