@@ -13,7 +13,7 @@ import 'package:logger/providers/log_filters_provider.dart';
 import 'package:logger/providers/shared_preferences_providers/total_call_duration_provider.dart';
 import 'package:logger/utils/analytics_fns.dart';
 import 'package:logger/utils/format_helpers.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 enum CallFreqType { received, called }
 

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/divider.dart';
 import 'package:logger/providers/shared_preferences_providers/export_type_provider.dart';
 import 'package:logger/utils/file_types.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class ExportFormatDialog extends ConsumerStatefulWidget {
   final FileType fileType;

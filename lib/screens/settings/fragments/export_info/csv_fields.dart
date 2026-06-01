@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/screens/settings/fragments/export_info/field_builder.dart';
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:logger/l10n/app_localizations.dart';
 
 class CsvFieldsInformation extends StatelessWidget {
   const CsvFieldsInformation({super.key});

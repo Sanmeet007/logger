@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/utils/app_information.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class AboutActivityScreen extends StatelessWidget {
   const AboutActivityScreen({super.key});

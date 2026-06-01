@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/data/models/tracklist_item.dart';
 import 'package:logger/providers/call_logs_provider.dart';
 import 'package:logger/utils/constants.dart' as constants;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class AddNewContactToTrackListDialog extends ConsumerStatefulWidget {
   final List<TrackListItem> currentContacts;

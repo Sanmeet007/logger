@@ -13,7 +13,7 @@ import 'package:logger/providers/shared_preferences_providers/uses_filter_preset
 import 'package:logger/screens/settings/preset_editor.dart';
 import 'package:logger/utils/filters.dart';
 import 'package:logger/utils/constants.dart' as constants;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/l10n/app_localizations.dart';
 
 class FilterPresetsActivity extends ConsumerStatefulWidget {
   const FilterPresetsActivity({super.key});
