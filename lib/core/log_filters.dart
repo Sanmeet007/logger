@@ -49,6 +49,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
   late int currentPresetId;
   late bool isNumberSearchEnabled;
   late bool isDurationFilteringOn;
+  late bool showUnknownContactsOnly;
   late DateRange dateRangeOption;
   late List<CallType> selectedCallTypes;
   late String selectedPhoneAccountId;
@@ -91,6 +92,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     selectedCallTypes = widget.currentFilter.selectedCallTypes;
     isDurationFilteringOn = widget.currentFilter.usesDurationFiltering;
     selectedPhoneAccountId = widget.currentFilter.phoneAccountId;
+    showUnknownContactsOnly = widget.currentFilter.showUnknownContactsOnly;
   }
 
   @override
@@ -141,6 +143,13 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
     checkFiltersState();
   }
 
+  void setShowUnknownContactsOnly(bool v) {
+    setState(() {
+      showUnknownContactsOnly = v;
+    });
+    checkFiltersState();
+  }
+
   void applyFilters() async {
     final ref = widget.parentRef;
     Navigator.pop(context, true);
@@ -175,6 +184,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                       ),
                 usesDurationFiltering: isDurationFilteringOn,
                 phoneAccountId: selectedPhoneAccountId,
+                showUnknownContactsOnly: showUnknownContactsOnly,
               ),
               currentPresetId,
             );
@@ -215,6 +225,7 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                 seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
               ),
         phoneAccountId: selectedPhoneAccountId,
+        showUnknownContactsOnly: showUnknownContactsOnly,
       ),
       widget.currentFilter,
     );
@@ -309,6 +320,8 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
         isDurationFilteringOn =
             Filter.defaultFilterConfig.usesDurationFiltering;
         selectedPhoneAccountId = Filter.defaultFilterConfig.phoneAccountId;
+        showUnknownContactsOnly =
+            Filter.defaultFilterConfig.showUnknownContactsOnly;
       });
     } else {
       setState(() {
@@ -494,6 +507,28 @@ class _LogFiltersState extends ConsumerState<LogFilters> {
                 if (widget.canFilterUsingPhoneAccountId &&
                     currentPresetId == -1)
                   const SizedBox(height: 10.0),
+                if (currentPresetId == -1)
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Material(
+                      child: SwitchListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 5.0),
+                        title: SizedText(
+                          AppLocalizations.of(context)
+                              .showUnknownContactsOnlyText,
+                          size: 18.0,
+                        ),
+                        value: showUnknownContactsOnly,
+                        onChanged: setShowUnknownContactsOnly,
+                      ),
+                    ),
+                  ),
+                if (currentPresetId == -1) const SizedBox(height: 10.0),
                 if (widget.canFilterUsingDuration && currentPresetId == -1)
                   Container(
                     clipBehavior: Clip.hardEdge,

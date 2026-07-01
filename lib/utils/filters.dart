@@ -17,6 +17,7 @@ class Filter {
   Duration? maxDuration;
   bool usesDurationFiltering;
   String phoneAccountId;
+  bool showUnknownContactsOnly;
 
   static final Filter defaultFilterConfig = Filter();
 
@@ -31,6 +32,7 @@ class Filter {
     this.maxDuration,
     this.usesDurationFiltering = false,
     this.phoneAccountId = constants.defaultPhoneAccountId,
+    this.showUnknownContactsOnly = false,
   })  : selectedCallTypes = selectedCallTypes ?? [...CallType.values],
         startDate = startDate ?? DateTime.now(),
         endDate = endDate ?? DateTime.now();
@@ -47,6 +49,7 @@ class Filter {
     bool? usesDurationFiltering,
     bool? usesPhoneAccountId,
     String? phoneAccountId,
+    bool? showUnknownContactsOnly,
   }) {
     return Filter(
       usesSpecificPhoneNumber:
@@ -61,6 +64,8 @@ class Filter {
       usesDurationFiltering:
           usesDurationFiltering ?? this.usesDurationFiltering,
       phoneAccountId: phoneAccountId ?? this.phoneAccountId,
+      showUnknownContactsOnly:
+          showUnknownContactsOnly ?? this.showUnknownContactsOnly,
     );
   }
 }
@@ -83,6 +88,7 @@ class FilterUtils {
     var maxDuration = filter.maxDuration?.inSeconds;
     var shouldUseDurationFiltering = filter.usesDurationFiltering;
     var phoneAccountId = filter.phoneAccountId;
+    var showUnknownContactsOnly = filter.showUnknownContactsOnly;
 
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -98,6 +104,10 @@ class FilterUtils {
         (e.number?.contains(phoneToMatch) ?? false);
 
     bool matchesCallType(CallLogEntry e) => callTypes.contains(e.callType);
+
+    // Unknown = not saved in contacts, i.e. no name attached to the entry.
+    bool matchesUnknownContact(CallLogEntry e) =>
+        !showUnknownContactsOnly || (e.name == null || e.name!.isEmpty);
 
     bool matchesDate(CallLogEntry e) {
       final entryDate = DateTime.fromMillisecondsSinceEpoch(e.timestamp ?? 1);
@@ -139,7 +149,8 @@ class FilterUtils {
         matchesCallType(e) &&
         matchesDate(e) &&
         matchesDuration(e) &&
-        matchesPhoneAccount(e));
+        matchesPhoneAccount(e) &&
+        matchesUnknownContact(e));
   }
 
   static Future<Iterable<CallLogEntry>> filterLogs(
@@ -159,6 +170,7 @@ class FilterUtils {
         filter1.dateRangeOption != filter2.dateRangeOption ||
         filter1.phoneAccountId != filter2.phoneAccountId ||
         filter1.usesDurationFiltering != filter2.usesDurationFiltering ||
+        filter1.showUnknownContactsOnly != filter2.showUnknownContactsOnly ||
         filter1.minDuration != filter2.minDuration ||
         (filter1.maxDuration ?? Duration.zero) !=
             (filter2.maxDuration ?? Duration.zero)) {

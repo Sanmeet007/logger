@@ -474,6 +474,9 @@
   "@filterByDurationText": {
     "description": "Text for filtering by call duration"
   },
+  "@showUnknownContactsOnlyText": {
+    "description": "Text for showing only calls from numbers not saved in contacts"
+  },
   "@filterByCallTypeText": {
     "description": "Text for filtering by call type"
   },
@@ -714,6 +717,7 @@
   "searchByNumberText": "Specific Phone Number",
   "phoneAccountIdFilterText": "Phone Account ID",
   "filterByDurationText": "Filter by Call Duration",
+  "showUnknownContactsOnlyText": "Unknown Contacts Only",
   "filterByCallTypeText": "Call Type",
   "answeredExternallyText": "Answered Externally",
   "voiceMailText": "Voice Mail",
