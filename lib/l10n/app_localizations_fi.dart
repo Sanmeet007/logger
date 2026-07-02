@@ -439,6 +439,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get filterByDurationText => 'Suodata puhelun keston mukaan';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Puhelun tyyppi';
 
   @override
@@ -794,13 +797,13 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Hallitse seurantalistaasi tehokkaasti. Napauta + (oikeassa yläkulmassa) lisätäksesi numeron, pyyhkäise vasemmalle listan kohteessa ja napauta Poista poistaaksesi seurannan.';
+      'Hallitse seurattavia kontaktejasi tehokkaasti. Napauta + (oikeassa yläkulmassa) lisätäksesi kontaktin, pyyhkäise vasemmalle listan kohteessa ja napauta Poista poistaaksesi seurannan.';
 
   @override
   String get removeAllText => 'poista kaikki';
 
   @override
-  String get trackContactLabelText => 'Puhelinnumero';
+  String get trackContactLabelText => 'Kontaktin nimi';
 
   @override
   String get trackContactText => 'Seuraa kontaktia';
@@ -838,13 +841,13 @@ class AppLocalizationsFi extends AppLocalizations {
   String get addText => 'Lisää';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Numero on jo lisätty';
+  String get numberAlreadyAddedErrorText => 'Kontakti on jo lisätty';
 
   @override
   String get invalidNumberErrorText => 'Virheellinen puhelinnumero';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Anna puhelinnumero';
+  String get emptyPhoneNumberErrorText => 'Anna kontaktin nimi';
 
   @override
   String get trackNumberErrorText =>

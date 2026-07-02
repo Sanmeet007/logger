@@ -439,6 +439,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get filterByDurationText => 'कॉल अवधि के आधार पर फ़िल्टर करें';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'कॉल प्रकार के आधार पर फ़िल्टर करें';
 
   @override
@@ -792,13 +795,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'अपनी ट्रैक लिस्ट को कुशलतापूर्वक प्रबंधित करें। नंबर जोड़ने के लिए ऊपर-दाएँ + पर टैप करें, किसी लिस्ट आइटम पर बाईं ओर स्वाइप करें और अनट्रैक करने के लिए Remove पर टैप करें।';
+      'अपने ट्रैक किए गए संपर्कों को कुशलतापूर्वक प्रबंधित करें। संपर्क जोड़ने के लिए ऊपर-दाएँ + पर टैप करें, किसी लिस्ट आइटम पर बाईं ओर स्वाइप करें और अनट्रैक करने के लिए Remove पर टैप करें।';
 
   @override
   String get removeAllText => 'सभी हटाएँ';
 
   @override
-  String get trackContactLabelText => 'फ़ोन नंबर';
+  String get trackContactLabelText => 'संपर्क का नाम';
 
   @override
   String get trackContactText => 'संपर्क ट्रैक करें';
@@ -836,13 +839,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get addText => 'जोड़ें';
 
   @override
-  String get numberAlreadyAddedErrorText => 'नंबर पहले से जोड़ा गया है';
+  String get numberAlreadyAddedErrorText => 'संपर्क पहले से जोड़ा गया है';
 
   @override
   String get invalidNumberErrorText => 'अमान्य फ़ोन नंबर';
 
   @override
-  String get emptyPhoneNumberErrorText => 'फ़ोन नंबर दर्ज करें';
+  String get emptyPhoneNumberErrorText => 'संपर्क का नाम दर्ज करें';
 
   @override
   String get trackNumberErrorText => 'नया ट्रैक संपर्क जोड़ते समय कुछ गलत हुआ';

@@ -440,6 +440,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get filterByDurationText => 'Çağrı Süresine Göre Filtrele';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Çağrı Türüne Göre Filtrele';
 
   @override
@@ -794,13 +797,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Takip listenizi verimli bir şekilde yönetin. Numara eklemek için sağ üstteki + simgesine dokunun, bir liste öğesini sola kaydırın ve Takibi Kaldır\'a dokunarak takipten çıkarın.';
+      'Takip ettiğiniz kişileri verimli bir şekilde yönetin. Kişi eklemek için sağ üstteki + simgesine dokunun, bir liste öğesini sola kaydırın ve Takibi Kaldır\'a dokunarak takipten çıkarın.';
 
   @override
   String get removeAllText => 'hepsini kaldır';
 
   @override
-  String get trackContactLabelText => 'Telefon Numarası';
+  String get trackContactLabelText => 'Kişi Adı';
 
   @override
   String get trackContactText => 'Bir Kişiyi Takip Et';
@@ -838,13 +841,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get addText => 'Ekle';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Numara zaten eklendi';
+  String get numberAlreadyAddedErrorText => 'Kişi zaten eklendi';
 
   @override
   String get invalidNumberErrorText => 'Geçersiz telefon numarası';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Lütfen bir telefon numarası girin';
+  String get emptyPhoneNumberErrorText => 'Lütfen bir kişi adı girin';
 
   @override
   String get trackNumberErrorText =>

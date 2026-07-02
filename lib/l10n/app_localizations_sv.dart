@@ -439,6 +439,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get filterByDurationText => 'Filtrera efter Samtalstid';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Samtalstyp';
 
   @override
@@ -791,13 +794,13 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Hantera din spårningslista effektivt. Tryck på + (uppe till höger) för att lägga till ett nummer, svep ett listobjekt åt vänster och tryck på Ta bort för att sluta spåra.';
+      'Hantera dina spårade kontakter effektivt. Tryck på + (uppe till höger) för att lägga till en kontakt, svep ett listobjekt åt vänster och tryck på Ta bort för att sluta spåra.';
 
   @override
   String get removeAllText => 'ta bort alla';
 
   @override
-  String get trackContactLabelText => 'Telefonnummer';
+  String get trackContactLabelText => 'Kontaktnamn';
 
   @override
   String get trackContactText => 'Spåra en kontakt';
@@ -835,13 +838,13 @@ class AppLocalizationsSv extends AppLocalizations {
   String get addText => 'Lägg till';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Nummer redan tillagt';
+  String get numberAlreadyAddedErrorText => 'Kontakt redan tillagd';
 
   @override
   String get invalidNumberErrorText => 'Ogiltigt telefonnummer';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Ange ett telefonnummer';
+  String get emptyPhoneNumberErrorText => 'Ange ett kontaktnamn';
 
   @override
   String get trackNumberErrorText =>

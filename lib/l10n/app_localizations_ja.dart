@@ -435,6 +435,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get filterByDurationText => '通話時間でフィルタリング';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => '通話タイプ';
 
   @override
@@ -755,13 +758,13 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'トラックリストを効率的に管理します。番号を追加するには右上の + をタップし、リスト項目を左にスワイプして「削除」をタップして追跡を解除します。';
+      '追跡中の連絡先を効率的に管理します。連絡先を追加するには右上の + をタップし、リスト項目を左にスワイプして「削除」をタップして追跡を解除します。';
 
   @override
   String get removeAllText => 'すべて削除';
 
   @override
-  String get trackContactLabelText => '電話番号';
+  String get trackContactLabelText => '連絡先名';
 
   @override
   String get trackContactText => '連絡先を追跡';
@@ -799,13 +802,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get addText => '追加';
 
   @override
-  String get numberAlreadyAddedErrorText => '番号は既に追加されています';
+  String get numberAlreadyAddedErrorText => '連絡先は既に追加されています';
 
   @override
   String get invalidNumberErrorText => '無効な電話番号';
 
   @override
-  String get emptyPhoneNumberErrorText => '電話番号を入力してください';
+  String get emptyPhoneNumberErrorText => '連絡先名を入力してください';
 
   @override
   String get trackNumberErrorText => '新しいトラック連絡先の追加中にエラーが発生しました';

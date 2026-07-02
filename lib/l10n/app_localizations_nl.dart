@@ -440,6 +440,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get filterByDurationText => 'Filteren op gespreksduur';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Oproeptype';
 
   @override
@@ -796,13 +799,13 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Beheer je volglijst efficiënt. Tik op + (rechtsboven) om een nummer toe te voegen, veeg een lijstitem naar links en tik op Verwijderen om het volgen te stoppen.';
+      'Beheer je gevolgde contacten efficiënt. Tik op + (rechtsboven) om een contact toe te voegen, veeg een lijstitem naar links en tik op Verwijderen om het volgen te stoppen.';
 
   @override
   String get removeAllText => 'alles verwijderen';
 
   @override
-  String get trackContactLabelText => 'Telefoonnummer';
+  String get trackContactLabelText => 'Contactnaam';
 
   @override
   String get trackContactText => 'Volg een contact';
@@ -840,13 +843,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get addText => 'Toevoegen';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Nummer al toegevoegd';
+  String get numberAlreadyAddedErrorText => 'Contact al toegevoegd';
 
   @override
   String get invalidNumberErrorText => 'Ongeldig telefoonnummer';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Voer een telefoonnummer in';
+  String get emptyPhoneNumberErrorText => 'Voer een contactnaam in';
 
   @override
   String get trackNumberErrorText =>

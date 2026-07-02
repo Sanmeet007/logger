@@ -441,6 +441,9 @@ class AppLocalizationsRo extends AppLocalizations {
   String get filterByDurationText => 'Filtrează după durata apelului';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Tipul apelului';
 
   @override
@@ -800,13 +803,13 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Gestionează-ți lista de urmărire eficient. Apasă + (în dreapta sus) pentru a adăuga un număr, glisează spre stânga pe un element din listă și apasă Elimină pentru a opri urmărirea.';
+      'Gestionează-ți contactele urmărite eficient. Apasă + (în dreapta sus) pentru a adăuga un contact, glisează spre stânga pe un element din listă și apasă Elimină pentru a opri urmărirea.';
 
   @override
   String get removeAllText => 'elimină tot';
 
   @override
-  String get trackContactLabelText => 'Număr de telefon';
+  String get trackContactLabelText => 'Numele contactului';
 
   @override
   String get trackContactText => 'Urmărește un contact';
@@ -845,13 +848,13 @@ class AppLocalizationsRo extends AppLocalizations {
   String get addText => 'Adaugă';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Numărul a fost deja adăugat';
+  String get numberAlreadyAddedErrorText => 'Contactul a fost deja adăugat';
 
   @override
   String get invalidNumberErrorText => 'Număr de telefon invalid';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Introduceți un număr de telefon';
+  String get emptyPhoneNumberErrorText => 'Introduceți un nume de contact';
 
   @override
   String get trackNumberErrorText =>

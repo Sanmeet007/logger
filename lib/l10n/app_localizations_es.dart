@@ -443,6 +443,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get filterByDurationText => 'Filtrar por Duración de la Llamada';
 
   @override
+  String get showUnknownContactsOnlyText => 'Unknown Contacts Only';
+
+  @override
   String get filterByCallTypeText => 'Tipo de llamada';
 
   @override
@@ -802,13 +805,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get tracklistPlaceholderText =>
-      'Administra tu lista de seguimiento de manera eficiente. Toca + (arriba a la derecha) para agregar un número, desliza a la izquierda sobre un elemento de la lista y toca Eliminar para dejar de seguir.';
+      'Administra tus contactos rastreados de manera eficiente. Toca + (arriba a la derecha) para agregar un contacto, desliza a la izquierda sobre un elemento de la lista y toca Eliminar para dejar de seguir.';
 
   @override
   String get removeAllText => 'eliminar todo';
 
   @override
-  String get trackContactLabelText => 'Número de teléfono';
+  String get trackContactLabelText => 'Nombre del contacto';
 
   @override
   String get trackContactText => 'Rastrear un contacto';
@@ -847,13 +850,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get addText => 'Agregar';
 
   @override
-  String get numberAlreadyAddedErrorText => 'Número ya agregado';
+  String get numberAlreadyAddedErrorText => 'Contacto ya agregado';
 
   @override
   String get invalidNumberErrorText => 'Número de teléfono inválido';
 
   @override
-  String get emptyPhoneNumberErrorText => 'Ingrese un número de teléfono';
+  String get emptyPhoneNumberErrorText => 'Ingrese un nombre de contacto';
 
   @override
   String get trackNumberErrorText =>
