@@ -36,6 +36,7 @@ class Datasource {
         uses_specific_phone_number INTEGER DEFAULT 0,
         specific_phone_number TEXT,
         uses_filter_by_call_duration INTEGER DEFAULT 0,
+        show_unknown_contacts_only INTEGER DEFAULT 0,
         call_min_duration INTEGER,
         call_max_duration INTEGER,
         selected_call_types TEXT,
@@ -65,15 +66,22 @@ class Datasource {
       )
     ''');
     }
+    
     if (oldVersion < 3) {
       await db.execute('DROP TABLE IF EXISTS ${TrackListDatasource.tableName}');
+      
       await db.execute('''
       CREATE TABLE ${TrackListDatasource.tableName} (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         contact_name TEXT UNIQUE,
         creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
       )
-    ''');
+      ''');
+
+      await db.execute(
+        'ALTER TABLE ${FilterPresetDatasource.tableName} '
+        'ADD COLUMN show_unknown_contacts_only INTEGER DEFAULT 0',
+      );
     }
   }
 
