@@ -51,7 +51,7 @@ class LogsGrouper {
       var curr = entries[i];
 
       final prevNumber = PhoneFormatter.parsePhoneNumber(prev.number ?? "");
-      final currNumber = PhoneFormatter.parsePhoneNumber(prev.number ?? "");
+      final currNumber = PhoneFormatter.parsePhoneNumber(curr.number ?? "");
 
       String prevKey =
           (prev.name ?? '') + (prevNumber) + (prev.callType?.toString() ?? '');
@@ -82,7 +82,7 @@ class LogsGrouper {
       var curr = entries[i];
 
       final prevNumber = PhoneFormatter.parsePhoneNumber(prev.number ?? "");
-      final currNumber = PhoneFormatter.parsePhoneNumber(prev.number ?? "");
+      final currNumber = PhoneFormatter.parsePhoneNumber(curr.number ?? "");
 
       String prevKey = (prev.name ?? '') + (prevNumber);
       String currKey = (curr.name ?? '') + (currNumber);
