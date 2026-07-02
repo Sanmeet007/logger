@@ -27,20 +27,22 @@ class TracklistItemUi extends ConsumerStatefulWidget {
 }
 
 class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
-  Future<TrackingMetrics> getMetrics(String phoneNumber) async {
+  Future<TrackingMetrics> getMetrics(String contactName) async {
     var entries = ref.watch(callLogsNotifierProvider).value ?? [];
-    var mappedEntries = entries.where(
-        (e) => PhoneFormatter.parsePhoneNumber(e.number ?? "") == phoneNumber);
+    var mappedEntries =
+        entries.where((e) => e.name == contactName);
     return parseTrackingMetrics(mappedEntries);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getMetrics(widget.item.phoneNumber),
+      future: getMetrics(widget.item.contactName),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == null) return const SizedBox();
+
+          final phoneNumber = snapshot.data!.lastCallEntry?.number;
 
           return Material(
             clipBehavior: Clip.hardEdge,
@@ -69,11 +71,12 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                         child: SlidableAction(
                           autoClose: true,
                           flex: 1,
-                          onPressed: (context) async {
-                            var uri =
-                                Uri.parse("tel:${widget.item.phoneNumber}");
-                            await launchUrl(uri);
-                          },
+                          onPressed: phoneNumber != null
+                              ? (context) async {
+                                  var uri = Uri.parse("tel:$phoneNumber");
+                                  await launchUrl(uri);
+                                }
+                              : null,
                           backgroundColor:
                               Theme.of(context).brightness == Brightness.dark
                                   ? const Color.fromARGB(255, 60, 60, 60)
@@ -93,7 +96,7 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                       onPressed: (context) async {
                         await ref
                             .read(trackListProvider.notifier)
-                            .removeNumberById(widget.item.id);
+                            .removeContactById(widget.item.id);
                       },
                       backgroundColor: Colors.redAccent,
                       icon: Icons.delete,
@@ -103,6 +106,8 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                 ),
                 child: ListTile(
                   onLongPress: () async {
+                    if (snapshot.data!.lastCallEntry == null) return;
+
                     bool isUnknown = CallDisplayHelper.isUnknownContact(
                       snapshot.data!.lastCallEntry!,
                     );
@@ -115,18 +120,20 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                               context, snapshot.data!.lastCallEntry!.number);
                     }
                   },
-                  trailing: IconButton(
-                    onPressed: () async {
-                      ref.read(screenIndexProvider.notifier).setIndex(0);
-                      await ref
-                          .read(logsFilterProvider.notifier)
-                          .filterByPhoneNumber(
-                            widget.item.phoneNumber,
-                          );
-                    },
-                    icon: Icon(Icons.electric_bolt),
-                    tooltip: AppLocalizations.of(context).quickFilterText,
-                  ),
+                  trailing: phoneNumber != null
+                      ? IconButton(
+                          onPressed: () async {
+                            ref.read(screenIndexProvider.notifier).setIndex(0);
+                            await ref
+                                .read(logsFilterProvider.notifier)
+                                .filterByPhoneNumber(
+                                  PhoneFormatter.parsePhoneNumber(phoneNumber),
+                                );
+                          },
+                          icon: Icon(Icons.electric_bolt),
+                          tooltip: AppLocalizations.of(context).quickFilterText,
+                        )
+                      : null,
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
@@ -136,40 +143,42 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  snapshot.data!.lastCallEntry?.name ??
-                                      AppLocalizations.of(context).unknownText,
+                                  widget.item.contactName,
                                   style: const TextStyle(
                                     fontSize: 20.0,
                                   ),
                                 ),
-                                Text(
-                                  widget.item.phoneNumber,
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                )
+                                if (phoneNumber != null)
+                                  Text(
+                                    phoneNumber,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                  )
                               ],
                             ),
                             actions: [
-                              IconButton(
-                                onPressed: () async {
-                                  var uri = Uri.parse(
-                                      "tel:${widget.item.phoneNumber}");
-                                  await launchUrl(uri);
-                                },
-                                icon: Icon(Icons.call),
-                                tooltip: AppLocalizations.of(context).callText,
-                              ),
-                              IconButton(
-                                onPressed: () async {
-                                  var uri = Uri.parse(
-                                      "sms:${widget.item.phoneNumber}");
-                                  await launchUrl(uri);
-                                },
-                                icon: Icon(Icons.sms),
-                                tooltip: AppLocalizations.of(context).smsText,
-                              ),
+                              if (phoneNumber != null) ...[
+                                IconButton(
+                                  onPressed: () async {
+                                    var uri = Uri.parse("tel:$phoneNumber");
+                                    await launchUrl(uri);
+                                  },
+                                  icon: Icon(Icons.call),
+                                  tooltip:
+                                      AppLocalizations.of(context).callText,
+                                ),
+                                IconButton(
+                                  onPressed: () async {
+                                    var uri = Uri.parse("sms:$phoneNumber");
+                                    await launchUrl(uri);
+                                  },
+                                  icon: Icon(Icons.sms),
+                                  tooltip:
+                                      AppLocalizations.of(context).smsText,
+                                ),
+                              ],
                               SizedBox(
                                 width: 10.0,
                               ),
@@ -200,8 +209,7 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                                               AppLocalizations.of(context)
                                                   .iteractionScoreText,
                                               style: TextStyle(
-                                                fontSize:
-                                                    16, // adjust for dark background
+                                                fontSize: 16,
                                               ),
                                             ),
                                             Text(
@@ -360,24 +368,27 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                             },
                           )
                         : Text(
-                            (snapshot.data!.lastCallEntry?.name ?? "?")[0],
+                            widget.item.contactName.isNotEmpty
+                                ? widget.item.contactName[0]
+                                : "?",
                             style: const TextStyle(fontSize: 25),
                           ),
                   ),
                   title: Text(
-                    snapshot.data!.lastCallEntry?.name ??
-                        AppLocalizations.of(context).unknownText,
+                    widget.item.contactName,
                     style: const TextStyle(
                       fontSize: 20.0,
                     ),
                   ),
-                  subtitle: Text(
-                    widget.item.phoneNumber,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
-                  ),
+                  subtitle: phoneNumber != null
+                      ? Text(
+                          phoneNumber,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                        )
+                      : null,
                 ),
               ),
             ),

@@ -5,23 +5,23 @@ import 'package:logger/data/repostiory/tracklist_repository_provider.dart';
 class TrackListNotifier extends AsyncNotifier<List<TrackListItem>> {
   @override
   Future<List<TrackListItem>> build() async {
-    return ref.watch(trackListRepositoryProvider).getNumbers();
+    return ref.watch(trackListRepositoryProvider).getContacts();
   }
 
-  Future<void> registerNumber(String phoneNumber) async {
-    await ref.read(trackListRepositoryProvider).registerNumber(phoneNumber);
+  Future<void> registerContact(String contactName) async {
+    await ref.read(trackListRepositoryProvider).registerContact(contactName);
     await _updateState();
   }
 
-  Future<void> registerNumberIfNotPresent(String phoneNumber) async {
+  Future<void> registerContactIfNotPresent(String contactName) async {
     await ref
         .read(trackListRepositoryProvider)
-        .registerNumberIfNotPresent(phoneNumber);
+        .registerContactIfNotPresent(contactName);
     await _updateState();
   }
 
-  Future<void> removeNumberById(int id) async {
-    await ref.read(trackListRepositoryProvider).removeNumberById(id);
+  Future<void> removeContactById(int id) async {
+    await ref.read(trackListRepositoryProvider).removeContactById(id);
     await _updateState();
   }
 
@@ -37,7 +37,7 @@ class TrackListNotifier extends AsyncNotifier<List<TrackListItem>> {
   Future<void> _updateState() async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(
-      () => ref.read(trackListRepositoryProvider).getNumbers(),
+      () => ref.read(trackListRepositoryProvider).getContacts(),
     );
   }
 }

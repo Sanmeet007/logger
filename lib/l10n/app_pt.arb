@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Ocultar botão de compartilhamento",
   "disableLogsSharingSubText": "Ocultar o botão de compartilhamento nos registros de chamadas",
   "trackListLabelText": "Lista de acompanhamento",
-  "tracklistPlaceholderText": "Gerencie sua lista de acompanhamento de forma eficiente. Toque em + (canto superior direito) para adicionar um número, deslize um item da lista para a esquerda e toque em Remover para parar de acompanhar.",
+  "tracklistPlaceholderText": "Gerencie seus contatos rastreados de forma eficiente. Toque em + (canto superior direito) para adicionar um contato, deslize um item da lista para a esquerda e toque em Remover para parar de acompanhar.",
   "removeAllText": "remover tudo",
-  "trackContactLabelText": "Número de telefone",
+  "trackContactLabelText": "Nome do contato",
   "trackContactText": "Rastrear um contato",
   "removeText": "Remover",
   "iteractionScoreText": "Pontuação de interação",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Distribuição de chamadas por dia da semana (%)",
   "addToTrackList": "Adicione até {maxItems} contatos à sua lista de acompanhamento para facilitar o rastreamento.",
   "addText": "Adicionar",
-  "numberAlreadyAddedErrorText": "Número já adicionado",
+  "numberAlreadyAddedErrorText": "Contato já adicionado",
   "invalidNumberErrorText": "Número de telefone inválido",
-  "emptyPhoneNumberErrorText": "Digite um número de telefone",
+  "emptyPhoneNumberErrorText": "Digite um nome de contato",
   "trackNumberErrorText": "Ocorreu um erro ao adicionar um novo contato à lista de acompanhamento",
   "quickFilterText": "Filtro rápido"
 }

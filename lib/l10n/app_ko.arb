@@ -240,9 +240,9 @@
   "disableLogsSharingText": "공유 버튼 숨기기",
   "disableLogsSharingSubText": "통화 기록에서 공유 버튼 숨기기",
   "trackListLabelText": "트랙리스트",
-  "tracklistPlaceholderText": "트랙리스트를 효율적으로 관리하세요. 번호를 추가하려면 오른쪽 상단의 +를 누르고, 리스트 항목을 왼쪽으로 스와이프한 후 제거를 눌러 추적을 해제하세요.",
+  "tracklistPlaceholderText": "추적 중인 연락처를 효율적으로 관리하세요. 연락처를 추가하려면 오른쪽 상단의 +를 누르고, 리스트 항목을 왼쪽으로 스와이프한 후 제거를 눌러 추적을 해제하세요.",
   "removeAllText": "모두 제거",
-  "trackContactLabelText": "전화번호",
+  "trackContactLabelText": "연락처 이름",
   "trackContactText": "연락처 추적",
   "removeText": "제거",
   "iteractionScoreText": "상호작용 점수",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "요일별 통화 분포 (%)",
   "addToTrackList": "간편한 추적을 위해 트랙리스트에 최대 {maxItems}명의 연락처를 추가하세요.",
   "addText": "추가",
-  "numberAlreadyAddedErrorText": "번호가 이미 추가됨",
+  "numberAlreadyAddedErrorText": "연락처가 이미 추가됨",
   "invalidNumberErrorText": "잘못된 전화번호",
-  "emptyPhoneNumberErrorText": "전화번호를 입력하세요",
+  "emptyPhoneNumberErrorText": "연락처 이름을 입력하세요",
   "trackNumberErrorText": "새 트랙 연락처를 추가하는 중 오류가 발생했습니다",
   "quickFilterText": "빠른 필터"
 }

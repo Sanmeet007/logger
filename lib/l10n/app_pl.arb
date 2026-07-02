@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Ukryj przycisk udostępniania",
   "disableLogsSharingSubText": "Ukryj przycisk udostępniania w historii połączeń",
   "trackListLabelText": "Lista śledzenia",
-  "tracklistPlaceholderText": "Zarządzaj swoją listą śledzenia efektywnie. Stuknij + (w prawym górnym rogu), aby dodać numer, przesuń w lewo element listy i stuknij Usuń, aby przestać śledzić.",
+  "tracklistPlaceholderText": "Zarządzaj śledzonymi kontaktami efektywnie. Stuknij + (w prawym górnym rogu), aby dodać kontakt, przesuń w lewo element listy i stuknij Usuń, aby przestać śledzić.",
   "removeAllText": "usuń wszystko",
-  "trackContactLabelText": "Numer telefonu",
+  "trackContactLabelText": "Nazwa kontaktu",
   "trackContactText": "Śledź kontakt",
   "removeText": "Usuń",
   "iteractionScoreText": "Wskaźnik interakcji",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Rozkład połączeń według dnia tygodnia (%)",
   "addToTrackList": "Dodaj do {maxItems} kontaktów do swojej listy śledzenia, aby łatwo śledzić.",
   "addText": "Dodaj",
-  "numberAlreadyAddedErrorText": "Numer już dodany",
+  "numberAlreadyAddedErrorText": "Kontakt już dodany",
   "invalidNumberErrorText": "Nieprawidłowy numer telefonu",
-  "emptyPhoneNumberErrorText": "Wprowadź numer telefonu",
+  "emptyPhoneNumberErrorText": "Wprowadź nazwę kontaktu",
   "trackNumberErrorText": "Wystąpił błąd podczas dodawania nowego kontaktu do śledzenia",
   "quickFilterText": "Szybki filtr"
 }

@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Ascunde butonul de partajare",
   "disableLogsSharingSubText": "Ascunde butonul de partajare din jurnalul de apeluri",
   "trackListLabelText": "Lista de urmărire",
-  "tracklistPlaceholderText": "Gestionează-ți lista de urmărire eficient. Apasă + (în dreapta sus) pentru a adăuga un număr, glisează spre stânga pe un element din listă și apasă Elimină pentru a opri urmărirea.",
+  "tracklistPlaceholderText": "Gestionează-ți contactele urmărite eficient. Apasă + (în dreapta sus) pentru a adăuga un contact, glisează spre stânga pe un element din listă și apasă Elimină pentru a opri urmărirea.",
   "removeAllText": "elimină tot",
-  "trackContactLabelText": "Număr de telefon",
+  "trackContactLabelText": "Numele contactului",
   "trackContactText": "Urmărește un contact",
   "removeText": "Elimină",
   "iteractionScoreText": "Scor de interacțiune",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Distribuția apelurilor pe zilele săptămânii (%)",
   "addToTrackList": "Adaugă până la {maxItems} contacte în lista ta de urmărire pentru o urmărire ușoară.",
   "addText": "Adaugă",
-  "numberAlreadyAddedErrorText": "Numărul a fost deja adăugat",
+  "numberAlreadyAddedErrorText": "Contactul a fost deja adăugat",
   "invalidNumberErrorText": "Număr de telefon invalid",
-  "emptyPhoneNumberErrorText": "Introduceți un număr de telefon",
+  "emptyPhoneNumberErrorText": "Introduceți un nume de contact",
   "trackNumberErrorText": "A apărut o eroare la adăugarea noului contact de urmărire",
   "quickFilterText": "Filtru rapid"
 }

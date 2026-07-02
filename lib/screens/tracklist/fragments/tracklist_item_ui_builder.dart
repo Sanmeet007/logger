@@ -6,32 +6,32 @@ class TracklistItemUiBuilder {
   TracklistItemUiBuilder._();
   factory TracklistItemUiBuilder() => _instance;
 
-  final List<TrackListItem> _currentNumbers = [];
+  final List<TrackListItem> _currentContacts = [];
   final List<TracklistItemUi> _currentTrackListUi = [];
 
   static bool areListsEqual(List<TrackListItem> a, List<TrackListItem> b) {
-    final aSet = a.map((e) => e.phoneNumber).toSet();
-    final bSet = b.map((e) => e.phoneNumber).toSet();
+    final aSet = a.map((e) => e.contactName).toSet();
+    final bSet = b.map((e) => e.contactName).toSet();
     return aSet.length == bSet.length && aSet.containsAll(bSet);
   }
 
   static List<TrackListItem> getNewItems(
       List<TrackListItem> oldList, List<TrackListItem> newList) {
-    final oldSet = oldList.map((e) => e.phoneNumber).toSet();
-    return newList.where((e) => !oldSet.contains(e.phoneNumber)).toList();
+    final oldSet = oldList.map((e) => e.contactName).toSet();
+    return newList.where((e) => !oldSet.contains(e.contactName)).toList();
   }
 
-  List<TracklistItemUi> build(List<TrackListItem> newNumbers) {
-    if (areListsEqual(_currentNumbers, newNumbers)) {
+  List<TracklistItemUi> build(List<TrackListItem> newContacts) {
+    if (areListsEqual(_currentContacts, newContacts)) {
       return _currentTrackListUi;
     }
 
-    final newNumberSet = newNumbers.map((e) => e.phoneNumber).toSet();
+    final newContactSet = newContacts.map((e) => e.contactName).toSet();
     _currentTrackListUi.removeWhere(
-      (ui) => !newNumberSet.contains(ui.item.phoneNumber),
+      (ui) => !newContactSet.contains(ui.item.contactName),
     );
 
-    final newItems = getNewItems(_currentNumbers, newNumbers);
+    final newItems = getNewItems(_currentContacts, newContacts);
     _currentTrackListUi.addAll(
       newItems.map(
         (item) => TracklistItemUi(
@@ -40,15 +40,15 @@ class TracklistItemUiBuilder {
       ),
     );
 
-    _currentNumbers
+    _currentContacts
       ..clear()
-      ..addAll(newNumbers);
+      ..addAll(newContacts);
 
     return _currentTrackListUi;
   }
 
   void clearCache() {
-    _currentNumbers.clear();
+    _currentContacts.clear();
     _currentTrackListUi.clear();
   }
 }

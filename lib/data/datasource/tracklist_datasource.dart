@@ -11,41 +11,41 @@ class TrackListDatasource {
 
   TrackListDatasource._();
 
-  Future<int> registerNumber(String phoneNumber) async {
+  Future<int> registerContact(String contactName) async {
     final db = await _ds.database;
 
     return db.transaction((txn) async {
       return await txn.insert(
         tableName,
-        TrackListItem.fromNumber(phoneNumber).toJSON(),
+        TrackListItem.fromName(contactName).toJSON(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
   }
 
-  Future<int> registerNumberIfNotPresent(String phoneNumber) async {
+  Future<int> registerContactIfNotPresent(String contactName) async {
     final db = await _ds.database;
 
     return db.transaction((txn) async {
       final List<Map<String, dynamic>> maps = await txn.query(
         tableName,
-        where: "phone_number = ?",
-        whereArgs: [phoneNumber],
+        where: "contact_name = ?",
+        whereArgs: [contactName],
       );
 
       if (maps.isNotEmpty) {
-        throw Exception("Phone number already registered");
+        throw Exception("Contact already registered");
       }
 
       return await txn.insert(
         tableName,
-        TrackListItem.fromNumber(phoneNumber).toJSON(),
+        TrackListItem.fromName(contactName).toJSON(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
   }
 
-  Future<List<TrackListItem>> getNumbers() async {
+  Future<List<TrackListItem>> getContacts() async {
     final db = await _ds.database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
@@ -59,7 +59,7 @@ class TrackListDatasource {
     );
   }
 
-  Future<int> removeNumberById(int id) async {
+  Future<int> removeContactById(int id) async {
     final db = await _ds.database;
     return db.transaction(
       (txn) async {

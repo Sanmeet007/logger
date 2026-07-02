@@ -20,7 +20,6 @@ import 'package:logger/screens/settings/fragments/export_info/json_fields.dart';
 import 'package:logger/screens/tracklist/fragments/add_new_number_to_track_list_dialog.dart';
 import 'package:logger/utils/file_types.dart';
 import 'package:logger/utils/generate_files.dart';
-import 'package:logger/utils/phone_formatter.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/utils/exported_filename_formatter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -396,21 +395,19 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
 
   void registerNewTrackListItem(currentContext) async {
     try {
-      String? newNumber = await showAdaptiveDialog<String>(
+      String? newContactName = await showAdaptiveDialog<String>(
         context: currentContext,
         builder: (context) {
-          return AddNewNumberToTrackListDialog(
-            currentNumbers: ref.read(trackListProvider).value ?? [],
+          return AddNewContactToTrackListDialog(
+            currentContacts: ref.read(trackListProvider).value ?? [],
           );
         },
       );
 
-      if (newNumber != null) {
-        newNumber = PhoneFormatter.parsePhoneNumber(newNumber);
-
+      if (newContactName != null) {
         ref
             .read(trackListProvider.notifier)
-            .registerNumberIfNotPresent(newNumber);
+            .registerContactIfNotPresent(newContactName);
       }
     } catch (E) {
       if (mounted) {

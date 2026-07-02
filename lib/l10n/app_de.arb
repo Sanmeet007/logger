@@ -240,9 +240,9 @@
     "disableLogsSharingText": "Teilen-Button ausblenden",
     "disableLogsSharingSubText": "Den Teilen-Button in den Anrufprotokollen verbergen",
     "trackListLabelText": "Trackliste",
-    "tracklistPlaceholderText": "Verwalten Sie Ihre Trackliste effizient. Tippen Sie auf + (oben rechts), um eine Nummer hinzuzufügen, wischen Sie nach links auf einem Listeneintrag und tippen Sie auf Entfernen, um die Verfolgung zu stoppen.",
+    "tracklistPlaceholderText": "Verwalten Sie Ihre verfolgten Kontakte effizient. Tippen Sie auf + (oben rechts), um einen Kontakt hinzuzufügen, wischen Sie nach links auf einem Listeneintrag und tippen Sie auf Entfernen, um die Verfolgung zu stoppen.",
     "removeAllText": "alle entfernen",
-    "trackContactLabelText": "Telefonnummer",
+    "trackContactLabelText": "Kontaktname",
     "trackContactText": "Kontakt verfolgen",
     "removeText": "Entfernen",
     "iteractionScoreText": "Interaktionspunktzahl",
@@ -254,9 +254,9 @@
     "callDistByWeekDay": "Anrufverteilung nach Wochentagen (%)",
     "addToTrackList": "Fügen Sie bis zu {maxItems} Kontakte zu Ihrer Trackliste für einfaches Tracking hinzu.",
     "addText": "Hinzufügen",
-    "numberAlreadyAddedErrorText": "Nummer bereits hinzugefügt",
+    "numberAlreadyAddedErrorText": "Kontakt bereits hinzugefügt",
     "invalidNumberErrorText": "Ungültige Telefonnummer",
-    "emptyPhoneNumberErrorText": "Geben Sie eine Telefonnummer ein",
+    "emptyPhoneNumberErrorText": "Geben Sie einen Kontaktnamen ein",
     "trackNumberErrorText": "Beim Hinzufügen des neuen Track-Kontakts ist ein Fehler aufgetreten",
     "quickFilterText": "Schnellfilter"
 }

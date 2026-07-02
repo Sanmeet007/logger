@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Paylaşım butonunu gizle",
   "disableLogsSharingSubText": "Çağrı kayıtlarında paylaşım butonunu gizle",
   "trackListLabelText": "Takip Listesi",
-  "tracklistPlaceholderText": "Takip listenizi verimli bir şekilde yönetin. Numara eklemek için sağ üstteki + simgesine dokunun, bir liste öğesini sola kaydırın ve Takibi Kaldır'a dokunarak takipten çıkarın.",
+  "tracklistPlaceholderText": "Takip ettiğiniz kişileri verimli bir şekilde yönetin. Kişi eklemek için sağ üstteki + simgesine dokunun, bir liste öğesini sola kaydırın ve Takibi Kaldır'a dokunarak takipten çıkarın.",
   "removeAllText": "hepsini kaldır",
-  "trackContactLabelText": "Telefon Numarası",
+  "trackContactLabelText": "Kişi Adı",
   "trackContactText": "Bir Kişiyi Takip Et",
   "removeText": "Kaldır",
   "iteractionScoreText": "Etkileşim Skoru",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Haftanın Günlerine Göre Arama Dağılımı (%)",
   "addToTrackList": "Kolay takip için takip listenize en fazla {maxItems} kişi ekleyin.",
   "addText": "Ekle",
-  "numberAlreadyAddedErrorText": "Numara zaten eklendi",
+  "numberAlreadyAddedErrorText": "Kişi zaten eklendi",
   "invalidNumberErrorText": "Geçersiz telefon numarası",
-  "emptyPhoneNumberErrorText": "Lütfen bir telefon numarası girin",
+  "emptyPhoneNumberErrorText": "Lütfen bir kişi adı girin",
   "trackNumberErrorText": "Yeni takip kişisi eklenirken bir hata oluştu",
   "quickFilterText": "Hızlı filtre"
 }

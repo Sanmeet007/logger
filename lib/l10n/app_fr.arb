@@ -240,9 +240,9 @@
     "disableLogsSharingText": "Masquer le bouton de partage",
     "disableLogsSharingSubText": "Masquer le bouton de partage dans les journaux d'appels",
     "trackListLabelText": "Liste de suivi",
-    "tracklistPlaceholderText": "Gérez votre liste de suivi efficacement. Appuyez sur + (en haut à droite) pour ajouter un numéro, faites glisser un élément de la liste vers la gauche et appuyez sur Supprimer pour ne plus suivre.",
+    "tracklistPlaceholderText": "Gérez vos contacts suivis efficacement. Appuyez sur + (en haut à droite) pour ajouter un contact, faites glisser un élément de la liste vers la gauche et appuyez sur Supprimer pour ne plus suivre.",
     "removeAllText": "tout supprimer",
-    "trackContactLabelText": "Numéro de téléphone",
+    "trackContactLabelText": "Nom du contact",
     "trackContactText": "Suivre un contact",
     "removeText": "Supprimer",
     "iteractionScoreText": "Score d'interaction",
@@ -254,9 +254,9 @@
     "callDistByWeekDay": "Répartition des appels par jour de la semaine (%)",
     "addToTrackList": "Ajoutez jusqu'à {maxItems} contacts à votre liste de suivi pour un suivi facile.",
     "addText": "Ajouter",
-    "numberAlreadyAddedErrorText": "Numéro déjà ajouté",
+    "numberAlreadyAddedErrorText": "Contact déjà ajouté",
     "invalidNumberErrorText": "Numéro de téléphone invalide",
-    "emptyPhoneNumberErrorText": "Entrez un numéro de téléphone",
+    "emptyPhoneNumberErrorText": "Entrez un nom de contact",
     "trackNumberErrorText": "Une erreur est survenue lors de l'ajout d'un nouveau contact à suivre",
     "quickFilterText": "Filtre rapide"
 }

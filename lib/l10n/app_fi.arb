@@ -240,9 +240,9 @@
     "disableLogsSharingText": "Piilota jakopainike",
     "disableLogsSharingSubText": "Piilota jakopainike puhelulokeissa",
     "trackListLabelText": "Seurantalista",
-    "tracklistPlaceholderText": "Hallitse seurantalistaasi tehokkaasti. Napauta + (oikeassa yläkulmassa) lisätäksesi numeron, pyyhkäise vasemmalle listan kohteessa ja napauta Poista poistaaksesi seurannan.",
+    "tracklistPlaceholderText": "Hallitse seurattavia kontaktejasi tehokkaasti. Napauta + (oikeassa yläkulmassa) lisätäksesi kontaktin, pyyhkäise vasemmalle listan kohteessa ja napauta Poista poistaaksesi seurannan.",
     "removeAllText": "poista kaikki",
-    "trackContactLabelText": "Puhelinnumero",
+    "trackContactLabelText": "Kontaktin nimi",
     "trackContactText": "Seuraa kontaktia",
     "removeText": "Poista",
     "iteractionScoreText": "Vuorovaikutuspisteet",
@@ -254,9 +254,9 @@
     "callDistByWeekDay": "Puhelujen jakautuminen viikonpäivittäin (%)",
     "addToTrackList": "Lisää jopa {maxItems} kontaktia seurantalistaasi helppoa seurantaa varten.",
     "addText": "Lisää",
-    "numberAlreadyAddedErrorText": "Numero on jo lisätty",
+    "numberAlreadyAddedErrorText": "Kontakti on jo lisätty",
     "invalidNumberErrorText": "Virheellinen puhelinnumero",
-    "emptyPhoneNumberErrorText": "Anna puhelinnumero",
+    "emptyPhoneNumberErrorText": "Anna kontaktin nimi",
     "trackNumberErrorText": "Uuden seurattavan kontaktin lisäämisessä tapahtui virhe",
     "quickFilterText": "Pikasuodatin"
 }

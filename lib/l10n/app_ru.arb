@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Скрыть кнопку «Поделиться»",
   "disableLogsSharingSubText": "Скрыть кнопку «Поделиться» в журнале звонков",
   "trackListLabelText": "Список отслеживания",
-  "tracklistPlaceholderText": "Эффективно управляйте своим списком отслеживания. Нажмите + (в правом верхнем углу), чтобы добавить номер, проведите влево по элементу списка и нажмите Удалить, чтобы перестать отслеживать.",
+  "tracklistPlaceholderText": "Эффективно управляйте отслеживаемыми контактами. Нажмите + (в правом верхнем углу), чтобы добавить контакт, проведите влево по элементу списка и нажмите Удалить, чтобы перестать отслеживать.",
   "removeAllText": "удалить всё",
-  "trackContactLabelText": "Номер телефона",
+  "trackContactLabelText": "Имя контакта",
   "trackContactText": "Отслеживать контакт",
   "removeText": "Удалить",
   "iteractionScoreText": "Оценка взаимодействия",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Распределение звонков по дням недели (%)",
   "addToTrackList": "Добавьте до {maxItems} контактов в ваш список отслеживания для удобного контроля.",
   "addText": "Добавить",
-  "numberAlreadyAddedErrorText": "Номер уже добавлен",
+  "numberAlreadyAddedErrorText": "Контакт уже добавлен",
   "invalidNumberErrorText": "Неверный номер телефона",
-  "emptyPhoneNumberErrorText": "Введите номер телефона",
+  "emptyPhoneNumberErrorText": "Введите имя контакта",
   "trackNumberErrorText": "Произошла ошибка при добавлении нового контакта для отслеживания",
   "quickFilterText": "Быстрый фильтр"
 }

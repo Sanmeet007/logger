@@ -5,33 +5,33 @@ class TrackListRepository {
   final TrackListDatasource _datasource;
   TrackListRepository(this._datasource);
 
-  Future<void> registerNumber(String phoneNumber) async {
+  Future<void> registerContact(String contactName) async {
     try {
-      await _datasource.registerNumber(phoneNumber);
+      await _datasource.registerContact(contactName);
     } catch (e) {
       throw '$e';
     }
   }
 
-  Future<void> registerNumberIfNotPresent(String phoneNumber) async {
+  Future<void> registerContactIfNotPresent(String contactName) async {
     try {
-      await _datasource.registerNumberIfNotPresent(phoneNumber);
+      await _datasource.registerContactIfNotPresent(contactName);
     } catch (e) {
       throw '$e';
     }
   }
 
-  Future<void> removeNumberById(int id) async {
+  Future<void> removeContactById(int id) async {
     try {
-      await _datasource.removeNumberById(id);
+      await _datasource.removeContactById(id);
     } catch (e) {
       throw '$e';
     }
   }
 
-  Future<List<TrackListItem>> getNumbers() async {
+  Future<List<TrackListItem>> getContacts() async {
     try {
-      return await _datasource.getNumbers();
+      return await _datasource.getContacts();
     } catch (e) {
       throw '$e';
     }

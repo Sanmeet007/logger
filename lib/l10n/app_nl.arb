@@ -240,9 +240,9 @@
   "disableLogsSharingText": "Deelknop verbergen",
   "disableLogsSharingSubText": "Verberg de deelknop in de oproeplogs",
   "trackListLabelText": "Volglijst",
-  "tracklistPlaceholderText": "Beheer je volglijst efficiënt. Tik op + (rechtsboven) om een nummer toe te voegen, veeg een lijstitem naar links en tik op Verwijderen om het volgen te stoppen.",
+  "tracklistPlaceholderText": "Beheer je gevolgde contacten efficiënt. Tik op + (rechtsboven) om een contact toe te voegen, veeg een lijstitem naar links en tik op Verwijderen om het volgen te stoppen.",
   "removeAllText": "alles verwijderen",
-  "trackContactLabelText": "Telefoonnummer",
+  "trackContactLabelText": "Contactnaam",
   "trackContactText": "Volg een contact",
   "removeText": "Verwijderen",
   "iteractionScoreText": "Interactie score",
@@ -254,9 +254,9 @@
   "callDistByWeekDay": "Oproepverdeling per weekdag (%)",
   "addToTrackList": "Voeg tot {maxItems} contacten toe aan je volglijst voor eenvoudig bijhouden.",
   "addText": "Toevoegen",
-  "numberAlreadyAddedErrorText": "Nummer al toegevoegd",
+  "numberAlreadyAddedErrorText": "Contact al toegevoegd",
   "invalidNumberErrorText": "Ongeldig telefoonnummer",
-  "emptyPhoneNumberErrorText": "Voer een telefoonnummer in",
+  "emptyPhoneNumberErrorText": "Voer een contactnaam in",
   "trackNumberErrorText": "Er is iets misgegaan bij het toevoegen van het nieuwe contact",
   "quickFilterText": "Snelfilter"
 }

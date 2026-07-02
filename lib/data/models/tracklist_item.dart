@@ -1,44 +1,44 @@
 class TrackListItem {
   final int id;
-  final String phoneNumber;
+  final String contactName;
 
   const TrackListItem({
     this.id = -1,
-    required this.phoneNumber,
+    required this.contactName,
   });
 
   static final TrackListItem defaultItem = TrackListItem(
     id: -1,
-    phoneNumber: "",
+    contactName: "",
   );
 
   Map<String, dynamic> toJSON() {
     return {
       "id": id == -1 ? null : id,
-      "phone_number": phoneNumber,
+      "contact_name": contactName,
     };
   }
 
   factory TrackListItem.fromJson(Map<String, dynamic> map) {
     return TrackListItem(
       id: map["id"] as int,
-      phoneNumber: map["phone_number"] as String,
+      contactName: map["contact_name"] as String,
     );
   }
 
-  factory TrackListItem.fromNumber(String phoneNumber) {
+  factory TrackListItem.fromName(String contactName) {
     return TrackListItem(
-      phoneNumber: phoneNumber,
+      contactName: contactName,
     );
   }
 
   TrackListItem copyWith({
     int? id,
-    String? phoneNumber,
+    String? contactName,
   }) {
     return TrackListItem(
       id: id ?? this.id,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      contactName: contactName ?? this.contactName,
     );
   }
 }

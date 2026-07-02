@@ -249,9 +249,9 @@
   "disableLogsSharingText": "शेयर बटन छुपाएँ",
   "disableLogsSharingSubText": "कॉल लॉग में शेयर बटन छुपाएँ",
   "trackListLabelText": "ट्रैक लिस्ट",
-  "tracklistPlaceholderText": "अपनी ट्रैक लिस्ट को कुशलतापूर्वक प्रबंधित करें। नंबर जोड़ने के लिए ऊपर-दाएँ + पर टैप करें, किसी लिस्ट आइटम पर बाईं ओर स्वाइप करें और अनट्रैक करने के लिए Remove पर टैप करें।",
+  "tracklistPlaceholderText": "अपने ट्रैक किए गए संपर्कों को कुशलतापूर्वक प्रबंधित करें। संपर्क जोड़ने के लिए ऊपर-दाएँ + पर टैप करें, किसी लिस्ट आइटम पर बाईं ओर स्वाइप करें और अनट्रैक करने के लिए Remove पर टैप करें।",
   "removeAllText": "सभी हटाएँ",
-  "trackContactLabelText": "फ़ोन नंबर",
+  "trackContactLabelText": "संपर्क का नाम",
   "trackContactText": "संपर्क ट्रैक करें",
   "removeText": "हटाएँ",
   "iteractionScoreText": "इंटरैक्शन स्कोर",
@@ -263,9 +263,9 @@
   "callDistByWeekDay": "सप्ताह के दिन अनुसार कॉल वितरण (%)",
   "addToTrackList": "आसान ट्रैकिंग के लिए अपनी ट्रैक लिस्ट में {maxItems} तक संपर्क जोड़ें।",
   "addText": "जोड़ें",
-  "numberAlreadyAddedErrorText": "नंबर पहले से जोड़ा गया है",
+  "numberAlreadyAddedErrorText": "संपर्क पहले से जोड़ा गया है",
   "invalidNumberErrorText": "अमान्य फ़ोन नंबर",
-  "emptyPhoneNumberErrorText": "फ़ोन नंबर दर्ज करें",
+  "emptyPhoneNumberErrorText": "संपर्क का नाम दर्ज करें",
   "trackNumberErrorText": "नया ट्रैक संपर्क जोड़ते समय कुछ गलत हुआ",
   "quickFilterText": "त्वरित फ़िल्टर"
 }

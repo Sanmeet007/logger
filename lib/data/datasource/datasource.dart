@@ -50,7 +50,7 @@ class Datasource {
     await db.execute('''
     CREATE TABLE IF NOT EXISTS ${TrackListDatasource.tableName} (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      phone_number TEXT UNIQUE,
+      contact_name TEXT UNIQUE,
       creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   ''');
@@ -66,7 +66,18 @@ class Datasource {
       )
     ''');
     }
+    
     if (oldVersion < 3) {
+      await db.execute('DROP TABLE IF EXISTS ${TrackListDatasource.tableName}');
+      
+      await db.execute('''
+      CREATE TABLE ${TrackListDatasource.tableName} (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        contact_name TEXT UNIQUE,
+        creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+      ''');
+
       await db.execute(
         'ALTER TABLE ${FilterPresetDatasource.tableName} '
         'ADD COLUMN show_unknown_contacts_only INTEGER DEFAULT 0',
