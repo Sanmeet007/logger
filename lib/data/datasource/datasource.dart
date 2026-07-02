@@ -21,7 +21,7 @@ class Datasource {
   Future<Database> _initDb() async {
     return await openDatabase(
       dbName,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -36,6 +36,7 @@ class Datasource {
         uses_specific_phone_number INTEGER DEFAULT 0,
         specific_phone_number TEXT,
         uses_filter_by_call_duration INTEGER DEFAULT 0,
+        show_unknown_contacts_only INTEGER DEFAULT 0,
         call_min_duration INTEGER,
         call_max_duration INTEGER,
         selected_call_types TEXT,
@@ -64,6 +65,12 @@ class Datasource {
         creation_timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     ''');
+    }
+    if (oldVersion < 3) {
+      await db.execute(
+        'ALTER TABLE ${FilterPresetDatasource.tableName} '
+        'ADD COLUMN show_unknown_contacts_only INTEGER DEFAULT 0',
+      );
     }
   }
 

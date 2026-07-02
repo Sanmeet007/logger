@@ -27,6 +27,7 @@ class FilterPreset {
       "uses_specific_phone_number": filterDetails.usesSpecificPhoneNumber,
       "specific_phone_number": filterDetails.phoneToMatch,
       "uses_filter_by_call_duration": filterDetails.usesDurationFiltering,
+      "show_unknown_contacts_only": filterDetails.showUnknownContactsOnly,
       "call_min_duration": filterDetails.minDuration.inSeconds,
       "call_max_duration": filterDetails.maxDuration?.inSeconds,
       "selected_call_types":
@@ -46,6 +47,8 @@ class FilterPreset {
         usesSpecificPhoneNumber: (map["uses_specific_phone_number"] ?? 0) == 1,
         phoneToMatch: map["specific_phone_number"],
         usesDurationFiltering: (map["uses_filter_by_call_duration"] ?? 0) == 1,
+        showUnknownContactsOnly:
+            (map["show_unknown_contacts_only"] ?? 0) == 1,
         minDuration: Duration(seconds: map["call_min_duration"] ?? 0),
         maxDuration: map["call_max_duration"] != null
             ? Duration(seconds: map["call_max_duration"])

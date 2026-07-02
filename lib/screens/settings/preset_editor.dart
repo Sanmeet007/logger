@@ -37,6 +37,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
   bool canSaveFilters = false;
   late bool isNumberSearchEnabled;
   late bool isDurationFilteringOn;
+  late bool showUnknownContactsOnly;
   late String selectedPhoneAccountId;
   late DateRange dateRangeOption;
   late List<CallType> selectedCallTypes;
@@ -65,6 +66,13 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
   void setFilterByDurationState(bool v) {
     setState(() {
       isDurationFilteringOn = v;
+    });
+    checkFiltersState();
+  }
+
+  void setShowUnknownContactsOnly(bool v) {
+    setState(() {
+      showUnknownContactsOnly = v;
     });
     checkFiltersState();
   }
@@ -172,6 +180,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                 seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
               ),
         phoneAccountId: selectedPhoneAccountId,
+        showUnknownContactsOnly: showUnknownContactsOnly,
       ),
       widget.preset.filterDetails,
     );
@@ -201,6 +210,7 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                 seconds: int.tryParse(_maxDurationInputController.text) ?? 0,
               ),
         phoneAccountId: selectedPhoneAccountId,
+        showUnknownContactsOnly: showUnknownContactsOnly,
       );
 
       if (presetId == -1) {
@@ -265,6 +275,8 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
 
     isNumberSearchEnabled = widget.preset.filterDetails.usesSpecificPhoneNumber;
     isDurationFilteringOn = widget.preset.filterDetails.usesDurationFiltering;
+    showUnknownContactsOnly =
+        widget.preset.filterDetails.showUnknownContactsOnly;
   }
 
   @override
@@ -375,6 +387,26 @@ class _PresetEditorState extends ConsumerState<PresetEditor> {
                         ),
                       ),
                   ],
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Material(
+                  child: SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 5.0),
+                    title: SizedText(
+                      AppLocalizations.of(context).showUnknownContactsOnlyText,
+                      size: 18.0,
+                    ),
+                    value: showUnknownContactsOnly,
+                    onChanged: setShowUnknownContactsOnly,
+                  ),
                 ),
               ),
               const SizedBox(height: 10.0),
