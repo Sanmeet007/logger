@@ -134,7 +134,7 @@ class LogsFilterNotifier extends Notifier<LogsFilterState> {
           phoneToMatch: PhoneFormatter.parsePhoneNumber(phoneNumber),
         ),
       );
-    } catch (e, _) {
+    } catch (e) {
       // debugPrint("Filter error: $e");
     } finally {
       ref.read(loaderProvider.notifier).hideLoading();
