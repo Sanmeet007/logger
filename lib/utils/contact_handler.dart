@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/utils/native_methods.dart';
 import 'package:logger/utils/snackbar.dart';
 import 'package:logger/l10n/app_localizations.dart';

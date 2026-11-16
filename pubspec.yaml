@@ -72,6 +72,7 @@ dependencies:
       ref: master
     # path: ../flutter_packages/shared_storage
 
+  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

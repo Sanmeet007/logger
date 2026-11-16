@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/components/logs/contact_log_freq.dart';
 import 'package:logger/screens/analytics/screen.dart';

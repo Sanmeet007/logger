@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'dart:core';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/l10n/app_localizations.dart';
 import 'package:timeago/timeago.dart' as timeago;
 

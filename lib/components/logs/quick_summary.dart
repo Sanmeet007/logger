@@ -1,5 +1,5 @@
 import 'package:call_log/call_log.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/components/analytics/call_stats.dart';
 import 'package:logger/components/common/grid_skeleton.dart';
 import 'package:logger/utils/analytics_fns.dart';

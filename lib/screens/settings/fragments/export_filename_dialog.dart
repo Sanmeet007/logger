@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/providers/shared_preferences_providers/export_file_name_format_provider.dart';
 import 'package:logger/screens/settings/fragments/datetime_table.dart';

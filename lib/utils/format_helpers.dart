@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/l10n/app_localizations.dart';
 import 'package:duration/duration.dart' as duration_util;
 import 'package:duration/locale.dart' as duration_locale;

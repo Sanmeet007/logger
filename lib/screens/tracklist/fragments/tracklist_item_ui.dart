@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/components/common/skeleton.dart';
@@ -29,8 +29,7 @@ class TracklistItemUi extends ConsumerStatefulWidget {
 class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
   Future<TrackingMetrics> getMetrics(String contactName) async {
     var entries = ref.watch(callLogsNotifierProvider).value ?? [];
-    var mappedEntries =
-        entries.where((e) => e.name == contactName);
+    var mappedEntries = entries.where((e) => e.name == contactName);
     return parseTrackingMetrics(mappedEntries);
   }
 
@@ -175,8 +174,7 @@ class _TracklistItemUiState extends ConsumerState<TracklistItemUi> {
                                     await launchUrl(uri);
                                   },
                                   icon: Icon(Icons.sms),
-                                  tooltip:
-                                      AppLocalizations.of(context).smsText,
+                                  tooltip: AppLocalizations.of(context).smsText,
                                 ),
                               ],
                               SizedBox(

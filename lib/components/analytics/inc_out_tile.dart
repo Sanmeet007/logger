@@ -1,5 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/components/analytics/indicator.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/l10n/app_localizations.dart';

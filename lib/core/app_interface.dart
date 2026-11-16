@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/custom_circular_progress.dart';
 import 'package:logger/components/common/custom_linear_progress_loader.dart';

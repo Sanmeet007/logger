@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/components/common/sized_text.dart';
 import 'package:logger/utils/app_information.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;

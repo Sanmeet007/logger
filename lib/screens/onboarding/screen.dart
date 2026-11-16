@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/core/app_core.dart';
 import 'package:logger/providers/shared_preferences_providers/onboarding_provider.dart';

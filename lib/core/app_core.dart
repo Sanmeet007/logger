@@ -6,7 +6,7 @@ import 'package:logger/providers/shared_preferences_providers/onboarding_provide
 import 'package:logger/screens/onboarding/screen.dart';
 import 'package:logger/core/app_interface.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:logger/l10n/app_localizations.dart';
 
 class AppCore extends ConsumerWidget {

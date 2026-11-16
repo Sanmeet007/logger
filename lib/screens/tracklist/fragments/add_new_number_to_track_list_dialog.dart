@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/data/models/tracklist_item.dart';
 import 'package:logger/providers/call_logs_provider.dart';
@@ -48,9 +48,7 @@ class _AddNewContactToTrackListDialogState
       return;
     }
 
-    if (widget.currentContacts
-        .map((e) => e.contactName)
-        .contains(trimmed)) {
+    if (widget.currentContacts.map((e) => e.contactName).contains(trimmed)) {
       setState(() {
         _errorText = AppLocalizations.of(context).numberAlreadyAddedErrorText;
       });
@@ -90,8 +88,8 @@ class _AddNewContactToTrackListDialogState
                 onSelected: (String selection) {
                   _currentText = selection;
                 },
-                fieldViewBuilder: (context, textController, focusNode,
-                    onFieldSubmitted) {
+                fieldViewBuilder:
+                    (context, textController, focusNode, onFieldSubmitted) {
                   textController.addListener(() {
                     _currentText = textController.text;
                     if (_errorText != null &&
@@ -118,8 +116,8 @@ class _AddNewContactToTrackListDialogState
                           : null,
                       labelText:
                           AppLocalizations.of(context).trackContactLabelText,
-                      hintText: AppLocalizations.of(context)
-                          .trackContactLabelText,
+                      hintText:
+                          AppLocalizations.of(context).trackContactLabelText,
                       border: OutlineInputBorder(),
                       errorText: _errorText,
                     ),
@@ -135,8 +133,7 @@ class _AddNewContactToTrackListDialogState
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
                           maxHeight: 200,
-                          maxWidth:
-                              MediaQuery.of(context).size.width * 0.65,
+                          maxWidth: MediaQuery.of(context).size.width * 0.65,
                         ),
                         child: ListView.builder(
                           padding: EdgeInsets.zero,
