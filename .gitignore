@@ -53,3 +53,4 @@ app.*.map.json
 untranslated_messages.txt
 *.jks
 **/problems
+**/.kotlin

@@ -140,11 +140,9 @@ packages:
   call_log:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "16686e6df92c215180f364ea57c9c2509673f16f"
-      url: "https://github.com/Sanmeet007/call_log"
-    source: git
+      path: "../flutter_packages/call_log"
+      relative: true
+    source: path
     version: "4.0.0"
   characters:
     dependency: transitive
@@ -238,10 +236,10 @@ packages:
     dependency: transitive
     description:
       name: cupertino_ui
-      sha256: "369e39a1c5c030a6212589c3da1809920b1c2cfade7b02aade7695bfa4b88c3a"
+      sha256: c3eaf7f5bdfee36deb0b14a4cbf7602f1b6b8d8b8576b81f38fc08c25881c94c
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.6"
+    version: "1.1.7"
   dart_style:
     dependency: transitive
     description:
@@ -570,10 +568,10 @@ packages:
     dependency: "direct main"
     description:
       name: material_ui
-      sha256: "474c135fd46b56ff1d35ca982155e8863d28fbc6464d1192acf4ee53a738680e"
+      sha256: a6b19012df437a356cbc01f8ea22a105e07194c47c9a6009da0032a0ce35c4ab
       url: "https://pub.dev"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   meta:
     dependency: transitive
     description:
@@ -602,10 +600,10 @@ packages:
     dependency: "direct main"
     description:
       name: open_file
-      sha256: b22decdae85b459eac24aeece48f33845c6f16d278a9c63d75c5355345ca236b
+      sha256: "4f9b00d42565249ed4346976bc0d57f91303bec391f6b0b217921277cf8e6e4f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.11"
+    version: "4.0.0"
   open_file_android:
     dependency: transitive
     description:
@@ -626,10 +624,10 @@ packages:
     dependency: transitive
     description:
       name: open_file_linux
-      sha256: d189f799eecbb139c97f8bc7d303f9e720954fa4e0fa1b0b7294767e5f2d7550
+      sha256: efd9c1f9679745cf35a54d21d809a1fe5a1196d4a1353fe2d205ba298ae86dc9
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5"
+    version: "1.1.0"
   open_file_mac:
     dependency: transitive
     description:
@@ -650,18 +648,18 @@ packages:
     dependency: transitive
     description:
       name: open_file_web
-      sha256: e3dbc9584856283dcb30aef5720558b90f88036360bd078e494ab80a80130c4f
+      sha256: "4945221c9ee98a5a6cdf26730fe0fabb3a36c1e423148bff4c32c283079ee532"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "1.1.0"
   open_file_windows:
     dependency: transitive
     description:
       name: open_file_windows
-      sha256: d26c31ddf935a94a1a3aa43a23f4fff8a5ff4eea395fe7a8cb819cf55431c875
+      sha256: "6a97d8f2a5966fb0a7f613a901f1d502f93456f64e8a7519d3204184413aab79"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "1.1.0"
   package_config:
     dependency: transitive
     description:
@@ -985,11 +983,9 @@ packages:
   shared_storage:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "15a0dd494fd5c96ed2a2cf3773c128450ae1df75"
-      url: "https://github.com/sanmeet007/shared-storage"
-    source: git
+      path: "../flutter_packages/shared_storage"
+      relative: true
+    source: path
     version: "0.9.1"
   shelf:
     dependency: transitive
@@ -1176,10 +1172,10 @@ packages:
     dependency: "direct main"
     description:
       name: uri_content
-      sha256: "34db4c58dcf934c92a72ca4943e1c363eaa2a9d525501b5216ed2870c4afb5d6"
+      sha256: "6d10ec315fc737dd8395660826518b7460fbf0cd56527a9cdc807c232c8a6185"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.3"
+    version: "4.0.1"
   url_launcher:
     dependency: "direct main"
     description:
