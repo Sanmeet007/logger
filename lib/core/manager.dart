@@ -245,9 +245,18 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
       final XFile shareFile = XFile(file.path);
 
       if (fileGenerationSuccess && mounted) {
-        await Share.shareXFiles(
-          [shareFile],
-          text: AppLocalizations.of(context).fileShareSubject,
+        // -------------------- < 3.50 ---------------------------
+        // await Share.shareXFiles(
+        //   [shareFile],
+        //   text: AppLocalizations.of(context).fileShareSubject,
+        // );
+        // -------------------------------------------------------
+
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [shareFile],
+            text: AppLocalizations.of(context).fileShareSubject,
+          ),
         );
       } else {
         if (mounted) {
