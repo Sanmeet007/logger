@@ -10,6 +10,7 @@ import 'package:logger/screens/settings/screen.dart';
 import 'package:logger/core/manager.dart';
 import 'package:logger/l10n/app_localizations.dart';
 import 'package:logger/screens/tracklist/screen.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
 class AppInterface extends ConsumerWidget {
   const AppInterface({
@@ -26,29 +27,29 @@ class AppInterface extends ConsumerWidget {
             Screen(
               index: 0,
               label: AppLocalizations.of(context).logsScreenLabelText,
-              icon: Icons.call_outlined,
-              selectedIcon: Icons.call,
+              icon: PhosphorIcons.phone,
+              selectedIcon: PhosphorIcons.phoneFill,
               screen: HomeScreen(),
             ),
             Screen(
               index: 1,
               label: AppLocalizations.of(context).analyticsScreenLabelText,
-              icon: Icons.pie_chart_outline,
-              selectedIcon: Icons.pie_chart,
+              icon: PhosphorIcons.chartBar,
+              selectedIcon: PhosphorIcons.chartBarFill,
               screen: AnalyticsScreen(),
             ),
             Screen(
               label: AppLocalizations.of(context).trackListLabelText,
               index: 2,
-              icon: Icons.view_list,
-              selectedIcon: Icons.view_list,
+              icon: PhosphorIcons.listBullets,
+              selectedIcon: PhosphorIcons.listBulletsFill,
               screen: TrackListScreen(),
             ),
             Screen(
               label: AppLocalizations.of(context).settingsScreenLabelText,
               index: 3,
-              icon: Icons.settings_outlined,
-              selectedIcon: Icons.settings,
+              icon: PhosphorIcons.gear,
+              selectedIcon: PhosphorIcons.gearFill,
               screen: SettingsScreen(),
             ),
           ],

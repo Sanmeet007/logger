@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/components/common/sized_text.dart';
@@ -97,7 +99,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
     }
   }
 
-  void downloadStatusSnackbar({required status}) {
+  void downloadStatusSnackbar({required String status}) {
     switch (status) {
       case "success":
         AppSnackBar.show(context,
@@ -393,7 +395,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
         });
   }
 
-  void registerNewTrackListItem(currentContext) async {
+  void registerNewTrackListItem(BuildContext currentContext) async {
     try {
       String? newContactName = await showAdaptiveDialog<String>(
         context: currentContext,
@@ -523,28 +525,49 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                     width: 10.0,
                   )
                 ]),
-            bottomNavigationBar: NavigationBar(
-              indicatorColor: const Color.fromARGB(217, 223, 202, 255),
-              onDestinationSelected: (int index) {
-                updateIndex(index);
-              },
-              selectedIndex: ref.watch(screenIndexProvider),
-              destinations: widget.items
-                  .map(
-                    (item) => NavigationDestination(
-                      icon: Icon(item.icon),
-                      selectedIcon: Icon(
-                        item.selectedIcon,
-                        color: Colors.black,
+            body: Stack(
+              children: [
+                IndexedStack(
+                  index: ref.watch(screenIndexProvider),
+                  children: [...widget.items.map((e) => e.screen)],
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 140,
+                  child: IgnorePointer(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Theme.of(context).cardColor.withAlpha(0),
+                            Theme.of(context).cardColor.withAlpha(100),
+                            Theme.of(context).cardColor,
+                          ],
+                          stops: const [
+                            0.0,
+                            0.6,
+                            1.0
+                          ], // Controls the pacing of the fade
+                        ),
                       ),
-                      label: item.label,
                     ),
-                  )
-                  .toList(),
-            ),
-            body: IndexedStack(
-              index: ref.watch(screenIndexProvider),
-              children: [...widget.items.map((e) => e.screen)],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: LoggyNavbar(
+                    items: widget.items,
+                    currentIndex: 0,
+                    onTap: (i) {},
+                  ),
+                ),
+              ],
             ),
           ),
           if (isTaskRunning)
@@ -555,6 +578,96 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
                       : Colors.white54,
               child: const Center(child: CircularProgressIndicator()),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class LoggyNavbar extends StatelessWidget {
+  final List<Screen> items;
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const LoggyNavbar({
+    super.key,
+    required this.items,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(100),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(35),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(35),
+              color: Theme.of(context).cardColor.withAlpha(150),
+              border: Border.all(
+                color: Colors.white.withAlpha(25),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: items.asMap().entries.map((entry) {
+                final index = entry.key;
+                final item = entry.value;
+
+                return _buildNavItem(
+                  context,
+                  item.icon,
+                  item.label,
+                  index,
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
+
+  Widget _buildNavItem(
+      BuildContext context, IconData icon, String label, int index) {
+    final bool isSelected = currentIndex == index;
+
+    return GestureDetector(
+      onTap: () => onTap(index),
+      behavior:
+          HitTestBehavior.opaque, // Ensures the entire tab area is clickable
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            size: 26,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: isSelected
+                ? Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )
+                : Theme.of(context).textTheme.labelMedium,
+          ),
         ],
       ),
     );
