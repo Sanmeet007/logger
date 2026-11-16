@@ -18,7 +18,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final _controller = PageController(viewportFraction: 1, keepPage: true);
   int currentIndex = 0;
 
-  void finishOnboarding(context) {
+  void finishOnboarding(BuildContext context) {
     ref.read(onboardingProvider.notifier).markComplete();
 
     Navigator.pushReplacement(

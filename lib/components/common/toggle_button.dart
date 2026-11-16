@@ -89,14 +89,14 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
     WidgetsBinding.instance.addPostFrameCallback((_) => initOptions(context));
   }
 
-  changeState(item) {
+  void changeState(Map item) {
     setState(() {
       item['isActive'] = !item['isActive'];
       widget.onChange(item["value"], item["isActive"]);
     });
   }
 
-  customBoxDecorationLight(isActive) {
+  BoxDecoration customBoxDecorationLight(bool isActive) {
     return BoxDecoration(
       color: isActive
           ? const Color.fromARGB(255, 216, 189, 255)
@@ -113,7 +113,7 @@ class _CustomToggleButtonsState extends State<CustomToggleButtons> {
     );
   }
 
-  customBoxDecorationDark(isActive) {
+  BoxDecoration customBoxDecorationDark(bool isActive) {
     return BoxDecoration(
       color: isActive
           ? const Color.fromARGB(255, 186, 169, 210)

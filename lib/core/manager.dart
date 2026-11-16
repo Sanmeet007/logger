@@ -412,7 +412,7 @@ class _ScreenManagerState extends ConsumerState<ScreenManager> {
             .registerContactIfNotPresent(newContactName);
       }
     } catch (E) {
-      if (mounted) {
+      if (mounted && currentContext.mounted) {
         AppSnackBar.show(
           currentContext,
           content: AppLocalizations.of(context).trackNumberErrorText,

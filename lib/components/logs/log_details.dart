@@ -64,7 +64,7 @@ class LogDetails extends ConsumerWidget {
         await parentRef.read(logsFilterProvider.notifier).filterByPhoneNumber(
               phoneNumber,
             );
-      } catch (e, _) {
+      } catch (e) {
         /// Silence is golden
       }
     });

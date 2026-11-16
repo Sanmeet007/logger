@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 
-buildTableField(String fieldName, String fieldValue) {
+TableRow buildTableField(String fieldName, String fieldValue) {
   return TableRow(children: [
     TableCell(
       child: Padding(
